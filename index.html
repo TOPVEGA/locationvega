@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Py Hub | منصة برمجيات متطورة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #0b0e1a 0%, #1a1f30 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            transition: background 0.4s ease;
+        }
+
+        body.light-mode {
+            background: linear-gradient(145deg, #e8edf5 0%, #d5dce8 100%);
+        }
+
+        body.english {
+            direction: ltr;
+            text-align: left;
+        }
+
+        body.english .glass-card *:not(i) {
+            text-align: left;
+        }
+
+        body.english .brand small {
+            text-align: left;
+        }
+
+        body.english .services-list ul li {
+            flex-direction: row-reverse;
+        }
+
+        .glass-card {
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(18px) saturate(180%);
+            -webkit-backdrop-filter: blur(18px) saturate(180%);
+            border-radius: 48px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        body.light-mode .glass-card {
+            background: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* شريط الإعلانات المتحرك */
+        .marquee-bar {
+            background: rgba(255, 215, 100, 0.08);
+            border-radius: 60px;
+            padding: 0.6rem 1.5rem;
+            margin-bottom: 1.8rem;
+            border: 1px solid rgba(255, 215, 100, 0.1);
+            overflow: hidden;
+        }
+
+        .marquee-bar marquee {
+            color: #f0e6c5;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        body.light-mode .marquee-bar marquee {
+            color: #2c3e50;
+        }
+
+        /* الهيدر */
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding-bottom: 1.2rem;
+            position: relative;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand i {
+            font-size: 2.4rem;
+            color: #8aafff;
+            text-shadow: 0 0 20px rgba(80, 140, 255, 0.5);
+        }
+
+        .brand h1 {
+            font-weight: 600;
+            font-size: 1.9rem;
+            background: linear-gradient(135deg, #e0eaff, #b0ceff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .brand small {
+            display: block;
+            font-size: 0.8rem;
+            color: rgba(220, 235, 255, 0.6);
+            margin-top: 2px;
+            letter-spacing: 0.3px;
+        }
+
+        body.light-mode .brand small {
+            color: #4a5a7a;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        /* أيقونة الإعدادات والقائمة المنسدلة */
+        .settings-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .settings-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #b0c8f0;
+            padding: 0.5rem 1rem;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.2rem;
+        }
+
+        .settings-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: rotate(30deg);
+        }
+
+        body.light-mode .settings-btn {
+            color: #2c3e50;
+            border-color: rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.03);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 110%;
+            background: rgba(20, 30, 50, 0.95);
+            backdrop-filter: blur(20px);
+            min-width: 220px;
+            border-radius: 24px;
+            padding: 0.8rem 0;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            z-index: 1000;
+        }
+
+        body.light-mode .dropdown-content {
+            background: rgba(240, 245, 255, 0.95);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown-content.show {
+            display: block;
+            animation: fadeIn 0.25s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.7rem 1.5rem;
+            color: #ccd9f0;
+            text-decoration: none;
+            transition: 0.2s;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+        }
+
+        body.light-mode .dropdown-item {
+            color: #1a2a4a;
+        }
+
+        body.light-mode .dropdown-item:hover {
+            background: rgba(0, 0, 0, 0.03);
+            color: #000;
+        }
+
+        .dropdown-item i {
+            width: 20px;
+            color: #6fa3ff;
+            font-size: 1.1rem;
+        }
+
+        body.light-mode .dropdown-item i {
+            color: #2a5a8a;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.05);
+            margin: 0.3rem 1rem;
+        }
+
+        body.light-mode .dropdown-divider {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .visitor-counter {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.3rem 1.2rem;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: #b0c8f0;
+            font-size: 0.85rem;
+        }
+
+        .visitor-counter i {
+            color: #6fa3ff;
+        }
+
+        body.light-mode .visitor-counter {
+            color: #2c3e50;
+            border-color: rgba(0, 0, 0, 0.05);
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        .license-tag {
+            background: rgba(255, 215, 100, 0.12);
+            backdrop-filter: blur(4px);
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 215, 100, 0.15);
+            color: #fadf9e;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .license-tag i {
+            color: #ffd966;
+        }
+
+        /* أزرار التنقل */
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem 1.5rem;
+            margin: 1.5rem 0 2rem 0;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0.7rem 1.8rem;
+            border-radius: 60px;
+            color: #ccd9f0;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: 0.25s ease;
+            cursor: default;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.3px;
+        }
+
+        .nav-btn i {
+            color: #8ab4ff;
+            font-size: 1.1rem;
+        }
+
+        .nav-btn:hover {
+            background: rgba(120, 180, 255, 0.15);
+            border-color: rgba(120, 180, 255, 0.3);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(0, 40, 120, 0.3);
+        }
+
+        body.light-mode .nav-btn {
+            color: #2c3e50;
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(0, 0, 0, 0.05);
+        }
+
+        body.light-mode .nav-btn:hover {
+            background: rgba(60, 120, 255, 0.1);
+            color: #1a2a4a;
+        }
+
+        /* شبكة القنوات */
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0 2rem 0;
+        }
+
+        .channel-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 32px;
+            padding: 1.6rem 1.4rem;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: 0.25s ease;
+            box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .channel-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(150, 200, 255, 0.2);
+            transform: scale(1.01);
+        }
+
+        body.light-mode .channel-card {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(0, 0, 0, 0.03);
+        }
+
+        body.light-mode .channel-card:hover {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .channel-card .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #eaf1ff;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .channel-card .card-title i {
+            color: #6fa3ff;
+            font-size: 1.5rem;
+        }
+
+        body.light-mode .channel-card .card-title {
+            color: #1a2a4a;
+        }
+
+        .channel-card .card-desc {
+            color: #b6c8e8;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin: 0.5rem 0 0.8rem 0;
+            opacity: 0.9;
+        }
+
+        body.light-mode .channel-card .card-desc {
+            color: #3a4a6a;
+        }
+
+        .channel-card .card-meta {
+            margin-top: auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px 12px;
+            padding-top: 0.8rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .channel-card .card-meta a {
+            color: #9bb9ff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.2s;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            border: 1px solid transparent;
+        }
+
+        .channel-card .card-meta a:hover {
+            background: rgba(80, 140, 255, 0.15);
+            border-color: rgba(80, 140, 255, 0.2);
+            color: #c8ddff;
+        }
+
+        body.light-mode .channel-card .card-meta a {
+            color: #3a6aaa;
+        }
+
+        .channel-card .badge {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            color: #b0c8f0;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        body.light-mode .channel-card .badge {
+            color: #3a5a7a;
+            border-color: rgba(0, 0, 0, 0.05);
+        }
+
+        /* الخدمات */
+        .services-list {
+            background: rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(8px);
+            border-radius: 40px;
+            padding: 1.8rem 2rem;
+            margin: 2rem 0 2.2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        body.light-mode .services-list {
+            background: rgba(0, 0, 0, 0.03);
+            border-color: rgba(0, 0, 0, 0.03);
+        }
+
+        .services-list ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem 2rem;
+            list-style: none;
+        }
+
+        .services-list ul li {
+            color: #ccdefa;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .services-list ul li i {
+            color: #6fa3ff;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        body.light-mode .services-list ul li {
+            color: #2a3a5a;
+        }
+
+        .highlight {
+            color: #ffd966;
+            font-weight: 500;
+        }
+
+        /* آراء العملاء */
+        .testimonials {
+            margin: 2rem 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .testimonial-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 24px;
+            padding: 1.2rem 1.4rem;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            text-align: center;
+        }
+
+        body.light-mode .testimonial-item {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(0, 0, 0, 0.03);
+        }
+
+        .testimonial-item .quote {
+            color: #b6c8e8;
+            font-size: 0.9rem;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .testimonial-item .author {
+            color: #8aafff;
+            margin-top: 0.5rem;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+
+        body.light-mode .testimonial-item .quote {
+            color: #3a4a6a;
+        }
+
+        body.light-mode .testimonial-item .author {
+            color: #2a5a8a;
+        }
+
+        /* آخر الإصدارات */
+        .latest-releases {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        body.light-mode .latest-releases {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.03);
+        }
+
+        .latest-releases h3 {
+            color: #eaf1ff;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        body.light-mode .latest-releases h3 {
+            color: #1a2a4a;
+        }
+
+        .release-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .release-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.8rem 1.2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            color: #b6c8e8;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        body.light-mode .release-item {
+            color: #2a3a5a;
+            border-color: rgba(0, 0, 0, 0.03);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .release-item .stars {
+            color: #ffd966;
+        }
+
+        /* نموذج طلب كود */
+        .request-form {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 32px;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        body.light-mode .request-form {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.03);
+        }
+
+        .request-form h3 {
+            color: #eaf1ff;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        body.light-mode .request-form h3 {
+            color: #1a2a4a;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-row input,
+        .form-row select,
+        .form-row textarea {
+            flex: 1;
+            min-width: 180px;
+            padding: 0.7rem 1.2rem;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+            color: #eaf1ff;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        body.light-mode .form-row input,
+        body.light-mode .form-row select,
+        body.light-mode .form-row textarea {
+            background: rgba(255, 255, 255, 0.3);
+            color: #1a2a4a;
+            border-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .form-row input::placeholder,
+        .form-row textarea::placeholder {
+            color: rgba(200, 215, 240, 0.4);
+        }
+
+        body.light-mode .form-row input::placeholder,
+        body.light-mode .form-row textarea::placeholder {
+            color: rgba(0, 0, 0, 0.2);
+        }
+
+        .form-row input:focus,
+        .form-row select:focus,
+        .form-row textarea:focus {
+            outline: none;
+            border-color: #6fa3ff;
+        }
+
+        .form-row textarea {
+            min-height: 80px;
+            resize: vertical;
+            border-radius: 24px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(145deg, rgba(70, 130, 255, 0.2), rgba(40, 80, 200, 0.1));
+            border: 1px solid rgba(100, 170, 255, 0.3);
+            padding: 0.8rem 2.5rem;
+            border-radius: 60px;
+            color: #eaf3ff;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(145deg, rgba(70, 130, 255, 0.35), rgba(40, 80, 200, 0.25));
+            border-color: #7aafff;
+            transform: scale(1.02);
+        }
+
+        body.light-mode .submit-btn {
+            color: #1a2a4a;
+            background: rgba(60, 120, 255, 0.1);
+        }
+
+        /* قسم الدفع */
+        .payment-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem 2.5rem;
+            margin: 2rem 0 1.8rem 0;
+            padding: 1.5rem 1.8rem;
+            background: rgba(0, 20, 60, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 80px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        body.light-mode .payment-section {
+            background: rgba(200, 215, 240, 0.1);
+            border-color: rgba(0, 0, 0, 0.03);
+        }
+
+        .payment-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.5rem 1.6rem 0.5rem 1.2rem;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: 0.2s;
+            color: #d6e5ff;
+            cursor: pointer;
+        }
+
+        .payment-item:hover {
+            background: rgba(120, 180, 255, 0.08);
+            border-color: rgba(120, 180, 255, 0.2);
+        }
+
+        body.light-mode .payment-item {
+            color: #1a2a4a;
+            border-color: rgba(0, 0, 0, 0.03);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .payment-item i {
+            font-size: 1.3rem;
+            color: #7dabff;
+        }
+
+        .payment-item .label {
+            font-weight: 400;
+            opacity: 0.7;
+            margin-left: 4px;
+        }
+
+        .payment-item .value {
+            font-weight: 500;
+            color: #f0f6ff;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        body.light-mode .payment-item .value {
+            color: #1a2a4a;
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            color: #7dabff;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            padding: 0.2rem 0.5rem;
+            border-radius: 40px;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #b0ccff;
+        }
+
+        .pay-btn {
+            background: linear-gradient(145deg, rgba(70, 130, 255, 0.2), rgba(40, 80, 200, 0.1));
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(100, 170, 255, 0.3);
+            padding: 0.9rem 3rem;
+            border-radius: 80px;
+            color: #eaf3ff;
+            font-size: 1.2rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            transition: 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(0, 30, 100, 0.3);
+            text-decoration: none;
+            margin: 0.5rem 0;
+        }
+
+        .pay-btn i {
+            font-size: 1.4rem;
+            color: #8bb9ff;
+        }
+
+        .pay-btn:hover {
+            background: linear-gradient(145deg, rgba(70, 130, 255, 0.35), rgba(40, 80, 200, 0.25));
+            border-color: #7aafff;
+            transform: scale(1.02);
+            color: #fff;
+            box-shadow: 0 12px 36px rgba(0, 60, 180, 0.4);
+        }
+
+        /* أزرار المشاركة */
+        .share-section {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: #b0c8f0;
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .share-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+        }
+
+        body.light-mode .share-btn {
+            color: #2a3a5a;
+            border-color: rgba(0, 0, 0, 0.03);
+        }
+
+        /* الروابط الاجتماعية */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            color: #8aafff;
+            font-size: 1.4rem;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid transparent;
+        }
+
+        .social-links a:hover {
+            color: #b8d0ff;
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+        }
+
+        body.light-mode .social-links a {
+            color: #2a5a8a;
+        }
+
+        body.light-mode .social-links a:hover {
+            color: #1a4a7a;
+        }
+
+        /* الفوتر */
+        .footer-contact {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            color: #9bb0d0;
+            font-size: 0.9rem;
+        }
+
+        .footer-contact .by {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-contact .by i {
+            color: #6fa3ff;
+        }
+
+        .footer-contact .copy {
+            opacity: 0.6;
+            font-size: 0.8rem;
+        }
+
+        .footer-contact .copy i {
+            margin: 0 4px;
+        }
+
+        body.light-mode .footer-contact {
+            color: #4a5a7a;
+            border-color: rgba(0, 0, 0, 0.03);
+        }
+
+        .notice {
+            text-align: center;
+            margin: 1.8rem 0 0.2rem 0;
+            font-size: 0.85rem;
+            color: #b0c4e0;
+            background: rgba(255, 200, 50, 0.04);
+            padding: 0.6rem 1.2rem;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 200, 50, 0.05);
+            display: inline-block;
+            width: auto;
+            backdrop-filter: blur(4px);
+        }
+
+        .notice i {
+            color: #ffd966;
+            margin-left: 6px;
+        }
+
+        body.light-mode .notice {
+            color: #3a4a5a;
+            border-color: rgba(0, 0, 0, 0.03);
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        /* أيقونة الدعم العائمة */
+        .support-float {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 999;
+        }
+
+        .support-float a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 120, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 1.5rem;
+            border-radius: 60px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: 0 8px 30px rgba(0, 80, 200, 0.4);
+            transition: 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .support-float a:hover {
+            transform: scale(1.05);
+            background: rgba(0, 100, 255, 1);
+            box-shadow: 0 12px 40px rgba(0, 80, 200, 0.6);
+        }
+
+        .support-float a i {
+            font-size: 1.4rem;
+        }
+
+        .support-float a .label {
+            font-size: 0.9rem;
+        }
+
+        /* استجابة */
+        @media (max-width: 700px) {
+            .glass-card {
+                padding: 1.8rem 1.2rem;
+                border-radius: 32px;
+            }
+            .brand h1 {
+                font-size: 1.5rem;
+            }
+            .license-tag {
+                font-size: 0.7rem;
+                padding: 0.3rem 0.9rem;
+            }
+            .header-actions {
+                width: 100%;
+                justify-content: center;
+                margin-top: 0.5rem;
+                gap: 10px;
+            }
+            .nav-btn {
+                padding: 0.5rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            .payment-section {
+                border-radius: 40px;
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .payment-item {
+                justify-content: center;
+            }
+            .pay-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 0.8rem 1.5rem;
+            }
+            .footer-contact {
+                flex-direction: column;
+                gap: 0.8rem;
+                align-items: center;
+                text-align: center;
+            }
+            .support-float {
+                bottom: 15px;
+                left: 15px;
+            }
+            .support-float a {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.8rem;
+            }
+            .support-float a .label {
+                display: none;
+            }
+            .form-row {
+                flex-direction: column;
+            }
+            .form-row input,
+            .form-row select,
+            .form-row textarea {
+                min-width: 100%;
+            }
+            .dropdown-content {
+                left: auto;
+                right: 0;
+                min-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- أيقونة الدعم العائمة -->
+    <div class="support-float">
+        <a href="https://t.me/CyberNinjja" target="_blank">
+            <i class="fas fa-headset"></i>
+            <span class="label">الدعم الفني</span>
+        </a>
+    </div>
+
+    <div class="glass-card">
+
+        <!-- شريط إعلانات متحرك -->
+        <div class="marquee-bar">
+            <marquee behavior="scroll" direction="right" scrollamount="4">
+                🚀 أحدث الإصدارات: بوت حماية متطور v3.0 | سكربت شد سوبرات 2026 | أداة نقل أعضاء مخفي 🔥
+                &nbsp;&nbsp;|&nbsp;&nbsp; 💰 عروض خاصة: خصم 20% على أول طلب خلال 24 ساعة
+                &nbsp;&nbsp;|&nbsp;&nbsp; 📢 قناة بايثون: @python2015
+            </marquee>
+        </div>
+
+        <!-- الهيدر -->
+        <div class="header">
+            <div class="brand">
+                <i class="fab fa-python"></i>
+                <div>
+                    <h1 id="brandTitle">Py Hub</h1>
+                    <small id="brandSub">منصة البرمجيات والتطوير</small>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="visitor-counter">
+                    <i class="fas fa-eye"></i>
+                    <span id="visitorCount">12,847</span>
+                </div>
+
+                <!-- أيقونة الإعدادات مع القائمة المنسدلة -->
+                <div class="settings-dropdown">
+                    <button class="settings-btn" onclick="toggleDropdown()" title="الإعدادات">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                    <div class="dropdown-content" id="dropdownMenu">
+                        <button class="dropdown-item" onclick="changeLanguage('ar')">
+                            <i class="fas fa-flag"></i> <span>🇸🇦 العربية</span>
+                        </button>
+                        <button class="dropdown-item" onclick="changeLanguage('en')">
+                            <i class="fas fa-flag"></i> <span>🇬🇧 English</span>
+                        </button>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item" onclick="toggleTheme()">
+                            <i class="fas fa-moon" id="themeIcon"></i> <span id="themeLabel">الوضع الليلي</span>
+                        </button>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="https://t.me/CyberNinjja" target="_blank">
+                            <i class="fas fa-headset"></i> <span>الدعم الفني</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="license-tag">
+                    <i class="fas fa-crown"></i> @TopVeGa
+                </div>
+            </div>
+        </div>
+
+        <!-- أزرار التنقل -->
+        <div class="nav-links" id="navLinks">
+            <span class="nav-btn"><i class="fas fa-code"></i> <span data-key="navCodes">الأكواد</span></span>
+            <span class="nav-btn"><i class="fas fa-tools"></i> <span data-key="navTools">الأدوات</span></span>
+            <span class="nav-btn"><i class="fas fa-terminal"></i> <span data-key="navScripts">سكربتات</span></span>
+            <span class="nav-btn"><i class="fas fa-robot"></i> <span data-key="navBots">بوتات</span></span>
+        </div>
+
+        <!-- بطاقات القنوات -->
+        <div class="channels-grid">
+            <div class="channel-card">
+                <div class="card-title"><i class="fab fa-python"></i> <span data-key="channel1Title">قناة بايثون</span></div>
+                <div class="card-desc" data-key="channel1Desc">محتوى برمجي، أكواد، ومشاريع بايثون متطورة.</div>
+                <div class="card-meta">
+                    <a href="https://t.me/python2015" target="_blank"><i class="fab fa-telegram-plane"></i> <span data-key="join">انضم</span></a>
+                    <span class="badge"><i class="far fa-clock"></i> <span data-key="active">نشطة</span></span>
+                </div>
+            </div>
+
+            <div class="channel-card">
+                <div class="card-title"><i class="fas fa-music"></i> <span data-key="channel2Title">سورس ميوزك فيجا</span></div>
+                <div class="card-desc" data-key="channel2Desc">مستوحى من بوتات الموسيقى • مفتوحة المصدر على تيليجرام</div>
+                <div class="card-meta">
+                    <a href="https://t.me/vegaone" target="_blank"><i class="fab fa-telegram-plane"></i> <span data-key="join">انضم</span></a>
+                    <span class="badge"><i class="fas fa-code-branch"></i> @TopVeGa</span>
+                </div>
+            </div>
+
+            <div class="channel-card">
+                <div class="card-title"><i class="fas fa-shield-alt"></i> <span data-key="channel3Title">قناة ترمكس</span></div>
+                <div class="card-desc" data-key="channel3Desc">أدوات حماية، تليثون، نقل أعضاء، ومزادات.</div>
+                <div class="card-meta">
+                    <a href="https://t.me/ToolsTermex" target="_blank"><i class="fab fa-telegram-plane"></i> <span data-key="join">انضم</span></a>
+                    <span class="badge"><i class="fas fa-lock"></i> <span data-key="protection">حماية</span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- الخدمات -->
+        <div class="services-list">
+            <ul>
+                <li><i class="fas fa-terminal"></i> <span data-key="s1">أكواد بجميع اللغات</span></li>
+                <li><i class="fas fa-file-audio"></i> <span data-key="s2">مصانع ميوزك</span></li>
+                <li><i class="fas fa-shield-virus"></i> <span data-key="s3">مصانع حماية</span></li>
+                <li><i class="fab fa-telegram"></i> <span data-key="s4">مصانع تليثون</span></li>
+                <li><i class="fas fa-user-friends"></i> <span data-key="s5">نقل أعضاء (مخفي/ظهار)</span></li>
+                <li><i class="fas fa-bolt"></i> <span data-key="s6">ملفات شد</span></li>
+                <li><i class="fas fa-upload"></i> <span data-key="s7">نشر تلقائي بمميزات</span></li>
+                <li><i class="fas fa-gavel"></i> <span data-key="s8">مزاد للسوبرات</span></li>
+                <li><i class="fas fa-file-code"></i> <span data-key="s9">lua & php حماية</span></li>
+                <li><i class="fas fa-bug"></i> <span data-key="s10">حل جميع الأخطاء</span></li>
+            </ul>
+        </div>
+
+        <!-- آخر الإصدارات -->
+        <div class="latest-releases">
+            <h3><i class="fas fa-rocket" style="color:#6fa3ff;"></i> <span data-key="latestTitle">آخر الإصدارات</span></h3>
+            <div class="release-grid">
+                <div class="release-item">
+                    <span data-key="r1">بوت حماية v3.0</span>
+                    <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+                </div>
+                <div class="release-item">
+                    <span data-key="r2">سكربت شد سوبرات</span>
+                    <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                </div>
+                <div class="release-item">
+                    <span data-key="r3">نقل أعضاء مخفي</span>
+                    <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                </div>
+                <div class="release-item">
+                    <span data-key="r4">مصانع ميوزك متطورة</span>
+                    <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- آراء العملاء -->
+        <div class="testimonials">
+            <div class="testimonial-item">
+                <div class="quote" data-key="t1">"أفضل منصة برمجيات، تعامل راقي وجودة عالية"</div>
+                <div class="author">— @AhmedDev</div>
+            </div>
+            <div class="testimonial-item">
+                <div class="quote" data-key="t2">"بوتات حماية احترافية وسريعة، أنصح بالتعامل"</div>
+                <div class="author">— @Sara_Coder</div>
+            </div>
+            <div class="testimonial-item">
+                <div class="quote" data-key="t3">"خدمة ممتازة وأسعار رمزية، شكراً Py Hub"</div>
+                <div class="author">— @MrRobot</div>
+            </div>
+        </div>
+
+        <!-- نموذج طلب كود مخصص -->
+        <div class="request-form">
+            <h3><i class="fas fa-pen-fancy" style="color:#6fa3ff;"></i> <span data-key="formTitle">اطلب كودك المخصص</span></h3>
+            <form id="requestForm" onsubmit="submitRequest(event)">
+                <div class="form-row">
+                    <input type="text" placeholder="اسمك أو معرفك" data-key="formName" required />
+                    <input type="text" placeholder="وصف الكود المطلوب" data-key="formDesc" required />
+                </div>
+                <div class="form-row">
+                    <select required>
+                        <option value="" data-key="formLang">اختر لغة البرمجة</option>
+                        <option>Python</option>
+                        <option>JavaScript</option>
+                        <option>PHP</option>
+                        <option>Lua</option>
+                        <option>HTML/CSS</option>
+                        <option data-key="other">أخرى</option>
+                    </select>
+                    <input type="text" placeholder="السعر المتوقع (اختياري)" data-key="formPrice" />
+                </div>
+                <div class="form-row">
+                    <textarea placeholder="تفاصيل إضافية عن الطلب..." data-key="formDetails"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> <span data-key="formSubmit">إرسال الطلب</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- قسم الدفع -->
+        <div class="payment-section">
+            <div class="payment-item" onclick="copyText('894656421')">
+                <i class="fas fa-credit-card"></i>
+                <span class="label" data-key="pay1Label">بايسن</span>
+                <span class="value" id="pay1">894656421</span>
+                <button class="copy-btn" onclick="event.stopPropagation(); copyText('894656421')">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </div>
+            <div class="payment-item" onclick="copyText('kamalxblack')">
+                <i class="fab fa-instagram"></i>
+                <span class="label" data-key="pay2Label">انستا باي</span>
+                <span class="value" id="pay2">kamalxblack</span>
+                <button class="copy-btn" onclick="event.stopPropagation(); copyText('kamalxblack')">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- زر الدفع -->
+        <div style="display: flex; justify-content: center;">
+            <a href="#" class="pay-btn" onclick="alert('🔗 جاري التوجيه إلى بوابة الدفع الآمنة...')">
+                <i class="fas fa-hand-holding-usd"></i> <span data-key="payBtn">طريقة الدفع</span>
+            </a>
+        </div>
+
+        <!-- عد تنازلي للعرض -->
+        <div style="text-align: center; margin: 1.5rem 0; color: #ffd966; font-size: 1rem;">
+            <i class="fas fa-clock"></i> <span data-key="offer">عرض خاص</span>: <span id="countdown">23:59:59</span>
+        </div>
+
+        <!-- أزرار المشاركة -->
+        <div class="share-section">
+            <a href="https://t.me/share/url?url=https://topvega.github.io" target="_blank" class="share-btn">
+                <i class="fab fa-telegram"></i> <span data-key="shareTelegram">مشاركة</span>
+            </a>
+            <a href="https://wa.me/?text=Py%20Hub%20منصة%20برمجيات%20متميزة" target="_blank" class="share-btn">
+                <i class="fab fa-whatsapp"></i> <span data-key="shareWhatsapp">واتساب</span>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://topvega.github.io" target="_blank" class="share-btn">
+                <i class="fab fa-facebook"></i> <span data-key="shareFacebook">فيسبوك</span>
+            </a>
+            <a href="#" onclick="copyLink()" class="share-btn">
+                <i class="fas fa-link"></i> <span data-key="shareCopy">نسخ الرابط</span>
+            </a>
+        </div>
+
+        <!-- الروابط الاجتماعية -->
+        <div class="social-links">
+            <a href="https://github.com/TOPVEGA" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+            <a href="https://t.me/topvega" target="_blank"><i class="fab fa-telegram"></i> <span data-key="founder">المؤسس</span></a>
+            <a href="https://t.me/CyberNinjja" target="_blank"><i class="fas fa-headset"></i> <span data-key="support">الدعم</span></a>
+            <a href="https://www.youtube.com/@Pythnhub" target="_blank"><i class="fab fa-youtube"></i> <span data-key="youtube">يوتيوب</span></a>
+        </div>
+
+        <!-- الفوتر -->
+        <div class="footer-contact">
+            <div class="by">
+                <i class="fas fa-at"></i> By: <strong style="color:#c8ddff;">@TopVeGa</strong>
+            </div>
+            <div class="copy">
+                <i class="fas fa-code"></i> <span data-key="footerRights">حرية تعديل و نشر</span> <i class="far fa-copyright"></i> 2015
+            </div>
+        </div>
+
+        <!-- تنويه -->
+        <div style="display: flex; justify-content: center;">
+            <span class="notice">
+                <i class="fas fa-exclamation-triangle"></i> <span data-key="notice">تنويه_هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك</span>
+            </span>
+        </div>
+
+        <div style="text-align: center; margin-top: 1.5rem; color: rgba(200, 215, 240, 0.3); font-size: 0.75rem; letter-spacing: 1px;">
+            السلام علي من اتبع الهدى
+        </div>
+
+    </div>
+
+    <script>
+        // ========== القائمة المنسدلة ==========
+        function toggleDropdown() {
+            const menu = document.getElementById('dropdownMenu');
+            menu.classList.toggle('show');
+        }
+
+        // إغلاق القائمة عند النقر خارجها
+        document.addEventListener('click', function(event) {
+            const dropdown = document.querySelector('.settings-dropdown');
+            if (!dropdown.contains(event.target)) {
+                document.getElementById('dropdownMenu').classList.remove('show');
+            }
+        });
+
+        // ========== تبديل الوضع (ليلي/نهاري) ==========
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            const label = document.getElementById('themeLabel');
+            const icon = document.getElementById('themeIcon');
+            if (document.body.classList.contains('light-mode')) {
+                label.textContent = 'الوضع النهاري';
+                icon.className = 'fas fa-sun';
+            } else {
+                label.textContent = 'الوضع الليلي';
+                icon.className = 'fas fa-moon';
+            }
+        }
+
+        // ========== تغيير اللغة ==========
+        const translations = {
+            ar: {
+                brandTitle: 'Py Hub',
+                brandSub: 'منصة البرمجيات والتطوير',
+                navCodes: 'الأكواد',
+                navTools: 'الأدوات',
+                navScripts: 'سكربتات',
+                navBots: 'بوتات',
+                channel1Title: 'قناة بايثون',
+                channel1Desc: 'محتوى برمجي، أكواد، ومشاريع بايثون متطورة.',
+                channel2Title: 'سورس ميوزك فيجا',
+                channel2Desc: 'مستوحى من بوتات الموسيقى • مفتوحة المصدر على تيليجرام',
+                channel3Title: 'قناة ترمكس',
+                channel3Desc: 'أدوات حماية، تليثون، نقل أعضاء، ومزادات.',
+                join: 'انضم',
+                active: 'نشطة',
+                protection: 'حماية',
+                s1: 'أكواد بجميع اللغات',
+                s2: 'مصانع ميوزك',
+                s3: 'مصانع حماية',
+                s4: 'مصانع تليثون',
+                s5: 'نقل أعضاء (مخفي/ظهار)',
+                s6: 'ملفات شد',
+                s7: 'نشر تلقائي بمميزات',
+                s8: 'مزاد للسوبرات',
+                s9: 'lua & php حماية',
+                s10: 'حل جميع الأخطاء',
+                latestTitle: 'آخر الإصدارات',
+                r1: 'بوت حماية v3.0',
+                r2: 'سكربت شد سوبرات',
+                r3: 'نقل أعضاء مخفي',
+                r4: 'مصانع ميوزك متطورة',
+                t1: '"أفضل منصة برمجيات، تعامل راقي وجودة عالية"',
+                t2: '"بوتات حماية احترافية وسريعة، أنصح بالتعامل"',
+                t3: '"خدمة ممتازة وأسعار رمزية، شكراً Py Hub"',
+                formTitle: 'اطلب كودك المخصص',
+                formName: 'اسمك أو معرفك',
+                formDesc: 'وصف الكود المطلوب',
+                formLang: 'اختر لغة البرمجة',
+                other: 'أخرى',
+                formPrice: 'السعر المتوقع (اختياري)',
+                formDetails: 'تفاصيل إضافية عن الطلب...',
+                formSubmit: 'إرسال الطلب',
+                pay1Label: 'بايسن',
+                pay2Label: 'انستا باي',
+                payBtn: 'طريقة الدفع',
+                offer: 'عرض خاص',
+                shareTelegram: 'مشاركة',
+                shareWhatsapp: 'واتساب',
+                shareFacebook: 'فيسبوك',
+                shareCopy: 'نسخ الرابط',
+                founder: 'المؤسس',
+                support: 'الدعم',
+                youtube: 'يوتيوب',
+                footerRights: 'حرية تعديل و نشر',
+                notice: 'تنويه_هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك'
+            },
+            en: {
+                brandTitle: 'Py Hub',
+                brandSub: 'Software & Development Platform',
+                navCodes: 'Codes',
+                navTools: 'Tools',
+                navScripts: 'Scripts',
+                navBots: 'Bots',
+                channel1Title: 'Python Channel',
+                channel1Desc: 'Programming content, codes, and advanced Python projects.',
+                channel2Title: 'Vega Music Source',
+                channel2Desc: 'Inspired by other music bots • Open source on Telegram',
+                channel3Title: 'Termex Channel',
+                channel3Desc: 'Protection tools, Telethon, member transfer, and auctions.',
+                join: 'Join',
+                active: 'Active',
+                protection: 'Protection',
+                s1: 'Codes in all languages',
+                s2: 'Music factories',
+                s3: 'Protection factories',
+                s4: 'Telethon factories',
+                s5: 'Member transfer (hidden/show)',
+                s6: 'Crash files',
+                s7: 'Auto-posting with features',
+                s8: 'Supergroup auctions',
+                s9: 'lua & php protection',
+                s10: 'Fix all errors',
+                latestTitle: 'Latest Releases',
+                r1: 'Protection Bot v3.0',
+                r2: 'Supergroup Crash Script',
+                r3: 'Hidden Member Transfer',
+                r4: 'Advanced Music Factories',
+                t1: '"The best programming platform, high quality and professional handling"',
+                t2: '"Professional and fast protection bots, highly recommended"',
+                t3: '"Excellent service and affordable prices, thanks Py Hub"',
+                formTitle: 'Request Your Custom Code',
+                formName: 'Your name or username',
+                formDesc: 'Describe the code you need',
+                formLang: 'Choose programming language',
+                other: 'Other',
+                formPrice: 'Expected price (optional)',
+                formDetails: 'Additional details about the request...',
+                formSubmit: 'Submit Request',
+                pay1Label: 'Baicen',
+                pay2Label: 'Instagram Pay',
+                payBtn: 'Payment Method',
+                offer: 'Special Offer',
+                shareTelegram: 'Share',
+                shareWhatsapp: 'WhatsApp',
+                shareFacebook: 'Facebook',
+                shareCopy: 'Copy Link',
+                founder: 'Founder',
+                support: 'Support',
+                youtube: 'YouTube',
+                footerRights: 'Free to modify & publish',
+                notice: 'Important: Please be serious so we don\'t waste time'
+            }
+        };
+
+        let currentLang = 'ar';
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+
+            // تغيير اتجاه الصفحة
+            if (lang === 'en') {
+                document.body.classList.add('english');
+                document.body.dir = 'ltr';
+                document.querySelector('.glass-card').dir = 'ltr';
+            } else {
+                document.body.classList.remove('english');
+                document.body.dir = 'rtl';
+                document.querySelector('.glass-card').dir = 'rtl';
+            }
+
+            // تحديث النصوص
+            document.getElementById('brandTitle').textContent = t.brandTitle;
+            document.getElementById('brandSub').textContent = t.brandSub;
+
+            // أزرار التنقل
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.dataset.key;
+                if (t[key]) {
+                    el.textContent = t[key];
+                }
+            });
+
+            // تحديث placeholders في النموذج
+            const formInputs = document.querySelectorAll('#requestForm input, #requestForm select, #requestForm textarea');
+            formInputs.forEach(input => {
+                const key = input.dataset.key;
+                if (key && t[key]) {
+                    if (input.tagName === 'SELECT') {
+                        // نحدّث الخيار الأول فقط
+                        const firstOption = input.querySelector('option[value=""]');
+                        if (firstOption) firstOption.textContent = t[key];
+                    } else {
+                        input.placeholder = t[key];
+                    }
+                }
+            });
+
+            // تحديث زر الإرسال
+            const submitBtn = document.querySelector('.submit-btn span');
+            if (submitBtn && t.formSubmit) {
+                submitBtn.textContent = t.formSubmit;
+            }
+
+            // إغلاق القائمة بعد التغيير
+            document.getElementById('dropdownMenu').classList.remove('show');
+        }
+
+        // ========== نسخ النص ==========
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ تم نسخ: ' + text);
+            }).catch(() => {
+                const input = document.createElement('input');
+                input.value = text;
+                document.body.appendChild(input);
+                input.select();
+                document.execCommand('copy');
+                document.body.removeChild(input);
+                alert('✅ تم نسخ: ' + text);
+            });
+        }
+
+        // ========== نسخ الرابط ==========
+        function copyLink() {
+            copyText(window.location.href);
+        }
+
+        // ========== عداد الزوار ==========
+        let visitorCount = 12847;
+        setInterval(() => {
+            visitorCount += Math.floor(Math.random() * 3);
+            document.getElementById('visitorCount').textContent = visitorCount.toLocaleString();
+        }, 15000);
+
+        // ========== عد تنازلي ==========
+        let totalSeconds = 86400;
+        const countdownEl = document.getElementById('countdown');
+        setInterval(() => {
+            if (totalSeconds <= 0) {
+                totalSeconds = 86400;
+            }
+            const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+            const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+            const seconds = String(totalSeconds % 60).padStart(2, '0');
+            countdownEl.textContent = `${hours}:${minutes}:${seconds}`;
+            totalSeconds--;
+        }, 1000);
+
+        // ========== نموذج الطلب ==========
+        function submitRequest(event) {
+            event.preventDefault();
+            const form = event.target;
+            const inputs = form.querySelectorAll('input, select, textarea');
+            let message = '📩 طلب كود جديد:\n';
+            inputs.forEach(input => {
+                if (input.value) {
+                    const label = input.placeholder || input.name || 'حقل';
+                    message += `- ${label}: ${input.value}\n`;
+                }
+            });
+            alert('✅ تم إرسال طلبك بنجاح!\n\n' + message);
+            form.reset();
+        }
+
+        console.log('🚀 Py Hub | منصة برمجيات متطورة');
+        console.log('📌 @TopVeGa | @CyberNinjja');
+    </script>
+
+</body>
+</html>
