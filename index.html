@@ -24,7 +24,7 @@
         }
 
         body.dark-mode {
-            background: #111827;
+            background: #0b1120;
         }
 
         .bg-pattern {
@@ -58,11 +58,11 @@
         }
 
         body.dark-mode .main-card {
-            background: rgba(30, 41, 59, 0.85);
+            background: rgba(15, 23, 42, 0.92);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-color: rgba(255, 255, 255, 0.03);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
 
         /* ===== الهيدر ===== */
@@ -573,6 +573,10 @@
             padding: 0.15rem 0;
         }
 
+        body.dark-mode .services-list ul li {
+            color: #e2e8f0;
+        }
+
         .bots-section {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -590,6 +594,11 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         }
 
+        body.dark-mode .bot-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.02);
+        }
+
         .payment-section {
             display: flex;
             flex-wrap: wrap;
@@ -605,6 +614,11 @@
             flex-direction: column;
         }
 
+        body.dark-mode .payment-section {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.02);
+        }
+
         .payment-item {
             display: flex;
             align-items: center;
@@ -618,6 +632,12 @@
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             flex-direction: column;
             min-width: 180px;
+        }
+
+        body.dark-mode .payment-item {
+            background: rgba(255, 255, 255, 0.02);
+            color: #e2e8f0;
+            border-color: rgba(255, 255, 255, 0.02);
         }
 
         .pay-btn {
@@ -678,9 +698,19 @@
             cursor: pointer;
         }
 
+        body.dark-mode .platform-links a {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.02);
+            color: #e2e8f0;
+        }
+
         .platform-links a:hover {
             background: #f1f5f9;
             transform: translateY(-2px);
+        }
+
+        body.dark-mode .platform-links a:hover {
+            background: rgba(255, 255, 255, 0.04);
         }
 
         .footer {
@@ -695,6 +725,11 @@
             font-size: 0.8rem;
         }
 
+        body.dark-mode .footer {
+            border-color: rgba(255, 255, 255, 0.02);
+            color: #94a3b8;
+        }
+
         .notice {
             text-align: center;
             margin: 0.8rem 0 0.2rem 0;
@@ -705,6 +740,12 @@
             border-radius: 60px;
             border: 1px solid rgba(0, 0, 0, 0.02);
             display: inline-block;
+        }
+
+        body.dark-mode .notice {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.02);
+            color: #94a3b8;
         }
 
         /* ===== نافذة التعليقات ===== */
@@ -780,6 +821,10 @@
             color: #0f172a;
         }
 
+        body.dark-mode .modal h2 {
+            color: #f1f5f9;
+        }
+
         .modal h2 i {
             color: #2563eb;
         }
@@ -800,12 +845,21 @@
             font-size: 0.65rem;
         }
 
+        body.dark-mode .calendar-modal .calendar-grid .weekday {
+            color: #94a3b8;
+        }
+
         .calendar-modal .calendar-grid .day {
             padding: 0.3rem 0;
             border-radius: 12px;
             background: #f8fafc;
             color: #1e293b;
             transition: all 0.3s ease;
+        }
+
+        body.dark-mode .calendar-modal .calendar-grid .day {
+            background: rgba(255, 255, 255, 0.02);
+            color: #e2e8f0;
         }
 
         .calendar-modal .calendar-grid .day.today {
@@ -815,12 +869,22 @@
             border: 1px solid rgba(37, 99, 235, 0.06);
         }
 
+        body.dark-mode .calendar-modal .calendar-grid .day.today {
+            background: rgba(96, 165, 250, 0.04);
+            color: #60a5fa;
+            border-color: rgba(96, 165, 250, 0.06);
+        }
+
         /* ===== نافذة خدماتنا  ===== */
         .about-modal .about-content {
             font-size: 0.9rem;
             line-height: 1.8;
             margin-top: 0.5rem;
             color: #1e293b;
+        }
+
+        body.dark-mode .about-modal .about-content {
+            color: #e2e8f0;
         }
 
         .about-modal .about-content ul {
@@ -833,6 +897,136 @@
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+
+        /* ===== قسم API الجديد ===== */
+        .api-section {
+            background: #fff;
+            border-radius: 28px;
+            padding: 1.5rem 1.8rem;
+            margin: 1.2rem 0;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .api-section {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .api-section .api-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 0.8rem;
+        }
+
+        .api-section .api-header i {
+            font-size: 1.8rem;
+            color: #2563eb;
+            animation: pulseIcon 2s ease-in-out infinite;
+        }
+
+        body.dark-mode .api-section .api-header i {
+            color: #60a5fa;
+        }
+
+        .api-section .api-header h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        body.dark-mode .api-section .api-header h3 {
+            color: #f1f5f9;
+        }
+
+        .api-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .api-card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 1rem 0.8rem;
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        body.dark-mode .api-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .api-card i {
+            font-size: 1.6rem;
+            color: #2563eb;
+            margin-bottom: 0.3rem;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .api-card i {
+            color: #60a5fa;
+        }
+
+        .api-card:hover i {
+            transform: scale(1.3) rotate(10deg);
+        }
+
+        .api-card .api-name {
+            font-weight: 600;
+            color: #0f172a;
+            font-size: 0.85rem;
+        }
+
+        body.dark-mode .api-card .api-name {
+            color: #f1f5f9;
+        }
+
+        .api-card .api-desc {
+            font-size: 0.7rem;
+            color: #64748b;
+            margin-top: 0.2rem;
+        }
+
+        body.dark-mode .api-card .api-desc {
+            color: #94a3b8;
+        }
+
+        .api-note {
+            margin-top: 0.8rem;
+            padding: 0.6rem 1rem;
+            background: rgba(37, 99, 235, 0.02);
+            border-radius: 16px;
+            font-size: 0.8rem;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        body.dark-mode .api-note {
+            background: rgba(255, 255, 255, 0.02);
+            color: #94a3b8;
+        }
+
+        .api-note i {
+            color: #2563eb;
+        }
+
+        .api-note strong {
+            color: #0f172a;
+        }
+
+        body.dark-mode .api-note strong {
+            color: #f1f5f9;
         }
 
         /* ===== استجابة ===== */
@@ -883,6 +1077,9 @@
                 flex-direction: column;
                 gap: 0.3rem;
                 text-align: center;
+            }
+            .api-grid {
+                grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
             }
         }
     </style>
@@ -1037,6 +1234,59 @@
                     <div class="bot-desc" data-key="bot2Desc">استخراج جلسات بايروجرام</div>
                     <a href="https://t.me/StrngGenBot" target="_blank" class="bot-link"><i class="fab fa-telegram"></i> <span data-key="openBot">افتح البوت</span></a>
                 </div>
+            </div>
+
+            <!-- ===== قسم API الجديد ===== -->
+            <div class="api-section" data-aos="fade-up" data-aos-delay="250">
+                <div class="api-header">
+                    <i class="fas fa-plug"></i>
+                    <h3>خدمات API للتطبيقات</h3>
+                </div>
+                <p style="color:#64748b; font-size:0.85rem; margin-bottom:0.5rem;">
+                    نقدم واجهات برمجة تطبيقات (API) جاهزة للتكامل مع تطبيقاتك، مصممة خصيصاً لتلبية احتياجات المطورين.
+                </p>
+                <div class="api-grid">
+                    <div class="api-card">
+                        <i class="fab fa-youtube"></i>
+                        <div class="api-name">YouTube API</div>
+                        <div class="api-desc">جلب البيانات، بحث، تشغيل</div>
+                    </div>
+                    <div class="api-card">
+                        <i class="fab fa-spotify"></i>
+                        <div class="api-name">Spotify API</div>
+                        <div class="api-desc">موسيقى، قوائم تشغيل، بحث</div>
+                    </div>
+                    <div class="api-card">
+                        <i class="fab fa-telegram"></i>
+                        <div class="api-name">Telegram API</div>
+                        <div class="api-desc">بوتات، جلسات، تفاعلات</div>
+                    </div>
+                    <div class="api-card">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <div class="api-name">Media API</div>
+                        <div class="api-desc">رفع ومعالجة الميديا</div>
+                    </div>
+                </div>
+                <div class="api-note">
+                    <i class="fas fa-info-circle"></i>
+                    <span><strong>ملاحظة:</strong> جميع واجهات API قابلة للتعديل والتخصيص حسب طلبك، مع دعم فني متواصل.</span>
+                </div>
+            </div>
+
+            <!-- ===== نبذة عن الرؤية والخدمة ===== -->
+            <div style="background: linear-gradient(135deg, rgba(37,99,235,0.02) 0%, rgba(139,92,246,0.02) 100%); border-radius: 28px; padding: 1.5rem 1.8rem; margin: 1.2rem 0; border: 1px solid rgba(37,99,235,0.04);">
+                <div style="display:flex; align-items:center; gap:12px; margin-bottom:0.8rem;">
+                    <i class="fas fa-bullseye" style="color:#2563eb; font-size:1.6rem;"></i>
+                    <h3 style="color:#0f172a; font-weight:700; font-size:1.1rem;">رؤيتنا وخدمتنا</h3>
+                </div>
+                <p style="color:#1e293b; font-size:0.9rem; line-height:1.8;">
+                    نؤمن بأن البرمجيات هي لغة المستقبل، ونسعى لتقديم منصة متكاملة تجمع بين <strong>الإبداع والتقنية</strong>.
+                    نقدم حلولاً برمجية مبتكرة، واجهات API متطورة، وأدوات تسهل على المطورين بناء تطبيقاتهم بسهولة.
+                    <br><br>
+                    <span style="color:#2563eb; font-weight:600;">خدمتنا:</span> نوفر بيئة داعمة للمطورين، مع محتوى غني، وأكواد جاهزة، ودعم فني احترافي.
+                    <br>
+                    <span style="color:#2563eb; font-weight:600;">رؤيتنا:</span> أن نكون المنصة الأولى في العالم العربي للبرمجيات والتطوير، مع الحفاظ على الجودة والابتكار.
+                </p>
             </div>
 
             <!-- ===== الدفع ===== -->
@@ -1232,7 +1482,7 @@
             document.getElementById('aboutOverlay').classList.remove('show');
         }
 
-        // ===== دفع نجوم تليجرام =====
+        // ===== دفع نجوم تليجرام (لحساب @TopVeGa) =====
         function openTelegramStars() {
             const modalHtml = `
                 <div style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);z-index:9999;display:flex;justify-content:center;align-items:center;padding:1.5rem;animation:fadeIn 0.3s ease;">
@@ -1245,18 +1495,18 @@
                             وتطوير المنصة نحو الأفضل ❤️
                         </p>
                         <div style="display:flex;flex-direction:column;gap:0.5rem;">
-                            <button onclick="window.open('https://t.me/Bi1ieBot?start=donate','_blank')" style="background:#eab308;border:none;padding:0.8rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+                            <button onclick="window.open('https://t.me/topvega?start=donate','_blank')" style="background:#eab308;border:none;padding:0.8rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
                                 <i class="fas fa-star"></i> تبرع بـ 1 ⭐
                             </button>
-                            <button onclick="window.open('https://t.me/Bi1ieBot?start=donate_5','_blank')" style="background:#f59e0b;border:none;padding:0.8rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+                            <button onclick="window.open('https://t.me/topvega?start=donate_5','_blank')" style="background:#f59e0b;border:none;padding:0.8rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
                                 <i class="fas fa-star"></i> تبرع بـ 5 ⭐
                             </button>
-                            <button onclick="window.open('https://t.me/Bi1ieBot?start=donate_10','_blank')" style="background:#d97706;border:none;padding:0.8rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+                            <button onclick="window.open('https://t.me/topvega?start=donate_10','_blank')" style="background:#d97706;border:none;padding:0.8rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
                                 <i class="fas fa-star"></i> تبرع بـ 10 ⭐
                             </button>
                         </div>
                         <p style="color:#94a3b8;font-size:0.65rem;margin-top:1rem;">
-                            <i class="fas fa-lock"></i> دفع آمن عبر بوت تليجرام
+                            <i class="fas fa-lock"></i> الدفع مباشرة لحساب @TopVeGa
                         </p>
                     </div>
                 </div>
@@ -1800,6 +2050,11 @@
             border: 1px solid rgba(0, 0, 0, 0.02);
         }
 
+        body.dark-mode .badge {
+            background: rgba(255, 255, 255, 0.02);
+            color: #94a3b8;
+        }
+
         .support-card .card-title i {
             color: #dc2626;
         }
@@ -1822,15 +2077,29 @@
             transform: translateY(-2px);
         }
 
+        body.dark-mode .bot-link {
+            background: rgba(96, 165, 250, 0.02);
+            color: #60a5fa;
+            border-color: rgba(96, 165, 250, 0.04);
+        }
+
         .pay-icon i {
             font-size: 1.8rem;
             color: #2563eb;
+        }
+
+        body.dark-mode .pay-icon i {
+            color: #60a5fa;
         }
 
         .pay-title {
             font-size: 1.1rem;
             font-weight: 700;
             color: #0f172a;
+        }
+
+        body.dark-mode .pay-title {
+            color: #f1f5f9;
         }
 
         .pay-sub {
@@ -1842,6 +2111,11 @@
             border-radius: 40px;
             letter-spacing: 1px;
             direction: ltr;
+        }
+
+        body.dark-mode .pay-sub {
+            color: #60a5fa;
+            background: rgba(96, 165, 250, 0.02);
         }
 
         @keyframes slideUp {
@@ -1860,7 +2134,8 @@
         body.dark-mode .channel-card,
         body.dark-mode .services-list,
         body.dark-mode .payment-section,
-        body.dark-mode .comment-input-area {
+        body.dark-mode .comment-input-area,
+        body.dark-mode .api-section {
             background: rgba(255, 255, 255, 0.02);
             border-color: rgba(255, 255, 255, 0.02);
         }
@@ -1925,6 +2200,98 @@
 
         body.dark-mode .calendar-modal .calendar-grid .weekday {
             color: #94a3b8;
+        }
+
+        body.dark-mode .api-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.02);
+        }
+
+        body.dark-mode .api-card .api-name {
+            color: #f1f5f9;
+        }
+
+        body.dark-mode .api-card .api-desc {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .api-card i {
+            color: #60a5fa;
+        }
+
+        body.dark-mode .api-note {
+            background: rgba(255, 255, 255, 0.02);
+            color: #94a3b8;
+        }
+
+        body.dark-mode .api-note strong {
+            color: #f1f5f9;
+        }
+
+        body.dark-mode .api-section .api-header h3 {
+            color: #f1f5f9;
+        }
+
+        body.dark-mode .api-section .api-header i {
+            color: #60a5fa;
+        }
+
+        /* تحسينات النصوص في الوضع المظلم */
+        body.dark-mode .services-list ul li {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .notice {
+            background: rgba(255, 255, 255, 0.02);
+            color: #94a3b8;
+        }
+
+        body.dark-mode .footer {
+            color: #94a3b8;
+            border-color: rgba(255, 255, 255, 0.02);
+        }
+
+        body.dark-mode .about-modal .about-content {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .modal h2 {
+            color: #f1f5f9;
+        }
+
+        body.dark-mode .comment-item .comment-text {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .comment-item .comment-user {
+            color: #f1f5f9;
+        }
+
+        /* تحسين الزر في الوضع المظلم */
+        body.dark-mode .btn-submit-comment {
+            background: #2563eb;
+        }
+
+        body.dark-mode .btn-submit-comment:hover {
+            background: #1d4ed8;
+        }
+
+        /* قسم الرؤية */
+        body.dark-mode [style*="background: linear-gradient"] {
+            background: linear-gradient(135deg, rgba(37,99,235,0.04) 0%, rgba(139,92,246,0.04) 100%) !important;
+            border-color: rgba(96,165,250,0.06) !important;
+        }
+
+        body.dark-mode [style*="background: linear-gradient"] h3 {
+            color: #f1f5f9 !important;
+        }
+
+        body.dark-mode [style*="background: linear-gradient"] p {
+            color: #e2e8f0 !important;
+        }
+
+        body.dark-mode [style*="background: linear-gradient"] span {
+            color: #60a5fa !important;
         }
     </style>
 
