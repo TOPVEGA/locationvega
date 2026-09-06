@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <style>
-        /* === الأنماط العامة === */
         * {
             margin: 0;
             padding: 0;
@@ -115,15 +114,8 @@
             animation: pulseIcon 3s infinite ease-in-out;
         }
         @keyframes pulseIcon {
-            0%,
-            100% {
-                transform: scale(1);
-                opacity: 0.9;
-            }
-            50% {
-                transform: scale(1.08);
-                opacity: 1;
-            }
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.08); opacity: 1; }
         }
         .brand h1 {
             font-weight: 700;
@@ -245,14 +237,8 @@
             animation: fadeIn 0.25s ease;
         }
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-8px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .dropdown-item {
             display: flex;
@@ -298,6 +284,45 @@
             background: rgba(0, 0, 0, 0.05);
         }
 
+        /* الساعة المتحركة */
+        .clock-widget {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.2rem 1rem 0.2rem 0.8rem;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            color: #b0c8e0;
+            font-size: 0.8rem;
+            backdrop-filter: blur(4px);
+            direction: ltr;
+        }
+        .clock-widget i {
+            color: #7aa8ff;
+            font-size: 0.9rem;
+        }
+        .clock-widget .time {
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            background: rgba(0,0,0,0.2);
+            padding: 0.05rem 0.6rem;
+            border-radius: 30px;
+        }
+        .clock-widget .date {
+            opacity: 0.6;
+            font-size: 0.7rem;
+        }
+        body.light-mode .clock-widget {
+            background: rgba(0,0,0,0.02);
+            border-color: rgba(0,0,0,0.04);
+            color: #3a4a6a;
+        }
+        body.light-mode .clock-widget .time {
+            background: rgba(0,0,0,0.03);
+        }
+
         .nav-links {
             display: flex;
             flex-wrap: wrap;
@@ -321,25 +346,13 @@
             backdrop-filter: blur(4px);
             animation: floatNav 4s infinite alternate ease-in-out;
         }
-        .nav-btn:nth-child(1) {
-            animation-delay: 0s;
-        }
-        .nav-btn:nth-child(2) {
-            animation-delay: 0.5s;
-        }
-        .nav-btn:nth-child(3) {
-            animation-delay: 1s;
-        }
-        .nav-btn:nth-child(4) {
-            animation-delay: 1.5s;
-        }
+        .nav-btn:nth-child(1) { animation-delay: 0s; }
+        .nav-btn:nth-child(2) { animation-delay: 0.5s; }
+        .nav-btn:nth-child(3) { animation-delay: 1s; }
+        .nav-btn:nth-child(4) { animation-delay: 1.5s; }
         @keyframes floatNav {
-            0% {
-                transform: translateY(0px);
-            }
-            100% {
-                transform: translateY(-5px);
-            }
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-5px); }
         }
         .nav-btn i {
             color: #7aa8ff;
@@ -498,8 +511,6 @@
             color: #3a4a6a;
         }
 
-        /* تم حذف قسم .about-section بالكامل */
-
         .bots-section {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -572,6 +583,12 @@
         .bot-card .bot-link:hover {
             background: rgba(80, 140, 255, 0.1);
             transform: scale(1.02);
+        }
+
+        /* أيقونة الدفع المتحركة */
+        .payment-icon-animated {
+            animation: pulseIcon 3s infinite ease-in-out;
+            display: inline-block;
         }
 
         .payment-section {
@@ -892,7 +909,6 @@
             background: rgba(0, 0, 0, 0.04);
         }
 
-        /* نافذة من نحن المنبثقة */
         .about-overlay {
             display: none;
             position: fixed;
@@ -1018,6 +1034,13 @@
                 margin-top: 0.3rem;
                 gap: 6px;
             }
+            .clock-widget {
+                font-size: 0.7rem;
+                padding: 0.1rem 0.6rem;
+            }
+            .clock-widget .date {
+                display: none;
+            }
             .music-player {
                 padding: 0.4rem 0.8rem;
                 gap: 0.4rem;
@@ -1110,6 +1133,13 @@
                 </div>
             </div>
             <div class="header-actions">
+                <!-- الساعة المتحركة -->
+                <div class="clock-widget" id="clockWidget">
+                    <i class="fas fa-clock"></i>
+                    <span class="time" id="clockTime">12:00:00</span>
+                    <span class="date" id="clockDate">01/01/2025</span>
+                </div>
+
                 <div class="visitor-counter">
                     <i class="fas fa-eye"></i>
                     <span id="visitorCount">12,847</span>
@@ -1136,7 +1166,7 @@
                         </button>
                         <div class="dropdown-divider"></div>
                         <button class="dropdown-item" onclick="openAboutModal()">
-                            <i class="fas fa-info-circle"></i> 📖 من نحن
+                            <i class="fas fa-info-circle"></i> 📖 خدماتنا 
                         </button>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="https://t.me/CyberNinjja" target="_blank">
@@ -1209,7 +1239,7 @@
         <div class="bots-section" data-aos="fade-up" data-aos-delay="200">
             <div class="bot-card">
                 <i class="fas fa-music"></i>
-                <div class="bot-name">بوت بيري للأغاني</div>
+                <div class="bot-name">بوت بيري </div>
                 <div class="bot-username">@Bi1ieBot</div>
                 <div class="bot-desc" data-key="bot1Desc">بوت استماع وتحميل الأغاني</div>
                 <a href="https://t.me/Bi1ieBot" target="_blank" class="bot-link"><i class="fab fa-telegram"></i> <span data-key="openBot">افتح البوت</span></a>
@@ -1226,7 +1256,7 @@
         <!-- ===== الدفع ===== -->
         <div class="payment-section" data-aos="fade-up" data-aos-delay="350">
             <div class="payment-item" onclick="copyText('0x...')">
-                <i class="fab fa-bitcoin"></i>
+                <i class="fab fa-bitcoin payment-icon-animated"></i>
                 <span class="label" data-key="payLabel">Binance Pay</span>
                 <span class="value">0x... (ID)</span>
                 <button class="copy-btn" onclick="event.stopPropagation(); copyText('0x...')">
@@ -1239,8 +1269,8 @@
         </div>
 
         <div style="display: flex; justify-content: center;" data-aos="fade-up" data-aos-delay="400">
-            <a href="#" class="pay-btn" onclick="alert('🔗 جاري التوجيه إلى بوابة Binance Pay...')">
-                <i class="fab fa-bitcoin"></i> <span data-key="payBtn">الدفع عبر Binance</span>
+            <a href="https://account.binance.com/register?ref=894656421&?registerChannel=user_center" target="_blank" class="pay-btn">
+                <i class="fab fa-bitcoin payment-icon-animated"></i> <span data-key="payBtn">الدفع عبر Binance</span>
             </a>
         </div>
 
@@ -1276,7 +1306,7 @@
 
         <div style="display: flex; justify-content: center;">
             <span class="notice">
-                <i class="fas fa-exclamation-triangle"></i> <span data-key="notice">تنويه_هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك</span>
+                <i class="fas fa-exclamation-triangle"></i> <span data-key="notice">تنويه هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك</span>
             </span>
         </div>
 
@@ -1286,11 +1316,11 @@
 
     </div>
 
-    <!-- ===== نافذة من نحن المنبثقة ===== -->
+    <!-- ===== نافذة خدماتنا  المنبثقة ===== -->
     <div class="about-overlay" id="aboutOverlay">
         <div class="about-modal">
             <button class="close-modal" onclick="closeAboutModal()"><i class="fas fa-times"></i></button>
-            <h2><i class="fas fa-info-circle"></i> من نحن</h2>
+            <h2><i class="fas fa-info-circle"></i> خدماتنا </h2>
             <div class="about-content">
                 <p>السلام علي من اتبع الهدى</p>
                 <ul>
@@ -1382,10 +1412,30 @@
         }
         animateParticles();
 
+        // ===== الساعة المتحركة (توقيت القاهرة) =====
+        function updateClock() {
+            const now = new Date();
+            // توقيت القاهرة (UTC+2 أو +3 حسب التوقيت الصيفي)
+            const cairoTime = new Date(now.toLocaleString('en-US', { timeZone: 'Africa/Cairo' }));
+            let hours = cairoTime.getHours();
+            const minutes = String(cairoTime.getMinutes()).padStart(2, '0');
+            const seconds = String(cairoTime.getSeconds()).padStart(2, '0');
+            const ampm = hours >= 12 ? 'م' : 'ص';
+            hours = hours % 12 || 12;
+            const timeStr = `${String(hours).padStart(2, '0')}:${minutes}:${seconds} ${ampm}`;
+            document.getElementById('clockTime').textContent = timeStr;
+
+            const day = String(cairoTime.getDate()).padStart(2, '0');
+            const month = String(cairoTime.getMonth() + 1).padStart(2, '0');
+            const year = cairoTime.getFullYear();
+            document.getElementById('clockDate').textContent = `${day}/${month}/${year}`;
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+
         // ===== مشغل الموسيقى (باستخدام الرابط المقدم) =====
-        // ملاحظة: الرابط من تيليجرام قد لا يعمل خارج التطبيق، نستخدمه كمصدر مع خيار احتياطي.
         const tracks = [
-            { name: '🎵 هدوء وسكينة', url: 'https://t.me/c/4318452690/23' },  // الرابط المطلوب
+            { name: '🎵 هدوء وسكينة', url: 'https://t.me/c/4318452690/23' },
             { name: '🌙 ليالي هادئة', url: 'https://cdn.pixabay.com/download/audio/2022/05/27/audio_4e3d7e0f1a.mp3' },
             { name: '🌊 أمواج وسلام', url: 'https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0e1f2a3b4.mp3' }
         ];
@@ -1521,7 +1571,7 @@
             else document.exitFullscreen().catch(e => {});
         }
 
-        // ===== نافذة من نحن =====
+        // ===== نافذة خدماتنا  =====
         function openAboutModal() {
             document.getElementById('aboutOverlay').classList.add('show');
             document.getElementById('dropdownMenu').classList.remove('show');
