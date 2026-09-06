@@ -27,6 +27,11 @@
             margin: 0;
         }
 
+        /* وضع ليلي بنفسجي زجاجي (الوضع الافتراضي) */
+        body:not(.light-mode) {
+            background: linear-gradient(145deg, #120b1a 0%, #1a102a 40%, #25183a 100%);
+        }
+
         body.light-mode {
             background: linear-gradient(145deg, #eef2f7 0%, #dce3ef 40%, #c8d2e3 100%);
         }
@@ -43,6 +48,17 @@
         }
         body.english .services-list ul li {
             flex-direction: row-reverse;
+        }
+
+        /* خلفية النجوم المتحركة */
+        #stars-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
         }
 
         #particles-canvas {
@@ -75,6 +91,15 @@
             box-shadow: 0 40px 80px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.2);
         }
 
+        /* وضع ليلي بنفسجي زجاجي */
+        body:not(.light-mode) .glass-card {
+            background: rgba(40, 20, 60, 0.25);
+            backdrop-filter: blur(32px) saturate(180%);
+            -webkit-backdrop-filter: blur(32px) saturate(180%);
+            box-shadow: 0 40px 80px rgba(80, 0, 120, 0.3), inset 0 1px 0 rgba(200, 150, 255, 0.1), 0 0 0 1px rgba(200, 150, 255, 0.05);
+            border: 1px solid rgba(180, 120, 255, 0.08);
+        }
+
         .marquee-bar {
             background: rgba(255, 255, 255, 0.03);
             border-radius: 60px;
@@ -89,6 +114,9 @@
         }
         body.light-mode .marquee-bar marquee {
             color: #3a4a5a;
+        }
+        body:not(.light-mode) .marquee-bar marquee {
+            color: #d4c0f0;
         }
 
         .header {
@@ -132,6 +160,12 @@
             background-clip: text;
             color: transparent;
         }
+        body:not(.light-mode) .brand h1 {
+            background: linear-gradient(135deg, #e8d0ff, #b080ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
         .brand small {
             display: block;
             font-size: 0.75rem;
@@ -141,6 +175,9 @@
         }
         body.light-mode .brand small {
             color: #4a5a7a;
+        }
+        body:not(.light-mode) .brand small {
+            color: #b090d0;
         }
 
         .header-actions {
@@ -164,11 +201,17 @@
         }
         .visitor-counter i {
             color: #6fa3ff;
+            animation: pulseIcon 3s infinite ease-in-out;
         }
         body.light-mode .visitor-counter {
             color: #3a4a6a;
             border-color: rgba(0, 0, 0, 0.04);
             background: rgba(0, 0, 0, 0.02);
+        }
+        body:not(.light-mode) .visitor-counter {
+            color: #c8b0e8;
+            border-color: rgba(180, 120, 255, 0.1);
+            background: rgba(80, 40, 120, 0.08);
         }
 
         .license-tag {
@@ -185,6 +228,12 @@
         }
         .license-tag i {
             color: #7aa8ff;
+            animation: pulseIcon 3s infinite ease-in-out;
+        }
+        body:not(.light-mode) .license-tag {
+            border-color: rgba(180, 120, 255, 0.1);
+            background: rgba(80, 40, 120, 0.08);
+            color: #d4c0f0;
         }
 
         .settings-dropdown {
@@ -206,10 +255,10 @@
             background: rgba(255, 255, 255, 0.08);
             transform: rotate(30deg);
         }
-        body.light-mode .settings-btn {
-            color: #3a4a6a;
-            border-color: rgba(0, 0, 0, 0.06);
-            background: rgba(0, 0, 0, 0.02);
+        body:not(.light-mode) .settings-btn {
+            border-color: rgba(180, 120, 255, 0.1);
+            color: #d4c0f0;
+            background: rgba(80, 40, 120, 0.08);
         }
 
         .dropdown-content {
@@ -231,6 +280,11 @@
             background: rgba(240, 245, 255, 0.97);
             border: 1px solid rgba(0, 0, 0, 0.04);
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+        }
+        body:not(.light-mode) .dropdown-content {
+            background: rgba(30, 10, 50, 0.96);
+            border: 1px solid rgba(180, 120, 255, 0.08);
+            box-shadow: 0 30px 60px rgba(80, 0, 120, 0.3);
         }
         .dropdown-content.show {
             display: block;
@@ -267,6 +321,13 @@
         body.light-mode .dropdown-item:hover {
             background: rgba(0, 0, 0, 0.04);
         }
+        body:not(.light-mode) .dropdown-item {
+            color: #d4c0f0;
+        }
+        body:not(.light-mode) .dropdown-item:hover {
+            background: rgba(180, 120, 255, 0.1);
+            color: #fff;
+        }
         .dropdown-item i {
             width: 20px;
             color: #7aa8ff;
@@ -274,6 +335,9 @@
         }
         body.light-mode .dropdown-item i {
             color: #3a6aaa;
+        }
+        body:not(.light-mode) .dropdown-item i {
+            color: #b080ff;
         }
         .dropdown-divider {
             height: 1px;
@@ -284,43 +348,74 @@
             background: rgba(0, 0, 0, 0.05);
         }
 
-        /* الساعة المتحركة */
+        /* الساعة المتحركة - حجم أكبر وتأثير تقلب */
         .clock-widget {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             background: rgba(255, 255, 255, 0.03);
-            padding: 0.2rem 1rem 0.2rem 0.8rem;
+            padding: 0.3rem 1.2rem 0.3rem 1rem;
             border-radius: 60px;
             border: 1px solid rgba(255, 255, 255, 0.04);
             color: #b0c8e0;
-            font-size: 0.8rem;
+            font-size: 1rem;
             backdrop-filter: blur(4px);
             direction: ltr;
+            animation: flipClock 10s infinite ease-in-out;
+            transform-style: preserve-3d;
+            perspective: 600px;
+        }
+        @keyframes flipClock {
+            0%, 10% { transform: rotateY(0deg) scale(1); }
+            15% { transform: rotateY(10deg) scale(1.02); }
+            25% { transform: rotateY(-10deg) scale(1.02); }
+            35%, 100% { transform: rotateY(0deg) scale(1); }
         }
         .clock-widget i {
             color: #7aa8ff;
-            font-size: 0.9rem;
+            font-size: 1.2rem;
+            animation: pulseIcon 3s infinite ease-in-out;
         }
         .clock-widget .time {
-            font-weight: 600;
+            font-weight: 700;
             font-family: 'Courier New', monospace;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             background: rgba(0,0,0,0.2);
-            padding: 0.05rem 0.6rem;
+            padding: 0.05rem 0.8rem;
             border-radius: 30px;
+            font-size: 1.1rem;
+            color: #e8f0ff;
         }
         .clock-widget .date {
-            opacity: 0.6;
-            font-size: 0.7rem;
+            opacity: 0.7;
+            font-size: 0.8rem;
+            background: rgba(0,0,0,0.1);
+            padding: 0.05rem 0.5rem;
+            border-radius: 20px;
         }
         body.light-mode .clock-widget {
             background: rgba(0,0,0,0.02);
-            border-color: rgba(0,0,0,0.04);
+            border-color: rgba(0, 0, 0, 0.04);
             color: #3a4a6a;
         }
         body.light-mode .clock-widget .time {
             background: rgba(0,0,0,0.03);
+            color: #1a2a4a;
+        }
+        body:not(.light-mode) .clock-widget {
+            background: rgba(80, 40, 120, 0.08);
+            border-color: rgba(180, 120, 255, 0.1);
+            color: #d4c0f0;
+        }
+        body:not(.light-mode) .clock-widget .time {
+            background: rgba(0,0,0,0.3);
+            color: #e8d0ff;
+        }
+        body:not(.light-mode) .clock-widget .date {
+            color: #b090d0;
+        }
+        body:not(.light-mode) .clock-widget i {
+            color: #b080ff;
         }
 
         .nav-links {
@@ -357,6 +452,7 @@
         .nav-btn i {
             color: #7aa8ff;
             font-size: 1rem;
+            animation: pulseIcon 3s infinite ease-in-out;
         }
         .nav-btn:hover {
             background: rgba(120, 180, 255, 0.08);
@@ -373,6 +469,15 @@
         body.light-mode .nav-btn:hover {
             background: rgba(60, 120, 255, 0.08);
             color: #1a2a4a;
+        }
+        body:not(.light-mode) .nav-btn {
+            background: rgba(80, 40, 120, 0.08);
+            border-color: rgba(180, 120, 255, 0.06);
+            color: #d4c0f0;
+        }
+        body:not(.light-mode) .nav-btn:hover {
+            background: rgba(180, 120, 255, 0.1);
+            color: #fff;
         }
 
         .channels-grid {
@@ -392,10 +497,18 @@
             display: flex;
             flex-direction: column;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+            animation: floatCard 6s infinite alternate ease-in-out;
+        }
+        .channel-card:nth-child(1) { animation-delay: 0s; }
+        .channel-card:nth-child(2) { animation-delay: 1s; }
+        .channel-card:nth-child(3) { animation-delay: 2s; }
+        @keyframes floatCard {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-4px); }
         }
         .channel-card:hover {
             background: rgba(255, 255, 255, 0.07);
-            transform: translateY(-4px);
+            transform: translateY(-6px);
             border-color: rgba(120, 180, 255, 0.1);
             box-shadow: 0 12px 40px rgba(70, 130, 255, 0.06);
         }
@@ -405,6 +518,14 @@
         }
         body.light-mode .channel-card:hover {
             background: rgba(255, 255, 255, 0.2);
+        }
+        body:not(.light-mode) .channel-card {
+            background: rgba(80, 40, 120, 0.08);
+            border-color: rgba(180, 120, 255, 0.06);
+        }
+        body:not(.light-mode) .channel-card:hover {
+            background: rgba(80, 40, 120, 0.15);
+            border-color: rgba(180, 120, 255, 0.12);
         }
         .channel-card .card-title {
             font-size: 1.2rem;
@@ -424,6 +545,9 @@
         body.light-mode .channel-card .card-title {
             color: #1a2a4a;
         }
+        body:not(.light-mode) .channel-card .card-title {
+            color: #e8d0ff;
+        }
         .channel-card .card-desc {
             color: #a8bcd8;
             font-size: 0.85rem;
@@ -432,6 +556,9 @@
         }
         body.light-mode .channel-card .card-desc {
             color: #4a5a7a;
+        }
+        body:not(.light-mode) .channel-card .card-desc {
+            color: #b8a0d0;
         }
         .channel-card .card-meta {
             margin-top: auto;
@@ -462,6 +589,9 @@
         body.light-mode .channel-card .card-meta a {
             color: #3a6aaa;
         }
+        body:not(.light-mode) .channel-card .card-meta a {
+            color: #b080ff;
+        }
         .channel-card .badge {
             background: rgba(255, 255, 255, 0.03);
             padding: 0.1rem 0.7rem;
@@ -473,6 +603,10 @@
         }
         body.light-mode .channel-card .badge {
             color: #4a6a8a;
+        }
+        body:not(.light-mode) .channel-card .badge {
+            color: #b090d0;
+            border-color: rgba(180, 120, 255, 0.06);
         }
 
         .services-list {
@@ -486,6 +620,10 @@
         }
         body.light-mode .services-list {
             background: rgba(0, 0, 0, 0.02);
+        }
+        body:not(.light-mode) .services-list {
+            background: rgba(40, 20, 60, 0.15);
+            border-color: rgba(180, 120, 255, 0.06);
         }
         .services-list ul {
             display: flex;
@@ -506,9 +644,16 @@
             color: #7aa8ff;
             font-size: 0.9rem;
             filter: drop-shadow(0 0 8px rgba(70, 130, 255, 0.05));
+            animation: pulseIcon 3s infinite ease-in-out;
         }
         body.light-mode .services-list ul li {
             color: #3a4a6a;
+        }
+        body:not(.light-mode) .services-list ul li {
+            color: #c8b0e8;
+        }
+        body:not(.light-mode) .services-list ul li i {
+            color: #b080ff;
         }
 
         .bots-section {
@@ -526,7 +671,10 @@
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.03);
             transition: 0.4s ease;
+            animation: floatCard 5s infinite alternate ease-in-out;
         }
+        .bot-card:nth-child(1) { animation-delay: 0.5s; }
+        .bot-card:nth-child(2) { animation-delay: 1.5s; }
         .bot-card:hover {
             background: rgba(255, 255, 255, 0.06);
             transform: translateY(-3px);
@@ -536,12 +684,19 @@
             background: rgba(255, 255, 255, 0.08);
             border-color: rgba(0, 0, 0, 0.03);
         }
+        body:not(.light-mode) .bot-card {
+            background: rgba(80, 40, 120, 0.08);
+            border-color: rgba(180, 120, 255, 0.06);
+        }
         .bot-card i {
             font-size: 2.2rem;
             color: #7aa8ff;
             margin-bottom: 0.3rem;
             filter: drop-shadow(0 0 15px rgba(70, 130, 255, 0.08));
             animation: pulseIcon 4s infinite ease-in-out;
+        }
+        body:not(.light-mode) .bot-card i {
+            color: #b080ff;
         }
         .bot-card .bot-name {
             color: #e8f0ff;
@@ -568,6 +723,15 @@
         body.light-mode .bot-card .bot-desc {
             color: #4a5a7a;
         }
+        body:not(.light-mode) .bot-card .bot-name {
+            color: #e8d0ff;
+        }
+        body:not(.light-mode) .bot-card .bot-username {
+            color: #b080ff;
+        }
+        body:not(.light-mode) .bot-card .bot-desc {
+            color: #b8a0d0;
+        }
         .bot-card .bot-link {
             display: inline-block;
             margin-top: 0.4rem;
@@ -584,8 +748,15 @@
             background: rgba(80, 140, 255, 0.1);
             transform: scale(1.02);
         }
+        body:not(.light-mode) .bot-card .bot-link {
+            background: rgba(180, 120, 255, 0.06);
+            color: #b080ff;
+            border-color: rgba(180, 120, 255, 0.06);
+        }
+        body:not(.light-mode) .bot-card .bot-link:hover {
+            background: rgba(180, 120, 255, 0.1);
+        }
 
-        /* أيقونة الدفع المتحركة */
         .payment-icon-animated {
             animation: pulseIcon 3s infinite ease-in-out;
             display: inline-block;
@@ -609,6 +780,10 @@
             background: rgba(200, 215, 240, 0.04);
             border-color: rgba(0, 0, 0, 0.03);
         }
+        body:not(.light-mode) .payment-section {
+            background: rgba(40, 20, 60, 0.15);
+            border-color: rgba(180, 120, 255, 0.06);
+        }
         .payment-item {
             display: flex;
             align-items: center;
@@ -631,10 +806,18 @@
             border-color: rgba(0, 0, 0, 0.03);
             background: rgba(255, 255, 255, 0.06);
         }
+        body:not(.light-mode) .payment-item {
+            color: #c8b0e8;
+            border-color: rgba(180, 120, 255, 0.06);
+            background: rgba(80, 40, 120, 0.08);
+        }
         .payment-item i {
             font-size: 1.3rem;
             color: #7aa8ff;
             filter: drop-shadow(0 0 10px rgba(70, 130, 255, 0.05));
+        }
+        body:not(.light-mode) .payment-item i {
+            color: #b080ff;
         }
         .payment-item .label {
             font-weight: 400;
@@ -653,6 +836,10 @@
         body.light-mode .payment-item .value {
             color: #1a2a4a;
             background: rgba(0, 0, 0, 0.04);
+        }
+        body:not(.light-mode) .payment-item .value {
+            color: #e8d0ff;
+            background: rgba(0, 0, 0, 0.2);
         }
         .copy-btn {
             background: none;
@@ -701,6 +888,17 @@
         body.light-mode .pay-btn:hover {
             background: rgba(60, 120, 255, 0.1);
         }
+        body:not(.light-mode) .pay-btn {
+            color: #d4c0f0;
+            background: rgba(180, 120, 255, 0.06);
+            border-color: rgba(180, 120, 255, 0.08);
+        }
+        body:not(.light-mode) .pay-btn:hover {
+            background: rgba(180, 120, 255, 0.1);
+        }
+        body:not(.light-mode) .pay-btn i {
+            color: #b080ff;
+        }
 
         .platform-links {
             display: flex;
@@ -722,7 +920,12 @@
             border: 1px solid rgba(255, 255, 255, 0.03);
             transition: 0.4s ease;
             backdrop-filter: blur(4px);
+            animation: floatNav 4s infinite alternate ease-in-out;
         }
+        .platform-links a:nth-child(1) { animation-delay: 0s; }
+        .platform-links a:nth-child(2) { animation-delay: 0.3s; }
+        .platform-links a:nth-child(3) { animation-delay: 0.6s; }
+        .platform-links a:nth-child(4) { animation-delay: 0.9s; }
         .platform-links a:hover {
             background: rgba(255, 255, 255, 0.06);
             transform: translateY(-3px);
@@ -737,6 +940,15 @@
         body.light-mode .platform-links a:hover {
             background: rgba(0, 0, 0, 0.03);
             color: #1a2a4a;
+        }
+        body:not(.light-mode) .platform-links a {
+            color: #c8b0e8;
+            border-color: rgba(180, 120, 255, 0.06);
+            background: rgba(80, 40, 120, 0.05);
+        }
+        body:not(.light-mode) .platform-links a:hover {
+            background: rgba(180, 120, 255, 0.08);
+            color: #fff;
         }
         .platform-links a i {
             font-size: 1.3rem;
@@ -770,6 +982,13 @@
             color: #4a5a7a;
             border-color: rgba(0, 0, 0, 0.03);
         }
+        body:not(.light-mode) .footer-contact {
+            color: #b090d0;
+            border-color: rgba(180, 120, 255, 0.06);
+        }
+        body:not(.light-mode) .footer-contact .by i {
+            color: #b080ff;
+        }
 
         .notice {
             text-align: center;
@@ -790,6 +1009,14 @@
         body.light-mode .notice {
             color: #4a5a6a;
             background: rgba(0, 0, 0, 0.01);
+        }
+        body:not(.light-mode) .notice {
+            color: #b090d0;
+            border-color: rgba(180, 120, 255, 0.06);
+            background: rgba(80, 40, 120, 0.05);
+        }
+        body:not(.light-mode) .notice i {
+            color: #b080ff;
         }
 
         .music-player {
@@ -814,6 +1041,11 @@
             background: rgba(230, 235, 245, 0.92);
             border-top: 1px solid rgba(0, 0, 0, 0.04);
             box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.02);
+        }
+        body:not(.light-mode) .music-player {
+            background: rgba(20, 10, 40, 0.92);
+            border-top: 1px solid rgba(180, 120, 255, 0.06);
+            box-shadow: 0 -4px 30px rgba(80, 0, 120, 0.1);
         }
         .music-player button {
             background: rgba(255, 255, 255, 0.04);
@@ -843,6 +1075,15 @@
         body.light-mode .music-player button:hover {
             background: rgba(0, 0, 0, 0.04);
         }
+        body:not(.light-mode) .music-player button {
+            color: #c8b0e8;
+            border-color: rgba(180, 120, 255, 0.06);
+            background: rgba(80, 40, 120, 0.05);
+        }
+        body:not(.light-mode) .music-player button:hover {
+            background: rgba(180, 120, 255, 0.1);
+            color: #fff;
+        }
         .music-player .track-info {
             color: #a0b8d8;
             font-size: 0.75rem;
@@ -852,6 +1093,9 @@
         }
         body.light-mode .music-player .track-info {
             color: #3a4a6a;
+        }
+        body:not(.light-mode) .music-player .track-info {
+            color: #c8b0e8;
         }
         .music-player .volume-slider {
             width: 60px;
@@ -871,6 +1115,10 @@
             cursor: pointer;
             box-shadow: 0 0 20px rgba(70, 130, 255, 0.2);
         }
+        body:not(.light-mode) .music-player .volume-slider::-webkit-slider-thumb {
+            background: #b080ff;
+            box-shadow: 0 0 20px rgba(180, 120, 255, 0.2);
+        }
         body.light-mode .music-player .volume-slider {
             background: rgba(0, 0, 0, 0.06);
         }
@@ -884,6 +1132,9 @@
         }
         body.light-mode .music-player .time-display {
             color: #4a5a7a;
+        }
+        body:not(.light-mode) .music-player .time-display {
+            color: #b090d0;
         }
         .music-player .progress-bar {
             flex: 1;
@@ -904,6 +1155,10 @@
             background: #7aa8ff;
             cursor: pointer;
             box-shadow: 0 0 20px rgba(70, 130, 255, 0.2);
+        }
+        body:not(.light-mode) .music-player .progress-bar::-webkit-slider-thumb {
+            background: #b080ff;
+            box-shadow: 0 0 20px rgba(180, 120, 255, 0.2);
         }
         body.light-mode .music-player .progress-bar {
             background: rgba(0, 0, 0, 0.04);
@@ -948,6 +1203,11 @@
             color: #1a2a4a;
             border-color: rgba(0, 0, 0, 0.04);
         }
+        body:not(.light-mode) .about-modal {
+            background: rgba(30, 10, 50, 0.95);
+            border-color: rgba(180, 120, 255, 0.08);
+            color: #d4c0f0;
+        }
         .about-modal h2 {
             font-size: 1.8rem;
             margin-bottom: 1rem;
@@ -957,6 +1217,9 @@
         }
         .about-modal h2 i {
             color: #7aa8ff;
+        }
+        body:not(.light-mode) .about-modal h2 i {
+            color: #b080ff;
         }
         .about-modal .close-modal {
             position: absolute;
@@ -981,6 +1244,13 @@
         body.light-mode .about-modal .close-modal:hover {
             background: rgba(0, 0, 0, 0.04);
         }
+        body:not(.light-mode) .about-modal .close-modal {
+            color: #b090d0;
+        }
+        body:not(.light-mode) .about-modal .close-modal:hover {
+            background: rgba(180, 120, 255, 0.1);
+            color: #fff;
+        }
         .about-modal .about-content {
             font-size: 1rem;
             line-height: 2;
@@ -992,6 +1262,9 @@
         }
         body.light-mode .about-modal .about-content .highlight {
             color: #2a5a8a;
+        }
+        body:not(.light-mode) .about-modal .about-content .highlight {
+            color: #b080ff;
         }
         .about-modal .about-content ul {
             list-style: none;
@@ -1007,6 +1280,9 @@
             color: #7aa8ff;
             width: 20px;
         }
+        body:not(.light-mode) .about-modal .about-content ul li i {
+            color: #b080ff;
+        }
         .about-modal .footer-note {
             margin-top: 1.5rem;
             padding-top: 1rem;
@@ -1018,6 +1294,10 @@
         body.light-mode .about-modal .footer-note {
             border-color: rgba(0, 0, 0, 0.04);
             color: #4a5a7a;
+        }
+        body:not(.light-mode) .about-modal .footer-note {
+            border-color: rgba(180, 120, 255, 0.06);
+            color: #b090d0;
         }
 
         @media (max-width: 700px) {
@@ -1035,10 +1315,16 @@
                 gap: 6px;
             }
             .clock-widget {
-                font-size: 0.7rem;
-                padding: 0.1rem 0.6rem;
+                font-size: 0.8rem;
+                padding: 0.2rem 0.8rem;
+                gap: 6px;
+            }
+            .clock-widget .time {
+                font-size: 0.9rem;
+                padding: 0.05rem 0.5rem;
             }
             .clock-widget .date {
+                font-size: 0.65rem;
                 display: none;
             }
             .music-player {
@@ -1100,6 +1386,8 @@
 </head>
 <body>
 
+    <!-- خلفية النجوم -->
+    <canvas id="stars-canvas"></canvas>
     <canvas id="particles-canvas"></canvas>
 
     <!-- ===== مشغل الموسيقى ===== -->
@@ -1133,7 +1421,7 @@
                 </div>
             </div>
             <div class="header-actions">
-                <!-- الساعة المتحركة -->
+                <!-- الساعة المتحركة - حجم أكبر وتأثير تقلب -->
                 <div class="clock-widget" id="clockWidget">
                     <i class="fas fa-clock"></i>
                     <span class="time" id="clockTime">12:00:00</span>
@@ -1166,11 +1454,11 @@
                         </button>
                         <div class="dropdown-divider"></div>
                         <button class="dropdown-item" onclick="openAboutModal()">
-                            <i class="fas fa-info-circle"></i> 📖 خدماتنا 
+                            <i class="fas fa-info-circle"></i> 📖 من نحن
                         </button>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="https://t.me/CyberNinjja" target="_blank">
-                            <i class="fas fa-headset"></i> الدعم الفني
+                        <a class="dropdown-item" href="https://t.me/Cybervega" target="_blank">
+                            <i class="fas fa-headset"></i> جروب الدعم
                         </a>
                     </div>
                 </div>
@@ -1234,12 +1522,12 @@
 
         <!-- البوتات -->
         <h3 style="color:#b8cce8; margin:1.2rem 0 0.6rem 0; display:flex; align-items:center; gap:10px; font-weight:600; font-size:1.1rem;">
-            <i class="fas fa-robot" style="color:#7aa8ff;"></i> <span data-key="botsTitle">بوتاتنا</span>
+            <i class="fas fa-robot" style="color:#7aa8ff; animation: pulseIcon 3s infinite ease-in-out;"></i> <span data-key="botsTitle">بوتاتنا</span>
         </h3>
         <div class="bots-section" data-aos="fade-up" data-aos-delay="200">
             <div class="bot-card">
                 <i class="fas fa-music"></i>
-                <div class="bot-name">بوت بيري </div>
+                <div class="bot-name">بوت بيري للأغاني</div>
                 <div class="bot-username">@Bi1ieBot</div>
                 <div class="bot-desc" data-key="bot1Desc">بوت استماع وتحميل الأغاني</div>
                 <a href="https://t.me/Bi1ieBot" target="_blank" class="bot-link"><i class="fab fa-telegram"></i> <span data-key="openBot">افتح البوت</span></a>
@@ -1284,9 +1572,9 @@
                 <i class="fab fa-telegram"></i>
                 <span class="link-label" data-key="founder">المؤسس</span>
             </a>
-            <a href="https://t.me/CyberNinjja" target="_blank">
+            <a href="https://t.me/Cybervega" target="_blank">
                 <i class="fas fa-headset"></i>
-                <span class="link-label" data-key="support">الدعم</span>
+                <span class="link-label" data-key="support">جروب الدعم</span>
             </a>
             <a href="https://www.youtube.com/@Pythnhub" target="_blank">
                 <i class="fab fa-youtube"></i>
@@ -1306,7 +1594,7 @@
 
         <div style="display: flex; justify-content: center;">
             <span class="notice">
-                <i class="fas fa-exclamation-triangle"></i> <span data-key="notice">تنويه هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك</span>
+                <i class="fas fa-exclamation-triangle"></i> <span data-key="notice">تنويه_هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك</span>
             </span>
         </div>
 
@@ -1316,11 +1604,11 @@
 
     </div>
 
-    <!-- ===== نافذة خدماتنا  المنبثقة ===== -->
+    <!-- ===== نافذة من نحن المنبثقة ===== -->
     <div class="about-overlay" id="aboutOverlay">
         <div class="about-modal">
             <button class="close-modal" onclick="closeAboutModal()"><i class="fas fa-times"></i></button>
-            <h2><i class="fas fa-info-circle"></i> خدماتنا </h2>
+            <h2><i class="fas fa-info-circle"></i> من نحن</h2>
             <div class="about-content">
                 <p>السلام علي من اتبع الهدى</p>
                 <ul>
@@ -1352,7 +1640,61 @@
     <script>
         AOS.init({ duration: 800, once: true });
 
-        // ===== خلفية جسيمات =====
+        // ===== خلفية النجوم المتحركة =====
+        const starsCanvas = document.getElementById('stars-canvas');
+        const starsCtx = starsCanvas.getContext('2d');
+        let sWidth, sHeight, stars = [];
+
+        function resizeStars() {
+            sWidth = starsCanvas.width = window.innerWidth;
+            sHeight = starsCanvas.height = window.innerHeight;
+        }
+        resizeStars();
+        window.addEventListener('resize', resizeStars);
+
+        class Star {
+            constructor() {
+                this.x = Math.random() * sWidth;
+                this.y = Math.random() * sHeight;
+                this.size = Math.random() * 2.5 + 0.5;
+                this.speed = 0.1 + Math.random() * 0.3;
+                this.opacity = Math.random() * 0.5 + 0.2;
+                this.twinkleSpeed = 0.02 + Math.random() * 0.04;
+                this.phase = Math.random() * Math.PI * 2;
+            }
+            update() {
+                this.y += this.speed;
+                this.phase += this.twinkleSpeed;
+                if (this.y > sHeight) {
+                    this.y = -5;
+                    this.x = Math.random() * sWidth;
+                }
+            }
+            draw() {
+                const opacity = this.opacity * (0.6 + 0.4 * Math.sin(this.phase));
+                starsCtx.beginPath();
+                starsCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                starsCtx.fillStyle = `rgba(200, 180, 255, ${opacity})`;
+                starsCtx.fill();
+                // توهج خفيف
+                starsCtx.shadowColor = 'rgba(180, 120, 255, 0.2)';
+                starsCtx.shadowBlur = 6;
+                starsCtx.fill();
+                starsCtx.shadowBlur = 0;
+            }
+        }
+
+        for (let i = 0; i < 120; i++) stars.push(new Star());
+
+        function animateStars() {
+            starsCtx.clearRect(0, 0, sWidth, sHeight);
+            stars.forEach(s => { s.update();
+                s.draw(); });
+            requestAnimationFrame(animateStars);
+        }
+        animateStars();
+
+        // ===== خلفية جسيمات (تأثير إضافي) =====
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
         let width, height, particles = [];
@@ -1368,10 +1710,10 @@
             constructor() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
-                this.size = Math.random() * 3 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.25;
-                this.speedY = (Math.random() - 0.5) * 0.25;
-                this.opacity = Math.random() * 0.25 + 0.02;
+                this.size = Math.random() * 2 + 0.3;
+                this.speedX = (Math.random() - 0.5) * 0.2;
+                this.speedY = (Math.random() - 0.5) * 0.2;
+                this.opacity = Math.random() * 0.15 + 0.02;
             }
             update() {
                 this.x += this.speedX;
@@ -1382,12 +1724,12 @@
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(120, 180, 255, ${this.opacity})`;
+                ctx.fillStyle = `rgba(160, 120, 220, ${this.opacity})`;
                 ctx.fill();
             }
         }
 
-        for (let i = 0; i < 80; i++) particles.push(new Particle());
+        for (let i = 0; i < 60; i++) particles.push(new Particle());
 
         function animateParticles() {
             ctx.clearRect(0, 0, width, height);
@@ -1398,12 +1740,12 @@
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 180) {
+                    if (dist < 150) {
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(120, 180, 255, ${0.04 * (1 - dist / 180)})`;
-                        ctx.lineWidth = 0.5;
+                        ctx.strokeStyle = `rgba(160, 120, 220, ${0.03 * (1 - dist / 150)})`;
+                        ctx.lineWidth = 0.4;
                         ctx.stroke();
                     }
                 }
@@ -1415,7 +1757,6 @@
         // ===== الساعة المتحركة (توقيت القاهرة) =====
         function updateClock() {
             const now = new Date();
-            // توقيت القاهرة (UTC+2 أو +3 حسب التوقيت الصيفي)
             const cairoTime = new Date(now.toLocaleString('en-US', { timeZone: 'Africa/Cairo' }));
             let hours = cairoTime.getHours();
             const minutes = String(cairoTime.getMinutes()).padStart(2, '0');
@@ -1433,11 +1774,11 @@
         updateClock();
         setInterval(updateClock, 1000);
 
-        // ===== مشغل الموسيقى (باستخدام الرابط المقدم) =====
+        // ===== مشغل الموسيقى (موسيقى هادئة) =====
         const tracks = [
-            { name: '🎵 هدوء وسكينة', url: 'https://t.me/c/4318452690/23' },
-            { name: '🌙 ليالي هادئة', url: 'https://cdn.pixabay.com/download/audio/2022/05/27/audio_4e3d7e0f1a.mp3' },
-            { name: '🌊 أمواج وسلام', url: 'https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0e1f2a3b4.mp3' }
+            { name: '🎵 هدوء وسكينة', url: 'https://cdn.pixabay.com/download/audio/2022/05/27/audio_4e3d7e0f1a.mp3' },
+            { name: '🌙 ليالي هادئة', url: 'https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0e1f2a3b4.mp3' },
+            { name: '🌊 أمواج وسلام', url: 'https://cdn.pixabay.com/download/audio/2022/02/02/audio_bb8b5e9f1c.mp3' }
         ];
 
         let currentTrack = 0,
@@ -1445,7 +1786,7 @@
             isMuted = false;
         let audio = new Audio();
         audio.loop = false;
-        audio.volume = 0.4;
+        audio.volume = 0.3;
 
         const playBtn = document.getElementById('playBtn');
         const playIcon = document.getElementById('playIcon');
@@ -1526,8 +1867,8 @@
                 volumeSlider.value = 0;
                 volumeIcon.className = 'fas fa-volume-mute';
             } else {
-                audio.volume = 0.4;
-                volumeSlider.value = 40;
+                audio.volume = 0.3;
+                volumeSlider.value = 30;
                 volumeIcon.className = 'fas fa-volume-up';
             }
         }
@@ -1571,7 +1912,7 @@
             else document.exitFullscreen().catch(e => {});
         }
 
-        // ===== نافذة خدماتنا  =====
+        // ===== نافذة من نحن =====
         function openAboutModal() {
             document.getElementById('aboutOverlay').classList.add('show');
             document.getElementById('dropdownMenu').classList.remove('show');
@@ -1638,7 +1979,7 @@
                 securePay: 'دفع آمن عبر باينس',
                 payBtn: 'الدفع عبر Binance',
                 founder: 'المؤسس',
-                support: 'الدعم',
+                support: 'جروب الدعم',
                 youtube: 'يوتيوب',
                 footerRights: 'حرية تعديل و نشر',
                 notice: 'تنويه_هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك'
@@ -1677,7 +2018,7 @@
                 securePay: 'Secure payment via Binance',
                 payBtn: 'Pay with Binance',
                 founder: 'Founder',
-                support: 'Support',
+                support: 'Support Group',
                 youtube: 'YouTube',
                 footerRights: 'Free to modify & publish',
                 notice: 'Important: Please be serious so we don\'t waste time'
@@ -1698,7 +2039,7 @@
         }
 
         console.log('🚀 Py Hub | منصة برمجيات وتطوير');
-        console.log('📌 @TopVeGa | @CyberNinjja');
+        console.log('📌 @TopVeGa | @Cybervega');
     </script>
 
 </body>
