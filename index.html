@@ -815,7 +815,7 @@
             border: 1px solid rgba(37, 99, 235, 0.06);
         }
 
-        /* ===== نافذة من نحن ===== */
+        /* ===== نافذة خدماتنا  ===== */
         .about-modal .about-content {
             font-size: 0.9rem;
             line-height: 1.8;
@@ -946,7 +946,7 @@
                     </button>
                     <div style="height:1px; background:rgba(0,0,0,0.02); margin:0.2rem 1rem;"></div>
                     <button class="dropdown-item" onclick="openAboutModal()" style="display:flex; align-items:center; gap:10px; padding:0.4rem 1.2rem; color:#1e293b; background:transparent; border:none; width:100%; cursor:pointer; font-size:0.8rem; border-radius:12px; transition:all 0.2s ease;">
-                        <i class="fas fa-info-circle"></i> 📖 من نحن
+                        <i class="fas fa-info-circle"></i> 📖 خدماتنا 
                     </button>
                     <div style="height:1px; background:rgba(0,0,0,0.02); margin:0.2rem 1rem;"></div>
                     <a class="dropdown-item" href="https://t.me/Cybervega" target="_blank" style="display:flex; align-items:center; gap:10px; padding:0.4rem 1.2rem; color:#1e293b; text-decoration:none; font-size:0.8rem; border-radius:12px; transition:all 0.2s ease;">
@@ -1025,7 +1025,7 @@
             <div class="bots-section" data-aos="fade-up" data-aos-delay="200">
                 <div class="bot-card">
                     <i class="fas fa-music"></i>
-                    <div class="bot-name">بوت بيري للأغاني</div>
+                    <div class="bot-name"> بيري للأغاني</div>
                     <div class="bot-username">@Bi1ieBot</div>
                     <div class="bot-desc" data-key="bot1Desc">بوت استماع وتحميل الأغاني</div>
                     <a href="https://t.me/Bi1ieBot" target="_blank" class="bot-link"><i class="fab fa-telegram"></i> <span data-key="openBot">افتح البوت</span></a>
@@ -1097,7 +1097,7 @@
                     <i class="fas fa-at"></i> By: <strong>@TopVeGa</strong>
                 </div>
                 <div>
-                    <i class="fas fa-code"></i> <span data-key="footerRights">حرية تعديل و نشر</span> <i class="far fa-copyright"></i> 2015
+                    <i class="fas fa-code"></i> <span data-key="footerRights">جميع الحقوق محفوظة </span> <i class="far fa-copyright"></i> © 2015-2024
                 </div>
             </div>
 
@@ -1155,11 +1155,11 @@
         </div>
     </div>
 
-    <!-- ===== نافذة من نحن ===== -->
+    <!-- ===== نافذة خدماتنا  ===== -->
     <div class="modal-overlay" id="aboutOverlay">
         <div class="modal about-modal">
             <button class="close-modal" onclick="closeAboutModal()"><i class="fas fa-times"></i></button>
-            <h2><i class="fas fa-info-circle"></i> من نحن</h2>
+            <h2><i class="fas fa-info-circle"></i> خدماتنا </h2>
             <div class="about-content">
                 <p>السلام علي من اتبع الهدى</p>
                 <ul>
@@ -1179,7 +1179,7 @@
                 <p>By : <span class="highlight">@TopVeGa</span></p>
                 <div class="footer-note">
                     <i class="fas fa-exclamation-triangle" style="color:#2563eb;"></i>
-                    #تنويه_هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك
+                    #تنويه هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك
                 </div>
             </div>
         </div>
@@ -1222,7 +1222,7 @@
             }
         }
 
-        // ===== نافذة من نحن =====
+        // ===== نافذة خدماتنا  =====
         function openAboutModal() {
             document.getElementById('aboutOverlay').classList.add('show');
             document.getElementById('dropdownMenu').style.display = 'none';
@@ -1266,15 +1266,15 @@
 
         // ===== التعليقات المتقدمة =====
         let comments = [
-            { id: 1, user: 'أحمد محمد', text: '⭐️⭐️⭐️⭐️⭐️ منصة رائعة، خدمات متكاملة وسريعة!', likes: 12, time: Date.now() -
+            { id: 1, user: 'أحمد محمد', text: ' منصة رائعة، خدمات متكاملة وسريعة!', likes: 12, time: Date.now() -
                     3600000, replies: [] },
             { id: 2, user: 'سارة خالد', text: '❤️ أفضل موقع برمجي تعاملت معه، دعم فني ممتاز جداً', likes: 8, time: Date.now() -
                     7200000, replies: [] },
             { id: 3, user: 'علي حسن', text: '🔥 أكواد احترافية وسعر رمزي، أنصح الجميع بالتجربة', likes: 15, time: Date.now() -
                     10800000, replies: [] },
-            { id: 4, user: 'نورا يوسف', text: '✨ موقع موثوق ومحتواه قيم، شكراً لفريق العمل', likes: 6, time: Date.now() -
+            { id: 4, user: 'نورا يوسف', text: ' موقع موثوق ومحتواه قيم، شكراً لفريق العمل', likes: 6, time: Date.now() -
                     14400000, replies: [] },
-            { id: 5, user: 'محمد طارق', text: '💪 خدمات ممتازة وسرعة في التنفيذ، يستحق 10/10', likes: 20, time: Date.now() -
+            { id: 5, user: 'محمد طارق', text: ' خدمات ممتازة وسرعة في التنفيذ، ', likes: 20, time: Date.now() -
                     18000000, replies: [] },
         ];
         let nextCommentId = 6;
@@ -1377,7 +1377,7 @@
             }
             comments.unshift({
                 id: nextCommentId++,
-                user: userInput.value.trim() || 'مستخدم',
+                user: userInput.value.trim() || 'اسمك',
                 text: textInput.value.trim(),
                 likes: 0,
                 time: Date.now(),
@@ -1570,7 +1570,7 @@
                 commentsTitle: 'آراء المستخدمين',
                 addComment: 'إضافة تعليق',
                 autoComments: 'تتغير التعليقات تلقائياً',
-                footerRights: 'حرية تعديل و نشر',
+                footerRights: 'جميع الحقوق محفوظة ',
                 notice: 'تنويه هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك',
                 support: 'جروب الدعم'
             },
@@ -1592,7 +1592,7 @@
                 join: 'Join',
                 joinSupport: 'Join Support',
                 active: 'Active',
-                activeSupport: 'Available 24/7',
+                activeSupport: 'Available 24',
                 protection: 'Protection',
                 s1: 'Codes in all languages',
                 s2: 'Music factories',
