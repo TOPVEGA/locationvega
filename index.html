@@ -3,51 +3,82 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Python Zone · منصة برمجيات</title>
+    <title>python zone | منصة برمجيات وتطوير</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
-        /* ============================================================
-           STYLE: NOTION / LINEAR
-           ============================================================ */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #fafafa;
-            color: #1a1a1a;
-            padding: 2rem 1.5rem;
-            line-height: 1.6;
-            direction: rtl;
             min-height: 100vh;
+            background: #f0f4f8;
+            padding: 1.5rem;
+            transition: background 0.4s ease;
+            position: relative;
         }
 
-        body.dark {
-            background: #1a1a1a;
-            color: #e8e8e8;
+        body.dark-mode {
+            background: #111827;
+        }
+
+        /* ===== سادة خلفية بسيطة ===== */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
             max-width: 1100px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
-        /* ===== HEADER ===== */
+        /* ===== الكارد الرئيسي ===== */
+        .main-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border-radius: 40px;
+            padding: 2rem 2rem 5rem 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.02);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        body.dark-mode .main-card {
+            background: rgba(30, 41, 59, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-color: rgba(255, 255, 255, 0.03);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ===== الهيدر ===== */
         .header {
             display: flex;
             flex-wrap: wrap;
-            align-items: center;
             justify-content: space-between;
-            padding: 0.6rem 0 1.2rem 0;
+            align-items: center;
+            padding-bottom: 1rem;
             border-bottom: 1px solid rgba(0, 0, 0, 0.04);
         }
 
-        body.dark .header {
-            border-bottom-color: rgba(255, 255, 255, 0.04);
+        body.dark-mode .header {
+            border-color: rgba(255, 255, 255, 0.04);
         }
 
         .brand {
@@ -56,732 +87,673 @@
             gap: 12px;
         }
 
-        .brand .logo {
-            width: 40px;
-            height: 40px;
-            background: #2563eb;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 1.4rem;
+        .brand i {
+            font-size: 2.2rem;
+            color: #2563eb;
         }
 
-        body.dark .brand .logo {
-            background: #3b82f6;
+        body.dark-mode .brand i {
+            color: #60a5fa;
         }
 
         .brand h1 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            letter-spacing: -0.3px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: -0.5px;
+        }
+
+        body.dark-mode .brand h1 {
+            color: #f1f5f9;
         }
 
         .brand small {
             display: block;
             font-size: 0.7rem;
+            color: #64748b;
             font-weight: 400;
-            color: #6b7280;
-            margin-top: -1px;
+            margin-top: 1px;
         }
 
-        body.dark .brand small {
-            color: #9ca3af;
+        body.dark-mode .brand small {
+            color: #94a3b8;
         }
 
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-
-        .btn-ghost {
-            background: transparent;
-            border: none;
-            padding: 0.3rem 0.9rem;
-            border-radius: 8px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: #1a1a1a;
-            cursor: pointer;
-            transition: 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-family: 'Inter', sans-serif;
-        }
-
-        body.dark .btn-ghost {
-            color: #e8e8e8;
-        }
-
-        .btn-ghost:hover {
-            background: rgba(0, 0, 0, 0.02);
-        }
-
-        body.dark .btn-ghost:hover {
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .btn-ghost i {
-            color: #6b7280;
-            font-size: 0.8rem;
-        }
-
-        body.dark .btn-ghost i {
-            color: #9ca3af;
-        }
-
-        .badge-light {
-            background: #f0f0f0;
-            padding: 0.05rem 0.6rem;
-            border-radius: 12px;
-            font-size: 0.6rem;
-            font-weight: 600;
-            color: #1a1a1a;
-        }
-
-        body.dark .badge-light {
-            background: #2a2a2a;
-            color: #e8e8e8;
-        }
-
-        /* ===== DROPDOWN ===== */
-        .dropdown-wrap {
-            position: relative;
-        }
-
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 110%;
-            left: 0;
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 0.3rem 0;
-            min-width: 180px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.02);
-            border: 1px solid rgba(0, 0, 0, 0.02);
-            z-index: 1000;
-            font-size: 0.8rem;
-        }
-
-        body.dark .dropdown-menu {
-            background: #1a1a1a;
-            border-color: rgba(255, 255, 255, 0.02);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        .dropdown-menu.show {
-            display: block;
-            animation: fade 0.15s ease;
-        }
-
-        @keyframes fade {
-            from {
-                opacity: 0;
-                transform: translateY(-4px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .dropdown-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 0.3rem 1.2rem;
-            color: #1a1a1a;
-            background: transparent;
-            border: none;
-            width: 100%;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.75rem;
-            transition: 0.15s ease;
-            border-radius: 6px;
-        }
-
-        body.dark .dropdown-item {
-            color: #e8e8e8;
-        }
-
-        .dropdown-item:hover {
-            background: rgba(0, 0, 0, 0.02);
-        }
-
-        body.dark .dropdown-item:hover {
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .dropdown-item i {
-            width: 16px;
-            color: #6b7280;
-        }
-
-        body.dark .dropdown-item i {
-            color: #9ca3af;
-        }
-
-        .dropdown-divider {
-            height: 1px;
-            background: rgba(0, 0, 0, 0.04);
-            margin: 0.2rem 0.8rem;
-        }
-
-        body.dark .dropdown-divider {
-            background: rgba(255, 255, 255, 0.04);
-        }
-
-        /* ===== NAV ===== */
-        .nav {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.3rem;
-            margin: 1.2rem 0 1.8rem 0;
-            padding-bottom: 0.2rem;
-        }
-
-        .nav-item {
-            padding: 0.2rem 1rem;
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: #6b7280;
-            border-radius: 8px;
-            transition: 0.2s ease;
-            cursor: default;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: transparent;
-        }
-
-        body.dark .nav-item {
-            color: #9ca3af;
-        }
-
-        .nav-item:hover {
-            background: rgba(0, 0, 0, 0.02);
-            color: #1a1a1a;
-        }
-
-        body.dark .nav-item:hover {
-            background: rgba(255, 255, 255, 0.02);
-            color: #e8e8e8;
-        }
-
-        .nav-item i {
-            font-size: 0.75rem;
-            color: #6b7280;
-        }
-
-        body.dark .nav-item i {
-            color: #9ca3af;
-        }
-
-        .nav-item.active {
-            background: #1a1a1a;
-            color: #ffffff;
-        }
-
-        body.dark .nav-item.active {
-            background: #e8e8e8;
-            color: #1a1a1a;
-        }
-
-        .nav-item.active i {
-            color: #ffffff;
-        }
-
-        body.dark .nav-item.active i {
-            color: #1a1a1a;
-        }
-
-        /* ===== CARDS (Notion style) ===== */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.2rem;
-            margin: 1.2rem 0;
-        }
-
-        .card {
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 1.2rem 1.2rem 1rem 1.2rem;
-            border: 1px solid rgba(0, 0, 0, 0.02);
-            transition: 0.2s ease;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01);
-        }
-
-        body.dark .card {
-            background: #1a1a1a;
-            border-color: rgba(255, 255, 255, 0.02);
-        }
-
-        .card:hover {
-            background: #f8f8f8;
-            border-color: rgba(0, 0, 0, 0.04);
-        }
-
-        body.dark .card:hover {
-            background: #222222;
-            border-color: rgba(255, 255, 255, 0.04);
-        }
-
-        .card-title {
-            font-size: 0.95rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
             gap: 8px;
-            margin-bottom: 0.2rem;
-        }
-
-        .card-title i {
-            font-size: 1rem;
-            color: #2563eb;
-        }
-
-        body.dark .card-title i {
-            color: #3b82f6;
-        }
-
-        .card-desc {
-            font-size: 0.8rem;
-            color: #6b7280;
-            line-height: 1.5;
-            margin: 0.1rem 0 0.6rem 0;
-        }
-
-        body.dark .card-desc {
-            color: #9ca3af;
-        }
-
-        .card-footer {
-            display: flex;
             flex-wrap: wrap;
+        }
+
+        .btn-icon {
+            background: rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            padding: 0.4rem 0.9rem;
+            border-radius: 60px;
+            color: #1e293b;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.2s ease;
+            display: flex;
             align-items: center;
             gap: 6px;
-            padding-top: 0.5rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.02);
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
         }
 
-        body.dark .card-footer {
-            border-top-color: rgba(255, 255, 255, 0.02);
-        }
-
-        .card-footer .link {
-            font-size: 0.7rem;
-            font-weight: 500;
+        .btn-icon i {
             color: #2563eb;
-            padding: 0.05rem 0.6rem;
-            border-radius: 8px;
-            background: rgba(37, 99, 235, 0.02);
-            transition: 0.2s;
-            display: inline-flex;
+        }
+
+        body.dark-mode .btn-icon {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.04);
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .btn-icon i {
+            color: #60a5fa;
+        }
+
+        .btn-icon:hover {
+            background: rgba(37, 99, 235, 0.04);
+            transform: translateY(-1px);
+        }
+
+        body.dark-mode .btn-icon:hover {
+            background: rgba(96, 165, 250, 0.06);
+        }
+
+        .visitor-count {
+            font-size: 0.7rem;
+            color: #64748b;
+            background: #f1f5f9;
+            padding: 0.2rem 0.8rem;
+            border-radius: 60px;
+            display: flex;
             align-items: center;
             gap: 4px;
         }
 
-        body.dark .card-footer .link {
-            color: #3b82f6;
-            background: rgba(59, 130, 246, 0.02);
+        body.dark-mode .visitor-count {
+            background: rgba(255, 255, 255, 0.03);
+            color: #94a3b8;
         }
 
-        .card-footer .link:hover {
-            background: rgba(37, 99, 235, 0.04);
+        .visitor-count i {
+            color: #2563eb;
         }
 
-        body.dark .card-footer .link:hover {
-            background: rgba(59, 130, 246, 0.04);
+        body.dark-mode .visitor-count i {
+            color: #60a5fa;
         }
 
-        .card-footer .tag {
-            font-size: 0.6rem;
-            color: #6b7280;
-            background: #f0f0f0;
-            padding: 0.05rem 0.6rem;
-            border-radius: 12px;
-        }
-
-        body.dark .card-footer .tag {
-            background: #2a2a2a;
-            color: #9ca3af;
-        }
-
-        .card.support .card-title i {
-            color: #dc2626;
-        }
-
-        body.dark .card.support .card-title i {
-            color: #ef4444;
-        }
-
-        .card.support .card-footer .link {
-            color: #dc2626;
-        }
-
-        body.dark .card.support .card-footer .link {
-            color: #ef4444;
-        }
-
-        /* ===== SERVICES (tags) ===== */
-        .services-wrap {
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 0.8rem 1.2rem;
-            margin: 1.2rem 0;
-            border: 1px solid rgba(0, 0, 0, 0.02);
-        }
-
-        body.dark .services-wrap {
-            background: #1a1a1a;
-            border-color: rgba(255, 255, 255, 0.02);
-        }
-
-        .services-wrap .tags {
+        /* ===== التنقل ===== */
+        .nav-links {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 0.2rem 0.8rem;
+            gap: 0.4rem;
+            margin: 1.2rem 0 1.8rem 0;
+        }
+
+        .nav-btn {
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            padding: 0.4rem 1.4rem;
+            border-radius: 60px;
+            color: #1e293b;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: 0.3s ease;
+            cursor: default;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        body.dark-mode .nav-btn {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.03);
+            color: #e2e8f0;
+        }
+
+        .nav-btn i {
+            color: #2563eb;
+        }
+
+        body.dark-mode .nav-btn i {
+            color: #60a5fa;
+        }
+
+        .nav-btn:hover {
+            background: #f1f5f9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+
+        body.dark-mode .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        /* ===== شبكة القنوات ===== */
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1rem;
+            margin: 1.2rem 0;
+        }
+
+        .channel-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 1.2rem 1.2rem;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            transition: 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        body.dark-mode .channel-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .channel-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
+            border-color: rgba(37, 99, 235, 0.06);
+        }
+
+        body.dark-mode .channel-card:hover {
+            border-color: rgba(96, 165, 250, 0.06);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .channel-card .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 0.2rem;
+        }
+
+        body.dark-mode .channel-card .card-title {
+            color: #f1f5f9;
+        }
+
+        .channel-card .card-title i {
+            color: #2563eb;
+            font-size: 1.2rem;
+        }
+
+        body.dark-mode .channel-card .card-title i {
+            color: #60a5fa;
+        }
+
+        .channel-card .card-desc {
+            color: #64748b;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            margin: 0.2rem 0 0.6rem 0;
+        }
+
+        body.dark-mode .channel-card .card-desc {
+            color: #94a3b8;
+        }
+
+        .channel-card .card-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px;
+            padding-top: 0.6rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.02);
+        }
+
+        body.dark-mode .channel-card .card-meta {
+            border-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .channel-card .card-meta a {
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            background: rgba(37, 99, 235, 0.02);
+            border: 1px solid transparent;
+            transition: 0.2s;
+        }
+
+        body.dark-mode .channel-card .card-meta a {
+            color: #60a5fa;
+            background: rgba(96, 165, 250, 0.02);
+        }
+
+        .channel-card .card-meta a:hover {
+            background: rgba(37, 99, 235, 0.04);
+        }
+
+        body.dark-mode .channel-card .card-meta a:hover {
+            background: rgba(96, 165, 250, 0.04);
+        }
+
+        .badge {
+            background: #f1f5f9;
+            padding: 0.1rem 0.7rem;
+            border-radius: 40px;
+            font-size: 0.6rem;
+            color: #64748b;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+
+        body.dark-mode .badge {
+            background: rgba(255, 255, 255, 0.02);
+            color: #94a3b8;
+        }
+
+        .channel-card.support-card .card-title i {
+            color: #dc2626;
+        }
+
+        body.dark-mode .channel-card.support-card .card-title i {
+            color: #f87171;
+        }
+
+        .channel-card.support-card .card-meta a {
+            color: #dc2626;
+        }
+
+        body.dark-mode .channel-card.support-card .card-meta a {
+            color: #f87171;
+        }
+
+        /* ===== قائمة الخدمات ===== */
+        .services-list {
+            background: #fff;
+            border-radius: 28px;
+            padding: 1.2rem 1.5rem;
+            margin: 1.2rem 0;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        body.dark-mode .services-list {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .services-list ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.3rem 1.2rem;
             list-style: none;
         }
 
-        .services-wrap .tags li {
-            font-size: 0.75rem;
-            color: #1a1a1a;
+        .services-list ul li {
+            color: #1e293b;
+            font-size: 0.8rem;
             display: flex;
             align-items: center;
-            gap: 4px;
-            padding: 0.1rem 0;
+            gap: 8px;
+            padding: 0.15rem 0;
         }
 
-        body.dark .services-wrap .tags li {
-            color: #e8e8e8;
+        body.dark-mode .services-list ul li {
+            color: #e2e8f0;
         }
 
-        .services-wrap .tags li i {
+        .services-list ul li i {
             color: #2563eb;
-            font-size: 0.7rem;
+            font-size: 0.8rem;
         }
 
-        body.dark .services-wrap .tags li i {
-            color: #3b82f6;
+        body.dark-mode .services-list ul li i {
+            color: #60a5fa;
         }
 
-        /* ===== BOTS ===== */
-        .bots-grid {
+        /* ===== البوتات ===== */
+        .bots-section {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1rem;
             margin: 1.2rem 0;
         }
 
-        .bot-item {
-            background: #ffffff;
-            border-radius: 14px;
-            padding: 1rem 0.8rem;
+        .bot-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 1.2rem 0.8rem;
             text-align: center;
             border: 1px solid rgba(0, 0, 0, 0.02);
-            transition: 0.2s ease;
+            transition: 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         }
 
-        body.dark .bot-item {
-            background: #1a1a1a;
+        body.dark-mode .bot-card {
+            background: rgba(255, 255, 255, 0.02);
             border-color: rgba(255, 255, 255, 0.02);
         }
 
-        .bot-item:hover {
-            background: #f8f8f8;
+        .bot-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.03);
         }
 
-        body.dark .bot-item:hover {
-            background: #222222;
+        body.dark-mode .bot-card:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
 
-        .bot-item .icon {
-            font-size: 1.8rem;
+        .bot-card i {
+            font-size: 2rem;
             color: #2563eb;
             margin-bottom: 0.2rem;
         }
 
-        body.dark .bot-item .icon {
-            color: #3b82f6;
+        body.dark-mode .bot-card i {
+            color: #60a5fa;
         }
 
-        .bot-item .name {
+        .bot-card .bot-name {
+            color: #0f172a;
+            font-size: 0.95rem;
             font-weight: 700;
-            font-size: 0.85rem;
         }
 
-        .bot-item .username {
-            font-size: 0.7rem;
+        body.dark-mode .bot-card .bot-name {
+            color: #f1f5f9;
+        }
+
+        .bot-card .bot-username {
             color: #2563eb;
+            font-size: 0.8rem;
             direction: ltr;
             display: block;
-        }
-
-        body.dark .bot-item .username {
-            color: #3b82f6;
-        }
-
-        .bot-item .desc {
-            font-size: 0.65rem;
-            color: #6b7280;
             margin: 0.1rem 0;
         }
 
-        body.dark .bot-item .desc {
-            color: #9ca3af;
+        body.dark-mode .bot-card .bot-username {
+            color: #60a5fa;
         }
 
-        .bot-item .btn {
+        .bot-card .bot-desc {
+            color: #64748b;
+            font-size: 0.7rem;
+        }
+
+        body.dark-mode .bot-card .bot-desc {
+            color: #94a3b8;
+        }
+
+        .bot-card .bot-link {
             display: inline-block;
-            margin-top: 0.3rem;
-            padding: 0.1rem 1rem;
-            border-radius: 8px;
+            margin-top: 0.4rem;
+            padding: 0.2rem 1.2rem;
+            border-radius: 60px;
             background: rgba(37, 99, 235, 0.02);
             color: #2563eb;
-            font-size: 0.65rem;
-            font-weight: 500;
+            text-decoration: none;
+            font-size: 0.75rem;
             border: 1px solid rgba(37, 99, 235, 0.04);
-            transition: 0.2s;
+            transition: 0.3s;
         }
 
-        body.dark .bot-item .btn {
-            background: rgba(59, 130, 246, 0.02);
-            color: #3b82f6;
-            border-color: rgba(59, 130, 246, 0.04);
+        body.dark-mode .bot-card .bot-link {
+            background: rgba(96, 165, 250, 0.02);
+            color: #60a5fa;
+            border-color: rgba(96, 165, 250, 0.04);
         }
 
-        .bot-item .btn:hover {
+        .bot-card .bot-link:hover {
             background: rgba(37, 99, 235, 0.04);
         }
 
-        body.dark .bot-item .btn:hover {
-            background: rgba(59, 130, 246, 0.04);
+        body.dark-mode .bot-card .bot-link:hover {
+            background: rgba(96, 165, 250, 0.04);
         }
 
-        /* ===== PAYMENT ===== */
-        .payment-wrap {
+        /* ===== قسم الدفع ===== */
+        .payment-section {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
             gap: 1.2rem;
             margin: 1.2rem 0 1rem 0;
-            padding: 0.8rem 1.2rem;
-            background: #ffffff;
-            border-radius: 20px;
+            padding: 1rem 1.5rem;
+            background: #fff;
+            border-radius: 40px;
             border: 1px solid rgba(0, 0, 0, 0.02);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
             flex-direction: column;
         }
 
-        body.dark .payment-wrap {
-            background: #1a1a1a;
+        body.dark-mode .payment-section {
+            background: rgba(255, 255, 255, 0.02);
             border-color: rgba(255, 255, 255, 0.02);
         }
 
-        .payment-box {
+        .payment-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            background: #f8f8f8;
-            padding: 0.2rem 1.5rem;
+            gap: 14px;
+            background: #f8fafc;
+            padding: 0.4rem 2rem;
             border-radius: 60px;
             border: 1px solid rgba(0, 0, 0, 0.02);
-            color: #1a1a1a;
+            color: #1e293b;
             cursor: pointer;
-            transition: 0.2s ease;
+            transition: 0.3s ease;
             flex-direction: column;
-            min-width: 140px;
+            min-width: 180px;
         }
 
-        body.dark .payment-box {
-            background: #222222;
-            color: #e8e8e8;
+        body.dark-mode .payment-item {
+            background: rgba(255, 255, 255, 0.02);
+            color: #e2e8f0;
             border-color: rgba(255, 255, 255, 0.02);
         }
 
-        .payment-box:hover {
-            background: #f0f0f0;
+        .payment-item:hover {
+            background: #f1f5f9;
         }
 
-        body.dark .payment-box:hover {
-            background: #2a2a2a;
+        body.dark-mode .payment-item:hover {
+            background: rgba(255, 255, 255, 0.03);
         }
 
-        .payment-box .title {
-            font-size: 0.95rem;
+        .payment-item .pay-title {
+            font-size: 1.1rem;
             font-weight: 700;
+            color: #0f172a;
         }
 
-        .payment-box .sub {
-            font-size: 0.7rem;
+        body.dark-mode .payment-item .pay-title {
+            color: #f1f5f9;
+        }
+
+        .payment-item .pay-sub {
+            font-size: 0.8rem;
             font-weight: 600;
             color: #2563eb;
             background: rgba(37, 99, 235, 0.02);
-            padding: 0.05rem 0.6rem;
-            border-radius: 20px;
-            letter-spacing: 0.5px;
+            padding: 0.05rem 1rem;
+            border-radius: 40px;
+            letter-spacing: 1px;
             direction: ltr;
         }
 
-        body.dark .payment-box .sub {
-            color: #3b82f6;
-            background: rgba(59, 130, 246, 0.02);
+        body.dark-mode .payment-item .pay-sub {
+            color: #60a5fa;
+            background: rgba(96, 165, 250, 0.02);
         }
 
-        .payment-box .icon {
-            font-size: 1.4rem;
+        .payment-item .pay-icon {
+            font-size: 1.8rem;
             color: #2563eb;
         }
 
-        body.dark .payment-box .icon {
-            color: #3b82f6;
+        body.dark-mode .payment-item .pay-icon {
+            color: #60a5fa;
         }
 
-        .btn-primary {
+        .pay-btn {
             background: #2563eb;
             border: none;
-            padding: 0.5rem 2rem;
-            border-radius: 12px;
-            color: #ffffff;
-            font-size: 0.9rem;
+            padding: 0.7rem 2.5rem;
+            border-radius: 60px;
+            color: #fff;
+            font-size: 1rem;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            transition: 0.3s ease;
+            gap: 12px;
+            transition: 0.4s ease;
             cursor: pointer;
             text-decoration: none;
-            font-family: 'Inter', sans-serif;
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.04);
+            margin: 0.2rem 0;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.08);
         }
 
-        .btn-primary:hover {
+        .pay-btn i {
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        .pay-btn:hover {
             background: #1d4ed8;
-            transform: scale(1.01);
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.12);
         }
 
-        .btn-primary i {
-            color: #ffffff;
-            font-size: 1rem;
+        body.dark-mode .pay-btn {
+            background: #2563eb;
         }
 
-        /* ===== SOCIAL ===== */
-        .social {
+        body.dark-mode .pay-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* ===== روابط المنصة ===== */
+        .platform-links {
             display: flex;
             justify-content: center;
-            gap: 0.6rem;
+            gap: 0.8rem;
             margin: 1.2rem 0 1rem 0;
             flex-wrap: wrap;
         }
 
-        .social a {
+        .platform-links a {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            color: #1a1a1a;
-            font-size: 0.75rem;
-            padding: 0.2rem 1rem;
-            border-radius: 8px;
-            background: #ffffff;
+            gap: 8px;
+            color: #1e293b;
+            text-decoration: none;
+            font-size: 0.8rem;
+            padding: 0.3rem 1.2rem;
+            border-radius: 60px;
+            background: #fff;
             border: 1px solid rgba(0, 0, 0, 0.02);
-            transition: 0.2s ease;
+            transition: 0.3s ease;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+            cursor: pointer;
         }
 
-        body.dark .social a {
-            background: #1a1a1a;
+        body.dark-mode .platform-links a {
+            background: rgba(255, 255, 255, 0.02);
             border-color: rgba(255, 255, 255, 0.02);
-            color: #e8e8e8;
+            color: #e2e8f0;
         }
 
-        .social a:hover {
-            background: #f8f8f8;
+        .platform-links a:hover {
+            background: #f1f5f9;
+            transform: translateY(-2px);
         }
 
-        body.dark .social a:hover {
-            background: #222222;
+        body.dark-mode .platform-links a:hover {
+            background: rgba(255, 255, 255, 0.03);
         }
 
-        .social a i {
-            font-size: 1rem;
+        .platform-links a i {
+            font-size: 1.1rem;
             color: #2563eb;
         }
 
-        body.dark .social a i {
-            color: #3b82f6;
+        body.dark-mode .platform-links a i {
+            color: #60a5fa;
         }
 
-        .social a i.fa-comment-dots {
+        .platform-links a i.fa-comment-dots {
             color: #dc2626;
         }
 
-        body.dark .social a i.fa-comment-dots {
-            color: #ef4444;
+        body.dark-mode .platform-links a i.fa-comment-dots {
+            color: #f87171;
         }
 
-        /* ===== FOOTER ===== */
+        /* ===== الفوتر ===== */
         .footer {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
             margin-top: 1.8rem;
-            padding-top: 0.8rem;
+            padding-top: 1rem;
             border-top: 1px solid rgba(0, 0, 0, 0.02);
-            font-size: 0.7rem;
-            color: #6b7280;
+            color: #64748b;
+            font-size: 0.8rem;
         }
 
-        body.dark .footer {
-            border-top-color: rgba(255, 255, 255, 0.02);
-            color: #9ca3af;
+        body.dark-mode .footer {
+            border-color: rgba(255, 255, 255, 0.02);
+            color: #94a3b8;
         }
 
         .footer .by {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 8px;
         }
 
         .footer .by i {
             color: #2563eb;
         }
 
-        body.dark .footer .by i {
-            color: #3b82f6;
+        body.dark-mode .footer .by i {
+            color: #60a5fa;
         }
 
         .footer .by strong {
-            color: #1a1a1a;
+            color: #0f172a;
         }
 
-        body.dark .footer .by strong {
-            color: #e8e8e8;
+        body.dark-mode .footer .by strong {
+            color: #f1f5f9;
         }
 
         .notice {
             text-align: center;
             margin: 0.8rem 0 0.2rem 0;
-            font-size: 0.65rem;
-            color: #6b7280;
-            background: #ffffff;
-            padding: 0.2rem 1rem;
+            font-size: 0.7rem;
+            color: #64748b;
+            background: #f8fafc;
+            padding: 0.3rem 1.2rem;
             border-radius: 60px;
             border: 1px solid rgba(0, 0, 0, 0.02);
             display: inline-block;
         }
 
-        body.dark .notice {
-            background: #1a1a1a;
-            color: #9ca3af;
+        body.dark-mode .notice {
+            background: rgba(255, 255, 255, 0.02);
+            color: #94a3b8;
             border-color: rgba(255, 255, 255, 0.02);
         }
 
@@ -789,114 +761,121 @@
             color: #2563eb;
         }
 
-        body.dark .notice i {
-            color: #3b82f6;
+        body.dark-mode .notice i {
+            color: #60a5fa;
         }
 
-        /* ===== MUSIC PLAYER ===== */
-        .player {
+        /* ===== مشغل الموسيقى ===== */
+        .music-player {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            padding: 0.2rem 0.8rem;
+            padding: 0.4rem 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.4rem;
+            gap: 0.6rem;
             flex-wrap: wrap;
             border-top: 1px solid rgba(0, 0, 0, 0.02);
             z-index: 999;
         }
 
-        body.dark .player {
-            background: rgba(26, 26, 26, 0.92);
-            border-top-color: rgba(255, 255, 255, 0.02);
+        body.dark-mode .music-player {
+            background: rgba(30, 41, 59, 0.85);
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
         }
 
-        .player button {
-            background: transparent;
+        .music-player button {
+            background: rgba(0, 0, 0, 0.02);
             border: 1px solid rgba(0, 0, 0, 0.02);
-            color: #1a1a1a;
-            width: 28px;
-            height: 28px;
-            border-radius: 8px;
+            color: #1e293b;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
             cursor: pointer;
-            transition: 0.2s ease;
+            transition: 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.7rem;
+            font-size: 0.8rem;
         }
 
-        body.dark .player button {
-            color: #e8e8e8;
-            border-color: rgba(255, 255, 255, 0.02);
-        }
-
-        .player button:hover {
-            background: rgba(0, 0, 0, 0.02);
-        }
-
-        body.dark .player button:hover {
+        body.dark-mode .music-player button {
             background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.02);
+            color: #e2e8f0;
         }
 
-        .player .track {
-            font-size: 0.65rem;
-            font-weight: 500;
-            color: #1a1a1a;
-            min-width: 50px;
+        .music-player button:hover {
+            background: rgba(37, 99, 235, 0.04);
+            transform: scale(1.05);
+        }
+
+        body.dark-mode .music-player button:hover {
+            background: rgba(96, 165, 250, 0.04);
+        }
+
+        .music-player .track-info {
+            color: #1e293b;
+            font-size: 0.7rem;
+            min-width: 70px;
             text-align: center;
+            font-weight: 500;
         }
 
-        body.dark .player .track {
-            color: #e8e8e8;
+        body.dark-mode .music-player .track-info {
+            color: #e2e8f0;
         }
 
-        .player input[type="range"] {
-            width: 40px;
-            height: 2px;
+        .music-player .progress-bar,
+        .music-player .volume-slider {
+            width: 60px;
+            height: 3px;
             -webkit-appearance: none;
             background: rgba(0, 0, 0, 0.04);
             border-radius: 4px;
             outline: none;
+            transition: 0.2s;
         }
 
-        body.dark .player input[type="range"] {
+        body.dark-mode .music-player .progress-bar,
+        body.dark-mode .music-player .volume-slider {
             background: rgba(255, 255, 255, 0.04);
         }
 
-        .player input[type="range"]::-webkit-slider-thumb {
+        .music-player .progress-bar::-webkit-slider-thumb,
+        .music-player .volume-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             background: #2563eb;
             cursor: pointer;
         }
 
-        body.dark .player input[type="range"]::-webkit-slider-thumb {
-            background: #3b82f6;
+        body.dark-mode .music-player .progress-bar::-webkit-slider-thumb,
+        body.dark-mode .music-player .volume-slider::-webkit-slider-thumb {
+            background: #60a5fa;
         }
 
-        .player .time {
-            font-size: 0.55rem;
-            color: #6b7280;
-            min-width: 35px;
+        .music-player .time-display {
+            color: #64748b;
+            font-size: 0.6rem;
+            min-width: 50px;
             text-align: center;
             direction: ltr;
             font-family: 'Inter', monospace;
         }
 
-        body.dark .player .time {
-            color: #9ca3af;
+        body.dark-mode .music-player .time-display {
+            color: #94a3b8;
         }
 
-        /* ===== MODALS ===== */
+        /* ===== نافذة التعليقات ===== */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -904,9 +883,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
             z-index: 2000;
             justify-content: center;
             align-items: center;
@@ -915,583 +894,628 @@
 
         .modal-overlay.show {
             display: flex;
-            animation: fade 0.2s ease;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .modal {
-            max-width: 460px;
+            max-width: 480px;
             width: 100%;
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 1.8rem;
-            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.02);
+            background: #fff;
+            border-radius: 32px;
+            padding: 2rem;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.04);
             border: 1px solid rgba(0, 0, 0, 0.02);
             position: relative;
             max-height: 90vh;
             overflow-y: auto;
         }
 
-        body.dark .modal {
-            background: #1a1a1a;
+        body.dark-mode .modal {
+            background: #1e293b;
             border-color: rgba(255, 255, 255, 0.02);
-            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.2);
         }
 
-        .modal .close {
+        .modal .close-modal {
             position: absolute;
-            top: 0.6rem;
-            left: 0.6rem;
+            top: 0.8rem;
+            left: 0.8rem;
             background: transparent;
             border: none;
-            color: #6b7280;
-            font-size: 1rem;
-            padding: 0.2rem 0.5rem;
-            border-radius: 8px;
+            color: #64748b;
+            font-size: 1.2rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 40px;
             cursor: pointer;
-            transition: 0.2s;
+            transition: 0.3s;
         }
 
-        body.dark .modal .close {
-            color: #9ca3af;
+        body.dark-mode .modal .close-modal {
+            color: #94a3b8;
         }
 
-        .modal .close:hover {
+        .modal .close-modal:hover {
             background: rgba(0, 0, 0, 0.02);
         }
 
-        body.dark .modal .close:hover {
+        body.dark-mode .modal .close-modal:hover {
             background: rgba(255, 255, 255, 0.02);
         }
 
         .modal h2 {
-            font-size: 1.1rem;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #0f172a;
+        }
+
+        body.dark-mode .modal h2 {
+            color: #f1f5f9;
+        }
+
+        .modal h2 i {
+            color: #dc2626;
+        }
+
+        body.dark-mode .modal h2 i {
+            color: #f87171;
+        }
+
+        .comment-item {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 0.8rem 1rem;
             margin-bottom: 0.8rem;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+
+        body.dark-mode .comment-item {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .comment-item .comment-user {
+            font-weight: 700;
+            color: #0f172a;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .modal h2 i {
+        body.dark-mode .comment-item .comment-user {
+            color: #f1f5f9;
+        }
+
+        .comment-item .comment-user i {
             color: #2563eb;
         }
 
-        body.dark .modal h2 i {
-            color: #3b82f6;
+        body.dark-mode .comment-item .comment-user i {
+            color: #60a5fa;
         }
 
-        /* comments */
-        .comment-item {
-            background: #f8f8f8;
-            border-radius: 12px;
-            padding: 0.6rem 0.8rem;
-            margin-bottom: 0.6rem;
-            border: 1px solid rgba(0, 0, 0, 0.02);
+        .comment-item .comment-text {
+            color: #1e293b;
+            font-size: 0.85rem;
+            margin-top: 0.2rem;
+            padding-right: 1.8rem;
         }
 
-        body.dark .comment-item {
-            background: #222222;
-            border-color: rgba(255, 255, 255, 0.02);
+        body.dark-mode .comment-item .comment-text {
+            color: #e2e8f0;
         }
 
-        .comment-item .user {
-            font-weight: 700;
-            font-size: 0.8rem;
+        .comment-item .comment-stars {
+            color: #eab308;
+            font-size: 0.75rem;
+            margin-top: 0.1rem;
+            padding-right: 1.8rem;
+        }
+
+        /* ===== نافذة التقويم ===== */
+        .calendar-modal .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .calendar-modal .calendar-header h2 {
+            font-size: 1.2rem;
+            color: #0f172a;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 8px;
         }
 
-        .comment-item .user i {
+        body.dark-mode .calendar-modal .calendar-header h2 {
+            color: #f1f5f9;
+        }
+
+        .calendar-modal .calendar-header h2 i {
             color: #2563eb;
         }
 
-        body.dark .comment-item .user i {
-            color: #3b82f6;
+        body.dark-mode .calendar-modal .calendar-header h2 i {
+            color: #60a5fa;
         }
 
-        .comment-item .text {
-            font-size: 0.8rem;
-            padding-right: 1.6rem;
+        .calendar-modal .calendar-header .clock-display {
+            font-family: 'Inter', monospace;
+            font-size: 1rem;
+            background: #f1f5f9;
+            padding: 0.1rem 0.8rem;
+            border-radius: 30px;
+            color: #2563eb;
+            font-weight: 600;
         }
 
-        .comment-item .stars {
-            color: #eab308;
-            font-size: 0.65rem;
-            padding-right: 1.6rem;
+        body.dark-mode .calendar-modal .calendar-header .clock-display {
+            background: rgba(255, 255, 255, 0.02);
+            color: #60a5fa;
         }
 
-        /* calendar */
-        .calendar-grid {
+        .calendar-modal .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 3px;
+            gap: 4px;
             text-align: center;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
         }
 
-        .calendar-grid .weekday {
+        .calendar-modal .calendar-grid .weekday {
             font-weight: 600;
-            color: #6b7280;
+            color: #64748b;
             padding: 0.2rem 0;
-            font-size: 0.6rem;
+            font-size: 0.65rem;
         }
 
-        body.dark .calendar-grid .weekday {
-            color: #9ca3af;
+        body.dark-mode .calendar-modal .calendar-grid .weekday {
+            color: #94a3b8;
         }
 
-        .calendar-grid .day {
-            padding: 0.2rem 0;
-            border-radius: 8px;
-            background: #f8f8f8;
-            color: #1a1a1a;
-            transition: 0.2s;
+        .calendar-modal .calendar-grid .day {
+            padding: 0.3rem 0;
+            border-radius: 12px;
+            background: #f8fafc;
+            color: #1e293b;
+            transition: 0.3s;
         }
 
-        body.dark .calendar-grid .day {
-            background: #222222;
-            color: #e8e8e8;
+        body.dark-mode .calendar-modal .calendar-grid .day {
+            background: rgba(255, 255, 255, 0.02);
+            color: #e2e8f0;
         }
 
-        .calendar-grid .day.today {
+        .calendar-modal .calendar-grid .day.today {
             background: rgba(37, 99, 235, 0.04);
             color: #2563eb;
             font-weight: 700;
             border: 1px solid rgba(37, 99, 235, 0.06);
         }
 
-        body.dark .calendar-grid .day.today {
-            background: rgba(59, 130, 246, 0.04);
-            color: #3b82f6;
-            border-color: rgba(59, 130, 246, 0.06);
+        body.dark-mode .calendar-modal .calendar-grid .day.today {
+            background: rgba(96, 165, 250, 0.04);
+            color: #60a5fa;
+            border-color: rgba(96, 165, 250, 0.06);
         }
 
-        .calendar-grid .day.other {
-            opacity: 0.2;
+        .calendar-modal .calendar-grid .day.other-month {
+            opacity: 0.3;
         }
 
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.6rem;
-        }
-
-        .calendar-header h2 {
-            font-size: 1rem;
-        }
-
-        .calendar-header .clock {
-            font-family: 'Inter', monospace;
-            font-size: 0.85rem;
-            background: #f8f8f8;
-            padding: 0.05rem 0.6rem;
-            border-radius: 8px;
-            color: #2563eb;
-            font-weight: 600;
-        }
-
-        body.dark .calendar-header .clock {
-            background: #222222;
-            color: #3b82f6;
-        }
-
-        .calendar-footer {
-            margin-top: 0.6rem;
+        .calendar-modal .calendar-footer {
+            margin-top: 1rem;
             text-align: center;
-            color: #6b7280;
-            font-size: 0.65rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.02);
-            padding-top: 0.4rem;
-        }
-
-        body.dark .calendar-footer {
-            color: #9ca3af;
-            border-color: rgba(255, 255, 255, 0.02);
-        }
-
-        /* about */
-        .about-content {
-            font-size: 0.85rem;
-            line-height: 1.7;
-        }
-
-        .about-content .hl {
-            color: #2563eb;
-            font-weight: 600;
-        }
-
-        body.dark .about-content .hl {
-            color: #3b82f6;
-        }
-
-        .about-content ul {
-            list-style: none;
-            margin: 0.4rem 0;
-        }
-
-        .about-content ul li {
-            padding: 0.1rem 0;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .about-content ul li i {
-            color: #2563eb;
-            width: 16px;
-            font-size: 0.8rem;
-        }
-
-        body.dark .about-content ul li i {
-            color: #3b82f6;
-        }
-
-        .about-footer {
-            margin-top: 0.8rem;
-            padding-top: 0.6rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.02);
+            color: #64748b;
             font-size: 0.75rem;
-            color: #6b7280;
+            border-top: 1px solid rgba(0, 0, 0, 0.02);
+            padding-top: 0.8rem;
+        }
+
+        body.dark-mode .calendar-modal .calendar-footer {
+            color: #94a3b8;
+            border-color: rgba(255, 255, 255, 0.02);
+        }
+
+        /* ===== نافذة من نحن ===== */
+        .about-modal .about-content {
+            font-size: 0.9rem;
+            line-height: 1.8;
+            margin-top: 0.5rem;
+            color: #1e293b;
+        }
+
+        body.dark-mode .about-modal .about-content {
+            color: #e2e8f0;
+        }
+
+        .about-modal .about-content .highlight {
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        body.dark-mode .about-modal .about-content .highlight {
+            color: #60a5fa;
+        }
+
+        .about-modal .about-content ul {
+            list-style: none;
+            margin: 0.6rem 0;
+        }
+
+        .about-modal .about-content ul li {
+            padding: 0.15rem 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .about-modal .about-content ul li i {
+            color: #2563eb;
+            width: 18px;
+        }
+
+        body.dark-mode .about-modal .about-content ul li i {
+            color: #60a5fa;
+        }
+
+        .about-modal .footer-note {
+            margin-top: 1.2rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.02);
+            font-size: 0.8rem;
+            color: #64748b;
             text-align: center;
         }
 
-        body.dark .about-footer {
+        body.dark-mode .about-modal .footer-note {
             border-color: rgba(255, 255, 255, 0.02);
-            color: #9ca3af;
+            color: #94a3b8;
         }
 
-        /* ===== RESPONSIVE ===== */
+        /* ===== استجابة ===== */
         @media (max-width: 700px) {
-            body {
-                padding: 1rem 0.6rem;
-            }
-            .header {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 0.3rem;
+            .main-card {
+                padding: 1.2rem 1rem 4.5rem 1rem;
+                border-radius: 28px;
             }
             .brand h1 {
-                font-size: 1.1rem;
+                font-size: 1.4rem;
             }
             .header-actions {
+                width: 100%;
                 justify-content: center;
+                margin-top: 0.3rem;
                 gap: 4px;
             }
-            .btn-ghost {
-                font-size: 0.65rem;
-                padding: 0.2rem 0.6rem;
+            .btn-icon {
+                font-size: 0.7rem;
+                padding: 0.2rem 0.7rem;
             }
-            .btn-ghost .date-label {
+            .btn-icon .date-label {
                 display: none;
             }
-            .grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-                gap: 0.8rem;
+            .channels-grid {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             }
-            .card {
-                padding: 0.8rem 0.8rem 0.6rem 0.8rem;
-            }
-            .services-wrap .tags {
+            .services-list ul {
                 flex-direction: column;
                 align-items: center;
                 gap: 0.1rem;
             }
-            .payment-box {
+            .payment-item {
                 min-width: unset;
                 width: 100%;
-                padding: 0.2rem 0.8rem;
+                padding: 0.3rem 1rem;
             }
-            .btn-primary {
+            .pay-btn {
                 width: 100%;
                 justify-content: center;
-                padding: 0.4rem 1rem;
-                font-size: 0.8rem;
+                padding: 0.5rem 1.2rem;
+                font-size: 0.9rem;
             }
-            .social a .label {
+            .platform-links a .link-label {
                 display: none;
             }
-            .social a {
-                padding: 0.2rem 0.7rem;
+            .platform-links a {
+                padding: 0.3rem 0.8rem;
                 font-size: 0.7rem;
             }
-            .player {
-                padding: 0.2rem 0.4rem;
-                gap: 0.2rem;
+            .music-player {
+                padding: 0.3rem 0.6rem;
+                gap: 0.3rem;
             }
-            .player input[type="range"] {
-                width: 25px;
+            .music-player .progress-bar {
+                width: 40px;
             }
-            .player .track {
-                min-width: 30px;
+            .music-player .volume-slider {
+                width: 30px;
+            }
+            .music-player .track-info {
+                min-width: 40px;
+                font-size: 0.6rem;
+            }
+            .music-player .time-display {
+                min-width: 35px;
                 font-size: 0.55rem;
             }
-            .player .time {
-                min-width: 25px;
-                font-size: 0.5rem;
-            }
             .modal {
-                padding: 1rem 0.8rem;
+                padding: 1.2rem 1rem;
             }
-            .calendar-grid .day {
-                padding: 0.15rem 0;
-                font-size: 0.6rem;
+            .calendar-modal .calendar-grid .day {
+                padding: 0.2rem 0;
+                font-size: 0.65rem;
             }
             .footer {
                 flex-direction: column;
-                gap: 0.2rem;
+                gap: 0.3rem;
                 text-align: center;
-            }
-            .dropdown-menu {
-                left: auto;
-                right: 0;
-                min-width: 150px;
             }
         }
     </style>
 </head>
 <body>
 
+    <div class="bg-pattern"></div>
+
     <div class="container">
 
-        <!-- ===== HEADER ===== -->
-        <header class="header">
-            <div class="brand">
-                <div class="logo"><i class="fab fa-python"></i></div>
-                <div>
-                    <h1>python zone</h1>
-                    <small>منصة البرمجيات والتطوير</small>
+        <div class="main-card" data-aos="fade-up">
+
+            <!-- ===== الهيدر ===== -->
+            <div class="header">
+                <div class="brand">
+                    <i class="fab fa-python"></i>
+                    <div>
+                        <h1 id="brandTitle" data-key="brandTitle">python zone</h1>
+                        <small id="brandSub" data-key="brandSub">منصة البرمجيات والتطوير</small>
+                    </div>
                 </div>
-            </div>
-            <div class="header-actions">
+                <div class="header-actions">
+                    <button class="btn-icon" onclick="toggleCalendar()">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span class="date-label">التاريخ</span>
+                        <span id="headerDateTime">00:00</span>
+                    </button>
 
-                <button class="btn-ghost" onclick="toggleCalendar()">
-                    <i class="fas fa-calendar-alt"></i>
-                    <span class="date-label">التاريخ</span>
-                    <span id="headerDateTime">00:00</span>
-                </button>
+                    <div class="visitor-count">
+                        <i class="fas fa-eye"></i>
+                        <span id="visitorCount">12,847</span>
+                    </div>
 
-                <span class="btn-ghost" style="cursor:default; gap:4px;">
-                    <i class="fas fa-eye"></i>
-                    <span id="visitorCount">12,847</span>
-                </span>
-
-                <div class="dropdown-wrap">
-                    <button class="btn-ghost" onclick="toggleDropdown()">
+                    <button class="btn-icon" onclick="toggleDropdown()" title="الإعدادات">
                         <i class="fas fa-cog"></i>
                     </button>
-                    <div class="dropdown-menu" id="dropdownMenu">
-                        <button class="dropdown-item" onclick="changeLanguage('ar')">
-                            <i class="fas fa-flag"></i> 🇸🇦 العربية
-                        </button>
-                        <button class="dropdown-item" onclick="changeLanguage('en')">
-                            <i class="fas fa-flag"></i> 🇬🇧 English
-                        </button>
-                        <div class="dropdown-divider"></div>
-                        <button class="dropdown-item" onclick="toggleTheme()">
-                            <i class="fas fa-moon" id="themeIcon"></i> الوضع الليلي
-                        </button>
-                        <div class="dropdown-divider"></div>
-                        <button class="dropdown-item" onclick="toggleFullscreen()">
-                            <i class="fas fa-expand"></i> شاشة كاملة
-                        </button>
-                        <div class="dropdown-divider"></div>
-                        <button class="dropdown-item" onclick="openAbout()">
-                            <i class="fas fa-info-circle"></i> من نحن
-                        </button>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="https://t.me/Cybervega" target="_blank">
-                            <i class="fas fa-headset"></i> جروب الدعم
-                        </a>
+
+                    <button class="btn-icon" onclick="toggleTheme()" title="الوضع">
+                        <i class="fas fa-moon" id="themeIcon"></i>
+                    </button>
+
+                    <div class="visitor-count" style="background:transparent; padding:0;">
+                        <i class="fas fa-crown" style="color:#eab308;"></i>
+                        <span style="font-weight:600;">@TopVeGa</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== قائمة الإعدادات ===== -->
+            <div style="position:relative;">
+                <div class="dropdown-content" id="dropdownMenu" style="display:none; position:absolute; left:0; top:100%; background:#fff; border-radius:20px; padding:0.4rem 0; box-shadow:0 20px 60px rgba(0,0,0,0.02); border:1px solid rgba(0,0,0,0.02); min-width:180px; z-index:1000;">
+                    <button class="dropdown-item" onclick="changeLanguage('ar')" style="display:flex; align-items:center; gap:10px; padding:0.4rem 1.2rem; color:#1e293b; background:transparent; border:none; width:100%; cursor:pointer; font-size:0.8rem; border-radius:12px;">
+                        <i class="fas fa-flag"></i> 🇸🇦 العربية
+                    </button>
+                    <button class="dropdown-item" onclick="changeLanguage('en')" style="display:flex; align-items:center; gap:10px; padding:0.4rem 1.2rem; color:#1e293b; background:transparent; border:none; width:100%; cursor:pointer; font-size:0.8rem; border-radius:12px;">
+                        <i class="fas fa-flag"></i> 🇬🇧 English
+                    </button>
+                    <div style="height:1px; background:rgba(0,0,0,0.02); margin:0.2rem 1rem;"></div>
+                    <button class="dropdown-item" onclick="toggleFullscreen()" style="display:flex; align-items:center; gap:10px; padding:0.4rem 1.2rem; color:#1e293b; background:transparent; border:none; width:100%; cursor:pointer; font-size:0.8rem; border-radius:12px;">
+                        <i class="fas fa-expand"></i> شاشة كاملة
+                    </button>
+                    <div style="height:1px; background:rgba(0,0,0,0.02); margin:0.2rem 1rem;"></div>
+                    <button class="dropdown-item" onclick="openAboutModal()" style="display:flex; align-items:center; gap:10px; padding:0.4rem 1.2rem; color:#1e293b; background:transparent; border:none; width:100%; cursor:pointer; font-size:0.8rem; border-radius:12px;">
+                        <i class="fas fa-info-circle"></i> 📖 من نحن
+                    </button>
+                    <div style="height:1px; background:rgba(0,0,0,0.02); margin:0.2rem 1rem;"></div>
+                    <a class="dropdown-item" href="https://t.me/Cybervega" target="_blank" style="display:flex; align-items:center; gap:10px; padding:0.4rem 1.2rem; color:#1e293b; text-decoration:none; font-size:0.8rem; border-radius:12px;">
+                        <i class="fas fa-headset"></i> جروب الدعم
+                    </a>
+                </div>
+            </div>
+
+            <!-- ===== التنقل ===== -->
+            <div class="nav-links">
+                <span class="nav-btn" data-key="navCodes"><i class="fas fa-code"></i> الأكواد</span>
+                <span class="nav-btn" data-key="navTools"><i class="fas fa-tools"></i> الأدوات</span>
+                <span class="nav-btn" data-key="navScripts"><i class="fas fa-terminal"></i> سكربتات</span>
+                <span class="nav-btn" data-key="navBots"><i class="fas fa-robot"></i> بوتات</span>
+            </div>
+
+            <!-- ===== القنوات ===== -->
+            <div class="channels-grid" data-aos="fade-up">
+                <div class="channel-card">
+                    <div class="card-title"><i class="fab fa-python"></i> <span data-key="channel1Title">قناة بايثون</span></div>
+                    <div class="card-desc" data-key="channel1Desc">محتوى برمجي، أكواد، ومشاريع بايثون متطورة.</div>
+                    <div class="card-meta">
+                        <a href="https://t.me/python2015" target="_blank"><i class="fab fa-telegram-plane"></i> <span data-key="join">انضم</span></a>
+                        <span class="badge"><i class="far fa-clock"></i> <span data-key="active">نشطة</span></span>
                     </div>
                 </div>
 
-                <span class="badge-light"><i class="fas fa-crown" style="color:#eab308;"></i> @TopVeGa</span>
+                <div class="channel-card">
+                    <div class="card-title"><i class="fas fa-music"></i> <span data-key="channel2Title">سورس ميوزك فيجا</span></div>
+                    <div class="card-desc" data-key="channel2Desc">مستوحى من بوتات الموسيقى • مفتوحة المصدر</div>
+                    <div class="card-meta">
+                        <a href="https://t.me/vegaone" target="_blank"><i class="fab fa-telegram-plane"></i> <span data-key="join">انضم</span></a>
+                        <span class="badge"><i class="fas fa-code-branch"></i> @TopVeGa</span>
+                    </div>
+                </div>
 
-            </div>
-        </header>
+                <div class="channel-card">
+                    <div class="card-title"><i class="fas fa-shield-alt"></i> <span data-key="channel3Title">قناة ترمكس</span></div>
+                    <div class="card-desc" data-key="channel3Desc">أدوات و اختراق و أمن سيبراني .</div>
+                    <div class="card-meta">
+                        <a href="https://t.me/ToolsTermex" target="_blank"><i class="fab fa-telegram-plane"></i> <span data-key="join">انضم</span></a>
+                        <span class="badge"><i class="fas fa-lock"></i> <span data-key="protection">حماية</span></span>
+                    </div>
+                </div>
 
-        <!-- ===== NAV ===== -->
-        <div class="nav">
-            <span class="nav-item active"><i class="fas fa-code"></i> الأكواد</span>
-            <span class="nav-item"><i class="fas fa-tools"></i> الأدوات</span>
-            <span class="nav-item"><i class="fas fa-terminal"></i> سكربتات</span>
-            <span class="nav-item"><i class="fas fa-robot"></i> بوتات</span>
-        </div>
-
-        <!-- ===== CARDS ===== -->
-        <div class="grid">
-            <div class="card">
-                <div class="card-title"><i class="fab fa-python"></i> قناة بايثون</div>
-                <div class="card-desc">محتوى برمجي، أكواد، ومشاريع بايثون متطورة.</div>
-                <div class="card-footer">
-                    <a href="https://t.me/python2015" target="_blank" class="link"><i class="fab fa-telegram-plane"></i> انضم</a>
-                    <span class="tag"><i class="far fa-clock"></i> نشطة</span>
+                <div class="channel-card support-card">
+                    <div class="card-title"><i class="fas fa-headset"></i> <span data-key="supportTitle">جروب الدعم</span></div>
+                    <div class="card-desc" data-key="supportDesc">الدعم الفني والمساعدة في جميع الاستفسارات.</div>
+                    <div class="card-meta">
+                        <a href="https://t.me/Cybervega" target="_blank"><i class="fab fa-telegram-plane"></i> <span data-key="joinSupport">انضم للدعم</span></a>
+                        <span class="badge"><i class="fas fa-heart" style="color:#dc2626;"></i> <span data-key="activeSupport">متاح 24</span></span>
+                    </div>
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-title"><i class="fas fa-music"></i> سورس ميوزك فيجا</div>
-                <div class="card-desc">مستوحى من بوتات الموسيقى • مفتوحة المصدر</div>
-                <div class="card-footer">
-                    <a href="https://t.me/vegaone" target="_blank" class="link"><i class="fab fa-telegram-plane"></i> انضم</a>
-                    <span class="tag"><i class="fas fa-code-branch"></i> @TopVeGa</span>
+            <!-- ===== الخدمات ===== -->
+            <div class="services-list" data-aos="fade-up" data-aos-delay="100">
+                <ul>
+                    <li><i class="fas fa-terminal"></i> <span data-key="s1">أكواد بجميع اللغات</span></li>
+                    <li><i class="fas fa-file-audio"></i> <span data-key="s2">مصانع ميوزك</span></li>
+                    <li><i class="fas fa-shield-virus"></i> <span data-key="s3">مصانع حماية</span></li>
+                    <li><i class="fab fa-telegram"></i> <span data-key="s4">مصانع تليثون</span></li>
+                    <li><i class="fas fa-user-friends"></i> <span data-key="s5">نقل أعضاء (مخفي او ظهار)</span></li>
+                    <li><i class="fas fa-bolt"></i> <span data-key="s6">ملفات شد</span></li>
+                    <li><i class="fas fa-upload"></i> <span data-key="s7">نشر تلقائي بمميزات</span></li>
+                    <li><i class="fas fa-gavel"></i> <span data-key="s8">مزاد للسوبرات</span></li>
+                    <li><i class="fas fa-file-code"></i> <span data-key="s9">lua & php حماية</span></li>
+                    <li><i class="fas fa-bug"></i> <span data-key="s10">حل جميع الأخطاء</span></li>
+                </ul>
+            </div>
+
+            <!-- ===== البوتات ===== -->
+            <h3 style="color:#0f172a; margin:1.2rem 0 0.6rem 0; display:flex; align-items:center; gap:10px; font-weight:700; font-size:1rem;">
+                <i class="fas fa-robot" style="color:#2563eb;"></i> <span data-key="botsTitle">بوتاتنا</span>
+            </h3>
+            <div class="bots-section" data-aos="fade-up" data-aos-delay="200">
+                <div class="bot-card">
+                    <i class="fas fa-music"></i>
+                    <div class="bot-name">بوت بيري للأغاني</div>
+                    <div class="bot-username">@Bi1ieBot</div>
+                    <div class="bot-desc" data-key="bot1Desc">بوت استماع وتحميل الأغاني</div>
+                    <a href="https://t.me/Bi1ieBot" target="_blank" class="bot-link"><i class="fab fa-telegram"></i> <span data-key="openBot">افتح البوت</span></a>
+                </div>
+                <div class="bot-card">
+                    <i class="fas fa-key"></i>
+                    <div class="bot-name">بوت استخراج جلسات</div>
+                    <div class="bot-username">@StrngGenBot</div>
+                    <div class="bot-desc" data-key="bot2Desc">استخراج جلسات بايروجرام</div>
+                    <a href="https://t.me/StrngGenBot" target="_blank" class="bot-link"><i class="fab fa-telegram"></i> <span data-key="openBot">افتح البوت</span></a>
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-title"><i class="fas fa-shield-alt"></i> قناة ترمكس</div>
-                <div class="card-desc">أدوات و اختراق و أمن سيبراني .</div>
-                <div class="card-footer">
-                    <a href="https://t.me/ToolsTermex" target="_blank" class="link"><i class="fab fa-telegram-plane"></i> انضم</a>
-                    <span class="tag"><i class="fas fa-lock"></i> حماية</span>
+            <!-- ===== الدفع ===== -->
+            <div class="payment-section" data-aos="fade-up" data-aos-delay="350">
+                <div class="payment-item" onclick="window.open('https://account.binance.com/register?ref=894656421&?registerChannel=user_center', '_blank')">
+                    <div class="pay-icon"><i class="fab fa-bitcoin"></i></div>
+                    <div class="pay-title">دفع</div>
+                    <div class="pay-sub">binance</div>
+                </div>
+                <div style="color:#64748b; font-size:0.65rem; opacity:0.5; display:flex; align-items:center; gap:6px;">
+                    <i class="fas fa-lock" style="color:#2563eb;"></i> <span data-key="securePay">دفع آمن عبر باينس</span>
                 </div>
             </div>
 
-            <div class="card support">
-                <div class="card-title"><i class="fas fa-headset"></i> جروب الدعم</div>
-                <div class="card-desc">الدعم الفني والمساعدة في جميع الاستفسارات.</div>
-                <div class="card-footer">
-                    <a href="https://t.me/Cybervega" target="_blank" class="link"><i class="fab fa-telegram-plane"></i> انضم للدعم</a>
-                    <span class="tag"><i class="fas fa-heart" style="color:#dc2626;"></i> متاح 24</span>
+            <div style="display: flex; justify-content: center;" data-aos="fade-up" data-aos-delay="400">
+                <a href="https://account.binance.com/register?ref=894656421&?registerChannel=user_center" target="_blank" class="pay-btn">
+                    <i class="fab fa-bitcoin"></i> <span data-key="payBtn">الدفع عبر Binance</span>
+                </a>
+            </div>
+
+            <!-- ===== روابط المنصة ===== -->
+            <div class="platform-links" data-aos="fade-up" data-aos-delay="450">
+                <a href="https://github.com/TOPVEGA" target="_blank">
+                    <i class="fab fa-github"></i>
+                    <span class="link-label">GitHub</span>
+                </a>
+                <a href="https://t.me/topvega" target="_blank">
+                    <i class="fab fa-telegram"></i>
+                    <span class="link-label" data-key="founder">المؤسس</span>
+                </a>
+                <a href="https://t.me/Cybervega" target="_blank">
+                    <i class="fas fa-headset"></i>
+                    <span class="link-label" data-key="support">جروب الدعم</span>
+                </a>
+                <a href="https://www.youtube.com/@Pythnhub" target="_blank">
+                    <i class="fab fa-youtube"></i>
+                    <span class="link-label" data-key="youtube">يوتيوب</span>
+                </a>
+                <a onclick="openComments()" style="cursor:pointer;">
+                    <i class="fas fa-comment-dots"></i>
+                    <span class="link-label" data-key="comments">التعليقات</span>
+                </a>
+            </div>
+
+            <!-- ===== الفوتر ===== -->
+            <div class="footer">
+                <div class="by">
+                    <i class="fas fa-at"></i> By: <strong>@TopVeGa</strong>
+                </div>
+                <div>
+                    <i class="fas fa-code"></i> <span data-key="footerRights">حرية تعديل و نشر</span> <i class="far fa-copyright"></i> 2015
                 </div>
             </div>
-        </div>
 
-        <!-- ===== SERVICES ===== -->
-        <div class="services-wrap">
-            <ul class="tags">
-                <li><i class="fas fa-terminal"></i> أكواد بجميع اللغات</li>
-                <li><i class="fas fa-file-audio"></i> مصانع ميوزك</li>
-                <li><i class="fas fa-shield-virus"></i> مصانع حماية</li>
-                <li><i class="fab fa-telegram"></i> مصانع تليثون</li>
-                <li><i class="fas fa-user-friends"></i> نقل أعضاء (مخفي او ظهار)</li>
-                <li><i class="fas fa-bolt"></i> ملفات شد</li>
-                <li><i class="fas fa-upload"></i> نشر تلقائي بمميزات</li>
-                <li><i class="fas fa-gavel"></i> مزاد للسوبرات</li>
-                <li><i class="fas fa-file-code"></i> lua & php حماية</li>
-                <li><i class="fas fa-bug"></i> حل جميع الأخطاء</li>
-            </ul>
-        </div>
-
-        <!-- ===== BOTS ===== -->
-        <h3 style="font-size:0.9rem; font-weight:700; margin:1rem 0 0.4rem 0; display:flex; align-items:center; gap:6px;">
-            <i class="fas fa-robot" style="color:#2563eb;"></i> بوتاتنا
-        </h3>
-        <div class="bots-grid">
-            <div class="bot-item">
-                <div class="icon"><i class="fas fa-music"></i></div>
-                <div class="name">بوت بيري للأغاني</div>
-                <div class="username">@Bi1ieBot</div>
-                <div class="desc">بوت استماع وتحميل الأغاني</div>
-                <a href="https://t.me/Bi1ieBot" target="_blank" class="btn"><i class="fab fa-telegram"></i> فتح البوت</a>
+            <div style="display: flex; justify-content: center;">
+                <span class="notice">
+                    <i class="fas fa-exclamation-triangle"></i> <span data-key="notice">تنويه هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك</span>
+                </span>
             </div>
-            <div class="bot-item">
-                <div class="icon"><i class="fas fa-key"></i></div>
-                <div class="name">بوت استخراج جلسات</div>
-                <div class="username">@StrngGenBot</div>
-                <div class="desc">استخراج جلسات بايروجرام</div>
-                <a href="https://t.me/StrngGenBot" target="_blank" class="btn"><i class="fab fa-telegram"></i> فتح البوت</a>
+
+            <div style="text-align: center; margin-top: 0.6rem; color: rgba(100, 116, 139, 0.1); font-size: 0.6rem;">
+                السلام علي من اتبع الهدى
             </div>
-        </div>
 
-        <!-- ===== PAYMENT ===== -->
-        <div class="payment-wrap">
-            <div class="payment-box" onclick="window.open('https://account.binance.com/register?ref=894656421&?registerChannel=user_center', '_blank')">
-                <div class="icon"><i class="fab fa-bitcoin"></i></div>
-                <div class="title">دفع</div>
-                <div class="sub">binance</div>
-            </div>
-            <div style="color:#6b7280; font-size:0.6rem; opacity:0.4; display:flex; align-items:center; gap:4px;">
-                <i class="fas fa-lock" style="color:#2563eb;"></i> دفع آمن عبر باينس
-            </div>
         </div>
-
-        <div style="display:flex; justify-content:center;">
-            <a href="https://account.binance.com/register?ref=894656421&?registerChannel=user_center" target="_blank" class="btn-primary">
-                <i class="fab fa-bitcoin"></i> الدفع عبر Binance
-            </a>
-        </div>
-
-        <!-- ===== SOCIAL ===== -->
-        <div class="social">
-            <a href="https://github.com/TOPVEGA" target="_blank">
-                <i class="fab fa-github"></i>
-                <span class="label">GitHub</span>
-            </a>
-            <a href="https://t.me/topvega" target="_blank">
-                <i class="fab fa-telegram"></i>
-                <span class="label">المؤسس</span>
-            </a>
-            <a href="https://t.me/Cybervega" target="_blank">
-                <i class="fas fa-headset"></i>
-                <span class="label">جروب الدعم</span>
-            </a>
-            <a href="https://www.youtube.com/@Pythnhub" target="_blank">
-                <i class="fab fa-youtube"></i>
-                <span class="label">يوتيوب</span>
-            </a>
-            <a onclick="openComments()" style="cursor:pointer;">
-                <i class="fas fa-comment-dots"></i>
-                <span class="label">التعليقات</span>
-            </a>
-        </div>
-
-        <!-- ===== FOOTER ===== -->
-        <div class="footer">
-            <div class="by">
-                <i class="fas fa-at"></i> By: <strong>@TopVeGa</strong>
-            </div>
-            <div>
-                <i class="fas fa-code"></i> حرية تعديل و نشر <i class="far fa-copyright"></i> 2015
-            </div>
-        </div>
-
-        <div style="display:flex; justify-content:center;">
-            <span class="notice">
-                <i class="fas fa-exclamation-triangle"></i> تنويه هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك
-            </span>
-        </div>
-
-        <div style="text-align:center; margin-top:0.4rem; color:rgba(107,114,128,0.08); font-size:0.5rem;">
-            السلام علي من اتبع الهدى
-        </div>
-
     </div>
 
-    <!-- ===== PLAYER ===== -->
-    <div class="player" id="musicPlayer">
+    <!-- ===== مشغل الموسيقى ===== -->
+    <div class="music-player" id="musicPlayer">
         <button onclick="togglePlay()" id="playBtn"><i class="fas fa-play" id="playIcon"></i></button>
         <button onclick="prevTrack()"><i class="fas fa-backward"></i></button>
         <button onclick="nextTrack()"><i class="fas fa-forward"></i></button>
-        <div class="track" id="trackInfo">🎵 هدوء وسكينة</div>
-        <input type="range" class="progress" id="progressBar" min="0" max="100" value="0" oninput="seekTrack(this.value)" />
-        <div class="time" id="timeDisplay">00:00 / 00:00</div>
+        <div class="track-info" id="trackInfo">🎵 هدوء وسكينة</div>
+        <input type="range" class="progress-bar" id="progressBar" min="0" max="100" value="0" oninput="seekTrack(this.value)" />
+        <div class="time-display" id="timeDisplay">00:00 / 00:00</div>
         <button onclick="toggleMute()"><i class="fas fa-volume-up" id="volumeIcon"></i></button>
-        <input type="range" class="volume" id="volumeSlider" min="0" max="100" value="40" oninput="changeVolume(this.value)" />
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="40" oninput="changeVolume(this.value)" />
     </div>
 
-    <!-- ===== MODALS ===== -->
-
-    <!-- Comments -->
+    <!-- ===== نافذة التعليقات ===== -->
     <div class="modal-overlay" id="commentsOverlay">
         <div class="modal">
-            <button class="close" onclick="closeComments()"><i class="fas fa-times"></i></button>
-            <h2><i class="fas fa-comment-dots"></i> آراء المستخدمين</h2>
+            <button class="close-modal" onclick="closeComments()"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-comment-dots"></i> <span data-key="commentsTitle">آراء المستخدمين</span></h2>
             <div id="commentsList"></div>
-            <div style="margin-top:0.4rem; text-align:center; font-size:0.55rem; opacity:0.2; color:#6b7280;">
+            <div style="margin-top:0.6rem; text-align:center; font-size:0.65rem; opacity:0.3; color:#64748b;">
                 <i class="fas fa-sync-alt"></i> تتغير التعليقات تلقائياً
             </div>
         </div>
     </div>
 
-    <!-- Calendar -->
+    <!-- ===== نافذة التقويم ===== -->
     <div class="modal-overlay" id="calendarOverlay">
-        <div class="modal">
-            <button class="close" onclick="toggleCalendar()"><i class="fas fa-times"></i></button>
+        <div class="modal calendar-modal">
+            <button class="close-modal" onclick="toggleCalendar()"><i class="fas fa-times"></i></button>
             <div class="calendar-header">
                 <h2><i class="fas fa-calendar-alt"></i> <span id="calMonthYear"></span></h2>
-                <div class="clock" id="calClock">00:00:00</div>
+                <div class="clock-display" id="calClock">00:00:00</div>
             </div>
             <div class="calendar-grid" id="calendarGrid"></div>
             <div class="calendar-footer">
@@ -1500,10 +1524,10 @@
         </div>
     </div>
 
-    <!-- About -->
+    <!-- ===== نافذة من نحن ===== -->
     <div class="modal-overlay" id="aboutOverlay">
-        <div class="modal">
-            <button class="close" onclick="closeAbout()"><i class="fas fa-times"></i></button>
+        <div class="modal about-modal">
+            <button class="close-modal" onclick="closeAboutModal()"><i class="fas fa-times"></i></button>
             <h2><i class="fas fa-info-circle"></i> من نحن</h2>
             <div class="about-content">
                 <p>السلام علي من اتبع الهدى</p>
@@ -1519,10 +1543,10 @@
                     <li><i class="fas fa-file-code"></i> يوجد ملف lua & php حمايه</li>
                     <li><i class="fas fa-bug"></i> يوجد حل جميع الأخطاء</li>
                 </ul>
-                <p style="margin-top:0.4rem;">يوجد عمل اي كود او تعديل اي ملف<br />كل هذا و <span class="hl">#بأسعار رمزيه بدون تكلفة</span></p>
-                <p style="margin-top:0.4rem;"><strong>للتواصل:</strong></p>
-                <p>By : <span class="hl">@TopVeGa</span></p>
-                <div class="about-footer">
+                <p style="margin-top:0.6rem;">يوجد عمل اي كود او تعديل اي ملف<br />كل هذا و <span class="highlight">#بأسعار رمزيه بدون تكلفة</span></p>
+                <p style="margin-top:0.6rem;"><strong>للتواصل:</strong></p>
+                <p>By : <span class="highlight">@TopVeGa</span></p>
+                <div class="footer-note">
                     <i class="fas fa-exclamation-triangle" style="color:#2563eb;"></i>
                     #تنويه_هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك
                 </div>
@@ -1530,58 +1554,56 @@
         </div>
     </div>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // =============================================
-        // 1. DROPDOWN
-        // =============================================
+        AOS.init({ duration: 600, once: true });
+
+        // ===== القائمة المنسدلة =====
         function toggleDropdown() {
-            document.getElementById('dropdownMenu').classList.toggle('show');
+            const menu = document.getElementById('dropdownMenu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
         }
         document.addEventListener('click', function(e) {
-            const wrap = document.querySelector('.dropdown-wrap');
-            if (!wrap.contains(e.target)) {
-                document.getElementById('dropdownMenu').classList.remove('show');
+            const d = document.querySelector('.header-actions');
+            if (!d.contains(e.target)) {
+                document.getElementById('dropdownMenu').style.display = 'none';
             }
         });
 
-        // =============================================
-        // 2. THEME
-        // =============================================
+        // ===== الوضع =====
         function toggleTheme() {
-            document.body.classList.toggle('dark');
+            document.body.classList.toggle('dark-mode');
             const icon = document.getElementById('themeIcon');
-            icon.className = document.body.classList.contains('dark') ? 'fas fa-sun' : 'fas fa-moon';
-        }
-
-        // =============================================
-        // 3. FULLSCREEN
-        // =============================================
-        function toggleFullscreen() {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(() => {});
+            if (document.body.classList.contains('dark-mode')) {
+                icon.className = 'fas fa-sun';
             } else {
-                document.exitFullscreen().catch(() => {});
+                icon.className = 'fas fa-moon';
             }
         }
 
-        // =============================================
-        // 4. ABOUT
-        // =============================================
-        function openAbout() {
-            document.getElementById('aboutOverlay').classList.add('show');
-            document.getElementById('dropdownMenu').classList.remove('show');
+        // ===== شاشة كاملة =====
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(e => {});
+            } else {
+                document.exitFullscreen().catch(e => {});
+            }
         }
 
-        function closeAbout() {
+        // ===== نافذة من نحن =====
+        function openAboutModal() {
+            document.getElementById('aboutOverlay').classList.add('show');
+            document.getElementById('dropdownMenu').style.display = 'none';
+        }
+
+        function closeAboutModal() {
             document.getElementById('aboutOverlay').classList.remove('show');
         }
         document.getElementById('aboutOverlay').addEventListener('click', function(e) {
-            if (e.target === this) closeAbout();
+            if (e.target === this) closeAboutModal();
         });
 
-        // =============================================
-        // 5. COMMENTS
-        // =============================================
+        // ===== التعليقات =====
         const allComments = [
             { user: 'أحمد محمد', text: '⭐️⭐️⭐️⭐️⭐️ منصة رائعة، خدمات متكاملة وسريعة!', stars: 5 },
             { user: 'سارة خالد', text: '❤️ أفضل موقع برمجي تعاملت معه، دعم فني ممتاز جداً', stars: 5 },
@@ -1605,8 +1627,9 @@
         }
 
         function openComments() {
-            document.getElementById('commentsOverlay').classList.add('show');
-            document.getElementById('dropdownMenu').classList.remove('show');
+            const overlay = document.getElementById('commentsOverlay');
+            overlay.classList.add('show');
+            document.getElementById('dropdownMenu').style.display = 'none';
             const comments = getRandomComments();
             const list = document.getElementById('commentsList');
             list.innerHTML = '';
@@ -1614,9 +1637,9 @@
                 const starsHtml = '★'.repeat(c.stars) + '☆'.repeat(5 - c.stars);
                 list.innerHTML += `
                     <div class="comment-item">
-                        <div class="user"><i class="fas fa-user-circle"></i> ${c.user}</div>
-                        <div class="text">${c.text}</div>
-                        <div class="stars">${starsHtml}</div>
+                        <div class="comment-user"><i class="fas fa-user-circle"></i> ${c.user}</div>
+                        <div class="comment-text">${c.text}</div>
+                        <div class="comment-stars">${starsHtml}</div>
                     </div>
                 `;
             });
@@ -1629,12 +1652,10 @@
             if (e.target === this) closeComments();
         });
 
-        // =============================================
-        // 6. CALENDAR
-        // =============================================
+        // ===== التقويم =====
         function toggleCalendar() {
             document.getElementById('calendarOverlay').classList.toggle('show');
-            document.getElementById('dropdownMenu').classList.remove('show');
+            document.getElementById('dropdownMenu').style.display = 'none';
             updateDateTime();
         }
         document.getElementById('calendarOverlay').addEventListener('click', function(e) {
@@ -1659,7 +1680,7 @@
 
             const startOffset = (firstDay + 1) % 7;
             for (let i = startOffset - 1; i >= 0; i--) {
-                html += `<div class="day other">${daysInPrevMonth - i}</div>`;
+                html += `<div class="day other-month">${daysInPrevMonth - i}</div>`;
             }
 
             for (let i = 1; i <= daysInMonth; i++) {
@@ -1670,7 +1691,7 @@
             const totalDays = startOffset + daysInMonth;
             const remaining = (7 - (totalDays % 7)) % 7;
             for (let i = 1; i <= remaining; i++) {
-                html += `<div class="day other">${i}</div>`;
+                html += `<div class="day other-month">${i}</div>`;
             }
 
             grid.innerHTML = html;
@@ -1678,29 +1699,25 @@
 
         function updateDateTime() {
             const now = new Date();
-            const cairo = new Date(now.toLocaleString('en-US', { timeZone: 'Africa/Cairo' }));
-            let h = cairo.getHours();
-            const m = String(cairo.getMinutes()).padStart(2, '0');
-            const s = String(cairo.getSeconds()).padStart(2, '0');
-            const ampm = h >= 12 ? 'م' : 'ص';
-            h = h % 12 || 12;
-            document.getElementById('headerDateTime').textContent = `${String(h).padStart(2,'0')}:${m}`;
-            document.getElementById('calClock').textContent = `${String(h).padStart(2,'0')}:${m}:${s} ${ampm}`;
+            const cairoTime = new Date(now.toLocaleString('en-US', { timeZone: 'Africa/Cairo' }));
+            let hours = cairoTime.getHours();
+            const minutes = String(cairoTime.getMinutes()).padStart(2, '0');
+            const seconds = String(cairoTime.getSeconds()).padStart(2, '0');
+            const ampm = hours >= 12 ? 'م' : 'ص';
+            hours = hours % 12 || 12;
+            document.getElementById('headerDateTime').textContent = `${String(hours).padStart(2,'0')}:${minutes}`;
+            document.getElementById('calClock').textContent = `${String(hours).padStart(2,'0')}:${minutes}:${seconds} ${ampm}`;
 
-            const day = String(cairo.getDate()).padStart(2, '0');
-            const monthNames = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر',
-                'ديسمبر'
-            ];
-            document.getElementById('calFullDate').textContent = `${day} ${monthNames[cairo.getMonth()]} ${cairo.getFullYear()}`;
-            document.getElementById('calMonthYear').textContent = `${monthNames[cairo.getMonth()]} ${cairo.getFullYear()}`;
-            buildCalendar(cairo);
+            const day = String(cairoTime.getDate()).padStart(2, '0');
+            const monthNames = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+            document.getElementById('calFullDate').textContent = `${day} ${monthNames[cairoTime.getMonth()]} ${cairoTime.getFullYear()}`;
+            document.getElementById('calMonthYear').textContent = `${monthNames[cairoTime.getMonth()]} ${cairoTime.getFullYear()}`;
+            buildCalendar(cairoTime);
         }
         updateDateTime();
         setInterval(updateDateTime, 1000);
 
-        // =============================================
-        // 7. MUSIC PLAYER
-        // =============================================
+        // ===== مشغل الموسيقى =====
         const tracks = [
             { name: '🎵 هدوء وسكينة', url: 'https://cdn.pixabay.com/download/audio/2026/01/22/audio_08b9c5a7d1.mp3' },
             { name: '🌙 ليالي هادئة', url: 'https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0e1f2a3b4.mp3' },
@@ -1732,28 +1749,18 @@
         }
 
         function togglePlay() {
-            if (isPlaying) {
-                audio.pause();
+            if (isPlaying) { audio.pause();
                 playIcon.className = 'fas fa-play';
-                isPlaying = false;
-            } else {
-                audio.play().catch(() => {});
+                isPlaying = false; } else { audio.play().catch(() => {});
                 playIcon.className = 'fas fa-pause';
-                isPlaying = true;
-            }
+                isPlaying = true; }
         }
 
-        function nextTrack() {
-            currentTrack = (currentTrack + 1) % tracks.length;
-            loadTrack(currentTrack);
-            if (isPlaying) audio.play().catch(() => {});
-        }
+        function nextTrack() { currentTrack = (currentTrack + 1) % tracks.length;
+            loadTrack(currentTrack); if (isPlaying) audio.play().catch(() => {}); }
 
-        function prevTrack() {
-            currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
-            loadTrack(currentTrack);
-            if (isPlaying) audio.play().catch(() => {});
-        }
+        function prevTrack() { currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+            loadTrack(currentTrack); if (isPlaying) audio.play().catch(() => {}); }
 
         audio.addEventListener('timeupdate', () => {
             if (audio.duration && !isNaN(audio.duration)) {
@@ -1762,71 +1769,140 @@
             }
         });
 
-        function formatTime(s) {
-            if (isNaN(s)) return '00:00';
-            const m = Math.floor(s / 60);
-            const sec = Math.floor(s % 60);
-            return `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
-        }
+        function formatTime(s) { if (isNaN(s)) return '00:00'; const m = Math.floor(s / 60); const sec = Math.floor(s % 60); return
+                `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`; }
 
-        function seekTrack(v) {
-            if (audio.duration && !isNaN(audio.duration)) {
-                audio.currentTime = (v / 100) * audio.duration;
-            }
-        }
+        function seekTrack(v) { if (audio.duration && !isNaN(audio.duration)) audio.currentTime = (v / 100) * audio.duration; }
 
-        function changeVolume(v) {
-            audio.volume = v / 100;
-            volumeIcon.className = v == 0 ? 'fas fa-volume-mute' : 'fas fa-volume-up';
-        }
+        function changeVolume(v) { audio.volume = v / 100;
+            volumeIcon.className = v == 0 ? 'fas fa-volume-mute' : 'fas fa-volume-up'; }
 
         function toggleMute() {
             isMuted = !isMuted;
-            if (isMuted) {
-                audio.volume = 0;
+            if (isMuted) { audio.volume = 0;
                 volumeSlider.value = 0;
-                volumeIcon.className = 'fas fa-volume-mute';
-            } else {
-                audio.volume = 0.3;
+                volumeIcon.className = 'fas fa-volume-mute'; } else { audio.volume = 0.3;
                 volumeSlider.value = 30;
-                volumeIcon.className = 'fas fa-volume-up';
-            }
+                volumeIcon.className = 'fas fa-volume-up'; }
         }
 
         audio.addEventListener('ended', () => { nextTrack(); });
 
         document.addEventListener('click', function autoPlay() {
-            if (!isPlaying) {
-                audio.play().catch(() => {});
+            if (!isPlaying) { audio.play().catch(() => {});
                 isPlaying = true;
-                playIcon.className = 'fas fa-pause';
-            }
+                playIcon.className = 'fas fa-pause'; }
             document.removeEventListener('click', autoPlay);
         });
 
-        // =============================================
-        // 8. VISITOR COUNTER
-        // =============================================
+        // ===== عداد الزوار =====
         let vc = 12847;
-        setInterval(() => {
-            vc += Math.floor(Math.random() * 2);
-            document.getElementById('visitorCount').textContent = vc.toLocaleString();
-        }, 15000);
+        setInterval(() => { vc += Math.floor(Math.random() * 2);
+            document.getElementById('visitorCount').textContent = vc.toLocaleString(); }, 15000);
 
-        // =============================================
-        // 9. LANGUAGE (placeholder)
-        // =============================================
-        function changeLanguage(lang) {
-            document.getElementById('dropdownMenu').classList.remove('show');
-            if (lang === 'en') {
-                document.body.style.direction = 'ltr';
-            } else {
-                document.body.style.direction = 'rtl';
+        // ===== الترجمة =====
+        const translations = {
+            ar: {
+                brandTitle: 'python zone',
+                brandSub: 'منصة البرمجيات والتطوير',
+                navCodes: 'الأكواد',
+                navTools: 'الأدوات',
+                navScripts: 'سكربتات',
+                navBots: 'بوتات',
+                channel1Title: 'قناة بايثون',
+                channel1Desc: 'محتوى برمجي، أكواد، ومشاريع بايثون متطورة.',
+                channel2Title: ' ميوزك فيجا',
+                channel2Desc: 'مستوحى من بوتات الموسيقى • مفتوحة المصدر',
+                channel3Title: 'قناة ترمكس',
+                channel3Desc: 'أدوات و اختراق و أمن سيبراني .',
+                supportTitle: 'جروب الدعم',
+                supportDesc: 'الدعم الفني والمساعدة في جميع الاستفسارات.',
+                join: 'انضم',
+                joinSupport: 'انضم للدعم',
+                active: 'نشطة',
+                activeSupport: 'متاح 24',
+                protection: 'حماية',
+                s1: 'أكواد بجميع اللغات',
+                s2: 'مصانع ميوزك',
+                s3: 'مصانع حماية',
+                s4: 'مصانع تليثون',
+                s5: 'نقل أعضاء (مخفي او ظهار)',
+                s6: 'ملفات شد',
+                s7: 'نشر تلقائي بمميزات',
+                s8: 'مزاد للسوبرات',
+                s9: 'lua & php حماية',
+                s10: 'حل جميع الأخطاء',
+                botsTitle: 'بوتاتنا',
+                bot1Desc: 'بوت استماع وتحميل الأغاني',
+                bot2Desc: 'استخراج جلسات بايروجرام',
+                openBot: 'افتح البوت',
+                securePay: 'دفع آمن عبر باينس',
+                payBtn: 'الدفع عبر Binance',
+                founder: 'المؤسس',
+                youtube: 'يوتيوب',
+                comments: 'التعليقات',
+                commentsTitle: 'آراء المستخدمين',
+                footerRights: 'حرية تعديل و نشر',
+                notice: 'تنويه هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك'
+            },
+            en: {
+                brandTitle: 'python zone',
+                brandSub: 'Software & Development Platform',
+                navCodes: 'Codes',
+                navTools: 'Tools',
+                navScripts: 'Scripts',
+                navBots: 'Bots',
+                channel1Title: 'Python Channel',
+                channel1Desc: 'Programming content, codes, and advanced Python projects.',
+                channel2Title: 'Vega Music Source',
+                channel2Desc: 'Inspired by music bots • Open source',
+                channel3Title: 'Termex Channel',
+                channel3Desc: 'Tools & hacking & cyber security.',
+                supportTitle: 'Support Group',
+                supportDesc: 'Technical support and help for all inquiries.',
+                join: 'Join',
+                joinSupport: 'Join Support',
+                active: 'Active',
+                activeSupport: 'Available 24',
+                protection: 'Protection',
+                s1: 'Codes in all languages',
+                s2: 'Music factories',
+                s3: 'Protection factories',
+                s4: 'Telethon factories',
+                s5: 'Member transfer (hidden & show)',
+                s6: 'Crash files',
+                s7: 'Auto-posting with features',
+                s8: 'Supergroup auctions',
+                s9: 'lua & php protection',
+                s10: 'Fix all errors',
+                botsTitle: 'Our Bots',
+                bot1Desc: 'Music listening and downloading bot',
+                bot2Desc: 'Pyrogram session extraction',
+                openBot: 'Open Bot',
+                securePay: 'Secure payment via Binance',
+                payBtn: 'Pay with Binance',
+                founder: 'Founder',
+                youtube: 'YouTube',
+                comments: 'Comments',
+                commentsTitle: 'User Reviews',
+                footerRights: 'Free to modify & publish',
+                notice: 'Important: Please be serious so we don\'t waste time'
             }
-            console.log('🌐 Language changed to:', lang);
+        };
+
+        function changeLanguage(lang) {
+            const t = translations[lang];
+            if (!t) return;
+            if (lang === 'en') { document.body.dir = 'ltr'; } else { document.body.dir = 'rtl'; }
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.dataset.key;
+                if (t[key]) el.textContent = t[key];
+            });
+            document.getElementById('dropdownMenu').style.display = 'none';
         }
 
-        console.log('🚀 python zone | @TopVeGa');
+        console.log('🚀 python zone | منصة برمجيات وتطوير');
+        console.log('📌 @TopVeGa | @Cybervega');
     </script>
 
 </body>
