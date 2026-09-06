@@ -22,13 +22,13 @@
             justify-content: center;
             align-items: center;
             padding: 1.5rem;
-            transition: all 0.5s ease;
+            transition: all 0.6s ease;
             position: relative;
             overflow-x: hidden;
         }
 
         body.light-mode {
-            background: linear-gradient(135deg, #e8edf5 0%, #d0d8e8 40%, #b8c4dc 100%);
+            background: linear-gradient(135deg, #eef2f7 0%, #dce3ef 40%, #c8d2e3 100%);
         }
 
         /* ===== خلفية الجسيمات ===== */
@@ -53,15 +53,15 @@
             padding: 2.5rem 2rem 7rem 2rem;
             box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            transition: all 0.4s ease;
+            transition: all 0.5s ease;
             position: relative;
             z-index: 1;
         }
 
         body.light-mode .glass-card {
-            background: rgba(255, 255, 255, 0.35);
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.45);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.4);
         }
 
         /* ===== شريط الإعلانات ===== */
@@ -301,7 +301,7 @@
             border-color: rgba(0, 0, 0, 0.04);
         }
         body.light-mode .nav-btn:hover {
-            background: rgba(60, 120, 255, 0.08);
+            background: rgba(60, 120, 255, 0.06);
             color: #1a2a4a;
         }
 
@@ -352,7 +352,7 @@
         .channel-card .card-desc {
             color: #a8bcd8;
             font-size: 0.85rem;
-            line-height: 1.5;
+            line-height: 1.6;
             margin: 0.2rem 0 0.5rem 0;
         }
         body.light-mode .channel-card .card-desc {
@@ -398,13 +398,13 @@
             color: #4a6a8a;
         }
 
-        /* ===== الخدمات ===== */
+        /* ===== قائمة الخدمات الكاملة ===== */
         .services-list {
             background: rgba(0, 0, 0, 0.08);
             backdrop-filter: blur(6px);
             border-radius: 28px;
-            padding: 1.2rem 1.5rem;
-            margin: 1.2rem 0;
+            padding: 1.5rem 1.8rem;
+            margin: 1.5rem 0;
             border: 1px solid rgba(255, 255, 255, 0.03);
         }
         body.light-mode .services-list {
@@ -414,21 +414,27 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 0.4rem 1.5rem;
+            gap: 0.5rem 2rem;
             list-style: none;
         }
         .services-list ul li {
             color: #b8cce8;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
             gap: 8px;
+            padding: 0.2rem 0;
         }
         .services-list ul li i {
             color: #7aa8ff;
+            width: 18px;
         }
         body.light-mode .services-list ul li {
             color: #3a4a6a;
+        }
+        .services-list .highlight-price {
+            color: #f0c850;
+            font-weight: 600;
         }
 
         /* ===== من نحن - دروس (تبويبات) ===== */
@@ -438,9 +444,10 @@
             padding: 1.5rem 1.8rem;
             margin: 1.5rem 0;
             border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.4s ease;
         }
         body.light-mode .about-section {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.08);
             border-color: rgba(0, 0, 0, 0.03);
         }
         .about-section .tabs-header {
@@ -457,12 +464,12 @@
             background: rgba(255, 255, 255, 0.02);
             color: #a8bcd8;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s ease;
             font-size: 0.85rem;
             font-weight: 500;
         }
         .about-section .tab-btn:hover {
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.05);
         }
         .about-section .tab-btn.active {
             background: rgba(70, 130, 255, 0.12);
@@ -482,7 +489,7 @@
 
         .about-section .tab-content {
             display: none;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.4s ease;
         }
         .about-section .tab-content.active {
             display: block;
@@ -490,7 +497,7 @@
         .about-section .tab-content p {
             color: #b8cce8;
             font-size: 0.95rem;
-            line-height: 1.8;
+            line-height: 1.9;
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
@@ -579,8 +586,8 @@
         .extra-services {
             background: rgba(0, 0, 0, 0.06);
             border-radius: 28px;
-            padding: 1.2rem 1.5rem;
-            margin: 1.2rem 0;
+            padding: 1.5rem 1.8rem;
+            margin: 1.5rem 0;
             border: 1px solid rgba(255, 255, 255, 0.03);
             text-align: center;
         }
@@ -590,7 +597,7 @@
         .extra-services p {
             color: #b8cce8;
             font-size: 0.95rem;
-            line-height: 1.8;
+            line-height: 2;
         }
         body.light-mode .extra-services p {
             color: #3a4a6a;
@@ -748,7 +755,7 @@
             box-shadow: 0 12px 40px rgba(240, 185, 11, 0.25);
         }
 
-        /* ===== روابط المنصات ===== */
+        /* ===== روابط المنصات (بدون إنستجرام) ===== */
         .platform-links {
             display: flex;
             justify-content: center;
@@ -822,7 +829,7 @@
             font-size: 0.75rem;
             color: #8aa0c0;
             background: rgba(255, 200, 50, 0.03);
-            padding: 0.4rem 1rem;
+            padding: 0.5rem 1.2rem;
             border-radius: 60px;
             border: 1px solid rgba(255, 200, 50, 0.03);
             display: inline-block;
@@ -836,7 +843,7 @@
             background: rgba(0, 0, 0, 0.01);
         }
 
-        /* ===== مشغل الموسيقى (مُصلح) ===== */
+        /* ===== مشغل الموسيقى (بمسارات هادئة) ===== */
         .music-player {
             position: fixed;
             bottom: 0;
@@ -1043,6 +1050,11 @@
             .platform-links a .link-label {
                 display: none;
             }
+            .services-list ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.3rem;
+            }
         }
     </style>
 </head>
@@ -1051,7 +1063,7 @@
     <!-- ===== خلفية الجسيمات ===== -->
     <canvas id="particles-canvas"></canvas>
 
-    <!-- ===== مشغل الموسيقى (مُصلح) ===== -->
+    <!-- ===== مشغل الموسيقى (بمسارات هادئة) ===== -->
     <div class="music-player" id="musicPlayer">
         <button onclick="togglePlay()" id="playBtn" title="تشغيل/إيقاف">
             <i class="fas fa-play" id="playIcon"></i>
@@ -1063,7 +1075,7 @@
             <i class="fas fa-forward"></i>
         </button>
 
-        <div class="track-info" id="trackInfo">🌙 ليلة هادئة</div>
+        <div class="track-info" id="trackInfo">🎵 هدوء وسكينة</div>
 
         <input type="range" class="progress-bar" id="progressBar" min="0" max="100" value="0" oninput="seekTrack(this.value)" />
 
@@ -1072,7 +1084,7 @@
         <button onclick="toggleMute()" title="كتم الصوت">
             <i class="fas fa-volume-up" id="volumeIcon"></i>
         </button>
-        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="60" oninput="changeVolume(this.value)" />
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="50" oninput="changeVolume(this.value)" />
 
         <span class="player-icon"><i class="fas fa-music"></i></span>
     </div>
@@ -1170,31 +1182,35 @@
 
             <div class="channel-card">
                 <div class="card-title"><i class="fas fa-shield-alt"></i> <span data-key="channel3Title">قناة ترمكس</span></div>
-                <div class="card-desc" data-key="channel3Desc">أدوات حماية، تليثون، نقل أعضاء، ومزادات.</div>
+                <div class="card-desc" data-key="channel3Desc">🛡️ أدوات الأمن السيبراني • حماية • اختراق أخلاقي • تليثون</div>
                 <div class="card-meta">
                     <a href="https://t.me/ToolsTermex" target="_blank"><i class="fab fa-telegram-plane"></i> <span data-key="join">انضم</span></a>
-                    <span class="badge"><i class="fas fa-lock"></i> <span data-key="protection">حماية</span></span>
+                    <span class="badge"><i class="fas fa-lock"></i> <span data-key="protection">أمن سيبراني</span></span>
                 </div>
             </div>
         </div>
 
-        <!-- الخدمات -->
+        <!-- ===== قائمة الخدمات الكاملة ===== -->
         <div class="services-list" data-aos="fade-up" data-aos-delay="100">
             <ul>
-                <li><i class="fas fa-terminal"></i> <span data-key="s1">أكواد بجميع اللغات</span></li>
-                <li><i class="fas fa-file-audio"></i> <span data-key="s2">مصانع ميوزك</span></li>
-                <li><i class="fas fa-shield-virus"></i> <span data-key="s3">مصانع حماية</span></li>
-                <li><i class="fab fa-telegram"></i> <span data-key="s4">مصانع تليثون</span></li>
-                <li><i class="fas fa-user-friends"></i> <span data-key="s5">نقل أعضاء (مخفي/ظهار)</span></li>
-                <li><i class="fas fa-bolt"></i> <span data-key="s6">ملفات شد</span></li>
-                <li><i class="fas fa-upload"></i> <span data-key="s7">نشر تلقائي بمميزات</span></li>
-                <li><i class="fas fa-gavel"></i> <span data-key="s8">مزاد للسوبرات</span></li>
-                <li><i class="fas fa-file-code"></i> <span data-key="s9">lua & php حماية</span></li>
-                <li><i class="fas fa-bug"></i> <span data-key="s10">حل جميع الأخطاء</span></li>
+                <li><i class="fas fa-code"></i> يوجد عمل اكواد برمجه بجميع اللغات</li>
+                <li><i class="fas fa-file-audio"></i> يوجد ملفات و مصانع ميوزك</li>
+                <li><i class="fas fa-shield-virus"></i> يوجد ملفات و مصانع حمايه</li>
+                <li><i class="fab fa-telegram"></i> يوجد ملفات و مصانع تليثون</li>
+                <li><i class="fas fa-user-friends"></i> يوجد ملفات نقل أعضاء مخفي و ظهار</li>
+                <li><i class="fas fa-bolt"></i> يوجد ملفات شد</li>
+                <li><i class="fas fa-upload"></i> يوجد ملفات نشر تلقائي بمميزات</li>
+                <li><i class="fas fa-gavel"></i> يوجد ملفات مزاد للسوبرات</li>
+                <li><i class="fas fa-file-code"></i> يوجد ملف lua & php حمايه</li>
+                <li><i class="fas fa-bug"></i> يوجد حل جميع الأخطاء</li>
+                <li style="width:100%; text-align:center; margin-top:0.3rem; color:#f0c850;">
+                    <i class="fas fa-star"></i> يوجد عمل اي كود او تعديل اي ملف
+                    <span class="highlight-price"> #بأسعار رمزيه بدون تكلفة</span>
+                </li>
             </ul>
         </div>
 
-        <!-- ===== من نحن - دروس (تبويبات) ===== -->
+        <!-- ===== من نحن - دروس (تبويبات) مع دعم اللغة والوضع ===== -->
         <div class="about-section" data-aos="fade-up" data-aos-delay="150">
             <div class="tabs-header">
                 <button class="tab-btn active" onclick="switchTab(event, 'tab1')" data-key="tabAbout">📖 من نحن</button>
@@ -1208,7 +1224,7 @@
                     نقدم حلولاً برمجية متكاملة تشمل الأكواد، الأدوات، السكربتات، البوتات، والمواقع بجميع لغات البرمجة.
                     <br /><br />
                     فريقنا متخصص في <span class="highlight-text">بايثون، جافا سكريبت، PHP، Lua، HTML/CSS</span>
-                    وجميع تقنيات الويب والتطبيقات.
+                    وجميع تقنيات الويب والتطبيقات. نضمن لك <span class="highlight-text">تسليم سريع</span> و <span class="highlight-text">دعم فني مستمر</span>.
                 </p>
             </div>
 
@@ -1218,7 +1234,7 @@
                     <span class="highlight-text">أنظمة حماية متطورة</span> و <span class="highlight-text">منصات كاملة</span>.
                     <br /><br />
                     نضع بين يديك كل ما تحتاجه في عالم التطوير، مع <span class="highlight-text">أسعار رمزية</span>
-                    وجودة لا تضاهى. نضمن لك <span class="highlight-text">تسليم سريع</span> و <span class="highlight-text">دعم فني مستمر</span>.
+                    وجودة لا تضاهى. نسعى دائماً لتقديم الأفضل لعملائنا.
                 </p>
             </div>
 
@@ -1228,7 +1244,7 @@
                     الحلول البرمجية المتكاملة. نسعى لتمكين المطورين والشركات من تحقيق أهدافهم التقنية.
                     <br /><br />
                     نؤمن بأن <span class="highlight-text">البرمجيات الجيدة</span> هي أساس النجاح في العصر الرقمي،
-                    ونسعى دائماً لتقديم الأفضل لعملائنا.
+                    ونعمل دائماً على تطوير أنفسنا لتقديم الأفضل.
                 </p>
             </div>
         </div>
@@ -1240,7 +1256,7 @@
         <div class="bots-section" data-aos="fade-up" data-aos-delay="200">
             <div class="bot-card">
                 <i class="fas fa-music"></i>
-                <div class="bot-name">بوت بيري للأغاني</div>
+                <div class="bot-name">بوت بيري </div>
                 <div class="bot-username">@Bi1ieBot</div>
                 <div class="bot-desc">بوت استماع وتحميل الأغاني</div>
                 <a href="https://t.me/Bi1ieBot" target="_blank" class="bot-link"><i class="fab fa-telegram"></i> افتح البوت</a>
@@ -1315,7 +1331,7 @@
             </a>
         </div>
 
-        <!-- ===== روابط المنصات (رقم 17) ===== -->
+        <!-- ===== روابط المنصات (بدون إنستجرام) ===== -->
         <div class="platform-links" data-aos="fade-up" data-aos-delay="450">
             <a href="https://github.com/TOPVEGA" target="_blank">
                 <i class="fab fa-github"></i>
@@ -1333,10 +1349,6 @@
                 <i class="fab fa-youtube"></i>
                 <span class="link-label"><span data-key="youtube">يوتيوب</span></span>
             </a>
-            <a href="https://www.instagram.com/kamalxblack" target="_blank">
-                <i class="fab fa-instagram"></i>
-                <span class="link-label">Instagram</span>
-            </a>
         </div>
 
         <!-- ===== الفوتر ===== -->
@@ -1352,7 +1364,7 @@
         <!-- تنويه -->
         <div style="display: flex; justify-content: center;">
             <span class="notice">
-                <i class="fas fa-exclamation-triangle"></i> <span data-key="notice">تنويه_هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك</span>
+                <i class="fas fa-exclamation-triangle"></i> <span data-key="notice">تنويه هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك</span>
             </span>
         </div>
 
@@ -1366,7 +1378,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
-        // ===== تهيئة AOS للتأثيرات الحركية =====
+        // ===== تهيئة AOS =====
         AOS.init({
             duration: 800,
             once: true,
@@ -1419,7 +1431,6 @@
                 p.update();
                 p.draw();
             });
-            // رسم خطوط بين الجسيمات المتقاربة
             for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
@@ -1439,12 +1450,11 @@
         }
         animateParticles();
 
-        // ===== مشغل الموسيقى (مُصلح) =====
-        // استخدام مسارات موسيقية تعمل فعلاً
+        // ===== مشغل الموسيقى (مسارات هادئة) =====
         const tracks = [
-            { name: '🌙 ليلة هادئة', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3' },
-            { name: '🎹 بيانو هادئ', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3' },
-            { name: '🌊 أمواج هادئة', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3' }
+            { name: '🎵 هدوء وسكينة', url: 'https://cdn.pixabay.com/download/audio/2022/03/10/audio_c8c8f7b8f1.mp3' },
+            { name: '🌙 ليالي هادئة', url: 'https://cdn.pixabay.com/download/audio/2022/05/27/audio_4e3d7e0f1a.mp3' },
+            { name: '🌊 أمواج وسلام', url: 'https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0e1f2a3b4.mp3' }
         ];
 
         let currentTrack = 0;
@@ -1452,7 +1462,7 @@
         let isMuted = false;
         let audio = new Audio(tracks[0].url);
         audio.loop = false;
-        audio.volume = 0.6;
+        audio.volume = 0.5;
 
         const playBtn = document.getElementById('playBtn');
         const playIcon = document.getElementById('playIcon');
@@ -1534,8 +1544,8 @@
                 volumeSlider.value = 0;
                 volumeIcon.className = 'fas fa-volume-mute';
             } else {
-                audio.volume = 0.6;
-                volumeSlider.value = 60;
+                audio.volume = 0.5;
+                volumeSlider.value = 50;
                 volumeIcon.className = 'fas fa-volume-up';
             }
         }
@@ -1544,7 +1554,7 @@
             nextTrack();
         });
 
-        // محاولة تشغيل تلقائي (مع التعامل مع قيود المتصفحات)
+        // تشغيل تلقائي عند النقر
         document.addEventListener('click', function autoPlay() {
             if (!isPlaying) {
                 audio.play().catch(e => {});
@@ -1611,20 +1621,10 @@
                 channel2Title: 'سورس ميوزك فيجا',
                 channel2Desc: 'مستوحى من بوتات الموسيقى • مفتوحة المصدر على تيليجرام',
                 channel3Title: 'قناة ترمكس',
-                channel3Desc: 'أدوات حماية، تليثون، نقل أعضاء، ومزادات.',
+                channel3Desc: '🛡️ أدوات الأمن السيبراني • حماية • اختراق أخلاقي • تليثون',
                 join: 'انضم',
                 active: 'نشطة',
-                protection: 'حماية',
-                s1: 'أكواد بجميع اللغات',
-                s2: 'مصانع ميوزك',
-                s3: 'مصانع حماية',
-                s4: 'مصانع تليثون',
-                s5: 'نقل أعضاء (مخفي/ظهار)',
-                s6: 'ملفات شد',
-                s7: 'نشر تلقائي بمميزات',
-                s8: 'مزاد للسوبرات',
-                s9: 'lua & php حماية',
-                s10: 'حل جميع الأخطاء',
+                protection: 'أمن سيبراني',
                 tabAbout: '📖 من نحن',
                 tabServices: '🛠 خدماتنا',
                 tabVision: '🌟 رؤيتنا',
@@ -1651,20 +1651,10 @@
                 channel2Title: 'Vega Music Source',
                 channel2Desc: 'Inspired by other music bots • Open source on Telegram',
                 channel3Title: 'Termex Channel',
-                channel3Desc: 'Protection tools, Telethon, member transfer, and auctions.',
+                channel3Desc: '🛡️ Cybersecurity tools • Protection • Ethical hacking • Telethon',
                 join: 'Join',
                 active: 'Active',
-                protection: 'Protection',
-                s1: 'Codes in all languages',
-                s2: 'Music factories',
-                s3: 'Protection factories',
-                s4: 'Telethon factories',
-                s5: 'Member transfer (hidden/show)',
-                s6: 'Crash files',
-                s7: 'Auto-posting with features',
-                s8: 'Supergroup auctions',
-                s9: 'lua & php protection',
-                s10: 'Fix all errors',
+                protection: 'Cybersecurity',
                 tabAbout: '📖 About Us',
                 tabServices: '🛠 Our Services',
                 tabVision: '🌟 Our Vision',
@@ -1725,7 +1715,7 @@
 
         console.log('🚀 Py Hub | منصة برمجيات متطورة');
         console.log('📌 @TopVeGa | @CyberNinjja');
-        console.log('🎵 مشغل موسيقى يعمل بشكل صحيح');
+        console.log('🎵 موسيقى هادئة تعمل بشكل صحيح');
     </script>
 
 </body>
