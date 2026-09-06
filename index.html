@@ -203,7 +203,7 @@
             color: #1e293b;
             font-weight: 500;
             font-size: 0.85rem;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             cursor: default;
             display: inline-flex;
             align-items: center;
@@ -212,7 +212,7 @@
         }
 
         .nav-btn i {
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .nav-btn:hover i {
@@ -249,12 +249,12 @@
             border-radius: 24px;
             padding: 1.2rem 1.2rem;
             border: 1px solid rgba(0, 0, 0, 0.02);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         }
 
         .channel-card .card-title i {
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             animation: pulseIcon 2s ease-in-out infinite;
         }
 
@@ -264,7 +264,7 @@
         }
 
         .bot-card i {
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             animation: pulseIcon 2s ease-in-out infinite;
         }
 
@@ -274,7 +274,7 @@
         }
 
         .platform-links a i {
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             animation: pulseIcon 2s ease-in-out infinite;
         }
 
@@ -314,7 +314,7 @@
             font-size: 0.9rem;
             resize: vertical;
             min-height: 80px;
-            transition: 0.3s;
+            transition: all 0.3s ease;
         }
 
         body.dark-mode .comment-input-area textarea {
@@ -352,6 +352,7 @@
             color: #1e293b;
             font-size: 0.8rem;
             min-width: 120px;
+            transition: all 0.3s ease;
         }
 
         body.dark-mode .comment-input-area .comment-actions input {
@@ -374,7 +375,7 @@
             font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -455,7 +456,7 @@
             display: flex;
             align-items: center;
             gap: 4px;
-            transition: 0.3s;
+            transition: all 0.3s ease;
             padding: 0.1rem 0.4rem;
             border-radius: 30px;
         }
@@ -500,6 +501,7 @@
             border: 1px solid rgba(0, 0, 0, 0.04);
             background: #f8fafc;
             font-size: 0.75rem;
+            transition: all 0.3s ease;
         }
 
         body.dark-mode .comment-item .reply-input input {
@@ -516,6 +518,12 @@
             color: #fff;
             font-size: 0.7rem;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .comment-item .reply-input button:hover {
+            background: #1d4ed8;
+            transform: scale(1.02);
         }
 
         .comment-item .reply-btn {
@@ -526,7 +534,7 @@
             font-size: 0.7rem;
             padding: 0.1rem 0.6rem;
             border-radius: 30px;
-            transition: 0.3s;
+            transition: all 0.3s ease;
         }
 
         .comment-item .reply-btn:hover {
@@ -578,7 +586,7 @@
             padding: 1.2rem 0.8rem;
             text-align: center;
             border: 1px solid rgba(0, 0, 0, 0.02);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         }
 
@@ -607,7 +615,7 @@
             border: 1px solid rgba(0, 0, 0, 0.02);
             color: #1e293b;
             cursor: pointer;
-            transition: 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             flex-direction: column;
             min-width: 180px;
         }
@@ -623,7 +631,7 @@
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            transition: 0.4s ease;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             cursor: pointer;
             text-decoration: none;
             margin: 0.2rem 0;
@@ -633,7 +641,7 @@
         .pay-btn i {
             font-size: 1.2rem;
             color: #fff;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .pay-btn:hover i {
@@ -665,7 +673,7 @@
             border-radius: 60px;
             background: #fff;
             border: 1px solid rgba(0, 0, 0, 0.02);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
             cursor: pointer;
         }
@@ -755,7 +763,12 @@
             padding: 0.2rem 0.6rem;
             border-radius: 40px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+        }
+
+        .modal .close-modal:hover {
+            background: rgba(0, 0, 0, 0.02);
+            transform: rotate(90deg);
         }
 
         .modal h2 {
@@ -792,7 +805,7 @@
             border-radius: 12px;
             background: #f8fafc;
             color: #1e293b;
-            transition: 0.3s;
+            transition: all 0.3s ease;
         }
 
         .calendar-modal .calendar-grid .day.today {
@@ -802,7 +815,7 @@
             border: 1px solid rgba(37, 99, 235, 0.06);
         }
 
-        /* ===== نافذة خدماتنا  ===== */
+        /* ===== نافذة من نحن ===== */
         .about-modal .about-content {
             font-size: 0.9rem;
             line-height: 1.8;
@@ -892,11 +905,6 @@
                     </div>
                 </div>
                 <div class="header-actions">
-                    <div class="visitor-count" id="welcomeMessage">
-                        <i class="fas fa-clock"></i>
-                        <span id="welcomeText">مرحباً بك!</span>
-                    </div>
-
                     <button class="btn-icon" onclick="toggleCalendar()">
                         <i class="fas fa-calendar-alt"></i>
                         <span class="date-label">التاريخ</span>
@@ -926,34 +934,22 @@
             <!-- ===== قائمة الإعدادات ===== -->
             <div style="position:relative;">
                 <div class="dropdown-content" id="dropdownMenu" style="display:none; position:absolute; left:0; top:100%; background:#fff; border-radius:20px; padding:0.4rem 0; box-shadow:0 20px 60px rgba(0,0,0,0.02); border:1px solid rgba(0,0,0,0.02); min-width:180px; z-index:1000;">
-                    <button class="dropdown-item" onclick="changeLanguage('ar')" style="display:flex; align-items:center; gap:10px; padding:0.4rem 1.2rem; color:#1e293b; background:transparent; border:none; width:100%; cursor:pointer; font-size:0.8rem; border-radius:12px;">
+                    <button class="dropdown-item" onclick="changeLanguage('ar')" style="display:flex; align-items:center; gap:10px; padding:0.4rem 1.2rem; color:#1e293b; background:transparent; border:none; width:100%; cursor:pointer; font-size:0.8rem; border-radius:12px; transition:all 0.2s ease;">
                         <i class="fas fa-flag"></i> 🇸🇦 العربية
                     </button>
-                    <button class="dropdown-item" onclick="changeLanguage('en')" style="display:flex; align-items:center; gap:10px; padding:0.4rem 1.2rem; color:#1e293b; background:transparent; border:none; width:100%; cursor:pointer; font-size:0.8rem; border-radius:12px;">
+                    <button class="dropdown-item" onclick="changeLanguage('en')" style="display:flex; align-items:center; gap:10px; padding:0.4rem 1.2rem; color:#1e293b; background:transparent; border:none; width:100%; cursor:pointer; font-size:0.8rem; border-radius:12px; transition:all 0.2s ease;">
                         <i class="fas fa-flag"></i> 🇬🇧 English
                     </button>
-                    <button class="dropdown-item" onclick="changeLanguage('fr')" style="display:flex; align-items:center; gap:10px; padding:0.4rem 1.2rem; color:#1e293b; background:transparent; border:none; width:100%; cursor:pointer; font-size:0.8rem; border-radius:12px;">
-                        <i class="fas fa-flag"></i> 🇫🇷 Français
-                    </button>
-                    <button class="dropdown-item" onclick="changeLanguage('tr')" style="display:flex; align-items:center; gap:10px; padding:0.4rem 1.2rem; color:#1e293b; background:transparent; border:none; width:100%; cursor:pointer; font-size:0.8rem; border-radius:12px;">
-                        <i class="fas fa-flag"></i> 🇹🇷 Türkçe
-                    </button>
-                    <button class="dropdown-item" onclick="changeLanguage('ru')" style="display:flex; align-items:center; gap:10px; padding:0.4rem 1.2rem; color:#1e293b; background:transparent; border:none; width:100%; cursor:pointer; font-size:0.8rem; border-radius:12px;">
-                        <i class="fas fa-flag"></i> 🇷🇺 Русский
-                    </button>
-                    <button class="dropdown-item" onclick="changeLanguage('hi')" style="display:flex; align-items:center; gap:10px; padding:0.4rem 1.2rem; color:#1e293b; background:transparent; border:none; width:100%; cursor:pointer; font-size:0.8rem; border-radius:12px;">
-                        <i class="fas fa-flag"></i> 🇮🇳 हिन्दी
-                    </button>
                     <div style="height:1px; background:rgba(0,0,0,0.02); margin:0.2rem 1rem;"></div>
-                    <button class="dropdown-item" onclick="toggleFullscreen()" style="display:flex; align-items:center; gap:10px; padding:0.4rem 1.2rem; color:#1e293b; background:transparent; border:none; width:100%; cursor:pointer; font-size:0.8rem; border-radius:12px;">
+                    <button class="dropdown-item" onclick="toggleFullscreen()" style="display:flex; align-items:center; gap:10px; padding:0.4rem 1.2rem; color:#1e293b; background:transparent; border:none; width:100%; cursor:pointer; font-size:0.8rem; border-radius:12px; transition:all 0.2s ease;">
                         <i class="fas fa-expand"></i> شاشة كاملة
                     </button>
                     <div style="height:1px; background:rgba(0,0,0,0.02); margin:0.2rem 1rem;"></div>
-                    <button class="dropdown-item" onclick="openAboutModal()" style="display:flex; align-items:center; gap:10px; padding:0.4rem 1.2rem; color:#1e293b; background:transparent; border:none; width:100%; cursor:pointer; font-size:0.8rem; border-radius:12px;">
-                        <i class="fas fa-info-circle"></i> 📖 خدماتنا 
+                    <button class="dropdown-item" onclick="openAboutModal()" style="display:flex; align-items:center; gap:10px; padding:0.4rem 1.2rem; color:#1e293b; background:transparent; border:none; width:100%; cursor:pointer; font-size:0.8rem; border-radius:12px; transition:all 0.2s ease;">
+                        <i class="fas fa-info-circle"></i> 📖 من نحن
                     </button>
                     <div style="height:1px; background:rgba(0,0,0,0.02); margin:0.2rem 1rem;"></div>
-                    <a class="dropdown-item" href="https://t.me/Cybervega" target="_blank" style="display:flex; align-items:center; gap:10px; padding:0.4rem 1.2rem; color:#1e293b; text-decoration:none; font-size:0.8rem; border-radius:12px;">
+                    <a class="dropdown-item" href="https://t.me/Cybervega" target="_blank" style="display:flex; align-items:center; gap:10px; padding:0.4rem 1.2rem; color:#1e293b; text-decoration:none; font-size:0.8rem; border-radius:12px; transition:all 0.2s ease;">
                         <i class="fas fa-headset"></i> جروب الدعم
                     </a>
                 </div>
@@ -970,38 +966,38 @@
             <!-- ===== القنوات ===== -->
             <div class="channels-grid" data-aos="fade-up">
                 <div class="channel-card">
-                    <div class="card-title"><i class="fab fa-python"></i> <span>قناة بايثون</span></div>
-                    <div class="card-desc">محتوى برمجي، أكواد، ومشاريع بايثون متطورة.</div>
+                    <div class="card-title"><i class="fab fa-python"></i> <span data-key="channel1Title">قناة بايثون</span></div>
+                    <div class="card-desc" data-key="channel1Desc">محتوى برمجي، أكواد، ومشاريع بايثون متطورة.</div>
                     <div class="card-meta">
-                        <a href="https://t.me/python2015" target="_blank"><i class="fab fa-telegram-plane"></i> انضم</a>
-                        <span class="badge"><i class="far fa-clock"></i> نشطة</span>
+                        <a href="https://t.me/python2015" target="_blank"><i class="fab fa-telegram-plane"></i> <span data-key="join">انضم</span></a>
+                        <span class="badge"><i class="far fa-clock"></i> <span data-key="active">نشطة</span></span>
                     </div>
                 </div>
 
                 <div class="channel-card">
-                    <div class="card-title"><i class="fas fa-music"></i> <span>سورس ميوزك فيجا</span></div>
-                    <div class="card-desc">مستوحى من بوتات الموسيقى • مفتوحة المصدر</div>
+                    <div class="card-title"><i class="fas fa-music"></i> <span data-key="channel2Title">سورس ميوزك فيجا</span></div>
+                    <div class="card-desc" data-key="channel2Desc">مستوحى من بوتات الموسيقى • مفتوحة المصدر</div>
                     <div class="card-meta">
-                        <a href="https://t.me/vegaone" target="_blank"><i class="fab fa-telegram-plane"></i> انضم</a>
+                        <a href="https://t.me/vegaone" target="_blank"><i class="fab fa-telegram-plane"></i> <span data-key="join">انضم</span></a>
                         <span class="badge"><i class="fas fa-code-branch"></i> @TopVeGa</span>
                     </div>
                 </div>
 
                 <div class="channel-card">
-                    <div class="card-title"><i class="fas fa-shield-alt"></i> <span>قناة ترمكس</span></div>
-                    <div class="card-desc">أدوات و اختراق و أمن سيبراني .</div>
+                    <div class="card-title"><i class="fas fa-shield-alt"></i> <span data-key="channel3Title">قناة ترمكس</span></div>
+                    <div class="card-desc" data-key="channel3Desc">أدوات و اختراق و أمن سيبراني .</div>
                     <div class="card-meta">
-                        <a href="https://t.me/ToolsTermex" target="_blank"><i class="fab fa-telegram-plane"></i> انضم</a>
-                        <span class="badge"><i class="fas fa-lock"></i> حماية</span>
+                        <a href="https://t.me/ToolsTermex" target="_blank"><i class="fab fa-telegram-plane"></i> <span data-key="join">انضم</span></a>
+                        <span class="badge"><i class="fas fa-lock"></i> <span data-key="protection">حماية</span></span>
                     </div>
                 </div>
 
                 <div class="channel-card support-card">
-                    <div class="card-title"><i class="fas fa-headset"></i> <span>جروب الدعم</span></div>
-                    <div class="card-desc">الدعم الفني والمساعدة في جميع الاستفسارات.</div>
+                    <div class="card-title"><i class="fas fa-headset"></i> <span data-key="supportTitle">جروب الدعم</span></div>
+                    <div class="card-desc" data-key="supportDesc">الدعم الفني والمساعدة في جميع الاستفسارات.</div>
                     <div class="card-meta">
-                        <a href="https://t.me/Cybervega" target="_blank"><i class="fab fa-telegram-plane"></i> انضم للدعم</a>
-                        <span class="badge"><i class="fas fa-heart" style="color:#dc2626;"></i> متاح 24</span>
+                        <a href="https://t.me/Cybervega" target="_blank"><i class="fab fa-telegram-plane"></i> <span data-key="joinSupport">انضم للدعم</span></a>
+                        <span class="badge"><i class="fas fa-heart" style="color:#dc2626;"></i> <span data-key="activeSupport">متاح 24</span></span>
                     </div>
                 </div>
             </div>
@@ -1009,37 +1005,37 @@
             <!-- ===== الخدمات ===== -->
             <div class="services-list" data-aos="fade-up" data-aos-delay="100">
                 <ul>
-                    <li><i class="fas fa-terminal"></i> أكواد بجميع اللغات</li>
-                    <li><i class="fas fa-file-audio"></i> مصانع ميوزك</li>
-                    <li><i class="fas fa-shield-virus"></i> مصانع حماية</li>
-                    <li><i class="fab fa-telegram"></i> مصانع تليثون</li>
-                    <li><i class="fas fa-user-friends"></i> نقل أعضاء (مخفي او ظهار)</li>
-                    <li><i class="fas fa-bolt"></i> ملفات شد</li>
-                    <li><i class="fas fa-upload"></i> نشر تلقائي بمميزات</li>
-                    <li><i class="fas fa-gavel"></i> مزاد للسوبرات</li>
-                    <li><i class="fas fa-file-code"></i> lua & php حماية</li>
-                    <li><i class="fas fa-bug"></i> حل جميع الأخطاء</li>
+                    <li><i class="fas fa-terminal"></i> <span data-key="s1">أكواد بجميع اللغات</span></li>
+                    <li><i class="fas fa-file-audio"></i> <span data-key="s2">مصانع ميوزك</span></li>
+                    <li><i class="fas fa-shield-virus"></i> <span data-key="s3">مصانع حماية</span></li>
+                    <li><i class="fab fa-telegram"></i> <span data-key="s4">مصانع تليثون</span></li>
+                    <li><i class="fas fa-user-friends"></i> <span data-key="s5">نقل أعضاء (مخفي او ظهار)</span></li>
+                    <li><i class="fas fa-bolt"></i> <span data-key="s6">ملفات شد</span></li>
+                    <li><i class="fas fa-upload"></i> <span data-key="s7">نشر تلقائي بمميزات</span></li>
+                    <li><i class="fas fa-gavel"></i> <span data-key="s8">مزاد للسوبرات</span></li>
+                    <li><i class="fas fa-file-code"></i> <span data-key="s9">lua & php حماية</span></li>
+                    <li><i class="fas fa-bug"></i> <span data-key="s10">حل جميع الأخطاء</span></li>
                 </ul>
             </div>
 
             <!-- ===== البوتات ===== -->
             <h3 style="color:#0f172a; margin:1.2rem 0 0.6rem 0; display:flex; align-items:center; gap:10px; font-weight:700; font-size:1rem;">
-                <i class="fas fa-robot" style="color:#2563eb;"></i> بوتاتنا
+                <i class="fas fa-robot" style="color:#2563eb;"></i> <span data-key="botsTitle">بوتاتنا</span>
             </h3>
             <div class="bots-section" data-aos="fade-up" data-aos-delay="200">
                 <div class="bot-card">
                     <i class="fas fa-music"></i>
                     <div class="bot-name">بوت بيري للأغاني</div>
                     <div class="bot-username">@Bi1ieBot</div>
-                    <div class="bot-desc">بوت استماع وتحميل الأغاني</div>
-                    <a href="https://t.me/Bi1ieBot" target="_blank" class="bot-link"><i class="fab fa-telegram"></i> افتح البوت</a>
+                    <div class="bot-desc" data-key="bot1Desc">بوت استماع وتحميل الأغاني</div>
+                    <a href="https://t.me/Bi1ieBot" target="_blank" class="bot-link"><i class="fab fa-telegram"></i> <span data-key="openBot">افتح البوت</span></a>
                 </div>
                 <div class="bot-card">
                     <i class="fas fa-key"></i>
                     <div class="bot-name">بوت استخراج جلسات</div>
                     <div class="bot-username">@StrngGenBot</div>
-                    <div class="bot-desc">استخراج جلسات بايروجرام</div>
-                    <a href="https://t.me/StrngGenBot" target="_blank" class="bot-link"><i class="fab fa-telegram"></i> افتح البوت</a>
+                    <div class="bot-desc" data-key="bot2Desc">استخراج جلسات بايروجرام</div>
+                    <a href="https://t.me/StrngGenBot" target="_blank" class="bot-link"><i class="fab fa-telegram"></i> <span data-key="openBot">افتح البوت</span></a>
                 </div>
             </div>
 
@@ -1058,16 +1054,16 @@
                     </div>
                 </div>
                 <div style="color:#64748b; font-size:0.65rem; opacity:0.5; display:flex; align-items:center; gap:6px;">
-                    <i class="fas fa-lock" style="color:#2563eb;"></i> دفع آمن عبر باينس و نجوم تليجرام
+                    <i class="fas fa-lock" style="color:#2563eb;"></i> <span data-key="securePay">دفع آمن عبر باينس و نجوم تليجرام</span>
                 </div>
             </div>
 
             <div style="display: flex; flex-wrap:wrap; justify-content: center; gap:1rem;" data-aos="fade-up" data-aos-delay="400">
                 <a href="https://account.binance.com/register?ref=894656421&?registerChannel=user_center" target="_blank" class="pay-btn">
-                    <i class="fab fa-bitcoin"></i> الدفع عبر Binance
+                    <i class="fab fa-bitcoin"></i> <span data-key="payBtn">الدفع عبر Binance</span>
                 </a>
                 <button onclick="openTelegramStars()" class="pay-btn" style="background:#eab308;">
-                    <i class="fas fa-star"></i> الدفع بـ ⭐ نجوم
+                    <i class="fas fa-star"></i> <span data-key="payStars">الدفع بـ ⭐ نجوم</span>
                 </button>
             </div>
 
@@ -1079,19 +1075,19 @@
                 </a>
                 <a href="https://t.me/topvega" target="_blank">
                     <i class="fab fa-telegram"></i>
-                    <span class="link-label">المؤسس</span>
+                    <span class="link-label" data-key="founder">المؤسس</span>
                 </a>
                 <a href="https://t.me/Cybervega" target="_blank">
                     <i class="fas fa-headset"></i>
-                    <span class="link-label">جروب الدعم</span>
+                    <span class="link-label" data-key="support">جروب الدعم</span>
                 </a>
                 <a href="https://www.youtube.com/@Pythnhub" target="_blank">
                     <i class="fab fa-youtube"></i>
-                    <span class="link-label">يوتيوب</span>
+                    <span class="link-label" data-key="youtube">يوتيوب</span>
                 </a>
                 <a onclick="openComments()" style="cursor:pointer;">
                     <i class="fas fa-comment-dots"></i>
-                    <span class="link-label">التعليقات</span>
+                    <span class="link-label" data-key="comments">التعليقات</span>
                 </a>
             </div>
 
@@ -1101,13 +1097,13 @@
                     <i class="fas fa-at"></i> By: <strong>@TopVeGa</strong>
                 </div>
                 <div>
-                    <i class="fas fa-code"></i> حرية تعديل و نشر <i class="far fa-copyright"></i> 2015
+                    <i class="fas fa-code"></i> <span data-key="footerRights">حرية تعديل و نشر</span> <i class="far fa-copyright"></i> 2015
                 </div>
             </div>
 
             <div style="display: flex; justify-content: center;">
                 <span class="notice">
-                    <i class="fas fa-exclamation-triangle"></i> تنويه هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك
+                    <i class="fas fa-exclamation-triangle"></i> <span data-key="notice">تنويه هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك</span>
                 </span>
             </div>
 
@@ -1122,7 +1118,7 @@
     <div class="modal-overlay" id="commentsOverlay">
         <div class="modal">
             <button class="close-modal" onclick="closeComments()"><i class="fas fa-times"></i></button>
-            <h2><i class="fas fa-comment-dots"></i> <span id="commentsTitle">آراء المستخدمين</span></h2>
+            <h2><i class="fas fa-comment-dots"></i> <span data-key="commentsTitle">آراء المستخدمين</span></h2>
 
             <!-- ===== إضافة تعليق جديد ===== -->
             <div class="comment-input-area">
@@ -1132,14 +1128,14 @@
                         <input type="text" id="newCommentUser" placeholder="اسمك" value="مستخدم">
                     </div>
                     <button class="btn-submit-comment" onclick="addComment()">
-                        <i class="fas fa-paper-plane"></i> إضافة تعليق
+                        <i class="fas fa-paper-plane"></i> <span data-key="addComment">إضافة تعليق</span>
                     </button>
                 </div>
             </div>
 
             <div id="commentsList"></div>
             <div style="margin-top:0.6rem; text-align:center; font-size:0.65rem; opacity:0.3; color:#64748b;">
-                <i class="fas fa-sync-alt"></i> تتغير التعليقات تلقائياً
+                <i class="fas fa-sync-alt"></i> <span data-key="autoComments">تتغير التعليقات تلقائياً</span>
             </div>
         </div>
     </div>
@@ -1159,11 +1155,11 @@
         </div>
     </div>
 
-    <!-- ===== نافذة خدماتنا  ===== -->
+    <!-- ===== نافذة من نحن ===== -->
     <div class="modal-overlay" id="aboutOverlay">
         <div class="modal about-modal">
             <button class="close-modal" onclick="closeAboutModal()"><i class="fas fa-times"></i></button>
-            <h2><i class="fas fa-info-circle"></i> خدماتنا </h2>
+            <h2><i class="fas fa-info-circle"></i> من نحن</h2>
             <div class="about-content">
                 <p>السلام علي من اتبع الهدى</p>
                 <ul>
@@ -1191,21 +1187,7 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 600, once: true });
-
-        // ===== رسالة ترحيب حسب الوقت =====
-        function updateWelcomeMessage() {
-            const now = new Date();
-            const hours = now.getHours();
-            let message = '';
-            if (hours >= 5 && hours < 12) message = '🌅 صباح الخير!';
-            else if (hours >= 12 && hours < 16) message = '☀️ مساء الخير!';
-            else if (hours >= 16 && hours < 20) message = '🌇 مساء النور!';
-            else if (hours >= 20 && hours < 24) message = '🌙 مساء الخير!';
-            else message = '🌙 تصبح على خير!';
-            document.getElementById('welcomeText').textContent = message;
-        }
-        updateWelcomeMessage();
+        AOS.init({ duration: 600, once: true, easing: 'ease-out' });
 
         // ===== القائمة المنسدلة =====
         function toggleDropdown() {
@@ -1240,7 +1222,7 @@
             }
         }
 
-        // ===== نافذة خدماتنا  =====
+        // ===== نافذة من نحن =====
         function openAboutModal() {
             document.getElementById('aboutOverlay').classList.add('show');
             document.getElementById('dropdownMenu').style.display = 'none';
@@ -1252,18 +1234,10 @@
 
         // ===== دفع نجوم تليجرام =====
         function openTelegramStars() {
-            const botToken = '7291861004:AAGYFewWB-J4icdK3FkbM9qARgXOQxQX5s0'; // استبدل بـ توكن بوتك
-            const chatId = '8368077406'; // استبدل بـ معرف الدردشة
-            const starsAmount = 1;
-
-            // إنشاء رابط دفع نجوم تليجرام
-            const invoiceLink = `https://t.me/${botToken}?start=invoice_${starsAmount}`;
-
-            // عرض نافذة منبثقة مع خيارات الدفع
             const modalHtml = `
-                <div style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);z-index:9999;display:flex;justify-content:center;align-items:center;padding:1.5rem;">
-                    <div style="background:#fff;border-radius:32px;padding:2rem;max-width:400px;width:100%;text-align:center;position:relative;">
-                        <button onclick="this.parentElement.parentElement.remove()" style="position:absolute;top:0.8rem;left:0.8rem;background:transparent;border:none;font-size:1.2rem;cursor:pointer;color:#64748b;">✕</button>
+                <div style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);z-index:9999;display:flex;justify-content:center;align-items:center;padding:1.5rem;animation:fadeIn 0.3s ease;">
+                    <div style="background:#fff;border-radius:32px;padding:2rem;max-width:400px;width:100%;text-align:center;position:relative;animation:slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);">
+                        <button onclick="this.parentElement.parentElement.remove()" style="position:absolute;top:0.8rem;left:0.8rem;background:transparent;border:none;font-size:1.2rem;cursor:pointer;color:#64748b;transition:all 0.3s ease;">✕</button>
                         <div style="font-size:3rem;margin-bottom:0.5rem;">⭐</div>
                         <h3 style="color:#0f172a;margin-bottom:0.5rem;">تبرع بـ نجوم تليجرام</h3>
                         <p style="color:#64748b;font-size:0.9rem;margin-bottom:1rem;">
@@ -1271,13 +1245,13 @@
                             وتطوير المنصة نحو الأفضل ❤️
                         </p>
                         <div style="display:flex;flex-direction:column;gap:0.5rem;">
-                            <button onclick="window.open('https://t.me/Bi1ieBot?start=donate','_blank')" style="background:#eab308;border:none;padding:0.8rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:0.3s;">
+                            <button onclick="window.open('https://t.me/Bi1ieBot?start=donate','_blank')" style="background:#eab308;border:none;padding:0.8rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
                                 <i class="fas fa-star"></i> تبرع بـ 1 ⭐
                             </button>
-                            <button onclick="window.open('https://t.me/Bi1ieBot?start=donate_5','_blank')" style="background:#f59e0b;border:none;padding:0.8rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:0.3s;">
+                            <button onclick="window.open('https://t.me/Bi1ieBot?start=donate_5','_blank')" style="background:#f59e0b;border:none;padding:0.8rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
                                 <i class="fas fa-star"></i> تبرع بـ 5 ⭐
                             </button>
-                            <button onclick="window.open('https://t.me/Bi1ieBot?start=donate_10','_blank')" style="background:#d97706;border:none;padding:0.8rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:0.3s;">
+                            <button onclick="window.open('https://t.me/Bi1ieBot?start=donate_10','_blank')" style="background:#d97706;border:none;padding:0.8rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
                                 <i class="fas fa-star"></i> تبرع بـ 10 ⭐
                             </button>
                         </div>
@@ -1292,19 +1266,18 @@
 
         // ===== التعليقات المتقدمة =====
         let comments = [
-            { id: 1, user: 'أحمد محمد', text: '⭐️ منصة رائعة، خدمات متكاملة وسريعة!', likes: 12, time: Date.now() -
+            { id: 1, user: 'أحمد محمد', text: '⭐️⭐️⭐️⭐️⭐️ منصة رائعة، خدمات متكاملة وسريعة!', likes: 12, time: Date.now() -
                     3600000, replies: [] },
             { id: 2, user: 'سارة خالد', text: '❤️ أفضل موقع برمجي تعاملت معه، دعم فني ممتاز جداً', likes: 8, time: Date.now() -
                     7200000, replies: [] },
             { id: 3, user: 'علي حسن', text: '🔥 أكواد احترافية وسعر رمزي، أنصح الجميع بالتجربة', likes: 15, time: Date.now() -
                     10800000, replies: [] },
-            { id: 4, user: 'نورا يوسف', text: 'موقع موثوق ومحتواه قيم، شكراً لفريق العمل', likes: 6, time: Date.now() -
+            { id: 4, user: 'نورا يوسف', text: '✨ موقع موثوق ومحتواه قيم، شكراً لفريق العمل', likes: 6, time: Date.now() -
                     14400000, replies: [] },
-            { id: 5, user: 'محمد طارق', text: 'خدمات ممتازة وسرعة في التنفيذ، يستحق 10/10', likes: 20, time: Date.now() -
+            { id: 5, user: 'محمد طارق', text: '💪 خدمات ممتازة وسرعة في التنفيذ، يستحق 10/10', likes: 20, time: Date.now() -
                     18000000, replies: [] },
         ];
         let nextCommentId = 6;
-        let currentReplyId = null;
 
         function getTimeAgo(timestamp) {
             const diff = Date.now() - timestamp;
@@ -1423,14 +1396,14 @@
                 position:fixed;bottom:20px;right:20px;background:#1e293b;color:#fff;
                 padding:0.8rem 1.5rem;border-radius:16px;font-size:0.9rem;
                 box-shadow:0 10px 30px rgba(0,0,0,0.1);z-index:9999;
-                animation:slideUp 0.3s ease;
+                animation:slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
                 direction:rtl;
             `;
             toast.textContent = message;
             document.body.appendChild(toast);
             setTimeout(() => {
                 toast.style.opacity = '0';
-                toast.style.transition = 'opacity 0.3s';
+                toast.style.transition = 'opacity 0.3s ease';
                 setTimeout(() => toast.remove(), 300);
             }, 3000);
         }
@@ -1524,8 +1497,8 @@
         updateDateTime();
         setInterval(updateDateTime, 1000);
 
-        // ===== تأثير الكتابة (Typing Effect) =====
-        function typeWriter(element, text, speed = 80) {
+        // ===== تأثير الكتابة (Typing Effect) - أكثر سلاسة =====
+        function typeWriter(element, text, speed = 60) {
             let i = 0;
             element.textContent = '';
             function type() {
@@ -1542,8 +1515,8 @@
         setTimeout(() => {
             const title = document.getElementById('brandTitle');
             const originalText = title.textContent;
-            typeWriter(title, originalText, 80);
-        }, 500);
+            typeWriter(title, originalText, 60);
+        }, 400);
 
         // ===== عداد الزوار =====
         let vc = 12847;
@@ -1552,7 +1525,7 @@
             document.getElementById('visitorCount').textContent = vc.toLocaleString();
         }, 15000);
 
-        // ===== الترجمة =====
+        // ===== الترجمة (عربي وإنجليزي فقط) =====
         const translations = {
             ar: {
                 brandTitle: 'python zone',
@@ -1563,7 +1536,7 @@
                 navBots: 'بوتات',
                 channel1Title: 'قناة بايثون',
                 channel1Desc: 'محتوى برمجي، أكواد، ومشاريع بايثون متطورة.',
-                channel2Title: 'ميوزك فيجا',
+                channel2Title: 'سورس ميوزك فيجا',
                 channel2Desc: 'مستوحى من بوتات الموسيقى • مفتوحة المصدر',
                 channel3Title: 'قناة ترمكس',
                 channel3Desc: 'أدوات و اختراق و أمن سيبراني .',
@@ -1574,9 +1547,32 @@
                 active: 'نشطة',
                 activeSupport: 'متاح 24',
                 protection: 'حماية',
+                s1: 'أكواد بجميع اللغات',
+                s2: 'مصانع ميوزك',
+                s3: 'مصانع حماية',
+                s4: 'مصانع تليثون',
+                s5: 'نقل أعضاء (مخفي او ظهار)',
+                s6: 'ملفات شد',
+                s7: 'نشر تلقائي بمميزات',
+                s8: 'مزاد للسوبرات',
+                s9: 'lua & php حماية',
+                s10: 'حل جميع الأخطاء',
+                botsTitle: 'بوتاتنا',
+                bot1Desc: 'بوت استماع وتحميل الأغاني',
+                bot2Desc: 'استخراج جلسات بايروجرام',
+                openBot: 'افتح البوت',
+                securePay: 'دفع آمن عبر باينس و نجوم تليجرام',
+                payBtn: 'الدفع عبر Binance',
+                payStars: 'الدفع بـ ⭐ نجوم',
+                founder: 'المؤسس',
+                youtube: 'يوتيوب',
+                comments: 'التعليقات',
                 commentsTitle: 'آراء المستخدمين',
+                addComment: 'إضافة تعليق',
+                autoComments: 'تتغير التعليقات تلقائياً',
                 footerRights: 'حرية تعديل و نشر',
-                notice: 'تنويه هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك'
+                notice: 'تنويه هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك',
+                support: 'جروب الدعم'
             },
             en: {
                 brandTitle: 'python zone',
@@ -1596,114 +1592,41 @@
                 join: 'Join',
                 joinSupport: 'Join Support',
                 active: 'Active',
-                activeSupport: 'Available 24',
+                activeSupport: 'Available 24/7',
                 protection: 'Protection',
+                s1: 'Codes in all languages',
+                s2: 'Music factories',
+                s3: 'Protection factories',
+                s4: 'Telethon factories',
+                s5: 'Member transfer (hidden & show)',
+                s6: 'Crash files',
+                s7: 'Auto-posting with features',
+                s8: 'Supergroup auctions',
+                s9: 'lua & php protection',
+                s10: 'Fix all errors',
+                botsTitle: 'Our Bots',
+                bot1Desc: 'Music listening and downloading bot',
+                bot2Desc: 'Pyrogram session extraction',
+                openBot: 'Open Bot',
+                securePay: 'Secure payment via Binance & Telegram Stars',
+                payBtn: 'Pay with Binance',
+                payStars: 'Pay with ⭐ Stars',
+                founder: 'Founder',
+                youtube: 'YouTube',
+                comments: 'Comments',
                 commentsTitle: 'User Reviews',
+                addComment: 'Add Comment',
+                autoComments: 'Comments refresh automatically',
                 footerRights: 'Free to modify & publish',
-                notice: 'Important: Please be serious so we don\'t waste time'
-            },
-            fr: {
-                brandTitle: 'python zone',
-                brandSub: 'Plateforme de Logiciels & Développement',
-                navCodes: 'Codes',
-                navTools: 'Outils',
-                navScripts: 'Scripts',
-                navBots: 'Bots',
-                channel1Title: 'Chaîne Python',
-                channel1Desc: 'Contenu de programmation, codes et projets Python avancés.',
-                channel2Title: 'Source Musique Vega',
-                channel2Desc: 'Inspiré des bots musicaux • Open source',
-                channel3Title: 'Chaîne Termex',
-                channel3Desc: 'Outils, hacking et cybersécurité.',
-                supportTitle: "Groupe d'Support",
-                supportDesc: "Support technique et aide pour toutes les demandes.",
-                join: 'Rejoindre',
-                joinSupport: "Rejoindre l'Support",
-                active: 'Active',
-                activeSupport: 'Disponible 24',
-                protection: 'Protection',
-                commentsTitle: "Avis des utilisateurs",
-                footerRights: 'Libre de modifier et publier',
-                notice: 'Important: Veuillez être sérieux pour ne pas perdre notre temps'
-            },
-            tr: {
-                brandTitle: 'python zone',
-                brandSub: 'Yazılım & Geliştirme Platformu',
-                navCodes: 'Kodlar',
-                navTools: 'Araçlar',
-                navScripts: 'Scriptler',
-                navBots: 'Botlar',
-                channel1Title: 'Python Kanalı',
-                channel1Desc: 'Programlama içeriği, kodlar ve gelişmiş Python projeleri.',
-                channel2Title: 'Vega Müzik Kaynağı',
-                channel2Desc: 'Müzik botlarından ilham alındı • Açık kaynak',
-                channel3Title: 'Termex Kanalı',
-                channel3Desc: 'Araçlar, hackleme ve siber güvenlik.',
-                supportTitle: 'Destek Grubu',
-                supportDesc: 'Tüm sorular için teknik destek ve yardım.',
-                join: 'Katıl',
-                joinSupport: 'Desteğe Katıl',
-                active: 'Aktif',
-                activeSupport: '24 Saat Mevcut',
-                protection: 'Koruma',
-                commentsTitle: 'Kullanıcı Yorumları',
-                footerRights: 'Düzenleme ve yayınlama özgürlüğü',
-                notice: 'Önemli: Zaman kaybetmemek için lütfen ciddi olun'
-            },
-            ru: {
-                brandTitle: 'python zone',
-                brandSub: 'Платформа для программирования и разработки',
-                navCodes: 'Коды',
-                navTools: 'Инструменты',
-                navScripts: 'Скрипты',
-                navBots: 'Боты',
-                channel1Title: 'Python Канал',
-                channel1Desc: 'Контент по программированию, коды и продвинутые проекты Python.',
-                channel2Title: 'Vega Музыкальный Источник',
-                channel2Desc: 'Вдохновлено музыкальными ботами • Открытый код',
-                channel3Title: 'Termex Канал',
-                channel3Desc: 'Инструменты, взлом и кибербезопасность.',
-                supportTitle: 'Группа поддержки',
-                supportDesc: 'Техническая поддержка и помощь по всем вопросам.',
-                join: 'Присоединиться',
-                joinSupport: 'Присоединиться к поддержке',
-                active: 'Активна',
-                activeSupport: 'Доступно 24',
-                protection: 'Защита',
-                commentsTitle: 'Отзывы пользователей',
-                footerRights: 'Свобода редактирования и публикации',
-                notice: 'Важно: Пожалуйста, будьте серьёзны, чтобы не тратить наше время'
-            },
-            hi: {
-                brandTitle: 'python zone',
-                brandSub: 'सॉफ्टवेयर और विकास मंच',
-                navCodes: 'कोड',
-                navTools: 'उपकरण',
-                navScripts: 'स्क्रिप्ट',
-                navBots: 'बॉट्स',
-                channel1Title: 'पायथन चैनल',
-                channel1Desc: 'प्रोग्रामिंग सामग्री, कोड और उन्नत पायथन प्रोजेक्ट।',
-                channel2Title: 'वेगा संगीत स्रोत',
-                channel2Desc: 'संगीत बॉट्स से प्रेरित • ओपन सोर्स',
-                channel3Title: 'टर्मेक्स चैनल',
-                channel3Desc: 'उपकरण, हैकिंग और साइबर सुरक्षा।',
-                supportTitle: 'सहायता समूह',
-                supportDesc: 'सभी पूछताछ के लिए तकनीकी सहायता और मदद।',
-                join: 'शामिल हों',
-                joinSupport: 'सहायता में शामिल हों',
-                active: 'सक्रिय',
-                activeSupport: '24 घंटे उपलब्ध',
-                protection: 'सुरक्षा',
-                commentsTitle: 'उपयोगकर्ता समीक्षाएँ',
-                footerRights: 'संशोधन और प्रकाशन की स्वतंत्रता',
-                notice: 'महत्वपूर्ण: कृपया गंभीर रहें ताकि समय बर्बाद न हो'
+                notice: 'Important: Please be serious so we don\'t waste time',
+                support: 'Support Group'
             }
         };
 
         function changeLanguage(lang) {
             const t = translations[lang];
             if (!t) return;
-            if (lang === 'en' || lang === 'fr' || lang === 'tr' || lang === 'ru' || lang === 'hi') {
+            if (lang === 'en') {
                 document.body.dir = 'ltr';
             } else {
                 document.body.dir = 'rtl';
@@ -1860,7 +1783,12 @@
             border-radius: 40px;
             background: rgba(37, 99, 235, 0.02);
             border: 1px solid transparent;
-            transition: 0.2s;
+            transition: all 0.3s ease;
+        }
+
+        .card-meta a:hover {
+            background: rgba(37, 99, 235, 0.04);
+            transform: translateY(-1px);
         }
 
         .badge {
@@ -1886,7 +1814,12 @@
             text-decoration: none;
             font-size: 0.75rem;
             border: 1px solid rgba(37, 99, 235, 0.04);
-            transition: 0.3s;
+            transition: all 0.3s ease;
+        }
+
+        .bot-link:hover {
+            background: rgba(37, 99, 235, 0.04);
+            transform: translateY(-2px);
         }
 
         .pay-icon i {
@@ -1973,6 +1906,25 @@
 
         body.dark-mode .dropdown-item:hover {
             background: rgba(255, 255, 255, 0.02);
+        }
+
+        body.dark-mode .comment-item .comment-actions-bottom button:hover {
+            color: #60a5fa;
+        }
+
+        body.dark-mode .calendar-modal .calendar-grid .day {
+            background: rgba(255, 255, 255, 0.02);
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .calendar-modal .calendar-grid .day.today {
+            background: rgba(96, 165, 250, 0.04);
+            color: #60a5fa;
+            border-color: rgba(96, 165, 250, 0.06);
+        }
+
+        body.dark-mode .calendar-modal .calendar-grid .weekday {
+            color: #94a3b8;
         }
     </style>
 
