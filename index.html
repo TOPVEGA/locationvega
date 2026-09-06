@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Py Hub | منصة برمجيات متطورة</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <style>
         /* ===== RESET & BASE ===== */
         * {
@@ -16,57 +17,67 @@
 
         body {
             min-height: 100vh;
-            background: linear-gradient(145deg, #0b0e1a 0%, #1a1f30 100%);
+            background: linear-gradient(135deg, #0a0e1a 0%, #141b2d 40%, #1a2340 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 1.5rem;
-            transition: background 0.4s ease;
+            transition: all 0.5s ease;
             position: relative;
+            overflow-x: hidden;
         }
 
         body.light-mode {
-            background: linear-gradient(145deg, #e8edf5 0%, #d5dce8 100%);
+            background: linear-gradient(135deg, #e8edf5 0%, #d0d8e8 40%, #b8c4dc 100%);
         }
 
-        /* ===== الحاوية الزجاجية الرئيسية ===== */
+        /* ===== خلفية الجسيمات ===== */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ===== الحاوية الزجاجية ===== */
         .glass-card {
             max-width: 1200px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(22px) saturate(200%);
-            -webkit-backdrop-filter: blur(22px) saturate(200%);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
             border-radius: 48px;
-            padding: 2.5rem 2rem 8rem 2rem;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+            padding: 2.5rem 2rem 7rem 2rem;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             position: relative;
+            z-index: 1;
         }
 
         body.light-mode .glass-card {
-            background: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.35);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         /* ===== شريط الإعلانات ===== */
         .marquee-bar {
-            background: rgba(255, 215, 100, 0.06);
+            background: rgba(255, 215, 100, 0.05);
             border-radius: 60px;
-            padding: 0.5rem 1.5rem;
+            padding: 0.4rem 1.5rem;
             margin-bottom: 1.5rem;
-            border: 1px solid rgba(255, 215, 100, 0.06);
-            overflow: hidden;
+            border: 1px solid rgba(255, 215, 100, 0.05);
         }
-
         .marquee-bar marquee {
-            color: #f0e6c5;
-            font-size: 0.9rem;
+            color: #d4c8a8;
+            font-size: 0.85rem;
         }
-
         body.light-mode .marquee-bar marquee {
-            color: #2c3e50;
+            color: #4a4a5a;
         }
 
         /* ===== الهيدر ===== */
@@ -75,47 +86,48 @@
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.8rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
-
         .brand {
             display: flex;
             align-items: center;
             gap: 12px;
         }
-
         .brand i {
-            font-size: 2.6rem;
-            color: #8aafff;
-            text-shadow: 0 0 30px rgba(80, 140, 255, 0.4);
+            font-size: 2.4rem;
+            color: #7aa8ff;
+            text-shadow: 0 0 40px rgba(70, 130, 255, 0.2);
         }
-
         .brand h1 {
             font-weight: 700;
-            font-size: 2rem;
-            background: linear-gradient(135deg, #e0eaff, #b0ceff);
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #ffffff, #a0c4ff);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
-
+        body.light-mode .brand h1 {
+            background: linear-gradient(135deg, #1a2a4a, #3a5a8a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
         .brand small {
             display: block;
-            font-size: 0.75rem;
-            color: rgba(220, 235, 255, 0.5);
+            font-size: 0.7rem;
+            color: rgba(200, 215, 240, 0.4);
             margin-top: 2px;
         }
-
         body.light-mode .brand small {
-            color: #4a5a7a;
+            color: #5a6a8a;
         }
 
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
         }
 
@@ -124,37 +136,34 @@
             align-items: center;
             gap: 6px;
             background: rgba(255, 255, 255, 0.03);
-            padding: 0.3rem 1.2rem;
+            padding: 0.25rem 1rem;
             border-radius: 60px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            color: #b0c8f0;
-            font-size: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            color: #a0b8d8;
+            font-size: 0.75rem;
         }
-
         .visitor-counter i {
             color: #6fa3ff;
         }
-
         body.light-mode .visitor-counter {
-            color: #2c3e50;
-            border-color: rgba(0, 0, 0, 0.05);
+            color: #3a4a6a;
+            border-color: rgba(0, 0, 0, 0.04);
             background: rgba(0, 0, 0, 0.02);
         }
 
         .license-tag {
-            background: rgba(255, 215, 100, 0.1);
-            padding: 0.4rem 1.2rem;
+            background: rgba(255, 215, 100, 0.08);
+            padding: 0.3rem 1rem;
             border-radius: 60px;
-            border: 1px solid rgba(255, 215, 100, 0.1);
-            color: #fadf9e;
-            font-size: 0.8rem;
+            border: 1px solid rgba(255, 215, 100, 0.06);
+            color: #d4c8a8;
+            font-size: 0.75rem;
             display: flex;
             align-items: center;
             gap: 6px;
         }
-
         .license-tag i {
-            color: #ffd966;
+            color: #f0c850;
         }
 
         /* ===== الإعدادات ===== */
@@ -162,26 +171,23 @@
             position: relative;
             display: inline-block;
         }
-
         .settings-btn {
             background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: #b0c8f0;
-            padding: 0.4rem 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: #a0b8d8;
+            padding: 0.35rem 0.8rem;
             border-radius: 60px;
             cursor: pointer;
             transition: 0.3s;
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
-
         .settings-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: rotate(30deg);
+            background: rgba(255, 255, 255, 0.08);
+            transform: rotate(20deg);
         }
-
         body.light-mode .settings-btn {
-            color: #2c3e50;
-            border-color: rgba(0, 0, 0, 0.08);
+            color: #3a4a6a;
+            border-color: rgba(0, 0, 0, 0.06);
             background: rgba(0, 0, 0, 0.02);
         }
 
@@ -190,78 +196,71 @@
             position: absolute;
             left: 0;
             top: 110%;
-            background: rgba(20, 30, 50, 0.95);
+            background: rgba(15, 25, 45, 0.95);
             backdrop-filter: blur(20px);
-            min-width: 200px;
-            border-radius: 20px;
-            padding: 0.6rem 0;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            min-width: 190px;
+            border-radius: 18px;
+            padding: 0.5rem 0;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.04);
             z-index: 1000;
         }
-
         body.light-mode .dropdown-content {
             background: rgba(240, 245, 255, 0.95);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.04);
         }
-
         .dropdown-content.show {
             display: block;
-            animation: fadeIn 0.25s ease;
+            animation: fadeIn 0.2s ease;
         }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(-8px);
+                transform: translateY(-6px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-
         .dropdown-item {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 0.6rem 1.3rem;
-            color: #ccd9f0;
+            padding: 0.5rem 1.2rem;
+            color: #b0c8e8;
             text-decoration: none;
             transition: 0.2s;
             cursor: pointer;
             border: none;
             background: none;
             width: 100%;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
-
         .dropdown-item:hover {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
             color: #fff;
         }
-
         body.light-mode .dropdown-item {
             color: #1a2a4a;
         }
         body.light-mode .dropdown-item:hover {
             background: rgba(0, 0, 0, 0.03);
         }
-
         .dropdown-item i {
             width: 18px;
             color: #6fa3ff;
         }
         body.light-mode .dropdown-item i {
-            color: #2a5a8a;
+            color: #3a6aaa;
         }
         .dropdown-divider {
             height: 1px;
-            background: rgba(255, 255, 255, 0.05);
-            margin: 0.3rem 1rem;
+            background: rgba(255, 255, 255, 0.04);
+            margin: 0.2rem 1rem;
         }
         body.light-mode .dropdown-divider {
-            background: rgba(0, 0, 0, 0.05);
+            background: rgba(0, 0, 0, 0.04);
         }
 
         /* ===== أزرار التنقل ===== */
@@ -269,278 +268,287 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 0.8rem 1.2rem;
-            margin: 1.2rem 0 1.8rem 0;
+            gap: 0.6rem 1rem;
+            margin: 1rem 0 1.5rem 0;
         }
-
         .nav-btn {
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(6px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 0.6rem 1.6rem;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 0.5rem 1.4rem;
             border-radius: 60px;
-            color: #ccd9f0;
+            color: #b0c8e8;
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             transition: 0.25s ease;
             cursor: default;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
-
         .nav-btn i {
-            color: #8ab4ff;
+            color: #7aa8ff;
         }
-
         .nav-btn:hover {
-            background: rgba(120, 180, 255, 0.12);
-            border-color: rgba(120, 180, 255, 0.2);
+            background: rgba(120, 180, 255, 0.08);
+            border-color: rgba(120, 180, 255, 0.12);
             color: #fff;
             transform: translateY(-2px);
         }
-
         body.light-mode .nav-btn {
-            color: #2c3e50;
-            background: rgba(255, 255, 255, 0.2);
+            color: #2a3a5a;
+            background: rgba(255, 255, 255, 0.15);
             border-color: rgba(0, 0, 0, 0.04);
+        }
+        body.light-mode .nav-btn:hover {
+            background: rgba(60, 120, 255, 0.08);
+            color: #1a2a4a;
         }
 
         /* ===== البطاقات ===== */
         .channels-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 1.5rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.2rem;
+            margin: 1.2rem 0;
         }
-
         .channel-card {
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border-radius: 28px;
-            padding: 1.5rem 1.2rem;
+            backdrop-filter: blur(8px);
+            border-radius: 24px;
+            padding: 1.3rem 1.2rem;
             border: 1px solid rgba(255, 255, 255, 0.04);
-            transition: 0.25s ease;
-            box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.3);
+            transition: 0.3s ease;
             display: flex;
             flex-direction: column;
         }
-
         .channel-card:hover {
             background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(150, 200, 255, 0.15);
-            transform: scale(1.01);
+            border-color: rgba(150, 200, 255, 0.1);
+            transform: translateY(-3px);
         }
-
         body.light-mode .channel-card {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.12);
             border-color: rgba(0, 0, 0, 0.03);
         }
-
+        body.light-mode .channel-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
         .channel-card .card-title {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            color: #eaf1ff;
+            color: #e8f0ff;
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.2rem;
         }
-
         .channel-card .card-title i {
-            color: #6fa3ff;
+            color: #7aa8ff;
         }
         body.light-mode .channel-card .card-title {
             color: #1a2a4a;
         }
-
         .channel-card .card-desc {
-            color: #b6c8e8;
-            font-size: 0.88rem;
+            color: #a8bcd8;
+            font-size: 0.85rem;
             line-height: 1.5;
-            margin: 0.3rem 0 0.6rem 0;
-            opacity: 0.85;
+            margin: 0.2rem 0 0.5rem 0;
         }
         body.light-mode .channel-card .card-desc {
-            color: #3a4a6a;
+            color: #4a5a7a;
         }
-
         .channel-card .card-meta {
             margin-top: auto;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 6px 10px;
-            padding-top: 0.6rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            gap: 6px 8px;
+            padding-top: 0.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
         }
-
         .channel-card .card-meta a {
-            color: #9bb9ff;
+            color: #8ab0f0;
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            transition: 0.2s;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 0.15rem 0.8rem;
+            padding: 0.1rem 0.7rem;
             border-radius: 40px;
             border: 1px solid transparent;
+            transition: 0.2s;
         }
-
         .channel-card .card-meta a:hover {
-            background: rgba(80, 140, 255, 0.12);
-            border-color: rgba(80, 140, 255, 0.15);
-            color: #c8ddff;
+            background: rgba(80, 140, 255, 0.08);
+            border-color: rgba(80, 140, 255, 0.08);
         }
         body.light-mode .channel-card .card-meta a {
             color: #3a6aaa;
         }
-
         .channel-card .badge {
             background: rgba(255, 255, 255, 0.03);
-            padding: 0.15rem 0.8rem;
+            padding: 0.1rem 0.7rem;
             border-radius: 40px;
-            font-size: 0.65rem;
-            color: #b0c8f0;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 0.6rem;
+            color: #8aa8c8;
+            border: 1px solid rgba(255, 255, 255, 0.03);
         }
         body.light-mode .channel-card .badge {
-            color: #3a5a7a;
+            color: #4a6a8a;
         }
 
         /* ===== الخدمات ===== */
         .services-list {
-            background: rgba(0, 0, 0, 0.12);
-            backdrop-filter: blur(8px);
-            border-radius: 32px;
-            padding: 1.5rem 1.8rem;
-            margin: 1.5rem 0;
+            background: rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(6px);
+            border-radius: 28px;
+            padding: 1.2rem 1.5rem;
+            margin: 1.2rem 0;
             border: 1px solid rgba(255, 255, 255, 0.03);
         }
         body.light-mode .services-list {
             background: rgba(0, 0, 0, 0.02);
         }
-
         .services-list ul {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 0.6rem 1.8rem;
+            gap: 0.4rem 1.5rem;
             list-style: none;
         }
-
         .services-list ul li {
-            color: #ccdefa;
-            font-size: 0.9rem;
+            color: #b8cce8;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
             gap: 8px;
         }
         .services-list ul li i {
-            color: #6fa3ff;
+            color: #7aa8ff;
         }
         body.light-mode .services-list ul li {
-            color: #2a3a5a;
+            color: #3a4a6a;
         }
 
-        /* ===== من نحن ===== */
+        /* ===== من نحن - دروس (تبويبات) ===== */
         .about-section {
             background: rgba(255, 255, 255, 0.02);
-            border-radius: 32px;
-            padding: 1.8rem 2rem;
-            margin: 1.8rem 0;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            text-align: center;
+            border-radius: 28px;
+            padding: 1.5rem 1.8rem;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.03);
         }
         body.light-mode .about-section {
             background: rgba(255, 255, 255, 0.05);
             border-color: rgba(0, 0, 0, 0.03);
         }
-
-        .about-section h2 {
-            color: #eaf1ff;
-            font-size: 1.6rem;
+        .about-section .tabs-header {
             display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 12px;
-            margin-bottom: 0.8rem;
+            gap: 0.5rem;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
         }
-        .about-section h2 i {
-            color: #6fa3ff;
+        .about-section .tab-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.02);
+            color: #a8bcd8;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.85rem;
+            font-weight: 500;
         }
-        body.light-mode .about-section h2 {
-            color: #1a2a4a;
+        .about-section .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+        .about-section .tab-btn.active {
+            background: rgba(70, 130, 255, 0.12);
+            border-color: rgba(70, 130, 255, 0.15);
+            color: #8ab0f0;
+        }
+        body.light-mode .about-section .tab-btn {
+            color: #3a4a6a;
+            border-color: rgba(0, 0, 0, 0.04);
+            background: rgba(0, 0, 0, 0.02);
+        }
+        body.light-mode .about-section .tab-btn.active {
+            background: rgba(60, 120, 255, 0.08);
+            border-color: rgba(60, 120, 255, 0.1);
+            color: #2a5a8a;
         }
 
-        .about-section p {
-            color: #b6c8e8;
-            font-size: 1rem;
+        .about-section .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .about-section .tab-content.active {
+            display: block;
+        }
+        .about-section .tab-content p {
+            color: #b8cce8;
+            font-size: 0.95rem;
             line-height: 1.8;
+            text-align: center;
             max-width: 800px;
             margin: 0 auto;
         }
-        body.light-mode .about-section p {
+        body.light-mode .about-section .tab-content p {
             color: #3a4a6a;
         }
-
-        .about-section .highlight-text {
-            color: #ffd966;
+        .about-section .tab-content .highlight-text {
+            color: #f0c850;
             font-weight: 600;
         }
-        body.light-mode .about-section .highlight-text {
-            color: #c9a030;
+        body.light-mode .about-section .tab-content .highlight-text {
+            color: #b89420;
         }
 
         /* ===== البوتات ===== */
         .bots-section {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.2rem;
-            margin: 1.5rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.2rem 0;
         }
-
         .bot-card {
             background: rgba(255, 255, 255, 0.03);
-            border-radius: 24px;
-            padding: 1.2rem 1rem;
+            border-radius: 20px;
+            padding: 1rem 0.8rem;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.03);
             transition: 0.3s;
         }
         .bot-card:hover {
-            background: rgba(255, 255, 255, 0.06);
-            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
         }
         body.light-mode .bot-card {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
             border-color: rgba(0, 0, 0, 0.03);
         }
-
         .bot-card i {
-            font-size: 2.2rem;
-            color: #6fa3ff;
-            margin-bottom: 0.4rem;
+            font-size: 2rem;
+            color: #7aa8ff;
+            margin-bottom: 0.3rem;
         }
         .bot-card .bot-name {
-            color: #eaf1ff;
-            font-size: 1.1rem;
+            color: #e8f0ff;
+            font-size: 1rem;
             font-weight: 600;
         }
         .bot-card .bot-username {
-            color: #8aafff;
-            font-size: 0.9rem;
+            color: #8ab0f0;
+            font-size: 0.85rem;
             direction: ltr;
             display: block;
-            margin: 0.2rem 0;
+            margin: 0.1rem 0;
         }
         .bot-card .bot-desc {
-            color: #b6c8e8;
-            font-size: 0.8rem;
-            opacity: 0.7;
+            color: #a8bcd8;
+            font-size: 0.75rem;
         }
         body.light-mode .bot-card .bot-name {
             color: #1a2a4a;
@@ -549,203 +557,234 @@
             color: #2a5a8a;
         }
         body.light-mode .bot-card .bot-desc {
-            color: #3a4a6a;
+            color: #4a5a7a;
         }
-
         .bot-card .bot-link {
             display: inline-block;
-            margin-top: 0.6rem;
-            padding: 0.3rem 1.2rem;
+            margin-top: 0.4rem;
+            padding: 0.2rem 1rem;
             border-radius: 60px;
-            background: rgba(80, 140, 255, 0.1);
-            color: #9bb9ff;
+            background: rgba(80, 140, 255, 0.06);
+            color: #8ab0f0;
             text-decoration: none;
-            font-size: 0.85rem;
-            border: 1px solid rgba(80, 140, 255, 0.1);
+            font-size: 0.8rem;
+            border: 1px solid rgba(80, 140, 255, 0.06);
             transition: 0.3s;
         }
         .bot-card .bot-link:hover {
-            background: rgba(80, 140, 255, 0.2);
-            border-color: rgba(80, 140, 255, 0.2);
+            background: rgba(80, 140, 255, 0.1);
         }
 
         /* ===== خدمات إضافية ===== */
         .extra-services {
-            background: rgba(0, 0, 0, 0.08);
-            border-radius: 32px;
-            padding: 1.5rem 1.8rem;
-            margin: 1.5rem 0;
+            background: rgba(0, 0, 0, 0.06);
+            border-radius: 28px;
+            padding: 1.2rem 1.5rem;
+            margin: 1.2rem 0;
             border: 1px solid rgba(255, 255, 255, 0.03);
             text-align: center;
         }
         body.light-mode .extra-services {
             background: rgba(0, 0, 0, 0.02);
         }
-
         .extra-services p {
-            color: #b6c8e8;
-            font-size: 1rem;
+            color: #b8cce8;
+            font-size: 0.95rem;
             line-height: 1.8;
         }
         body.light-mode .extra-services p {
             color: #3a4a6a;
         }
         .extra-services .highlight {
-            color: #ffd966;
+            color: #f0c850;
             font-weight: 600;
         }
 
         /* ===== التوثيق ===== */
         .pricing-section {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.8rem;
+            margin: 1.2rem 0;
         }
-
         .pricing-card {
             background: rgba(255, 255, 255, 0.03);
-            border-radius: 20px;
-            padding: 1.2rem 0.8rem;
+            border-radius: 18px;
+            padding: 1rem 0.6rem;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.03);
             transition: 0.3s;
         }
         .pricing-card:hover {
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.05);
             transform: scale(1.02);
         }
         body.light-mode .pricing-card {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.06);
             border-color: rgba(0, 0, 0, 0.03);
         }
-
         .pricing-card .period {
-            color: #b0c8f0;
-            font-size: 0.85rem;
+            color: #a8bcd8;
+            font-size: 0.8rem;
             font-weight: 500;
         }
         .pricing-card .price {
-            color: #ffd966;
-            font-size: 1.6rem;
+            color: #f0c850;
+            font-size: 1.4rem;
             font-weight: 700;
-            margin: 0.3rem 0;
+            margin: 0.2rem 0;
         }
         .pricing-card .price small {
-            font-size: 0.8rem;
-            opacity: 0.7;
+            font-size: 0.7rem;
+            opacity: 0.6;
         }
         .pricing-card .note {
-            color: #8aafff;
-            font-size: 0.75rem;
+            color: #8ab0f0;
+            font-size: 0.7rem;
         }
         body.light-mode .pricing-card .period {
-            color: #2a3a5a;
+            color: #3a4a6a;
         }
         body.light-mode .pricing-card .note {
-            color: #2a5a8a;
+            color: #3a6aaa;
         }
 
-        /* ===== قسم الدفع (باينس فقط) ===== */
+        /* ===== الدفع ===== */
         .payment-section {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            gap: 1.5rem;
-            margin: 1.5rem 0 1.2rem 0;
-            padding: 1.2rem 1.8rem;
-            background: rgba(0, 20, 60, 0.15);
-            backdrop-filter: blur(10px);
+            gap: 1.2rem;
+            margin: 1.2rem 0 1rem 0;
+            padding: 1rem 1.5rem;
+            background: rgba(0, 20, 60, 0.08);
+            backdrop-filter: blur(8px);
             border-radius: 60px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.03);
         }
         body.light-mode .payment-section {
-            background: rgba(200, 215, 240, 0.08);
+            background: rgba(200, 215, 240, 0.06);
             border-color: rgba(0, 0, 0, 0.03);
         }
-
         .payment-item {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             background: rgba(255, 255, 255, 0.03);
-            padding: 0.4rem 1.4rem 0.4rem 1rem;
+            padding: 0.3rem 1.2rem 0.3rem 0.8rem;
             border-radius: 60px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            color: #d6e5ff;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            color: #b8cce8;
             cursor: pointer;
             transition: 0.2s;
         }
         .payment-item:hover {
-            background: rgba(120, 180, 255, 0.08);
-            border-color: rgba(120, 180, 255, 0.15);
+            background: rgba(120, 180, 255, 0.04);
+            border-color: rgba(120, 180, 255, 0.06);
         }
         body.light-mode .payment-item {
-            color: #1a2a4a;
+            color: #2a3a5a;
             border-color: rgba(0, 0, 0, 0.03);
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.06);
         }
-
         .payment-item i {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             color: #f0b90b;
         }
         .payment-item .label {
             font-weight: 400;
-            opacity: 0.7;
+            opacity: 0.6;
+            font-size: 0.8rem;
         }
         .payment-item .value {
             font-weight: 600;
-            color: #f0f6ff;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 0.15rem 0.8rem;
+            color: #e8f0ff;
+            background: rgba(0, 0, 0, 0.15);
+            padding: 0.1rem 0.6rem;
             border-radius: 40px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             direction: ltr;
         }
         body.light-mode .payment-item .value {
             color: #1a2a4a;
-            background: rgba(0, 0, 0, 0.05);
+            background: rgba(0, 0, 0, 0.04);
         }
-
         .copy-btn {
             background: none;
             border: none;
-            color: #7dabff;
+            color: #7aa8ff;
             cursor: pointer;
-            font-size: 0.85rem;
-            padding: 0.1rem 0.4rem;
+            font-size: 0.8rem;
+            padding: 0.1rem 0.3rem;
             border-radius: 40px;
         }
         .copy-btn:hover {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
         }
 
-        /* ===== زر الدفع ===== */
         .pay-btn {
             background: linear-gradient(145deg, #f0b90b, #d69e0a);
             border: none;
-            padding: 0.9rem 3rem;
+            padding: 0.7rem 2.5rem;
             border-radius: 60px;
             color: #1a1a1a;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
             display: inline-flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             transition: 0.3s;
             cursor: pointer;
-            box-shadow: 0 8px 30px rgba(240, 185, 11, 0.2);
+            box-shadow: 0 8px 30px rgba(240, 185, 11, 0.15);
             text-decoration: none;
-            margin: 0.3rem 0;
+            margin: 0.2rem 0;
         }
         .pay-btn i {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
         }
         .pay-btn:hover {
-            transform: scale(1.04);
-            box-shadow: 0 12px 40px rgba(240, 185, 11, 0.35);
+            transform: scale(1.03);
+            box-shadow: 0 12px 40px rgba(240, 185, 11, 0.25);
+        }
+
+        /* ===== روابط المنصات ===== */
+        .platform-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin: 1.5rem 0 1rem 0;
+            flex-wrap: wrap;
+        }
+        .platform-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #a0b8d8;
+            text-decoration: none;
+            font-size: 0.85rem;
+            padding: 0.4rem 1.2rem;
+            border-radius: 60px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: 0.3s;
+        }
+        .platform-links a:hover {
+            background: rgba(255, 255, 255, 0.04);
+            transform: translateY(-2px);
+            color: #e8f0ff;
+        }
+        body.light-mode .platform-links a {
+            color: #3a4a6a;
+            border-color: rgba(0, 0, 0, 0.03);
+            background: rgba(0, 0, 0, 0.01);
+        }
+        body.light-mode .platform-links a:hover {
+            background: rgba(0, 0, 0, 0.02);
+            color: #1a2a4a;
+        }
+        .platform-links a i {
+            font-size: 1.2rem;
         }
 
         /* ===== الفوتر ===== */
@@ -754,11 +793,11 @@
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            margin-top: 2rem;
-            padding-top: 1.2rem;
+            margin-top: 1.8rem;
+            padding-top: 1rem;
             border-top: 1px solid rgba(255, 255, 255, 0.03);
-            color: #9bb0d0;
-            font-size: 0.85rem;
+            color: #8aa0c0;
+            font-size: 0.8rem;
         }
         .footer-contact .by {
             display: flex;
@@ -766,11 +805,11 @@
             gap: 8px;
         }
         .footer-contact .by i {
-            color: #6fa3ff;
+            color: #7aa8ff;
         }
         .footer-contact .copy {
-            opacity: 0.5;
-            font-size: 0.75rem;
+            opacity: 0.4;
+            font-size: 0.7rem;
         }
         body.light-mode .footer-contact {
             color: #4a5a7a;
@@ -779,183 +818,193 @@
 
         .notice {
             text-align: center;
-            margin: 1.2rem 0 0.2rem 0;
-            font-size: 0.8rem;
-            color: #b0c4e0;
-            background: rgba(255, 200, 50, 0.04);
-            padding: 0.5rem 1.2rem;
+            margin: 1rem 0 0.2rem 0;
+            font-size: 0.75rem;
+            color: #8aa0c0;
+            background: rgba(255, 200, 50, 0.03);
+            padding: 0.4rem 1rem;
             border-radius: 60px;
-            border: 1px solid rgba(255, 200, 50, 0.04);
+            border: 1px solid rgba(255, 200, 50, 0.03);
             display: inline-block;
             width: auto;
         }
         .notice i {
-            color: #ffd966;
+            color: #f0c850;
         }
         body.light-mode .notice {
-            color: #3a4a5a;
-            background: rgba(0, 0, 0, 0.02);
+            color: #4a5a6a;
+            background: rgba(0, 0, 0, 0.01);
         }
 
-        /* ===== مشغل الموسيقى ===== */
+        /* ===== مشغل الموسيقى (مُصلح) ===== */
         .music-player {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: rgba(10, 15, 30, 0.85);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-            padding: 0.8rem 1.5rem;
+            background: rgba(8, 12, 28, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 0.6rem 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 1rem;
+            gap: 0.8rem;
             flex-wrap: wrap;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
             z-index: 999;
         }
         body.light-mode .music-player {
-            background: rgba(230, 235, 245, 0.9);
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            background: rgba(230, 235, 245, 0.92);
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
         }
-
-        .music-player .player-controls {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
         .music-player button {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            color: #b0c8f0;
-            width: 36px;
-            height: 36px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            color: #a0b8d8;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             cursor: pointer;
             transition: 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
         .music-player button:hover {
-            background: rgba(80, 140, 255, 0.15);
-            border-color: rgba(80, 140, 255, 0.15);
-            color: #fff;
+            background: rgba(80, 140, 255, 0.08);
+            border-color: rgba(80, 140, 255, 0.08);
+            color: #e8f0ff;
         }
         body.light-mode .music-player button {
-            color: #2c3e50;
-            border-color: rgba(0, 0, 0, 0.05);
+            color: #3a4a6a;
+            border-color: rgba(0, 0, 0, 0.04);
             background: rgba(0, 0, 0, 0.02);
         }
         body.light-mode .music-player button:hover {
-            background: rgba(0, 0, 0, 0.05);
+            background: rgba(0, 0, 0, 0.04);
         }
-
+        .music-player .track-info {
+            color: #a0b8d8;
+            font-size: 0.75rem;
+            min-width: 80px;
+            text-align: center;
+        }
+        body.light-mode .music-player .track-info {
+            color: #3a4a6a;
+        }
         .music-player .volume-slider {
-            width: 80px;
-            height: 4px;
+            width: 60px;
+            height: 3px;
             -webkit-appearance: none;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 4px;
             outline: none;
         }
         .music-player .volume-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            background: #6fa3ff;
+            background: #7aa8ff;
             cursor: pointer;
         }
         body.light-mode .music-player .volume-slider {
-            background: rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.06);
         }
-
-        .music-player .track-info {
-            color: #b0c8f0;
-            font-size: 0.8rem;
-            opacity: 0.6;
-            min-width: 100px;
-            text-align: center;
-        }
-        body.light-mode .music-player .track-info {
-            color: #2c3e50;
-        }
-
         .music-player .time-display {
-            color: #b0c8f0;
-            font-size: 0.75rem;
-            opacity: 0.5;
-            min-width: 80px;
+            color: #7a90b0;
+            font-size: 0.65rem;
+            min-width: 60px;
             text-align: center;
             direction: ltr;
         }
         body.light-mode .music-player .time-display {
-            color: #2c3e50;
+            color: #4a5a7a;
         }
-
         .music-player .progress-bar {
             flex: 1;
-            min-width: 120px;
-            max-width: 300px;
-            height: 4px;
+            min-width: 80px;
+            max-width: 200px;
+            height: 3px;
             -webkit-appearance: none;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.06);
             border-radius: 4px;
             outline: none;
         }
         .music-player .progress-bar::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            background: #6fa3ff;
+            background: #7aa8ff;
             cursor: pointer;
         }
         body.light-mode .music-player .progress-bar {
-            background: rgba(0, 0, 0, 0.08);
+            background: rgba(0, 0, 0, 0.04);
+        }
+        .music-player .player-icon {
+            color: #f0b90b;
+            font-size: 1rem;
         }
 
-        .music-player .player-icon {
-            font-size: 1.2rem;
-            color: #f0b90b;
+        /* ===== زر الشاشة الكاملة ===== */
+        .fullscreen-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            color: #a0b8d8;
+            padding: 0.35rem 0.8rem;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+        .fullscreen-btn:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+        body.light-mode .fullscreen-btn {
+            color: #3a4a6a;
+            border-color: rgba(0, 0, 0, 0.04);
+            background: rgba(0, 0, 0, 0.02);
+        }
+        body.light-mode .fullscreen-btn:hover {
+            background: rgba(0, 0, 0, 0.03);
         }
 
         /* ===== استجابة ===== */
         @media (max-width: 700px) {
             .glass-card {
-                padding: 1.5rem 1rem 7rem 1rem;
+                padding: 1.5rem 1rem 6rem 1rem;
                 border-radius: 28px;
             }
             .brand h1 {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
             }
             .header-actions {
                 width: 100%;
                 justify-content: center;
                 margin-top: 0.3rem;
+                gap: 6px;
             }
             .music-player {
-                padding: 0.5rem 0.8rem;
-                gap: 0.5rem;
+                padding: 0.4rem 0.8rem;
+                gap: 0.4rem;
             }
             .music-player .progress-bar {
-                min-width: 60px;
-                max-width: 120px;
+                min-width: 50px;
+                max-width: 80px;
             }
             .music-player .volume-slider {
-                width: 50px;
+                width: 40px;
             }
             .music-player .track-info {
-                min-width: 60px;
-                font-size: 0.7rem;
-            }
-            .music-player .time-display {
                 min-width: 50px;
                 font-size: 0.65rem;
+            }
+            .music-player .time-display {
+                min-width: 40px;
+                font-size: 0.6rem;
             }
             .pricing-section {
                 grid-template-columns: 1fr 1fr;
@@ -964,7 +1013,7 @@
                 flex-direction: column;
                 align-items: stretch;
                 border-radius: 32px;
-                padding: 1rem;
+                padding: 0.8rem;
             }
             .payment-item {
                 justify-content: center;
@@ -972,32 +1021,47 @@
             .pay-btn {
                 width: 100%;
                 justify-content: center;
-                padding: 0.7rem 1.5rem;
-                font-size: 1rem;
+                padding: 0.6rem 1.2rem;
+                font-size: 0.95rem;
             }
             .dropdown-content {
                 left: auto;
                 right: 0;
-                min-width: 180px;
+                min-width: 170px;
+            }
+            .about-section .tabs-header {
+                gap: 0.3rem;
+            }
+            .about-section .tab-btn {
+                padding: 0.3rem 1rem;
+                font-size: 0.75rem;
+            }
+            .platform-links a {
+                padding: 0.3rem 0.8rem;
+                font-size: 0.75rem;
+            }
+            .platform-links a .link-label {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== مشغل الموسيقى (أسفل الصفحة) ===== -->
+    <!-- ===== خلفية الجسيمات ===== -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- ===== مشغل الموسيقى (مُصلح) ===== -->
     <div class="music-player" id="musicPlayer">
-        <div class="player-controls">
-            <button onclick="togglePlay()" id="playBtn" title="تشغيل/إيقاف">
-                <i class="fas fa-play" id="playIcon"></i>
-            </button>
-            <button onclick="prevTrack()" title="السابق">
-                <i class="fas fa-backward"></i>
-            </button>
-            <button onclick="nextTrack()" title="التالي">
-                <i class="fas fa-forward"></i>
-            </button>
-        </div>
+        <button onclick="togglePlay()" id="playBtn" title="تشغيل/إيقاف">
+            <i class="fas fa-play" id="playIcon"></i>
+        </button>
+        <button onclick="prevTrack()" title="السابق">
+            <i class="fas fa-backward"></i>
+        </button>
+        <button onclick="nextTrack()" title="التالي">
+            <i class="fas fa-forward"></i>
+        </button>
 
         <div class="track-info" id="trackInfo">🌙 ليلة هادئة</div>
 
@@ -1005,17 +1069,12 @@
 
         <div class="time-display" id="timeDisplay">00:00 / 00:00</div>
 
-        <div class="player-controls">
-            <button onclick="toggleMute()" title="كتم الصوت">
-                <i class="fas fa-volume-up" id="volumeIcon"></i>
-            </button>
-            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="70" oninput="changeVolume(this.value)" />
-        </div>
+        <button onclick="toggleMute()" title="كتم الصوت">
+            <i class="fas fa-volume-up" id="volumeIcon"></i>
+        </button>
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="60" oninput="changeVolume(this.value)" />
 
-        <div style="display:flex; align-items:center; gap:4px; color:#f0b90b;">
-            <i class="fas fa-music"></i>
-            <span style="font-size:0.7rem; opacity:0.5;">Py Hub</span>
-        </div>
+        <span class="player-icon"><i class="fas fa-music"></i></span>
     </div>
 
     <!-- ===== الحاوية الزجاجية ===== -->
@@ -1023,7 +1082,7 @@
 
         <!-- شريط إعلانات -->
         <div class="marquee-bar">
-            <marquee behavior="scroll" direction="right" scrollamount="4">
+            <marquee behavior="scroll" direction="right" scrollamount="3">
                 🚀 Py Hub | خبرة من 2015 حتى الآن | ننفذ أي كود أو بوت أو موقع 🌟
                 &nbsp;&nbsp;|&nbsp;&nbsp; 💰 توثيق 3 شهور ب 550ج | 6 شهور ب 750ج | سنة ب 1400ج
                 &nbsp;&nbsp;|&nbsp;&nbsp; 📢 @Bi1ieBot | @StrngGenBot
@@ -1035,8 +1094,8 @@
             <div class="brand">
                 <i class="fab fa-python"></i>
                 <div>
-                    <h1>Py Hub</h1>
-                    <small>منصة البرمجيات والتطوير</small>
+                    <h1 id="brandTitle">Py Hub</h1>
+                    <small id="brandSub">منصة البرمجيات والتطوير</small>
                 </div>
             </div>
             <div class="header-actions">
@@ -1061,11 +1120,19 @@
                             <i class="fas fa-moon" id="themeIcon"></i> <span id="themeLabel">الوضع الليلي</span>
                         </button>
                         <div class="dropdown-divider"></div>
+                        <button class="dropdown-item" onclick="toggleFullscreen()">
+                            <i class="fas fa-expand"></i> <span id="fullscreenLabel">شاشة كاملة</span>
+                        </button>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="https://t.me/CyberNinjja" target="_blank">
                             <i class="fas fa-headset"></i> الدعم الفني
                         </a>
                     </div>
                 </div>
+
+                <button class="fullscreen-btn" onclick="toggleFullscreen()" title="شاشة كاملة">
+                    <i class="fas fa-expand"></i>
+                </button>
 
                 <div class="license-tag">
                     <i class="fas fa-crown"></i> @TopVeGa
@@ -1074,99 +1141,121 @@
         </div>
 
         <!-- أزرار التنقل -->
-        <div class="nav-links">
-            <span class="nav-btn"><i class="fas fa-code"></i> الأكواد</span>
-            <span class="nav-btn"><i class="fas fa-tools"></i> الأدوات</span>
-            <span class="nav-btn"><i class="fas fa-terminal"></i> سكربتات</span>
-            <span class="nav-btn"><i class="fas fa-robot"></i> بوتات</span>
+        <div class="nav-links" id="navLinks">
+            <span class="nav-btn"><i class="fas fa-code"></i> <span data-key="navCodes">الأكواد</span></span>
+            <span class="nav-btn"><i class="fas fa-tools"></i> <span data-key="navTools">الأدوات</span></span>
+            <span class="nav-btn"><i class="fas fa-terminal"></i> <span data-key="navScripts">سكربتات</span></span>
+            <span class="nav-btn"><i class="fas fa-robot"></i> <span data-key="navBots">بوتات</span></span>
         </div>
 
         <!-- بطاقات القنوات -->
-        <div class="channels-grid">
+        <div class="channels-grid" data-aos="fade-up">
             <div class="channel-card">
-                <div class="card-title"><i class="fab fa-python"></i> قناة بايثون</div>
-                <div class="card-desc">محتوى برمجي، أكواد، ومشاريع بايثون متطورة.</div>
+                <div class="card-title"><i class="fab fa-python"></i> <span data-key="channel1Title">قناة بايثون</span></div>
+                <div class="card-desc" data-key="channel1Desc">محتوى برمجي، أكواد، ومشاريع بايثون متطورة.</div>
                 <div class="card-meta">
-                    <a href="https://t.me/python2015" target="_blank"><i class="fab fa-telegram-plane"></i> انضم</a>
-                    <span class="badge"><i class="far fa-clock"></i> نشطة</span>
+                    <a href="https://t.me/python2015" target="_blank"><i class="fab fa-telegram-plane"></i> <span data-key="join">انضم</span></a>
+                    <span class="badge"><i class="far fa-clock"></i> <span data-key="active">نشطة</span></span>
                 </div>
             </div>
 
             <div class="channel-card">
-                <div class="card-title"><i class="fas fa-music"></i> سورس ميوزك فيجا</div>
-                <div class="card-desc">مستوحى من بوتات الموسيقى • مفتوحة المصدر على تيليجرام</div>
+                <div class="card-title"><i class="fas fa-music"></i> <span data-key="channel2Title">سورس ميوزك فيجا</span></div>
+                <div class="card-desc" data-key="channel2Desc">مستوحى من بوتات الموسيقى • مفتوحة المصدر على تيليجرام</div>
                 <div class="card-meta">
-                    <a href="https://t.me/vegaone" target="_blank"><i class="fab fa-telegram-plane"></i> انضم</a>
+                    <a href="https://t.me/vegaone" target="_blank"><i class="fab fa-telegram-plane"></i> <span data-key="join">انضم</span></a>
                     <span class="badge"><i class="fas fa-code-branch"></i> @TopVeGa</span>
                 </div>
             </div>
 
             <div class="channel-card">
-                <div class="card-title"><i class="fas fa-shield-alt"></i> قناة ترمكس</div>
-                <div class="card-desc">أدوات حماية، تليثون، نقل أعضاء، ومزادات.</div>
+                <div class="card-title"><i class="fas fa-shield-alt"></i> <span data-key="channel3Title">قناة ترمكس</span></div>
+                <div class="card-desc" data-key="channel3Desc">أدوات حماية، تليثون، نقل أعضاء، ومزادات.</div>
                 <div class="card-meta">
-                    <a href="https://t.me/ToolsTermex" target="_blank"><i class="fab fa-telegram-plane"></i> انضم</a>
-                    <span class="badge"><i class="fas fa-lock"></i> حماية</span>
+                    <a href="https://t.me/ToolsTermex" target="_blank"><i class="fab fa-telegram-plane"></i> <span data-key="join">انضم</span></a>
+                    <span class="badge"><i class="fas fa-lock"></i> <span data-key="protection">حماية</span></span>
                 </div>
             </div>
         </div>
 
         <!-- الخدمات -->
-        <div class="services-list">
+        <div class="services-list" data-aos="fade-up" data-aos-delay="100">
             <ul>
-                <li><i class="fas fa-terminal"></i> أكواد بجميع اللغات</li>
-                <li><i class="fas fa-file-audio"></i> مصانع ميوزك</li>
-                <li><i class="fas fa-shield-virus"></i> مصانع حماية</li>
-                <li><i class="fab fa-telegram"></i> مصانع تليثون</li>
-                <li><i class="fas fa-user-friends"></i> نقل أعضاء (مخفي/ظهار)</li>
-                <li><i class="fas fa-bolt"></i> ملفات شد</li>
-                <li><i class="fas fa-upload"></i> نشر تلقائي بمميزات</li>
-                <li><i class="fas fa-gavel"></i> مزاد للسوبرات</li>
-                <li><i class="fas fa-file-code"></i> lua & php حماية</li>
-                <li><i class="fas fa-bug"></i> حل جميع الأخطاء</li>
+                <li><i class="fas fa-terminal"></i> <span data-key="s1">أكواد بجميع اللغات</span></li>
+                <li><i class="fas fa-file-audio"></i> <span data-key="s2">مصانع ميوزك</span></li>
+                <li><i class="fas fa-shield-virus"></i> <span data-key="s3">مصانع حماية</span></li>
+                <li><i class="fab fa-telegram"></i> <span data-key="s4">مصانع تليثون</span></li>
+                <li><i class="fas fa-user-friends"></i> <span data-key="s5">نقل أعضاء (مخفي/ظهار)</span></li>
+                <li><i class="fas fa-bolt"></i> <span data-key="s6">ملفات شد</span></li>
+                <li><i class="fas fa-upload"></i> <span data-key="s7">نشر تلقائي بمميزات</span></li>
+                <li><i class="fas fa-gavel"></i> <span data-key="s8">مزاد للسوبرات</span></li>
+                <li><i class="fas fa-file-code"></i> <span data-key="s9">lua & php حماية</span></li>
+                <li><i class="fas fa-bug"></i> <span data-key="s10">حل جميع الأخطاء</span></li>
             </ul>
         </div>
 
-        <!-- ===== من نحن ===== -->
-        <div class="about-section">
-            <h2><i class="fas fa-info-circle"></i> من نحن</h2>
-            <p>
-                <span class="highlight-text">نحن خبرة واسعة من 2015 حتى الآن</span> في مجال البرمجة وتطوير الأنظمة.
-                نقدم حلولاً برمجية متكاملة تشمل <span class="highlight-text">الأكواد، الأدوات، السكربتات، البوتات،
-                والمواقع</span> بجميع لغات البرمجة.
-                <br /><br />
-                ننفذ أي طلب برمجي مهما كان حجمه، من <span class="highlight-text">بوتات تيليجرام</span> إلى
-                <span class="highlight-text">أنظمة حماية متطورة</span> و <span class="highlight-text">منصات كاملة</span>.
-                نضع بين يديك كل ما تحتاجه في عالم التطوير، مع <span class="highlight-text">أسعار رمزية</span> وجودة لا تضاهى.
-                <br /><br />
-                فريقنا متخصص في <span class="highlight-text">بايثون، جافا سكريبت، PHP، Lua، HTML/CSS</span> وجميع
-                تقنيات الويب والتطبيقات. نضمن لك <span class="highlight-text">تسليم سريع</span> و <span class="highlight-text">دعم فني مستمر</span>.
-            </p>
+        <!-- ===== من نحن - دروس (تبويبات) ===== -->
+        <div class="about-section" data-aos="fade-up" data-aos-delay="150">
+            <div class="tabs-header">
+                <button class="tab-btn active" onclick="switchTab(event, 'tab1')" data-key="tabAbout">📖 من نحن</button>
+                <button class="tab-btn" onclick="switchTab(event, 'tab2')" data-key="tabServices">🛠 خدماتنا</button>
+                <button class="tab-btn" onclick="switchTab(event, 'tab3')" data-key="tabVision">🌟 رؤيتنا</button>
+            </div>
+
+            <div class="tab-content active" id="tab1">
+                <p>
+                    <span class="highlight-text">نحن خبرة واسعة من 2015 حتى الآن</span> في عالم البرمجة وتطوير الأنظمة.
+                    نقدم حلولاً برمجية متكاملة تشمل الأكواد، الأدوات، السكربتات، البوتات، والمواقع بجميع لغات البرمجة.
+                    <br /><br />
+                    فريقنا متخصص في <span class="highlight-text">بايثون، جافا سكريبت، PHP، Lua، HTML/CSS</span>
+                    وجميع تقنيات الويب والتطبيقات.
+                </p>
+            </div>
+
+            <div class="tab-content" id="tab2">
+                <p>
+                    ننفذ أي طلب برمجي مهما كان حجمه، من <span class="highlight-text">بوتات تيليجرام</span> إلى
+                    <span class="highlight-text">أنظمة حماية متطورة</span> و <span class="highlight-text">منصات كاملة</span>.
+                    <br /><br />
+                    نضع بين يديك كل ما تحتاجه في عالم التطوير، مع <span class="highlight-text">أسعار رمزية</span>
+                    وجودة لا تضاهى. نضمن لك <span class="highlight-text">تسليم سريع</span> و <span class="highlight-text">دعم فني مستمر</span>.
+                </p>
+            </div>
+
+            <div class="tab-content" id="tab3">
+                <p>
+                    <span class="highlight-text">رؤيتنا</span> هي أن نكون المنصة الأولى في العالم العربي لتقديم
+                    الحلول البرمجية المتكاملة. نسعى لتمكين المطورين والشركات من تحقيق أهدافهم التقنية.
+                    <br /><br />
+                    نؤمن بأن <span class="highlight-text">البرمجيات الجيدة</span> هي أساس النجاح في العصر الرقمي،
+                    ونسعى دائماً لتقديم الأفضل لعملائنا.
+                </p>
+            </div>
         </div>
 
         <!-- ===== بوتاتنا ===== -->
-        <h3 style="color:#eaf1ff; margin:1.5rem 0 0.8rem 0; display:flex; align-items:center; gap:10px;">
-            <i class="fas fa-robot" style="color:#6fa3ff;"></i> بوتاتنا
+        <h3 style="color:#e8f0ff; margin:1.2rem 0 0.6rem 0; display:flex; align-items:center; gap:10px; font-weight:600; font-size:1.1rem;">
+            <i class="fas fa-robot" style="color:#7aa8ff;"></i> <span data-key="botsTitle">بوتاتنا</span>
         </h3>
-        <div class="bots-section">
+        <div class="bots-section" data-aos="fade-up" data-aos-delay="200">
             <div class="bot-card">
                 <i class="fas fa-music"></i>
                 <div class="bot-name">بوت بيري للأغاني</div>
                 <div class="bot-username">@Bi1ieBot</div>
-                <div class="bot-desc">بوت استماع وتحميل الأغاني من يوتيوب</div>
+                <div class="bot-desc">بوت استماع وتحميل الأغاني</div>
                 <a href="https://t.me/Bi1ieBot" target="_blank" class="bot-link"><i class="fab fa-telegram"></i> افتح البوت</a>
             </div>
             <div class="bot-card">
                 <i class="fas fa-key"></i>
                 <div class="bot-name">بوت استخراج جلسات</div>
                 <div class="bot-username">@StrngGenBot</div>
-                <div class="bot-desc">استخراج جلسات بايروجرام وتيليثون بسهولة</div>
+                <div class="bot-desc">استخراج جلسات بايروجرام</div>
                 <a href="https://t.me/StrngGenBot" target="_blank" class="bot-link"><i class="fab fa-telegram"></i> افتح البوت</a>
             </div>
         </div>
 
         <!-- ===== خدمات إضافية ===== -->
-        <div class="extra-services">
+        <div class="extra-services" data-aos="fade-up" data-aos-delay="250">
             <p>
                 <span class="highlight">⭐ متواجد لتنفيذ أي موقع</span> (برفعهولك استضافه بدومين انت تحدده)
                 <br />
@@ -1174,38 +1263,38 @@
                 <br />
                 <span class="highlight">⭐ متوفر كل شئ في التليجرام</span>
                 <br />
-                <span style="color:#ffd966;">اطلب اللي محتاجه وانتظر الرد ⭐</span>
+                <span style="color:#f0c850;">اطلب اللي محتاجه وانتظر الرد ⭐</span>
             </p>
         </div>
 
         <!-- ===== التوثيق ===== -->
-        <h3 style="color:#eaf1ff; margin:1.5rem 0 0.8rem 0; display:flex; align-items:center; gap:10px;">
-            <i class="fas fa-certificate" style="color:#f0b90b;"></i> توثيق منصة Fragment
+        <h3 style="color:#e8f0ff; margin:1.2rem 0 0.6rem 0; display:flex; align-items:center; gap:10px; font-weight:600; font-size:1.1rem;">
+            <i class="fas fa-certificate" style="color:#f0b90b;"></i> <span data-key="pricingTitle">توثيق منصة Fragment</span>
         </h3>
-        <div class="pricing-section">
+        <div class="pricing-section" data-aos="fade-up" data-aos-delay="300">
             <div class="pricing-card">
                 <div class="period">📅 3 شهور</div>
                 <div class="price">550ج <small>🇪🇬</small></div>
                 <div class="note">🎁 توثيق شرعي</div>
             </div>
-            <div class="pricing-card" style="border-color:rgba(240,185,11,0.2);">
+            <div class="pricing-card" style="border-color:rgba(240,185,11,0.15);">
                 <div class="period">📅 6 شهور</div>
                 <div class="price">750ج <small>🇪🇬</small></div>
                 <div class="note">🎁 توثيق شرعي</div>
             </div>
-            <div class="pricing-card" style="border-color:rgba(240,185,11,0.3);">
+            <div class="pricing-card" style="border-color:rgba(240,185,11,0.2);">
                 <div class="period">📅 سنة كاملة</div>
                 <div class="price">1400ج <small>🇪🇬</small></div>
                 <div class="note">🎁 توثيق شرعي</div>
             </div>
         </div>
 
-        <div style="text-align:center; color:#8aafff; font-size:0.85rem; margin:0.5rem 0 1.5rem 0;">
-            <i class="fas fa-shield-alt"></i> ضمان كامل فترته ✅
+        <div style="text-align:center; color:#8ab0f0; font-size:0.8rem; margin:0.3rem 0 1.2rem 0;">
+            <i class="fas fa-shield-alt"></i> <span data-key="guarantee">ضمان كامل فترته ✅</span>
         </div>
 
-        <!-- ===== قسم الدفع (باينس فقط) ===== -->
-        <div class="payment-section">
+        <!-- ===== الدفع ===== -->
+        <div class="payment-section" data-aos="fade-up" data-aos-delay="350">
             <div class="payment-item" onclick="copyText('0x...')">
                 <i class="fab fa-bitcoin"></i>
                 <span class="label">Binance Pay</span>
@@ -1214,15 +1303,39 @@
                     <i class="fas fa-copy"></i>
                 </button>
             </div>
-            <div style="color:#b0c8f0; font-size:0.8rem; opacity:0.5;">
-                <i class="fas fa-lock"></i> دفع آمن عبر باينس
+            <div style="color:#a0b8d8; font-size:0.7rem; opacity:0.4;">
+                <i class="fas fa-lock"></i> <span data-key="securePay">دفع آمن عبر باينس</span>
             </div>
         </div>
 
         <!-- زر الدفع -->
-        <div style="display: flex; justify-content: center;">
+        <div style="display: flex; justify-content: center;" data-aos="fade-up" data-aos-delay="400">
             <a href="#" class="pay-btn" onclick="alert('🔗 جاري التوجيه إلى بوابة Binance Pay...')">
-                <i class="fab fa-bitcoin"></i> الدفع عبر Binance
+                <i class="fab fa-bitcoin"></i> <span data-key="payBtn">الدفع عبر Binance</span>
+            </a>
+        </div>
+
+        <!-- ===== روابط المنصات (رقم 17) ===== -->
+        <div class="platform-links" data-aos="fade-up" data-aos-delay="450">
+            <a href="https://github.com/TOPVEGA" target="_blank">
+                <i class="fab fa-github"></i>
+                <span class="link-label">GitHub</span>
+            </a>
+            <a href="https://t.me/topvega" target="_blank">
+                <i class="fab fa-telegram"></i>
+                <span class="link-label"><span data-key="founder">المؤسس</span></span>
+            </a>
+            <a href="https://t.me/CyberNinjja" target="_blank">
+                <i class="fas fa-headset"></i>
+                <span class="link-label"><span data-key="support">الدعم</span></span>
+            </a>
+            <a href="https://www.youtube.com/@Pythnhub" target="_blank">
+                <i class="fab fa-youtube"></i>
+                <span class="link-label"><span data-key="youtube">يوتيوب</span></span>
+            </a>
+            <a href="https://www.instagram.com/kamalxblack" target="_blank">
+                <i class="fab fa-instagram"></i>
+                <span class="link-label">Instagram</span>
             </a>
         </div>
 
@@ -1232,26 +1345,102 @@
                 <i class="fas fa-at"></i> By: <strong style="color:#c8ddff;">@TopVeGa</strong>
             </div>
             <div class="copy">
-                <i class="fas fa-code"></i> حرية تعديل و نشر <i class="far fa-copyright"></i> 2015
+                <i class="fas fa-code"></i> <span data-key="footerRights">حرية تعديل و نشر</span> <i class="far fa-copyright"></i> 2015
             </div>
         </div>
 
         <!-- تنويه -->
         <div style="display: flex; justify-content: center;">
             <span class="notice">
-                <i class="fas fa-exclamation-triangle"></i> تنويه_هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك
+                <i class="fas fa-exclamation-triangle"></i> <span data-key="notice">تنويه_هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك</span>
             </span>
         </div>
 
-        <div style="text-align: center; margin-top: 1rem; color: rgba(200, 215, 240, 0.2); font-size: 0.7rem; letter-spacing: 1px;">
+        <div style="text-align: center; margin-top: 0.8rem; color: rgba(200, 215, 240, 0.15); font-size: 0.65rem; letter-spacing: 1px;">
             السلام علي من اتبع الهدى
         </div>
 
     </div>
 
-    <!-- ===== JavaScript ===== -->
+    <!-- ===== مكتبة AOS ===== -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
     <script>
-        // ===== مشغل الموسيقى =====
+        // ===== تهيئة AOS للتأثيرات الحركية =====
+        AOS.init({
+            duration: 800,
+            once: true,
+            easing: 'ease-out'
+        });
+
+        // ===== خلفية الجسيمات =====
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 0.5) * 0.3;
+                this.opacity = Math.random() * 0.4 + 0.1;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > width || this.x < 0) this.speedX *= -1;
+                if (this.y > height || this.y < 0) this.speedY *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(120, 180, 255, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 60; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            // رسم خطوط بين الجسيمات المتقاربة
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 150) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(120, 180, 255, ${0.06 * (1 - dist / 150)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // ===== مشغل الموسيقى (مُصلح) =====
+        // استخدام مسارات موسيقية تعمل فعلاً
         const tracks = [
             { name: '🌙 ليلة هادئة', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3' },
             { name: '🎹 بيانو هادئ', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3' },
@@ -1263,7 +1452,7 @@
         let isMuted = false;
         let audio = new Audio(tracks[0].url);
         audio.loop = false;
-        audio.volume = 0.7;
+        audio.volume = 0.6;
 
         const playBtn = document.getElementById('playBtn');
         const playIcon = document.getElementById('playIcon');
@@ -1273,84 +1462,71 @@
         const volumeSlider = document.getElementById('volumeSlider');
         const volumeIcon = document.getElementById('volumeIcon');
 
-        // تحميل المسار
         function loadTrack(index) {
             audio.src = tracks[index].url;
             trackInfo.textContent = tracks[index].name;
             audio.load();
-            if (isPlaying) {
-                audio.play();
-            }
             progressBar.value = 0;
             timeDisplay.textContent = '00:00 / 00:00';
+            if (isPlaying) {
+                audio.play().catch(e => console.log('Audio play error:', e));
+            }
         }
 
-        // تشغيل/إيقاف
         function togglePlay() {
             if (isPlaying) {
                 audio.pause();
                 playIcon.className = 'fas fa-play';
                 isPlaying = false;
             } else {
-                audio.play();
+                audio.play().catch(e => console.log('Audio play error:', e));
                 playIcon.className = 'fas fa-pause';
                 isPlaying = true;
             }
         }
 
-        // التالي
         function nextTrack() {
             currentTrack = (currentTrack + 1) % tracks.length;
             loadTrack(currentTrack);
             if (isPlaying) {
-                audio.play();
+                audio.play().catch(e => console.log('Audio play error:', e));
             }
         }
 
-        // السابق
         function prevTrack() {
             currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
             loadTrack(currentTrack);
             if (isPlaying) {
-                audio.play();
+                audio.play().catch(e => console.log('Audio play error:', e));
             }
         }
 
-        // تحديث شريط التقدم
         audio.addEventListener('timeupdate', () => {
-            if (audio.duration) {
+            if (audio.duration && !isNaN(audio.duration)) {
                 const percent = (audio.currentTime / audio.duration) * 100;
                 progressBar.value = percent;
-                const current = formatTime(audio.currentTime);
-                const total = formatTime(audio.duration);
-                timeDisplay.textContent = `${current} / ${total}`;
+                timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
             }
         });
 
         function formatTime(seconds) {
+            if (isNaN(seconds)) return '00:00';
             const m = Math.floor(seconds / 60);
             const s = Math.floor(seconds % 60);
             return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
         }
 
-        // السحب على شريط التقدم
         function seekTrack(value) {
-            if (audio.duration) {
+            if (audio.duration && !isNaN(audio.duration)) {
                 audio.currentTime = (value / 100) * audio.duration;
             }
         }
 
-        // تغيير مستوى الصوت
         function changeVolume(value) {
             audio.volume = value / 100;
-            if (value == 0) {
-                volumeIcon.className = 'fas fa-volume-mute';
-            } else {
-                volumeIcon.className = 'fas fa-volume-up';
-            }
+            volumeIcon.className = value == 0 ? 'fas fa-volume-mute' : 'fas fa-volume-up';
         }
 
-        // كتم الصوت
         function toggleMute() {
             isMuted = !isMuted;
             if (isMuted) {
@@ -1358,22 +1534,39 @@
                 volumeSlider.value = 0;
                 volumeIcon.className = 'fas fa-volume-mute';
             } else {
-                audio.volume = 0.7;
-                volumeSlider.value = 70;
+                audio.volume = 0.6;
+                volumeSlider.value = 60;
                 volumeIcon.className = 'fas fa-volume-up';
             }
         }
 
-        // عند انتهاء الأغنية، انتقل إلى التالية
         audio.addEventListener('ended', () => {
             nextTrack();
         });
+
+        // محاولة تشغيل تلقائي (مع التعامل مع قيود المتصفحات)
+        document.addEventListener('click', function autoPlay() {
+            if (!isPlaying) {
+                audio.play().catch(e => {});
+                isPlaying = true;
+                playIcon.className = 'fas fa-pause';
+            }
+            document.removeEventListener('click', autoPlay);
+        });
+
+        // ===== تبديل التبويبات =====
+        function switchTab(event, tabId) {
+            const container = event.target.closest('.about-section');
+            container.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            container.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
 
         // ===== القائمة المنسدلة =====
         function toggleDropdown() {
             document.getElementById('dropdownMenu').classList.toggle('show');
         }
-
         document.addEventListener('click', function(event) {
             const dropdown = document.querySelector('.settings-dropdown');
             if (!dropdown.contains(event.target)) {
@@ -1395,6 +1588,15 @@
             }
         }
 
+        // ===== الشاشة الكاملة =====
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(e => {});
+            } else {
+                document.exitFullscreen().catch(e => {});
+            }
+        }
+
         // ===== تغيير اللغة =====
         const translations = {
             ar: {
@@ -1412,7 +1614,30 @@
                 channel3Desc: 'أدوات حماية، تليثون، نقل أعضاء، ومزادات.',
                 join: 'انضم',
                 active: 'نشطة',
-                protection: 'حماية'
+                protection: 'حماية',
+                s1: 'أكواد بجميع اللغات',
+                s2: 'مصانع ميوزك',
+                s3: 'مصانع حماية',
+                s4: 'مصانع تليثون',
+                s5: 'نقل أعضاء (مخفي/ظهار)',
+                s6: 'ملفات شد',
+                s7: 'نشر تلقائي بمميزات',
+                s8: 'مزاد للسوبرات',
+                s9: 'lua & php حماية',
+                s10: 'حل جميع الأخطاء',
+                tabAbout: '📖 من نحن',
+                tabServices: '🛠 خدماتنا',
+                tabVision: '🌟 رؤيتنا',
+                botsTitle: 'بوتاتنا',
+                pricingTitle: 'توثيق منصة Fragment',
+                guarantee: 'ضمان كامل فترته ✅',
+                securePay: 'دفع آمن عبر باينس',
+                payBtn: 'الدفع عبر Binance',
+                founder: 'المؤسس',
+                support: 'الدعم',
+                youtube: 'يوتيوب',
+                footerRights: 'حرية تعديل و نشر',
+                notice: 'تنويه_هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك'
             },
             en: {
                 brandTitle: 'Py Hub',
@@ -1429,7 +1654,30 @@
                 channel3Desc: 'Protection tools, Telethon, member transfer, and auctions.',
                 join: 'Join',
                 active: 'Active',
-                protection: 'Protection'
+                protection: 'Protection',
+                s1: 'Codes in all languages',
+                s2: 'Music factories',
+                s3: 'Protection factories',
+                s4: 'Telethon factories',
+                s5: 'Member transfer (hidden/show)',
+                s6: 'Crash files',
+                s7: 'Auto-posting with features',
+                s8: 'Supergroup auctions',
+                s9: 'lua & php protection',
+                s10: 'Fix all errors',
+                tabAbout: '📖 About Us',
+                tabServices: '🛠 Our Services',
+                tabVision: '🌟 Our Vision',
+                botsTitle: 'Our Bots',
+                pricingTitle: 'Fragment Verification',
+                guarantee: 'Full guarantee ✅',
+                securePay: 'Secure payment via Binance',
+                payBtn: 'Pay with Binance',
+                founder: 'Founder',
+                support: 'Support',
+                youtube: 'YouTube',
+                footerRights: 'Free to modify & publish',
+                notice: 'Important: Please be serious so we don\'t waste time'
             }
         };
 
@@ -1445,7 +1693,6 @@
                 document.body.dir = 'rtl';
             }
 
-            // تحديث النصوص في العناصر ذات data-key
             document.querySelectorAll('[data-key]').forEach(el => {
                 const key = el.dataset.key;
                 if (t[key]) el.textContent = t[key];
@@ -1472,13 +1719,13 @@
         // ===== عداد الزوار =====
         let visitorCount = 12847;
         setInterval(() => {
-            visitorCount += Math.floor(Math.random() * 3);
+            visitorCount += Math.floor(Math.random() * 2);
             document.getElementById('visitorCount').textContent = visitorCount.toLocaleString();
         }, 15000);
 
         console.log('🚀 Py Hub | منصة برمجيات متطورة');
         console.log('📌 @TopVeGa | @CyberNinjja');
-        console.log('🎵 مشغل موسيقى هادئ يعمل تلقائياً');
+        console.log('🎵 مشغل موسيقى يعمل بشكل صحيح');
     </script>
 
 </body>
