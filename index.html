@@ -348,68 +348,74 @@
             background: rgba(0, 0, 0, 0.05);
         }
 
-        /* الساعة المتحركة - حجم أكبر وتأثير تقلب */
+        /* ===== الساعة المتطورة - حجم كبير وخط واضح ===== */
         .clock-widget {
             display: flex;
             align-items: center;
-            gap: 10px;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 0.3rem 1.2rem 0.3rem 1rem;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.4rem 1.4rem 0.4rem 1.2rem;
             border-radius: 60px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            color: #b0c8e0;
-            font-size: 1rem;
-            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(8px);
             direction: ltr;
             animation: flipClock 10s infinite ease-in-out;
             transform-style: preserve-3d;
             perspective: 600px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
         @keyframes flipClock {
             0%, 10% { transform: rotateY(0deg) scale(1); }
-            15% { transform: rotateY(10deg) scale(1.02); }
-            25% { transform: rotateY(-10deg) scale(1.02); }
+            15% { transform: rotateY(12deg) scale(1.03); }
+            25% { transform: rotateY(-12deg) scale(1.03); }
             35%, 100% { transform: rotateY(0deg) scale(1); }
         }
         .clock-widget i {
             color: #7aa8ff;
-            font-size: 1.2rem;
+            font-size: 1.6rem;
             animation: pulseIcon 3s infinite ease-in-out;
+            filter: drop-shadow(0 0 10px rgba(70, 130, 255, 0.2));
         }
         .clock-widget .time {
             font-weight: 700;
             font-family: 'Courier New', monospace;
-            letter-spacing: 1.5px;
-            background: rgba(0,0,0,0.2);
-            padding: 0.05rem 0.8rem;
-            border-radius: 30px;
-            font-size: 1.1rem;
+            letter-spacing: 2px;
+            background: rgba(0,0,0,0.15);
+            padding: 0.1rem 1rem;
+            border-radius: 40px;
+            font-size: 1.6rem;
             color: #e8f0ff;
+            text-shadow: 0 0 20px rgba(70, 130, 255, 0.1);
         }
         .clock-widget .date {
-            opacity: 0.7;
-            font-size: 0.8rem;
-            background: rgba(0,0,0,0.1);
-            padding: 0.05rem 0.5rem;
+            opacity: 0.8;
+            font-size: 0.9rem;
+            background: rgba(0,0,0,0.08);
+            padding: 0.05rem 0.7rem;
             border-radius: 20px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: #c8d8f0;
         }
         body.light-mode .clock-widget {
-            background: rgba(0,0,0,0.02);
-            border-color: rgba(0, 0, 0, 0.04);
-            color: #3a4a6a;
+            background: rgba(0,0,0,0.03);
+            border-color: rgba(0, 0, 0, 0.06);
         }
         body.light-mode .clock-widget .time {
-            background: rgba(0,0,0,0.03);
+            background: rgba(0,0,0,0.04);
             color: #1a2a4a;
         }
+        body.light-mode .clock-widget .date {
+            color: #4a5a7a;
+        }
         body:not(.light-mode) .clock-widget {
-            background: rgba(80, 40, 120, 0.08);
-            border-color: rgba(180, 120, 255, 0.1);
-            color: #d4c0f0;
+            background: rgba(80, 40, 120, 0.12);
+            border-color: rgba(180, 120, 255, 0.12);
         }
         body:not(.light-mode) .clock-widget .time {
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.25);
             color: #e8d0ff;
+            text-shadow: 0 0 30px rgba(180, 120, 255, 0.15);
         }
         body:not(.light-mode) .clock-widget .date {
             color: #b090d0;
@@ -502,6 +508,7 @@
         .channel-card:nth-child(1) { animation-delay: 0s; }
         .channel-card:nth-child(2) { animation-delay: 1s; }
         .channel-card:nth-child(3) { animation-delay: 2s; }
+        .channel-card:nth-child(4) { animation-delay: 3s; }
         @keyframes floatCard {
             0% { transform: translateY(0px); }
             100% { transform: translateY(-4px); }
@@ -607,6 +614,21 @@
         body:not(.light-mode) .channel-card .badge {
             color: #b090d0;
             border-color: rgba(180, 120, 255, 0.06);
+        }
+
+        /* كارد جروب الدعم - أيقونة جديدة */
+        .channel-card.support-card .card-title i {
+            color: #ff6b9d;
+            filter: drop-shadow(0 0 15px rgba(255, 107, 157, 0.2));
+        }
+        body:not(.light-mode) .channel-card.support-card .card-title i {
+            color: #ff7eb3;
+        }
+        .channel-card.support-card .card-meta a {
+            color: #ff6b9d;
+        }
+        body:not(.light-mode) .channel-card.support-card .card-meta a {
+            color: #ff7eb3;
         }
 
         .services-list {
@@ -1315,17 +1337,20 @@
                 gap: 6px;
             }
             .clock-widget {
-                font-size: 0.8rem;
+                font-size: 0.9rem;
                 padding: 0.2rem 0.8rem;
-                gap: 6px;
+                gap: 8px;
             }
             .clock-widget .time {
-                font-size: 0.9rem;
-                padding: 0.05rem 0.5rem;
+                font-size: 1.1rem;
+                padding: 0.05rem 0.6rem;
             }
             .clock-widget .date {
-                font-size: 0.65rem;
+                font-size: 0.7rem;
                 display: none;
+            }
+            .clock-widget i {
+                font-size: 1.2rem;
             }
             .music-player {
                 padding: 0.4rem 0.8rem;
@@ -1421,7 +1446,7 @@
                 </div>
             </div>
             <div class="header-actions">
-                <!-- الساعة المتحركة - حجم أكبر وتأثير تقلب -->
+                <!-- الساعة المتطورة - حجم كبير وخط واضح -->
                 <div class="clock-widget" id="clockWidget">
                     <i class="fas fa-clock"></i>
                     <span class="time" id="clockTime">12:00:00</span>
@@ -1476,6 +1501,7 @@
             <span class="nav-btn" data-key="navBots"><i class="fas fa-robot"></i> بوتات</span>
         </div>
 
+        <!-- القنوات مع إضافة كارد جروب الدعم -->
         <div class="channels-grid" data-aos="fade-up">
             <div class="channel-card">
                 <div class="card-title"><i class="fab fa-python"></i> <span data-key="channel1Title">قناة بايثون</span></div>
@@ -1501,6 +1527,16 @@
                 <div class="card-meta">
                     <a href="https://t.me/ToolsTermex" target="_blank"><i class="fab fa-telegram-plane"></i> <span data-key="join">انضم</span></a>
                     <span class="badge"><i class="fas fa-lock"></i> <span data-key="protection">حماية</span></span>
+                </div>
+            </div>
+
+            <!-- كارد جروب الدعم الجديد -->
+            <div class="channel-card support-card">
+                <div class="card-title"><i class="fas fa-headset"></i> <span data-key="supportTitle">جروب الدعم</span></div>
+                <div class="card-desc" data-key="supportDesc">الدعم الفني والمساعدة في جميع الاستفسارات.</div>
+                <div class="card-meta">
+                    <a href="https://t.me/Cybervega" target="_blank"><i class="fab fa-telegram-plane"></i> <span data-key="joinSupport">انضم للدعم</span></a>
+                    <span class="badge"><i class="fas fa-heart" style="color:#ff6b9d;"></i> <span data-key="activeSupport">متاح 24/7</span></span>
                 </div>
             </div>
         </div>
@@ -1676,7 +1712,6 @@
                 starsCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 starsCtx.fillStyle = `rgba(200, 180, 255, ${opacity})`;
                 starsCtx.fill();
-                // توهج خفيف
                 starsCtx.shadowColor = 'rgba(180, 120, 255, 0.2)';
                 starsCtx.shadowBlur = 6;
                 starsCtx.fill();
@@ -1694,7 +1729,7 @@
         }
         animateStars();
 
-        // ===== خلفية جسيمات (تأثير إضافي) =====
+        // ===== خلفية جسيمات =====
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
         let width, height, particles = [];
@@ -1754,7 +1789,7 @@
         }
         animateParticles();
 
-        // ===== الساعة المتحركة (توقيت القاهرة) =====
+        // ===== الساعة =====
         function updateClock() {
             const now = new Date();
             const cairoTime = new Date(now.toLocaleString('en-US', { timeZone: 'Africa/Cairo' }));
@@ -1774,7 +1809,7 @@
         updateClock();
         setInterval(updateClock, 1000);
 
-        // ===== مشغل الموسيقى (موسيقى هادئة) =====
+        // ===== مشغل الموسيقى =====
         const tracks = [
             { name: '🎵 هدوء وسكينة', url: 'https://cdn.pixabay.com/download/audio/2022/05/27/audio_4e3d7e0f1a.mp3' },
             { name: '🌙 ليالي هادئة', url: 'https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0e1f2a3b4.mp3' },
@@ -1875,7 +1910,6 @@
 
         audio.addEventListener('ended', () => { nextTrack(); });
 
-        // بدء التشغيل التلقائي عند أول تفاعل
         document.addEventListener('click', function autoPlay() {
             if (!isPlaying) {
                 audio.play().catch(e => {});
@@ -1958,8 +1992,12 @@
                 channel2Desc: 'مستوحى من بوتات الموسيقى • مفتوحة المصدر',
                 channel3Title: 'قناة ترمكس',
                 channel3Desc: 'أدوات حماية، تليثون، نقل أعضاء، ومزادات.',
+                supportTitle: 'جروب الدعم',
+                supportDesc: 'الدعم الفني والمساعدة في جميع الاستفسارات.',
                 join: 'انضم',
+                joinSupport: 'انضم للدعم',
                 active: 'نشطة',
+                activeSupport: 'متاح 24/7',
                 protection: 'حماية',
                 s1: 'أكواد بجميع اللغات',
                 s2: 'مصانع ميوزك',
@@ -1997,8 +2035,12 @@
                 channel2Desc: 'Inspired by music bots • Open source',
                 channel3Title: 'Termex Channel',
                 channel3Desc: 'Protection tools, Telethon, member transfer, auctions.',
+                supportTitle: 'Support Group',
+                supportDesc: 'Technical support and help for all inquiries.',
                 join: 'Join',
+                joinSupport: 'Join Support',
                 active: 'Active',
+                activeSupport: 'Available 24/7',
                 protection: 'Protection',
                 s1: 'Codes in all languages',
                 s2: 'Music factories',
