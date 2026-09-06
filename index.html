@@ -6,8 +6,6 @@
     <title>python zone | منصة برمجيات وتطوير</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <!-- Ace Editor -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.0/ace.min.css" />
     <style>
         * {
             margin: 0;
@@ -80,12 +78,44 @@
             transition: all 0.4s ease;
             position: relative;
             z-index: 1;
+            animation: glassGlow 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes glassGlow {
+            0% {
+                box-shadow: 0 40px 80px rgba(80, 0, 120, 0.3), 0 0 40px rgba(255, 100, 0, 0.05), 0 0 80px rgba(255, 0, 100, 0.03);
+                border-color: rgba(180, 120, 255, 0.08);
+            }
+            50% {
+                box-shadow: 0 40px 80px rgba(80, 0, 120, 0.3), 0 0 60px rgba(255, 150, 0, 0.08), 0 0 100px rgba(200, 0, 255, 0.05);
+                border-color: rgba(255, 150, 50, 0.15);
+            }
+            100% {
+                box-shadow: 0 40px 80px rgba(80, 0, 120, 0.3), 0 0 40px rgba(255, 0, 50, 0.08), 0 0 80px rgba(255, 100, 0, 0.05);
+                border-color: rgba(200, 50, 255, 0.15);
+            }
         }
 
         body.light-mode .glass-card {
             background: rgba(255, 255, 255, 0.35);
             box-shadow: 0 40px 80px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: glassGlowLight 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes glassGlowLight {
+            0% {
+                box-shadow: 0 40px 80px rgba(0, 0, 0, 0.06), 0 0 30px rgba(255, 100, 0, 0.03);
+                border-color: rgba(0, 0, 0, 0.05);
+            }
+            50% {
+                box-shadow: 0 40px 80px rgba(0, 0, 0, 0.06), 0 0 50px rgba(255, 150, 0, 0.05);
+                border-color: rgba(255, 150, 50, 0.08);
+            }
+            100% {
+                box-shadow: 0 40px 80px rgba(0, 0, 0, 0.06), 0 0 30px rgba(200, 0, 255, 0.04);
+                border-color: rgba(200, 50, 255, 0.08);
+            }
         }
 
         .marquee-bar {
@@ -161,6 +191,59 @@
             align-items: center;
             gap: 10px;
             flex-wrap: wrap;
+        }
+
+        /* ===== أيقونة التاريخ والوقت ===== */
+        .date-icon-btn {
+            background: rgba(80, 40, 120, 0.12);
+            border: 1px solid rgba(180, 120, 255, 0.12);
+            color: #d4c0f0;
+            padding: 0.35rem 1rem;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1rem;
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: glassPulse 4s ease-in-out infinite alternate;
+        }
+        @keyframes glassPulse {
+            0% { border-color: rgba(180, 120, 255, 0.12); box-shadow: 0 0 15px rgba(180, 120, 255, 0.05); }
+            50% { border-color: rgba(255, 150, 50, 0.2); box-shadow: 0 0 25px rgba(255, 150, 50, 0.08); }
+            100% { border-color: rgba(255, 50, 80, 0.2); box-shadow: 0 0 25px rgba(255, 50, 80, 0.08); }
+        }
+        .date-icon-btn:hover {
+            background: rgba(180, 120, 255, 0.08);
+            transform: scale(1.03);
+        }
+        body.light-mode .date-icon-btn {
+            background: rgba(0, 0, 0, 0.03);
+            border-color: rgba(0, 0, 0, 0.06);
+            color: #3a4a6a;
+        }
+        .date-icon-btn i {
+            color: #b080ff;
+            font-size: 1.2rem;
+        }
+        body.light-mode .date-icon-btn i {
+            color: #3a6aaa;
+        }
+        .date-icon-btn .date-label {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        .date-icon-btn .date-time {
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            background: rgba(0,0,0,0.15);
+            padding: 0.05rem 0.6rem;
+            border-radius: 30px;
+        }
+        body.light-mode .date-icon-btn .date-time {
+            background: rgba(0,0,0,0.04);
         }
 
         .visitor-counter {
@@ -304,69 +387,6 @@
             background: rgba(0, 0, 0, 0.05);
         }
 
-        .clock-widget {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: rgba(80, 40, 120, 0.12);
-            padding: 0.4rem 1.4rem 0.4rem 1.2rem;
-            border-radius: 60px;
-            border: 1px solid rgba(180, 120, 255, 0.12);
-            backdrop-filter: blur(8px);
-            direction: ltr;
-            animation: flipClock 10s infinite ease-in-out;
-            transform-style: preserve-3d;
-            perspective: 600px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-        @keyframes flipClock {
-            0%, 10% { transform: rotateY(0deg) scale(1); }
-            15% { transform: rotateY(12deg) scale(1.03); }
-            25% { transform: rotateY(-12deg) scale(1.03); }
-            35%, 100% { transform: rotateY(0deg) scale(1); }
-        }
-        .clock-widget i {
-            color: #b080ff;
-            font-size: 1.6rem;
-            animation: pulseIcon 3s infinite ease-in-out;
-            filter: drop-shadow(0 0 10px rgba(180, 120, 255, 0.2));
-        }
-        .clock-widget .time {
-            font-weight: 700;
-            font-family: 'Courier New', monospace;
-            letter-spacing: 2px;
-            background: rgba(0,0,0,0.25);
-            padding: 0.1rem 1rem;
-            border-radius: 40px;
-            font-size: 1.6rem;
-            color: #e8d0ff;
-            text-shadow: 0 0 30px rgba(180, 120, 255, 0.15);
-        }
-        .clock-widget .date {
-            opacity: 0.8;
-            font-size: 0.9rem;
-            background: rgba(0,0,0,0.15);
-            padding: 0.05rem 0.7rem;
-            border-radius: 20px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            color: #b090d0;
-        }
-        body.light-mode .clock-widget {
-            background: rgba(0,0,0,0.03);
-            border-color: rgba(0, 0, 0, 0.06);
-        }
-        body.light-mode .clock-widget .time {
-            background: rgba(0,0,0,0.04);
-            color: #1a2a4a;
-        }
-        body.light-mode .clock-widget .date {
-            color: #4a5a7a;
-        }
-        body.light-mode .clock-widget i {
-            color: #3a6aaa;
-        }
-
         .nav-links {
             display: flex;
             flex-wrap: wrap;
@@ -425,7 +445,7 @@
 
         .channels-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.2rem;
             margin: 1.2rem 0;
         }
@@ -593,140 +613,6 @@
         }
         body.light-mode .services-list ul li i {
             color: #3a6aaa;
-        }
-
-        /* ===== محرر الأكواد ===== */
-        .code-editor-section {
-            background: rgba(40, 20, 60, 0.15);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 32px;
-            padding: 1.5rem;
-            margin: 1.2rem 0;
-            border: 1px solid rgba(180, 120, 255, 0.06);
-        }
-        body.light-mode .code-editor-section {
-            background: rgba(0, 0, 0, 0.02);
-            border-color: rgba(0, 0, 0, 0.03);
-        }
-        .code-editor-section .editor-header {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-        .code-editor-section .editor-header h3 {
-            color: #e8d0ff;
-            font-weight: 600;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .code-editor-section .editor-header h3 i {
-            color: #b080ff;
-        }
-        body.light-mode .code-editor-section .editor-header h3 {
-            color: #1a2a4a;
-        }
-        .code-editor-section .editor-controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-right: auto;
-        }
-        .code-editor-section .editor-controls select {
-            background: rgba(80, 40, 120, 0.12);
-            border: 1px solid rgba(180, 120, 255, 0.08);
-            color: #d4c0f0;
-            padding: 0.4rem 1rem;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            outline: none;
-            transition: 0.3s;
-        }
-        .code-editor-section .editor-controls select:hover {
-            border-color: rgba(180, 120, 255, 0.2);
-        }
-        body.light-mode .code-editor-section .editor-controls select {
-            background: rgba(0, 0, 0, 0.03);
-            color: #1a2a4a;
-            border-color: rgba(0, 0, 0, 0.06);
-        }
-        .code-editor-section .editor-controls select option {
-            background: #1a102a;
-            color: #d4c0f0;
-        }
-        body.light-mode .code-editor-section .editor-controls select option {
-            background: #fff;
-            color: #1a2a4a;
-        }
-        .code-editor-section .editor-controls .run-btn {
-            background: rgba(180, 120, 255, 0.1);
-            border: 1px solid rgba(180, 120, 255, 0.15);
-            color: #d4c0f0;
-            padding: 0.4rem 1.5rem;
-            border-radius: 40px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .code-editor-section .editor-controls .run-btn:hover {
-            background: rgba(180, 120, 255, 0.2);
-            transform: scale(1.03);
-        }
-        .code-editor-section .editor-controls .run-btn i {
-            color: #b080ff;
-        }
-        body.light-mode .code-editor-section .editor-controls .run-btn {
-            background: rgba(60, 120, 255, 0.06);
-            color: #1a2a4a;
-            border-color: rgba(60, 120, 255, 0.08);
-        }
-        body.light-mode .code-editor-section .editor-controls .run-btn i {
-            color: #3a6aaa;
-        }
-        #editor {
-            width: 100%;
-            height: 250px;
-            border-radius: 16px;
-            border: 1px solid rgba(180, 120, 255, 0.06);
-            overflow: hidden;
-        }
-        body.light-mode #editor {
-            border-color: rgba(0, 0, 0, 0.06);
-        }
-        .code-output {
-            margin-top: 0.8rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 16px;
-            padding: 0.8rem 1.2rem;
-            border: 1px solid rgba(180, 120, 255, 0.06);
-            min-height: 60px;
-            color: #b8a0d0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.85rem;
-            white-space: pre-wrap;
-            word-break: break-all;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        .code-output.error {
-            color: #ff6b8a;
-            border-color: rgba(255, 107, 138, 0.2);
-        }
-        body.light-mode .code-output {
-            background: rgba(0, 0, 0, 0.02);
-            color: #3a4a6a;
-        }
-        body.light-mode .code-output.error {
-            color: #d63031;
         }
 
         .bots-section {
@@ -931,7 +817,7 @@
             color: #3a6aaa;
         }
 
-        /* ===== روابط منصة ===== */
+        /* ===== روابط المنصة مع أيقونة التعليقات ===== */
         .platform-links {
             display: flex;
             justify-content: center;
@@ -953,6 +839,7 @@
             transition: 0.4s ease;
             backdrop-filter: blur(4px);
             animation: floatNav 4s infinite alternate ease-in-out;
+            cursor: pointer;
         }
         .platform-links a:nth-child(1) { animation-delay: 0s; }
         .platform-links a:nth-child(2) { animation-delay: 0.3s; }
@@ -978,7 +865,121 @@
             filter: drop-shadow(0 0 10px rgba(180, 120, 255, 0.05));
         }
 
-        /* ===== حذف أيقونة جروب الدعم من الأسفل - تم حذفها ===== */
+        /* ===== نافذة التعليقات ===== */
+        .comments-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+        .comments-overlay.show {
+            display: flex;
+            animation: fadeIn 0.4s ease;
+        }
+        .comments-modal {
+            max-width: 500px;
+            width: 100%;
+            background: rgba(30, 10, 50, 0.95);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-radius: 48px;
+            padding: 2rem;
+            border: 1px solid rgba(180, 120, 255, 0.08);
+            box-shadow: 0 40px 80px rgba(80, 0, 120, 0.3);
+            color: #d4c0f0;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: glassGlow 4s ease-in-out infinite alternate;
+        }
+        body.light-mode .comments-modal {
+            background: rgba(240, 245, 255, 0.95);
+            color: #1a2a4a;
+            border-color: rgba(0, 0, 0, 0.04);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.08);
+        }
+        .comments-modal .close-modal {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: none;
+            color: #b090d0;
+            font-size: 1.4rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .comments-modal .close-modal:hover {
+            background: rgba(180, 120, 255, 0.1);
+            color: #fff;
+        }
+        body.light-mode .comments-modal .close-modal {
+            color: #3a4a6a;
+        }
+        body.light-mode .comments-modal .close-modal:hover {
+            background: rgba(0, 0, 0, 0.04);
+        }
+        .comments-modal h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .comments-modal h2 i {
+            color: #ff6b9d;
+        }
+        .comment-item {
+            background: rgba(80, 40, 120, 0.08);
+            border-radius: 16px;
+            padding: 0.8rem 1rem;
+            margin-bottom: 0.8rem;
+            border: 1px solid rgba(180, 120, 255, 0.04);
+        }
+        body.light-mode .comment-item {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.03);
+        }
+        .comment-item .comment-user {
+            font-weight: 700;
+            color: #e8d0ff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        body.light-mode .comment-item .comment-user {
+            color: #1a2a4a;
+        }
+        .comment-item .comment-user i {
+            color: #ff6b9d;
+            font-size: 1rem;
+        }
+        .comment-item .comment-text {
+            color: #b8a0d0;
+            font-size: 0.9rem;
+            margin-top: 0.2rem;
+            padding-right: 1.8rem;
+        }
+        body.light-mode .comment-item .comment-text {
+            color: #4a5a7a;
+        }
+        .comment-item .comment-stars {
+            color: #ffb800;
+            font-size: 0.8rem;
+            margin-top: 0.1rem;
+            padding-right: 1.8rem;
+        }
 
         .footer-contact {
             display: flex;
@@ -1276,6 +1277,155 @@
             color: #4a5a7a;
         }
 
+        /* ===== نافذة التاريخ والتقويم ===== */
+        .calendar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+        .calendar-overlay.show {
+            display: flex;
+            animation: fadeIn 0.4s ease;
+        }
+        .calendar-modal {
+            max-width: 420px;
+            width: 100%;
+            background: rgba(30, 10, 50, 0.95);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-radius: 48px;
+            padding: 2rem;
+            border: 1px solid rgba(180, 120, 255, 0.08);
+            box-shadow: 0 40px 80px rgba(80, 0, 120, 0.3);
+            color: #d4c0f0;
+            position: relative;
+            animation: glassGlow 4s ease-in-out infinite alternate;
+        }
+        body.light-mode .calendar-modal {
+            background: rgba(240, 245, 255, 0.95);
+            color: #1a2a4a;
+            border-color: rgba(0, 0, 0, 0.04);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.08);
+        }
+        .calendar-modal .close-modal {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: none;
+            color: #b090d0;
+            font-size: 1.4rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .calendar-modal .close-modal:hover {
+            background: rgba(180, 120, 255, 0.1);
+            color: #fff;
+        }
+        body.light-mode .calendar-modal .close-modal {
+            color: #3a4a6a;
+        }
+        body.light-mode .calendar-modal .close-modal:hover {
+            background: rgba(0, 0, 0, 0.04);
+        }
+        .calendar-modal .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+        }
+        .calendar-modal .calendar-header h2 {
+            font-size: 1.4rem;
+            color: #e8d0ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        body.light-mode .calendar-modal .calendar-header h2 {
+            color: #1a2a4a;
+        }
+        .calendar-modal .calendar-header h2 i {
+            color: #b080ff;
+        }
+        .calendar-modal .calendar-header .clock-display {
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            background: rgba(0,0,0,0.15);
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            color: #b080ff;
+            font-weight: 700;
+        }
+        body.light-mode .calendar-modal .calendar-header .clock-display {
+            background: rgba(0,0,0,0.04);
+            color: #3a6aaa;
+        }
+        .calendar-modal .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+        .calendar-modal .calendar-grid .weekday {
+            font-weight: 700;
+            color: #b090d0;
+            padding: 0.3rem 0;
+            font-size: 0.7rem;
+        }
+        body.light-mode .calendar-modal .calendar-grid .weekday {
+            color: #4a5a7a;
+        }
+        .calendar-modal .calendar-grid .day {
+            padding: 0.4rem 0;
+            border-radius: 12px;
+            background: rgba(80, 40, 120, 0.05);
+            color: #c8b0e8;
+            transition: 0.3s;
+        }
+        body.light-mode .calendar-modal .calendar-grid .day {
+            background: rgba(0, 0, 0, 0.02);
+            color: #3a4a6a;
+        }
+        .calendar-modal .calendar-grid .day.today {
+            background: rgba(180, 120, 255, 0.15);
+            color: #e8d0ff;
+            font-weight: 700;
+            border: 1px solid rgba(180, 120, 255, 0.2);
+        }
+        body.light-mode .calendar-modal .calendar-grid .day.today {
+            background: rgba(60, 120, 255, 0.08);
+            color: #1a2a4a;
+            border-color: rgba(60, 120, 255, 0.15);
+        }
+        .calendar-modal .calendar-grid .day.other-month {
+            opacity: 0.3;
+        }
+        .calendar-modal .calendar-footer {
+            margin-top: 1.2rem;
+            text-align: center;
+            color: #b090d0;
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(180, 120, 255, 0.04);
+            padding-top: 1rem;
+        }
+        body.light-mode .calendar-modal .calendar-footer {
+            color: #4a5a7a;
+            border-color: rgba(0, 0, 0, 0.03);
+        }
+
         @media (max-width: 700px) {
             .glass-card {
                 padding: 1.5rem 1rem 6rem 1rem;
@@ -1290,33 +1440,15 @@
                 margin-top: 0.3rem;
                 gap: 6px;
             }
-            .clock-widget {
-                font-size: 0.9rem;
+            .date-icon-btn {
+                font-size: 0.8rem;
                 padding: 0.2rem 0.8rem;
-                gap: 8px;
             }
-            .clock-widget .time {
-                font-size: 1.1rem;
-                padding: 0.05rem 0.6rem;
-            }
-            .clock-widget .date {
-                font-size: 0.7rem;
+            .date-icon-btn .date-label {
                 display: none;
             }
-            .clock-widget i {
-                font-size: 1.2rem;
-            }
-            #editor {
-                height: 180px;
-            }
-            .code-editor-section .editor-header {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 0.8rem;
-            }
-            .code-editor-section .editor-controls {
-                margin-right: 0;
-                justify-content: center;
+            .date-icon-btn .date-time {
+                font-size: 0.75rem;
             }
             .music-player {
                 padding: 0.4rem 0.8rem;
@@ -1373,7 +1505,17 @@
                 padding: 1.5rem 1rem;
             }
             .channels-grid {
-                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            .calendar-modal {
+                padding: 1.5rem 1rem;
+            }
+            .calendar-modal .calendar-grid .day {
+                padding: 0.3rem 0;
+                font-size: 0.7rem;
+            }
+            .comments-modal {
+                padding: 1.5rem 1rem;
             }
         }
     </style>
@@ -1415,12 +1557,12 @@
                 </div>
             </div>
             <div class="header-actions">
-                <!-- الساعة -->
-                <div class="clock-widget" id="clockWidget">
-                    <i class="fas fa-clock"></i>
-                    <span class="time" id="clockTime">12:00:00</span>
-                    <span class="date" id="clockDate">01/01/2025</span>
-                </div>
+                <!-- أيقونة التاريخ والوقت - تفتح تقويم -->
+                <button class="date-icon-btn" onclick="toggleCalendar()">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span class="date-label">التاريخ</span>
+                    <span class="date-time" id="headerDateTime">00:00</span>
+                </button>
 
                 <div class="visitor-counter">
                     <i class="fas fa-eye"></i>
@@ -1499,7 +1641,6 @@
                 </div>
             </div>
 
-            <!-- جروب الدعم -->
             <div class="channel-card support-card">
                 <div class="card-title"><i class="fas fa-headset"></i> <span data-key="supportTitle">جروب الدعم</span></div>
                 <div class="card-desc" data-key="supportDesc">الدعم الفني والمساعدة في جميع الاستفسارات.</div>
@@ -1523,30 +1664,6 @@
                 <li><i class="fas fa-file-code"></i> <span data-key="s9">lua & php حماية</span></li>
                 <li><i class="fas fa-bug"></i> <span data-key="s10">حل جميع الأخطاء</span></li>
             </ul>
-        </div>
-
-        <!-- ===== محرر الأكواد ===== -->
-        <div class="code-editor-section" data-aos="fade-up" data-aos-delay="150">
-            <div class="editor-header">
-                <h3><i class="fas fa-code"></i> <span data-key="editorTitle">تجربة الأكواد مباشرة</span></h3>
-                <div class="editor-controls">
-                    <select id="languageSelect">
-                        <option value="python">Python</option>
-                        <option value="javascript">JavaScript</option>
-                        <option value="html">HTML</option>
-                        <option value="css">CSS</option>
-                        <option value="php">PHP</option>
-                    </select>
-                    <button class="run-btn" onclick="runCode()">
-                        <i class="fas fa-play"></i> <span data-key="runBtn">تشغيل ▶</span>
-                    </button>
-                    <button class="run-btn" onclick="clearOutput()" style="background:rgba(255,107,107,0.08);border-color:rgba(255,107,107,0.1);">
-                        <i class="fas fa-eraser"></i> <span data-key="clearBtn">مسح</span>
-                    </button>
-                </div>
-            </div>
-            <div id="editor">print("مرحباً بك في python zone!")</div>
-            <div class="code-output" id="output">▶ انتظر تنفيذ الكود...</div>
         </div>
 
         <!-- البوتات -->
@@ -1588,7 +1705,7 @@
             </a>
         </div>
 
-        <!-- ===== روابط المنصة (تم حذف جروب الدعم) ===== -->
+        <!-- ===== روابط المنصة مع أيقونة التعليقات ===== -->
         <div class="platform-links" data-aos="fade-up" data-aos-delay="450">
             <a href="https://github.com/TOPVEGA" target="_blank">
                 <i class="fab fa-github"></i>
@@ -1598,10 +1715,18 @@
                 <i class="fab fa-telegram"></i>
                 <span class="link-label" data-key="founder">المؤسس</span>
             </a>
-            <!-- تم حذف جروب الدعم من هنا -->
+            <a href="https://t.me/Cybervega" target="_blank">
+                <i class="fas fa-headset"></i>
+                <span class="link-label" data-key="support">جروب الدعم</span>
+            </a>
             <a href="https://www.youtube.com/@Pythnhub" target="_blank">
                 <i class="fab fa-youtube"></i>
                 <span class="link-label" data-key="youtube">يوتيوب</span>
+            </a>
+            <!-- أيقونة التعليقات -->
+            <a onclick="openComments()" style="cursor:pointer;">
+                <i class="fas fa-comment-dots" style="color:#ff6b9d;"></i>
+                <span class="link-label" data-key="comments">التعليقات</span>
             </a>
         </div>
 
@@ -1625,6 +1750,35 @@
             السلام علي من اتبع الهدى
         </div>
 
+    </div>
+
+    <!-- ===== نافذة التقويم والتاريخ ===== -->
+    <div class="calendar-overlay" id="calendarOverlay">
+        <div class="calendar-modal">
+            <button class="close-modal" onclick="toggleCalendar()"><i class="fas fa-times"></i></button>
+            <div class="calendar-header">
+                <h2><i class="fas fa-calendar-alt"></i> <span id="calMonthYear"></span></h2>
+                <div class="clock-display" id="calClock">00:00:00</div>
+            </div>
+            <div class="calendar-grid" id="calendarGrid">
+                <!-- يتم إنشاء التقويم بواسطة JavaScript -->
+            </div>
+            <div class="calendar-footer">
+                <i class="fas fa-clock"></i> <span id="calFullDate"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== نافذة التعليقات ===== -->
+    <div class="comments-overlay" id="commentsOverlay">
+        <div class="comments-modal">
+            <button class="close-modal" onclick="closeComments()"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-comment-dots" style="color:#ff6b9d;"></i> <span data-key="commentsTitle">آراء المستخدمين</span></h2>
+            <div id="commentsList"></div>
+            <div style="margin-top:0.8rem; text-align:center; font-size:0.7rem; opacity:0.4; color:#b090d0;">
+                <i class="fas fa-sync-alt"></i> تتغير التعليقات تلقائياً في كل مرة
+            </div>
+        </div>
     </div>
 
     <!-- ===== نافذة من نحن ===== -->
@@ -1658,158 +1812,10 @@
         </div>
     </div>
 
-    <!-- Ace Editor -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.0/ace.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.0/mode-python.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.0/mode-javascript.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.0/mode-html.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.0/mode-css.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.0/mode-php.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
         AOS.init({ duration: 800, once: true });
-
-        // ===== محرر الأكواد =====
-        const editor = ace.edit("editor");
-        editor.setTheme("ace/theme/twilight");
-        editor.session.setMode("ace/mode/python");
-        editor.setFontSize(14);
-        editor.setShowPrintMargin(false);
-        editor.setOptions({
-            enableBasicAutocompletion: true,
-            enableLiveAutocompletion: true,
-            tabSize: 4
-        });
-
-        // تغيير اللغة
-        document.getElementById('languageSelect').addEventListener('change', function() {
-            const lang = this.value;
-            const modeMap = {
-                'python': 'ace/mode/python',
-                'javascript': 'ace/mode/javascript',
-                'html': 'ace/mode/html',
-                'css': 'ace/mode/css',
-                'php': 'ace/mode/php'
-            };
-            editor.session.setMode(modeMap[lang]);
-        });
-
-        // ===== تشغيل الكود =====
-        function runCode() {
-            const code = editor.getValue();
-            const lang = document.getElementById('languageSelect').value;
-            const output = document.getElementById('output');
-            output.className = 'code-output';
-            output.textContent = '⏳ جاري التنفيذ...';
-
-            setTimeout(() => {
-                try {
-                    let result = '';
-                    if (lang === 'python') {
-                        // تنفيذ بايثون باستخدام Skulpt (محاكاة بسيطة)
-                        result = runPython(code);
-                    } else if (lang === 'javascript') {
-                        result = runJavaScript(code);
-                    } else if (lang === 'html') {
-                        result = runHTML(code);
-                    } else if (lang === 'css') {
-                        result = runCSS(code);
-                    } else if (lang === 'php') {
-                        result = runPHP(code);
-                    } else {
-                        result = '⚠️ لغة غير مدعومة حالياً';
-                    }
-                    output.textContent = result;
-                    output.className = 'code-output';
-                } catch (e) {
-                    output.textContent = '❌ خطأ: ' + e.message;
-                    output.className = 'code-output error';
-                }
-            }, 300);
-        }
-
-        // ===== تنفيذ بايثون (محاكي بسيط) =====
-        function runPython(code) {
-            try {
-                // تنفيذ بسيط للعمليات الأساسية
-                const lines = code.split('\n');
-                let output = '';
-                let variables = {};
-                for (let line of lines) {
-                    line = line.trim();
-                    if (line === '') continue;
-                    if (line.startsWith('print(')) {
-                        const content = line.substring(6, line.length - 1);
-                        // تقييم بسيط
-                        let evalContent = content;
-                        for (let key in variables) {
-                            evalContent = evalContent.replace(new RegExp(key, 'g'), variables[key]);
-                        }
-                        try {
-                            const val = Function('"use strict"; return (' + evalContent + ')')();
-                            output += String(val) + '\n';
-                        } catch (e) {
-                            output += content.replace(/["']/g, '') + '\n';
-                        }
-                    } else if (line.includes('=')) {
-                        const parts = line.split('=');
-                        const varName = parts[0].trim();
-                        const varValue = parts.slice(1).join('=').trim();
-                        try {
-                            const val = Function('"use strict"; return (' + varValue + ')')();
-                            variables[varName] = val;
-                        } catch (e) {
-                            variables[varName] = varValue.replace(/["']/g, '');
-                        }
-                    } else {
-                        output += line + '\n';
-                    }
-                }
-                return output || '✅ تم التنفيذ بنجاح (بدون مخرجات)';
-            } catch (e) {
-                throw new Error('خطأ في تنفيذ بايثون: ' + e.message);
-            }
-        }
-
-        // ===== تنفيذ جافا سكريبت =====
-        function runJavaScript(code) {
-            try {
-                const oldLog = console.log;
-                let output = '';
-                console.log = function(...args) {
-                    output += args.join(' ') + '\n';
-                };
-                const result = new Function(code)();
-                console.log = oldLog;
-                if (result !== undefined && output === '') {
-                    output = String(result);
-                }
-                return output || '✅ تم التنفيذ بنجاح (بدون مخرجات)';
-            } catch (e) {
-                throw new Error(e.message);
-            }
-        }
-
-        // ===== تنفيذ HTML =====
-        function runHTML(code) {
-            return '📄 ✅ تم عرض HTML بنجاح! (افتح F12 لعرض النتيجة)\n' + code.substring(0, 100) + '...';
-        }
-
-        // ===== تنفيذ CSS =====
-        function runCSS(code) {
-            return '🎨 ✅ تم تطبيق CSS بنجاح!\n' + code.substring(0, 100) + '...';
-        }
-
-        // ===== تنفيذ PHP =====
-        function runPHP(code) {
-            return '🐘 ✅ تم تنفيذ PHP بنجاح (محاكاة)\n' + code.substring(0, 100) + '...';
-        }
-
-        function clearOutput() {
-            document.getElementById('output').textContent = '▶ انتظر تنفيذ الكود...';
-            document.getElementById('output').className = 'code-output';
-        }
 
         // ===== خلفية النجوم =====
         const starsCanvas = document.getElementById('stars-canvas');
@@ -1924,8 +1930,8 @@
         }
         animateParticles();
 
-        // ===== الساعة =====
-        function updateClock() {
+        // ===== الوقت والتاريخ =====
+        function updateDateTime() {
             const now = new Date();
             const cairoTime = new Date(now.toLocaleString('en-US', { timeZone: 'Africa/Cairo' }));
             let hours = cairoTime.getHours();
@@ -1934,19 +1940,126 @@
             const ampm = hours >= 12 ? 'م' : 'ص';
             hours = hours % 12 || 12;
             const timeStr = `${String(hours).padStart(2, '0')}:${minutes}:${seconds} ${ampm}`;
-            document.getElementById('clockTime').textContent = timeStr;
+            document.getElementById('headerDateTime').textContent = `${String(hours).padStart(2, '0')}:${minutes}`;
+            document.getElementById('calClock').textContent = timeStr;
 
             const day = String(cairoTime.getDate()).padStart(2, '0');
             const month = String(cairoTime.getMonth() + 1).padStart(2, '0');
             const year = cairoTime.getFullYear();
-            document.getElementById('clockDate').textContent = `${day}/${month}/${year}`;
+            const monthNames = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+            document.getElementById('calFullDate').textContent = `${day} ${monthNames[cairoTime.getMonth()]} ${year}`;
+            document.getElementById('calMonthYear').textContent = `${monthNames[cairoTime.getMonth()]} ${year}`;
+
+            // بناء التقويم
+            buildCalendar(cairoTime);
         }
-        updateClock();
-        setInterval(updateClock, 1000);
+
+        function buildCalendar(date) {
+            const grid = document.getElementById('calendarGrid');
+            const year = date.getFullYear();
+            const month = date.getMonth();
+            const today = date.getDate();
+
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+            const weekdays = ['ح', 'ن', 'ث', 'ر', 'خ', 'ج', 'س'];
+            let html = '';
+            weekdays.forEach(d => {
+                html += `<div class="weekday">${d}</div>`;
+            });
+
+            // أيام الشهر السابق
+            const startOffset = (firstDay + 1) % 7;
+            for (let i = startOffset - 1; i >= 0; i--) {
+                html += `<div class="day other-month">${daysInPrevMonth - i}</div>`;
+            }
+
+            // أيام الشهر الحالي
+            for (let i = 1; i <= daysInMonth; i++) {
+                const isToday = i === today ? 'today' : '';
+                html += `<div class="day ${isToday}">${i}</div>`;
+            }
+
+            // أيام الشهر التالي
+            const totalDays = startOffset + daysInMonth;
+            const remaining = (7 - (totalDays % 7)) % 7;
+            for (let i = 1; i <= remaining; i++) {
+                html += `<div class="day other-month">${i}</div>`;
+            }
+
+            grid.innerHTML = html;
+        }
+
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+
+        // ===== تقويم =====
+        function toggleCalendar() {
+            document.getElementById('calendarOverlay').classList.toggle('show');
+            document.getElementById('dropdownMenu').classList.remove('show');
+            updateDateTime();
+        }
+        document.getElementById('calendarOverlay').addEventListener('click', function(e) {
+            if (e.target === this) toggleCalendar();
+        });
+
+        // ===== التعليقات =====
+        const allComments = [
+            { user: 'أحمد محمد', text: '⭐️⭐️⭐️⭐️⭐️ منصة رائعة، خدمات متكاملة وسريعة!', stars: 5 },
+            { user: 'سارة خالد', text: '❤️ أفضل موقع برمجي تعاملت معه، دعم فني ممتاز جداً', stars: 5 },
+            { user: 'علي حسن', text: '🔥 أكواد احترافية وسعر رمزي، أنصح الجميع بالتجربة', stars: 5 },
+            { user: 'نورا يوسف', text: '✨ موقع موثوق ومحتواه قيم، شكراً لفريق العمل', stars: 5 },
+            { user: 'محمد طارق', text: '💪 خدمات ممتازة وسرعة في التنفيذ، يستحق 10/10', stars: 5 },
+            { user: 'ليلى عماد', text: '🌟 تجربة فريدة، تعلمت الكثير من محتواهم التقني', stars: 5 },
+            { user: 'كريم سمير', text: '👍 أسعار مناسبة وجودة عالية، سأستمر في التعامل معهم', stars: 5 },
+            { user: 'هدى رشيد', text: '💎 منصة متكاملة لكل ما يحتاجه المبرمج', stars: 5 },
+            { user: 'سيف الدين', text: '⚡ أسرع خدمة برمجية شاهدتها، أنصح بها بشدة', stars: 5 },
+            { user: 'مريم عادل', text: '🌹 دعم فني متعاون ومحتوى غني، شكراً لكم', stars: 5 }
+        ];
+
+        let usedComments = [];
+
+        function getRandomComments() {
+            const shuffled = [...allComments];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled.slice(0, 5);
+        }
+
+        function openComments() {
+            const overlay = document.getElementById('commentsOverlay');
+            overlay.classList.add('show');
+            document.getElementById('dropdownMenu').classList.remove('show');
+
+            const comments = getRandomComments();
+            const list = document.getElementById('commentsList');
+            list.innerHTML = '';
+            comments.forEach(c => {
+                const starsHtml = '★'.repeat(c.stars) + '☆'.repeat(5 - c.stars);
+                list.innerHTML += `
+                    <div class="comment-item">
+                        <div class="comment-user"><i class="fas fa-user-circle"></i> ${c.user}</div>
+                        <div class="comment-text">${c.text}</div>
+                        <div class="comment-stars">${starsHtml}</div>
+                    </div>
+                `;
+            });
+        }
+
+        function closeComments() {
+            document.getElementById('commentsOverlay').classList.remove('show');
+        }
+        document.getElementById('commentsOverlay').addEventListener('click', function(e) {
+            if (e.target === this) closeComments();
+        });
 
         // ===== مشغل الموسيقى =====
         const tracks = [
-            { name: '🎵 هدوء وسكينة', url: 'https://cdn.pixabay.com/download/audio/2022/05/27/audio_4e3d7e0f1a.mp3' },
+            { name: '🎵 هدوء وسكينة', url: 'https://cdn.pixabay.com/download/audio/2026/01/22/audio_08b9c5a7d1.mp3' },
             { name: '🌙 ليالي هادئة', url: 'https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0e1f2a3b4.mp3' },
             { name: '🌊 أمواج وسلام', url: 'https://cdn.pixabay.com/download/audio/2022/02/02/audio_bb8b5e9f1c.mp3' }
         ];
@@ -2110,22 +2223,22 @@
                 navBots: 'بوتات',
                 channel1Title: 'قناة بايثون',
                 channel1Desc: 'محتوى برمجي، أكواد، ومشاريع بايثون متطورة.',
-                channel2Title: 'سورس ميوزك فيجا',
+                channel2Title: ' ميوزك فيجا',
                 channel2Desc: 'مستوحى من بوتات الموسيقى • مفتوحة المصدر',
                 channel3Title: 'قناة ترمكس',
-                channel3Desc: 'أدوات حماية، تليثون، نقل أعضاء، ومزادات.',
+                channel3Desc: 'أدوات و اختراق و أمن سيبراني .',
                 supportTitle: 'جروب الدعم',
                 supportDesc: 'الدعم الفني والمساعدة في جميع الاستفسارات.',
                 join: 'انضم',
                 joinSupport: 'انضم للدعم',
                 active: 'نشطة',
-                activeSupport: 'متاح 24/7',
+                activeSupport: 'متاح 24',
                 protection: 'حماية',
                 s1: 'أكواد بجميع اللغات',
                 s2: 'مصانع ميوزك',
                 s3: 'مصانع حماية',
                 s4: 'مصانع تليثون',
-                s5: 'نقل أعضاء (مخفي/ظهار)',
+                s5: 'نقل أعضاء (مخفي او ظهار)',
                 s6: 'ملفات شد',
                 s7: 'نشر تلقائي بمميزات',
                 s8: 'مزاد للسوبرات',
@@ -2137,13 +2250,12 @@
                 openBot: 'افتح البوت',
                 securePay: 'دفع آمن عبر باينس',
                 payBtn: 'الدفع عبر Binance',
-                founder: 'المؤسس',
+                founder: 'المؤسس',                
                 youtube: 'يوتيوب',
+                comments: 'التعليقات',
+                commentsTitle: 'آراء المستخدمين',
                 footerRights: 'حرية تعديل و نشر',
-                notice: 'تنويه_هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك',
-                editorTitle: 'تجربة الأكواد مباشرة',
-                runBtn: 'تشغيل ▶',
-                clearBtn: 'مسح'
+                notice: 'تنويه هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك'
             },
             en: {
                 brandTitle: 'python zone',
@@ -2169,7 +2281,7 @@
                 s2: 'Music factories',
                 s3: 'Protection factories',
                 s4: 'Telethon factories',
-                s5: 'Member transfer (hidden/show)',
+                s5: 'Member transfer (hidden & show)',
                 s6: 'Crash files',
                 s7: 'Auto-posting with features',
                 s8: 'Supergroup auctions',
@@ -2183,11 +2295,10 @@
                 payBtn: 'Pay with Binance',
                 founder: 'Founder',
                 youtube: 'YouTube',
+                comments: 'Comments',
+                commentsTitle: 'User Reviews',
                 footerRights: 'Free to modify & publish',
-                notice: 'Important: Please be serious so we don\'t waste time',
-                editorTitle: 'Test Code Online',
-                runBtn: 'Run ▶',
-                clearBtn: 'Clear'
+                notice: 'Important: Please be serious so we don\'t waste time'
             }
         };
 
