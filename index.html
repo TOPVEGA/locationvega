@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>python zone | منصة برمجيات وتطوير</title>
+    <title>python zone | منصة خدمات فيجا متنوعة</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
+        /* جميع الأنماط كما هي دون تغيير */
         * {
             margin: 0;
             padding: 0;
@@ -65,7 +66,6 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
 
-        /* ===== الهيدر ===== */
         .header {
             display: flex;
             flex-wrap: wrap;
@@ -186,7 +186,6 @@
             color: #2563eb;
         }
 
-        /* ===== التنقل ===== */
         .nav-links {
             display: flex;
             flex-wrap: wrap;
@@ -236,7 +235,6 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
         }
 
-        /* ===== الشبكات ===== */
         .channels-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -289,7 +287,6 @@
             100% { transform: scale(1); }
         }
 
-        /* ===== التعليقات ===== */
         .comment-input-area {
             background: #fff;
             border-radius: 28px;
@@ -541,7 +538,6 @@
             background: rgba(37, 99, 235, 0.04);
         }
 
-        /* ===== باقي الأنماط ===== */
         .services-list {
             background: #fff;
             border-radius: 28px;
@@ -748,7 +744,6 @@
             color: #94a3b8;
         }
 
-        /* ===== نافذة التعليقات ===== */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -829,7 +824,6 @@
             color: #2563eb;
         }
 
-        /* ===== نافذة التقويم ===== */
         .calendar-modal .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -875,7 +869,6 @@
             border-color: rgba(96, 165, 250, 0.06);
         }
 
-        /* ===== نافذة خدماتنا  ===== */
         .about-modal .about-content {
             font-size: 0.9rem;
             line-height: 1.8;
@@ -899,7 +892,6 @@
             gap: 8px;
         }
 
-        /* ===== قسم API الجديد ===== */
         .api-section {
             background: #fff;
             border-radius: 28px;
@@ -1029,7 +1021,6 @@
             color: #f1f5f9;
         }
 
-        /* ===== استجابة ===== */
         @media (max-width: 700px) {
             .main-card {
                 padding: 1.2rem 1rem 4.5rem 1rem;
@@ -1081,6 +1072,359 @@
             .api-grid {
                 grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
             }
+        }
+
+        /* أنماط إضافية */
+        .highlight {
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        body.dark-mode .highlight {
+            color: #60a5fa;
+        }
+
+        .footer-note {
+            margin-top: 1.2rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.02);
+            font-size: 0.8rem;
+            color: #64748b;
+            text-align: center;
+        }
+
+        body.dark-mode .footer-note {
+            border-color: rgba(255, 255, 255, 0.02);
+            color: #94a3b8;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .calendar-header h2 {
+            font-size: 1.2rem;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        body.dark-mode .calendar-header h2 {
+            color: #f1f5f9;
+        }
+
+        .calendar-header .clock-display {
+            font-family: 'Inter', monospace;
+            font-size: 1rem;
+            background: #f1f5f9;
+            padding: 0.1rem 0.8rem;
+            border-radius: 30px;
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        body.dark-mode .calendar-header .clock-display {
+            background: rgba(255, 255, 255, 0.02);
+            color: #60a5fa;
+        }
+
+        .calendar-footer {
+            margin-top: 1rem;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.75rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.02);
+            padding-top: 0.8rem;
+        }
+
+        body.dark-mode .calendar-footer {
+            color: #94a3b8;
+            border-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .card-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px;
+            padding-top: 0.6rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.02);
+        }
+
+        body.dark-mode .card-meta {
+            border-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .card-meta a {
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            background: rgba(37, 99, 235, 0.02);
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .card-meta a:hover {
+            background: rgba(37, 99, 235, 0.04);
+            transform: translateY(-1px);
+        }
+
+        .badge {
+            background: #f1f5f9;
+            padding: 0.1rem 0.7rem;
+            border-radius: 40px;
+            font-size: 0.6rem;
+            color: #64748b;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+
+        body.dark-mode .badge {
+            background: rgba(255, 255, 255, 0.02);
+            color: #94a3b8;
+        }
+
+        .support-card .card-title i {
+            color: #dc2626;
+        }
+
+        .bot-link {
+            display: inline-block;
+            margin-top: 0.4rem;
+            padding: 0.2rem 1.2rem;
+            border-radius: 60px;
+            background: rgba(37, 99, 235, 0.02);
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 0.75rem;
+            border: 1px solid rgba(37, 99, 235, 0.04);
+            transition: all 0.3s ease;
+        }
+
+        .bot-link:hover {
+            background: rgba(37, 99, 235, 0.04);
+            transform: translateY(-2px);
+        }
+
+        body.dark-mode .bot-link {
+            background: rgba(96, 165, 250, 0.02);
+            color: #60a5fa;
+            border-color: rgba(96, 165, 250, 0.04);
+        }
+
+        .pay-icon i {
+            font-size: 1.8rem;
+            color: #2563eb;
+        }
+
+        body.dark-mode .pay-icon i {
+            color: #60a5fa;
+        }
+
+        .pay-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        body.dark-mode .pay-title {
+            color: #f1f5f9;
+        }
+
+        .pay-sub {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #2563eb;
+            background: rgba(37, 99, 235, 0.02);
+            padding: 0.05rem 1rem;
+            border-radius: 40px;
+            letter-spacing: 1px;
+            direction: ltr;
+        }
+
+        body.dark-mode .pay-sub {
+            color: #60a5fa;
+            background: rgba(96, 165, 250, 0.02);
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        body.dark-mode .bot-card,
+        body.dark-mode .channel-card,
+        body.dark-mode .services-list,
+        body.dark-mode .payment-section,
+        body.dark-mode .comment-input-area,
+        body.dark-mode .api-section {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.02);
+        }
+
+        body.dark-mode .bot-card .bot-name,
+        body.dark-mode .channel-card .card-title,
+        body.dark-mode .pay-title {
+            color: #f1f5f9;
+        }
+
+        body.dark-mode .bot-card .bot-desc,
+        body.dark-mode .channel-card .card-desc {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .bot-card .bot-username {
+            color: #60a5fa;
+        }
+
+        body.dark-mode .payment-item {
+            background: rgba(255, 255, 255, 0.02);
+            color: #e2e8f0;
+            border-color: rgba(255, 255, 255, 0.02);
+        }
+
+        body.dark-mode .pay-sub {
+            color: #60a5fa;
+            background: rgba(96, 165, 250, 0.02);
+        }
+
+        body.dark-mode .pay-icon i {
+            color: #60a5fa;
+        }
+
+        body.dark-mode .dropdown-content {
+            background: #1e293b;
+            border-color: rgba(255, 255, 255, 0.02);
+        }
+
+        body.dark-mode .dropdown-item {
+            color: #e2e8f0 !important;
+        }
+
+        body.dark-mode .dropdown-item:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        body.dark-mode .comment-item .comment-actions-bottom button:hover {
+            color: #60a5fa;
+        }
+
+        body.dark-mode .calendar-modal .calendar-grid .day {
+            background: rgba(255, 255, 255, 0.02);
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .calendar-modal .calendar-grid .day.today {
+            background: rgba(96, 165, 250, 0.04);
+            color: #60a5fa;
+            border-color: rgba(96, 165, 250, 0.06);
+        }
+
+        body.dark-mode .calendar-modal .calendar-grid .weekday {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .api-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.02);
+        }
+
+        body.dark-mode .api-card .api-name {
+            color: #f1f5f9;
+        }
+
+        body.dark-mode .api-card .api-desc {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .api-card i {
+            color: #60a5fa;
+        }
+
+        body.dark-mode .api-note {
+            background: rgba(255, 255, 255, 0.02);
+            color: #94a3b8;
+        }
+
+        body.dark-mode .api-note strong {
+            color: #f1f5f9;
+        }
+
+        body.dark-mode .api-section .api-header h3 {
+            color: #f1f5f9;
+        }
+
+        body.dark-mode .api-section .api-header i {
+            color: #60a5fa;
+        }
+
+        body.dark-mode .services-list ul li {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .notice {
+            background: rgba(255, 255, 255, 0.02);
+            color: #94a3b8;
+        }
+
+        body.dark-mode .footer {
+            color: #94a3b8;
+            border-color: rgba(255, 255, 255, 0.02);
+        }
+
+        body.dark-mode .about-modal .about-content {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .modal h2 {
+            color: #f1f5f9;
+        }
+
+        body.dark-mode .comment-item .comment-text {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .comment-item .comment-user {
+            color: #f1f5f9;
+        }
+
+        body.dark-mode .btn-submit-comment {
+            background: #2563eb;
+        }
+
+        body.dark-mode .btn-submit-comment:hover {
+            background: #1d4ed8;
+        }
+
+        body.dark-mode [style*="background: linear-gradient"] {
+            background: linear-gradient(135deg, rgba(37,99,235,0.04) 0%, rgba(139,92,246,0.04) 100%) !important;
+            border-color: rgba(96,165,250,0.06) !important;
+        }
+
+        body.dark-mode [style*="background: linear-gradient"] h3 {
+            color: #f1f5f9 !important;
+        }
+
+        body.dark-mode [style*="background: linear-gradient"] p {
+            color: #e2e8f0 !important;
+        }
+
+        body.dark-mode [style*="background: linear-gradient"] span {
+            color: #60a5fa !important;
         }
     </style>
 </head>
@@ -1143,7 +1487,7 @@
                     </button>
                     <div style="height:1px; background:rgba(0,0,0,0.02); margin:0.2rem 1rem;"></div>
                     <button class="dropdown-item" onclick="openAboutModal()" style="display:flex; align-items:center; gap:10px; padding:0.4rem 1.2rem; color:#1e293b; background:transparent; border:none; width:100%; cursor:pointer; font-size:0.8rem; border-radius:12px; transition:all 0.2s ease;">
-                        <i class="fas fa-info-circle"></i> 📖 خدماتنا 
+                        <i class="fas fa-info-circle"></i> 📖 خدماتنا
                     </button>
                     <div style="height:1px; background:rgba(0,0,0,0.02); margin:0.2rem 1rem;"></div>
                     <a class="dropdown-item" href="https://t.me/Cybervega" target="_blank" style="display:flex; align-items:center; gap:10px; padding:0.4rem 1.2rem; color:#1e293b; text-decoration:none; font-size:0.8rem; border-radius:12px; transition:all 0.2s ease;">
@@ -1154,10 +1498,10 @@
 
             <!-- ===== التنقل ===== -->
             <div class="nav-links">
-                <span class="nav-btn"><i class="fas fa-code"></i> الأكواد</span>
-                <span class="nav-btn"><i class="fas fa-tools"></i> الأدوات</span>
-                <span class="nav-btn"><i class="fas fa-terminal"></i> سكربتات</span>
-                <span class="nav-btn"><i class="fas fa-robot"></i> بوتات</span>
+                <span class="nav-btn"><i class="fas fa-code"></i> <span data-key="navCodes">الأكواد</span></span>
+                <span class="nav-btn"><i class="fas fa-tools"></i> <span data-key="navTools">الأدوات</span></span>
+                <span class="nav-btn"><i class="fas fa-terminal"></i> <span data-key="navScripts">سكربتات</span></span>
+                <span class="nav-btn"><i class="fas fa-robot"></i> <span data-key="navBots">بوتات</span></span>
             </div>
 
             <!-- ===== القنوات ===== -->
@@ -1222,7 +1566,7 @@
             <div class="bots-section" data-aos="fade-up" data-aos-delay="200">
                 <div class="bot-card">
                     <i class="fas fa-music"></i>
-                    <div class="bot-name"> بيري للأغاني</div>
+                    <div class="bot-name">بيري للأغاني</div>
                     <div class="bot-username">@Bi1ieBot</div>
                     <div class="bot-desc" data-key="bot1Desc">بوت استماع وتحميل الأغاني</div>
                     <a href="https://t.me/Bi1ieBot" target="_blank" class="bot-link"><i class="fab fa-telegram"></i> <span data-key="openBot">افتح البوت</span></a>
@@ -1240,36 +1584,36 @@
             <div class="api-section" data-aos="fade-up" data-aos-delay="250">
                 <div class="api-header">
                     <i class="fas fa-plug"></i>
-                    <h3>خدمات API للتطبيقات</h3>
+                    <h3 data-key="apiTitle">خدمات API للتطبيقات</h3>
                 </div>
-                <p style="color:#64748b; font-size:0.85rem; margin-bottom:0.5rem;">
+                <p style="color:#64748b; font-size:0.85rem; margin-bottom:0.5rem;" data-key="apiDesc">
                     نقدم واجهات برمجة تطبيقات (API) جاهزة للتكامل مع تطبيقاتك، مصممة خصيصاً لتلبية احتياجات المطورين.
                 </p>
                 <div class="api-grid">
                     <div class="api-card">
                         <i class="fab fa-youtube"></i>
-                        <div class="api-name">YouTube API</div>
-                        <div class="api-desc">جلب البيانات، بحث، تشغيل</div>
+                        <div class="api-name" data-key="apiName1">YouTube API</div>
+                        <div class="api-desc" data-key="apiDesc1">جلب البيانات، بحث، تشغيل</div>
                     </div>
                     <div class="api-card">
                         <i class="fab fa-spotify"></i>
-                        <div class="api-name">Spotify API</div>
-                        <div class="api-desc">موسيقى، قوائم تشغيل، بحث</div>
+                        <div class="api-name" data-key="apiName2">Spotify API</div>
+                        <div class="api-desc" data-key="apiDesc2">موسيقى، قوائم تشغيل، بحث</div>
                     </div>
                     <div class="api-card">
                         <i class="fab fa-telegram"></i>
-                        <div class="api-name">Telegram API</div>
-                        <div class="api-desc">بوتات، جلسات، تفاعلات</div>
+                        <div class="api-name" data-key="apiName3">Telegram API</div>
+                        <div class="api-desc" data-key="apiDesc3">بوتات، جلسات، تفاعلات</div>
                     </div>
                     <div class="api-card">
                         <i class="fas fa-cloud-upload-alt"></i>
-                        <div class="api-name">Media API</div>
-                        <div class="api-desc">رفع ومعالجة الميديا</div>
+                        <div class="api-name" data-key="apiName4">Media API</div>
+                        <div class="api-desc" data-key="apiDesc4">رفع ومعالجة الميديا</div>
                     </div>
                 </div>
                 <div class="api-note">
                     <i class="fas fa-info-circle"></i>
-                    <span><strong>ملاحظة:</strong> جميع واجهات API قابلة للتعديل والتخصيص حسب طلبك، مع دعم فني متواصل.</span>
+                    <span data-key="apiNote"><strong>ملاحظة:</strong> جميع واجهات API قابلة للتعديل والتخصيص حسب طلبك، مع دعم فني متواصل.</span>
                 </div>
             </div>
 
@@ -1277,9 +1621,9 @@
             <div style="background: linear-gradient(135deg, rgba(37,99,235,0.02) 0%, rgba(139,92,246,0.02) 100%); border-radius: 28px; padding: 1.5rem 1.8rem; margin: 1.2rem 0; border: 1px solid rgba(37,99,235,0.04);">
                 <div style="display:flex; align-items:center; gap:12px; margin-bottom:0.8rem;">
                     <i class="fas fa-bullseye" style="color:#2563eb; font-size:1.6rem;"></i>
-                    <h3 style="color:#0f172a; font-weight:700; font-size:1.1rem;">رؤيتنا وخدمتنا</h3>
+                    <h3 style="color:#0f172a; font-weight:700; font-size:1.1rem;" data-key="visionTitle">رؤيتنا وخدمتنا</h3>
                 </div>
-                <p style="color:#1e293b; font-size:0.9rem; line-height:1.8;">
+                <p style="color:#1e293b; font-size:0.9rem; line-height:1.8;" data-key="visionText">
                     نؤمن بأن البرمجيات هي لغة المستقبل، ونسعى لتقديم منصة متكاملة تجمع بين <strong>الإبداع والتقنية</strong>.
                     نقدم حلولاً برمجية مبتكرة، واجهات API متطورة، وأدوات تسهل على المطورين بناء تطبيقاتهم بسهولة.
                     <br><br>
@@ -1294,13 +1638,13 @@
                 <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem; width:100%;">
                     <div class="payment-item" onclick="window.open('https://account.binance.com/register?ref=894656421&?registerChannel=user_center', '_blank')">
                         <div class="pay-icon"><i class="fab fa-bitcoin"></i></div>
-                        <div class="pay-title">دفع</div>
+                        <div class="pay-title" data-key="payTitle">دفع</div>
                         <div class="pay-sub">Binance</div>
                     </div>
                     <div class="payment-item" onclick="openTelegramStars()">
                         <div class="pay-icon"><i class="fas fa-star" style="color:#eab308;"></i></div>
-                        <div class="pay-title">دفع</div>
-                        <div class="pay-sub">⭐ نجوم تليجرام</div>
+                        <div class="pay-title" data-key="payTitle">دفع</div>
+                        <div class="pay-sub" data-key="payStarsSub">⭐ نجوم تليجرام</div>
                     </div>
                 </div>
                 <div style="color:#64748b; font-size:0.65rem; opacity:0.5; display:flex; align-items:center; gap:6px;">
@@ -1409,27 +1753,27 @@
     <div class="modal-overlay" id="aboutOverlay">
         <div class="modal about-modal">
             <button class="close-modal" onclick="closeAboutModal()"><i class="fas fa-times"></i></button>
-            <h2><i class="fas fa-info-circle"></i> خدماتنا </h2>
+            <h2><i class="fas fa-info-circle"></i> <span data-key="aboutTitle">خدماتنا</span></h2>
             <div class="about-content">
-                <p>السلام علي من اتبع الهدى</p>
+                <p data-key="aboutGreeting">السلام علي من اتبع الهدى</p>
                 <ul>
-                    <li><i class="fas fa-code"></i> يوجد عمل اكواد برمجه بجميع اللغات</li>
-                    <li><i class="fas fa-file-audio"></i> يوجد ملفات و مصانع ميوزك</li>
-                    <li><i class="fas fa-shield-virus"></i> يوجد ملفات و مصانع حمايه</li>
-                    <li><i class="fab fa-telegram"></i> يوجد ملفات و مصانع تليثون</li>
-                    <li><i class="fas fa-user-friends"></i> يوجد ملفات نقل أعضاء مخفي و ظهار</li>
-                    <li><i class="fas fa-bolt"></i> يوجد ملفات شد</li>
-                    <li><i class="fas fa-upload"></i> يوجد ملفات نشر تلقائي بمميزات</li>
-                    <li><i class="fas fa-gavel"></i> يوجد ملفات مزاد للسوبرات</li>
-                    <li><i class="fas fa-file-code"></i> يوجد ملف lua & php حمايه</li>
-                    <li><i class="fas fa-bug"></i> يوجد حل جميع الأخطاء</li>
+                    <li><i class="fas fa-code"></i> <span data-key="about1">يوجد عمل اكواد برمجه بجميع اللغات</span></li>
+                    <li><i class="fas fa-file-audio"></i> <span data-key="about2">يوجد ملفات و مصانع ميوزك</span></li>
+                    <li><i class="fas fa-shield-virus"></i> <span data-key="about3">يوجد ملفات و مصانع حمايه</span></li>
+                    <li><i class="fab fa-telegram"></i> <span data-key="about4">يوجد ملفات و مصانع تليثون</span></li>
+                    <li><i class="fas fa-user-friends"></i> <span data-key="about5">يوجد ملفات نقل أعضاء مخفي و ظهار</span></li>
+                    <li><i class="fas fa-bolt"></i> <span data-key="about6">يوجد ملفات شد</span></li>
+                    <li><i class="fas fa-upload"></i> <span data-key="about7">يوجد ملفات نشر تلقائي بمميزات</span></li>
+                    <li><i class="fas fa-gavel"></i> <span data-key="about8">يوجد ملفات مزاد للسوبرات</span></li>
+                    <li><i class="fas fa-file-code"></i> <span data-key="about9">يوجد ملف lua & php حمايه</span></li>
+                    <li><i class="fas fa-bug"></i> <span data-key="about10">يوجد حل جميع الأخطاء</span></li>
                 </ul>
-                <p style="margin-top:0.6rem;">يوجد عمل اي كود او تعديل اي ملف<br />كل هذا و <span class="highlight">#بأسعار رمزيه بدون تكلفة</span></p>
-                <p style="margin-top:0.6rem;"><strong>للتواصل:</strong></p>
+                <p style="margin-top:0.6rem;" data-key="aboutPricing">يوجد عمل اي كود او تعديل اي ملف<br />كل هذا و <span class="highlight">#بأسعار رمزيه بدون تكلفة</span></p>
+                <p style="margin-top:0.6rem;"><strong data-key="aboutContact">للتواصل:</strong></p>
                 <p>By : <span class="highlight">@TopVeGa</span></p>
                 <div class="footer-note">
                     <i class="fas fa-exclamation-triangle" style="color:#2563eb;"></i>
-                    #تنويه هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك
+                    <span data-key="aboutNotice">#تنويه هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك</span>
                 </div>
             </div>
         </div>
@@ -1489,24 +1833,24 @@
                     <div style="background:#fff;border-radius:32px;padding:2rem;max-width:400px;width:100%;text-align:center;position:relative;animation:slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);">
                         <button onclick="this.parentElement.parentElement.remove()" style="position:absolute;top:0.8rem;left:0.8rem;background:transparent;border:none;font-size:1.2rem;cursor:pointer;color:#64748b;transition:all 0.3s ease;">✕</button>
                         <div style="font-size:3rem;margin-bottom:0.5rem;">⭐</div>
-                        <h3 style="color:#0f172a;margin-bottom:0.5rem;">تبرع بـ نجوم تليجرام</h3>
-                        <p style="color:#64748b;font-size:0.9rem;margin-bottom:1rem;">
+                        <h3 style="color:#0f172a;margin-bottom:0.5rem;" data-key="donateTitle">تبرع بـ نجوم تليجرام</h3>
+                        <p style="color:#64748b;font-size:0.9rem;margin-bottom:1rem;" data-key="donateDesc">
                             تبرعك بـ 1 نجمة يساعدنا على الاستمرار<br>
                             وتطوير المنصة نحو الأفضل ❤️
                         </p>
                         <div style="display:flex;flex-direction:column;gap:0.5rem;">
                             <button onclick="window.open('https://t.me/topvega?start=donate','_blank')" style="background:#eab308;border:none;padding:0.8rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
-                                <i class="fas fa-star"></i> تبرع بـ 1 ⭐
+                                <i class="fas fa-star"></i> <span data-key="donate1">تبرع بـ 1 ⭐</span>
                             </button>
                             <button onclick="window.open('https://t.me/topvega?start=donate_5','_blank')" style="background:#f59e0b;border:none;padding:0.8rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
-                                <i class="fas fa-star"></i> تبرع بـ 5 ⭐
+                                <i class="fas fa-star"></i> <span data-key="donate5">تبرع بـ 5 ⭐</span>
                             </button>
                             <button onclick="window.open('https://t.me/topvega?start=donate_10','_blank')" style="background:#d97706;border:none;padding:0.8rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
-                                <i class="fas fa-star"></i> تبرع بـ 10 ⭐
+                                <i class="fas fa-star"></i> <span data-key="donate10">تبرع بـ 10 ⭐</span>
                             </button>
                         </div>
                         <p style="color:#94a3b8;font-size:0.65rem;margin-top:1rem;">
-                            <i class="fas fa-lock"></i> الدفع مباشرة لحساب @TopVeGa
+                            <i class="fas fa-lock"></i> <span data-key="donateSecure">الدفع مباشرة لحساب @TopVeGa</span>
                         </p>
                     </div>
                 </div>
@@ -1775,7 +2119,7 @@
             document.getElementById('visitorCount').textContent = vc.toLocaleString();
         }, 15000);
 
-        // ===== الترجمة (عربي وإنجليزي فقط) =====
+        // ===== الترجمة (عربي وإنجليزي) =====
         const translations = {
             ar: {
                 brandTitle: 'python zone',
@@ -1814,6 +2158,8 @@
                 securePay: 'دفع آمن عبر باينس و نجوم تليجرام',
                 payBtn: 'الدفع عبر Binance',
                 payStars: 'الدفع بـ ⭐ نجوم',
+                payTitle: 'دفع',
+                payStarsSub: '⭐ نجوم تليجرام',
                 founder: 'المؤسس',
                 youtube: 'يوتيوب',
                 comments: 'التعليقات',
@@ -1822,7 +2168,41 @@
                 autoComments: 'تتغير التعليقات تلقائياً',
                 footerRights: 'جميع الحقوق محفوظة ',
                 notice: 'تنويه هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك',
-                support: 'جروب الدعم'
+                support: 'جروب الدعم',
+                apiTitle: 'خدمات API للتطبيقات',
+                apiDesc: 'نقدم واجهات برمجة تطبيقات (API) جاهزة للتكامل مع تطبيقاتك، مصممة خصيصاً لتلبية احتياجات المطورين.',
+                apiName1: 'YouTube API',
+                apiDesc1: 'جلب البيانات، بحث، تشغيل',
+                apiName2: 'Spotify API',
+                apiDesc2: 'موسيقى، قوائم تشغيل، بحث',
+                apiName3: 'Telegram API',
+                apiDesc3: 'بوتات، جلسات، تفاعلات',
+                apiName4: 'Media API',
+                apiDesc4: 'رفع ومعالجة الميديا',
+                apiNote: 'ملاحظة: جميع واجهات API قابلة للتعديل والتخصيص حسب طلبك، مع دعم فني متواصل.',
+                visionTitle: 'رؤيتنا وخدمتنا',
+                visionText: 'نؤمن بأن البرمجيات هي لغة المستقبل، ونسعى لتقديم منصة متكاملة تجمع بين الإبداع والتقنية. نقدم حلولاً برمجية مبتكرة، واجهات API متطورة، وأدوات تسهل على المطورين بناء تطبيقاتهم بسهولة. خدمتنا: نوفر بيئة داعمة للمطورين، مع محتوى غني، وأكواد جاهزة، ودعم فني احترافي. رؤيتنا: أن نكون المنصة الأولى في العالم العربي للبرمجيات والتطوير، مع الحفاظ على الجودة والابتكار.',
+                aboutTitle: 'خدماتنا',
+                aboutGreeting: 'السلام علي من اتبع الهدى',
+                about1: 'يوجد عمل اكواد برمجه بجميع اللغات',
+                about2: 'يوجد ملفات و مصانع ميوزك',
+                about3: 'يوجد ملفات و مصانع حمايه',
+                about4: 'يوجد ملفات و مصانع تليثون',
+                about5: 'يوجد ملفات نقل أعضاء مخفي و ظهار',
+                about6: 'يوجد ملفات شد',
+                about7: 'يوجد ملفات نشر تلقائي بمميزات',
+                about8: 'يوجد ملفات مزاد للسوبرات',
+                about9: 'يوجد ملف lua & php حمايه',
+                about10: 'يوجد حل جميع الأخطاء',
+                aboutPricing: 'يوجد عمل اي كود او تعديل اي ملف كل هذا و #بأسعار رمزيه بدون تكلفة',
+                aboutContact: 'للتواصل:',
+                aboutNotice: '#تنويه هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك',
+                donateTitle: 'تبرع بـ نجوم تليجرام',
+                donateDesc: 'تبرعك بـ 1 نجمة يساعدنا على الاستمرار وتطوير المنصة نحو الأفضل ❤️',
+                donate1: 'تبرع بـ 1 ⭐',
+                donate5: 'تبرع بـ 5 ⭐',
+                donate10: 'تبرع بـ 10 ⭐',
+                donateSecure: 'الدفع مباشرة لحساب @TopVeGa'
             },
             en: {
                 brandTitle: 'python zone',
@@ -1861,6 +2241,8 @@
                 securePay: 'Secure payment via Binance & Telegram Stars',
                 payBtn: 'Pay with Binance',
                 payStars: 'Pay with ⭐ Stars',
+                payTitle: 'Pay',
+                payStarsSub: '⭐ Telegram Stars',
                 founder: 'Founder',
                 youtube: 'YouTube',
                 comments: 'Comments',
@@ -1869,7 +2251,41 @@
                 autoComments: 'Comments refresh automatically',
                 footerRights: 'Free to modify & publish',
                 notice: 'Important: Please be serious so we don\'t waste time',
-                support: 'Support Group'
+                support: 'Support Group',
+                apiTitle: 'API Services for Applications',
+                apiDesc: 'We provide ready-to-use APIs for integration with your applications, specifically designed to meet developers\' needs.',
+                apiName1: 'YouTube API',
+                apiDesc1: 'Fetch data, search, play',
+                apiName2: 'Spotify API',
+                apiDesc2: 'Music, playlists, search',
+                apiName3: 'Telegram API',
+                apiDesc3: 'Bots, sessions, interactions',
+                apiName4: 'Media API',
+                apiDesc4: 'Upload and process media',
+                apiNote: 'Note: All APIs are customizable upon request, with continuous technical support.',
+                visionTitle: 'Our Vision & Service',
+                visionText: 'We believe that software is the language of the future, and we strive to provide an integrated platform that combines creativity and technology. We offer innovative software solutions, advanced APIs, and tools that make it easy for developers to build their applications. Our service: We provide a supportive environment for developers, with rich content, ready-made codes, and professional technical support. Our vision: To be the leading platform in the Arab world for software and development, while maintaining quality and innovation.',
+                aboutTitle: 'Our Services',
+                aboutGreeting: 'Peace be upon those who follow the guidance',
+                about1: 'We provide programming codes in all languages',
+                about2: 'We provide music files and factories',
+                about3: 'We provide protection files and factories',
+                about4: 'We provide Telethon files and factories',
+                about5: 'We provide member transfer files (hidden & show)',
+                about6: 'We provide crash files',
+                about7: 'We provide auto-posting files with features',
+                about8: 'We provide supergroup auction files',
+                about9: 'We provide lua & php protection files',
+                about10: 'We solve all errors',
+                aboutPricing: 'We can create any code or modify any file All of this at #symbolic prices without cost',
+                aboutContact: 'Contact:',
+                aboutNotice: '#Important: Please be serious so we don\'t waste time',
+                donateTitle: 'Donate with Telegram Stars',
+                donateDesc: 'Your donation of 1 star helps us continue and develop the platform for the better ❤️',
+                donate1: 'Donate 1 ⭐',
+                donate5: 'Donate 5 ⭐',
+                donate10: 'Donate 10 ⭐',
+                donateSecure: 'Payment directly to @TopVeGa account'
             }
         };
 
@@ -1931,369 +2347,9 @@
             if (e.target === this) closeAboutModal();
         });
 
-        console.log('🚀 python zone | منصة برمجيات وتطوير');
+        console.log('🚀 python zone | منصة خدمات فيجا متنوعة');
         console.log('📌 @TopVeGa | @Cybervega');
         console.log('⭐ جميع الحقوق محفوظة © 2015-2024');
     </script>
-
-    <style>
-        /* أنماط إضافية */
-        .highlight {
-            color: #2563eb;
-            font-weight: 600;
-        }
-
-        body.dark-mode .highlight {
-            color: #60a5fa;
-        }
-
-        .footer-note {
-            margin-top: 1.2rem;
-            padding-top: 0.8rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.02);
-            font-size: 0.8rem;
-            color: #64748b;
-            text-align: center;
-        }
-
-        body.dark-mode .footer-note {
-            border-color: rgba(255, 255, 255, 0.02);
-            color: #94a3b8;
-        }
-
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .calendar-header h2 {
-            font-size: 1.2rem;
-            color: #0f172a;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        body.dark-mode .calendar-header h2 {
-            color: #f1f5f9;
-        }
-
-        .calendar-header .clock-display {
-            font-family: 'Inter', monospace;
-            font-size: 1rem;
-            background: #f1f5f9;
-            padding: 0.1rem 0.8rem;
-            border-radius: 30px;
-            color: #2563eb;
-            font-weight: 600;
-        }
-
-        body.dark-mode .calendar-header .clock-display {
-            background: rgba(255, 255, 255, 0.02);
-            color: #60a5fa;
-        }
-
-        .calendar-footer {
-            margin-top: 1rem;
-            text-align: center;
-            color: #64748b;
-            font-size: 0.75rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.02);
-            padding-top: 0.8rem;
-        }
-
-        body.dark-mode .calendar-footer {
-            color: #94a3b8;
-            border-color: rgba(255, 255, 255, 0.02);
-        }
-
-        .card-meta {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 6px;
-            padding-top: 0.6rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.02);
-        }
-
-        body.dark-mode .card-meta {
-            border-color: rgba(255, 255, 255, 0.02);
-        }
-
-        .card-meta a {
-            color: #2563eb;
-            text-decoration: none;
-            font-size: 0.75rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 0.1rem 0.8rem;
-            border-radius: 40px;
-            background: rgba(37, 99, 235, 0.02);
-            border: 1px solid transparent;
-            transition: all 0.3s ease;
-        }
-
-        .card-meta a:hover {
-            background: rgba(37, 99, 235, 0.04);
-            transform: translateY(-1px);
-        }
-
-        .badge {
-            background: #f1f5f9;
-            padding: 0.1rem 0.7rem;
-            border-radius: 40px;
-            font-size: 0.6rem;
-            color: #64748b;
-            border: 1px solid rgba(0, 0, 0, 0.02);
-        }
-
-        body.dark-mode .badge {
-            background: rgba(255, 255, 255, 0.02);
-            color: #94a3b8;
-        }
-
-        .support-card .card-title i {
-            color: #dc2626;
-        }
-
-        .bot-link {
-            display: inline-block;
-            margin-top: 0.4rem;
-            padding: 0.2rem 1.2rem;
-            border-radius: 60px;
-            background: rgba(37, 99, 235, 0.02);
-            color: #2563eb;
-            text-decoration: none;
-            font-size: 0.75rem;
-            border: 1px solid rgba(37, 99, 235, 0.04);
-            transition: all 0.3s ease;
-        }
-
-        .bot-link:hover {
-            background: rgba(37, 99, 235, 0.04);
-            transform: translateY(-2px);
-        }
-
-        body.dark-mode .bot-link {
-            background: rgba(96, 165, 250, 0.02);
-            color: #60a5fa;
-            border-color: rgba(96, 165, 250, 0.04);
-        }
-
-        .pay-icon i {
-            font-size: 1.8rem;
-            color: #2563eb;
-        }
-
-        body.dark-mode .pay-icon i {
-            color: #60a5fa;
-        }
-
-        .pay-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #0f172a;
-        }
-
-        body.dark-mode .pay-title {
-            color: #f1f5f9;
-        }
-
-        .pay-sub {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #2563eb;
-            background: rgba(37, 99, 235, 0.02);
-            padding: 0.05rem 1rem;
-            border-radius: 40px;
-            letter-spacing: 1px;
-            direction: ltr;
-        }
-
-        body.dark-mode .pay-sub {
-            color: #60a5fa;
-            background: rgba(96, 165, 250, 0.02);
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        /* تحسينات الوضع المظلم */
-        body.dark-mode .bot-card,
-        body.dark-mode .channel-card,
-        body.dark-mode .services-list,
-        body.dark-mode .payment-section,
-        body.dark-mode .comment-input-area,
-        body.dark-mode .api-section {
-            background: rgba(255, 255, 255, 0.02);
-            border-color: rgba(255, 255, 255, 0.02);
-        }
-
-        body.dark-mode .bot-card .bot-name,
-        body.dark-mode .channel-card .card-title,
-        body.dark-mode .pay-title {
-            color: #f1f5f9;
-        }
-
-        body.dark-mode .bot-card .bot-desc,
-        body.dark-mode .channel-card .card-desc {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .bot-card .bot-username {
-            color: #60a5fa;
-        }
-
-        body.dark-mode .payment-item {
-            background: rgba(255, 255, 255, 0.02);
-            color: #e2e8f0;
-            border-color: rgba(255, 255, 255, 0.02);
-        }
-
-        body.dark-mode .pay-sub {
-            color: #60a5fa;
-            background: rgba(96, 165, 250, 0.02);
-        }
-
-        body.dark-mode .pay-icon i {
-            color: #60a5fa;
-        }
-
-        body.dark-mode .dropdown-content {
-            background: #1e293b;
-            border-color: rgba(255, 255, 255, 0.02);
-        }
-
-        body.dark-mode .dropdown-item {
-            color: #e2e8f0 !important;
-        }
-
-        body.dark-mode .dropdown-item:hover {
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        body.dark-mode .comment-item .comment-actions-bottom button:hover {
-            color: #60a5fa;
-        }
-
-        body.dark-mode .calendar-modal .calendar-grid .day {
-            background: rgba(255, 255, 255, 0.02);
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .calendar-modal .calendar-grid .day.today {
-            background: rgba(96, 165, 250, 0.04);
-            color: #60a5fa;
-            border-color: rgba(96, 165, 250, 0.06);
-        }
-
-        body.dark-mode .calendar-modal .calendar-grid .weekday {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .api-card {
-            background: rgba(255, 255, 255, 0.02);
-            border-color: rgba(255, 255, 255, 0.02);
-        }
-
-        body.dark-mode .api-card .api-name {
-            color: #f1f5f9;
-        }
-
-        body.dark-mode .api-card .api-desc {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .api-card i {
-            color: #60a5fa;
-        }
-
-        body.dark-mode .api-note {
-            background: rgba(255, 255, 255, 0.02);
-            color: #94a3b8;
-        }
-
-        body.dark-mode .api-note strong {
-            color: #f1f5f9;
-        }
-
-        body.dark-mode .api-section .api-header h3 {
-            color: #f1f5f9;
-        }
-
-        body.dark-mode .api-section .api-header i {
-            color: #60a5fa;
-        }
-
-        /* تحسينات النصوص في الوضع المظلم */
-        body.dark-mode .services-list ul li {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .notice {
-            background: rgba(255, 255, 255, 0.02);
-            color: #94a3b8;
-        }
-
-        body.dark-mode .footer {
-            color: #94a3b8;
-            border-color: rgba(255, 255, 255, 0.02);
-        }
-
-        body.dark-mode .about-modal .about-content {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .modal h2 {
-            color: #f1f5f9;
-        }
-
-        body.dark-mode .comment-item .comment-text {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .comment-item .comment-user {
-            color: #f1f5f9;
-        }
-
-        /* تحسين الزر في الوضع المظلم */
-        body.dark-mode .btn-submit-comment {
-            background: #2563eb;
-        }
-
-        body.dark-mode .btn-submit-comment:hover {
-            background: #1d4ed8;
-        }
-
-        /* قسم الرؤية */
-        body.dark-mode [style*="background: linear-gradient"] {
-            background: linear-gradient(135deg, rgba(37,99,235,0.04) 0%, rgba(139,92,246,0.04) 100%) !important;
-            border-color: rgba(96,165,250,0.06) !important;
-        }
-
-        body.dark-mode [style*="background: linear-gradient"] h3 {
-            color: #f1f5f9 !important;
-        }
-
-        body.dark-mode [style*="background: linear-gradient"] p {
-            color: #e2e8f0 !important;
-        }
-
-        body.dark-mode [style*="background: linear-gradient"] span {
-            color: #60a5fa !important;
-        }
-    </style>
-
 </body>
 </html>
