@@ -49,7 +49,6 @@ self.addEventListener('activate', event => {
 
 // ===== التعامل مع طلبات الشبكة =====
 self.addEventListener('fetch', event => {
-  // تجاهل طلبات التحليلات
   if (event.request.url.includes('google-analytics') || 
       event.request.url.includes('doubleclick') ||
       event.request.url.includes('googletagmanager')) {
