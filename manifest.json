@@ -1,12 +1,27 @@
 {
   "background_color": "#f0f4f8",
-  "dir": "ltr",
+  "dir": "rtl",
   "display": "standalone",
   "name": "Python Zone",
-  "orientation": "any",
+  "orientation": "portrait",
   "scope": "/",
   "short_name": "Python Zone",
   "start_url": "/",
   "theme_color": "#2563eb",
-  "description": "منصة البرمجيات والتطوير - أكواد، أدوات، بوتات"
+  "description": "منصة البرمجيات والتطوير - أكواد، أدوات، بوتات",
+  "lang": "ar",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%232563eb'/%3E%3Ctext x='256' y='320' font-size='200' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-weight='bold'%3EPZ%3C%2Ftext%3E%3Ctext x='256' y='180' font-size='120' text-anchor='middle' fill='%23ffd343'%3E%3C%2Ftext%3E%3C%2Fsvg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' fill='%232563eb'/%3E%3Ctext x='96' y='130' font-size='100' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-weight='bold'%3EPZ%3C%2Ftext%3E%3Ctext x='96' y='75' font-size='60' text-anchor='middle' fill='%23ffd343'%3E%3C%2Ftext%3E%3C%2Fsvg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
 }
