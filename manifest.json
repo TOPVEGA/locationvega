@@ -1,0 +1,61 @@
+{
+  "name": "Python Zone - منصة البرمجيات والتطوير",
+  "short_name": "Python Zone",
+  "description": "منصة البرمجيات والتطوير - أكواد، أدوات، بوتات، ومصانع برمجية",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f0f4f8",
+  "theme_color": "#2563eb",
+  "orientation": "portrait",
+  "scope": "/",
+  "lang": "ar",
+  "dir": "rtl",
+  "categories": ["education", "development", "programming", "tools"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%232563eb'/%3E%3Ctext x='256' y='320' font-size='200' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-weight='bold'%3EPZ%3C%2Ftext%3E%3Ctext x='256' y='180' font-size='120' text-anchor='middle' fill='%23ffd343'%3E%3C%2Ftext%3E%3C%2Fsvg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' fill='%232563eb'/%3E%3Ctext x='96' y='130' font-size='100' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-weight='bold'%3EPZ%3C%2Ftext%3E%3Ctext x='96' y='75' font-size='60' text-anchor='middle' fill='%23ffd343'%3E%3C%2Ftext%3E%3C%2Fsvg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 144 144'%3E%3Crect width='144' height='144' fill='%232563eb'/%3E%3Ctext x='72' y='100' font-size='75' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-weight='bold'%3EPZ%3C%2Ftext%3E%3C%2Fsvg%3E",
+      "sizes": "144x144",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "القنوات",
+      "short_name": "قنوات",
+      "description": "قنوات بايثون والبرمجة",
+      "url": "/#channels",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%232563eb'/%3E%3Ctext x='48' y='65' font-size='50' text-anchor='middle' fill='%23ffffff'%3E📡%3C%2Ftext%3E%3C%2Fsvg%3E",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "البوتات",
+      "short_name": "بوتات",
+      "description": "بوتات تليجرام",
+      "url": "/#bots",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%232563eb'/%3E%3Ctext x='48' y='65' font-size='50' text-anchor='middle' fill='%23ffffff'%3E🤖%3C%2Ftext%3E%3C%2Fsvg%3E",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "display_override": ["standalone", "window-controls-overlay"]
+}
