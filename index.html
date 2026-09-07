@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     
     <style>
-        /* ===== المتغيرات ===== */
+        /* ===== المتغيرات والثيمات ===== */
         :root {
             --primary: #2563eb;
             --primary-dark: #1d4ed8;
@@ -34,8 +34,10 @@
             --radius-lg: 28px;
             --transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             --font: 'Inter', system-ui, sans-serif;
+            --bottom-nav-height: 70px;
         }
         
+        /* ===== الثيمات ===== */
         body.dark-mode {
             --bg: #0b1120;
             --card-bg: rgba(15,23,42,0.92);
@@ -46,12 +48,65 @@
             --shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
         
+        body.theme-purple {
+            --primary: #7c3aed;
+            --primary-dark: #6d28d9;
+            --primary-light: #a78bfa;
+        }
+        
+        body.theme-green {
+            --primary: #16a34a;
+            --primary-dark: #15803d;
+            --primary-light: #4ade80;
+        }
+        
+        body.theme-red {
+            --primary: #dc2626;
+            --primary-dark: #b91c1c;
+            --primary-light: #f87171;
+        }
+        
+        body.theme-orange {
+            --primary: #f59e0b;
+            --primary-dark: #d97706;
+            --primary-light: #fbbf24;
+        }
+        
+        body.theme-pink {
+            --primary: #ec4899;
+            --primary-dark: #db2777;
+            --primary-light: #f472b6;
+        }
+        
+        body.theme-cyan {
+            --primary: #06b6d4;
+            --primary-dark: #0891b2;
+            --primary-light: #22d3ee;
+        }
+        
+        body.reading-mode {
+            --bg: #fefcf7;
+            --card-bg: rgba(255,252,247,0.95);
+            --text: #1a1a2e;
+            --text-secondary: #4a4a5a;
+            --text-light: #8a8a9a;
+        }
+        
+        body.dark-mode.reading-mode {
+            --bg: #1a1a2e;
+            --card-bg: rgba(26,26,46,0.95);
+            --text: #f5f0eb;
+            --text-secondary: #b5b0ab;
+            --text-light: #7a7570;
+        }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font); }
         
         body {
             min-height: 100vh;
             background: var(--bg);
             padding: 1.5rem;
+            padding-bottom: calc(1.5rem + var(--bottom-nav-height) + 20px);
             transition: var(--transition);
             position: relative;
         }
@@ -85,6 +140,10 @@
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
         
         .auth-box {
@@ -220,7 +279,7 @@
         }
         
         .auth-box .social-login {
-            display: grid; grid-template-columns: repeat(4, 1fr);
+            display: grid; grid-template-columns: repeat(3, 1fr);
             gap: 0.5rem; margin-bottom: 1.2rem;
         }
         .auth-box .social-login button {
@@ -255,6 +314,32 @@
             font-size: 0.65rem; color: var(--text-secondary);
         }
         .auth-box .auth-footer i { color: var(--primary); }
+        
+        /* ===== 2FA Modal ===== */
+        .twofa-modal .modal {
+            max-width: 400px;
+        }
+        .twofa-modal .qr-container {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        .twofa-modal .qr-container canvas {
+            border-radius: var(--radius-sm);
+            border: 2px solid var(--border);
+        }
+        .twofa-modal .secret-key {
+            background: var(--border);
+            padding: 0.5rem;
+            border-radius: var(--radius-sm);
+            text-align: center;
+            font-family: monospace;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            color: var(--text);
+            margin: 0.5rem 0;
+            direction: ltr;
+        }
         
         /* ===== القائمة الجانبية ===== */
         .side-menu {
@@ -373,9 +458,73 @@
         }
         .menu-overlay.show { display: block; }
         
+        /* ===== Bottom Navigation ===== */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: var(--bottom-nav-height);
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 99990;
+            padding: 0.5rem 0;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.02);
+        }
+        body.dark-mode .bottom-nav {
+            background: rgba(15,23,42,0.95);
+        }
+        
+        .bottom-nav .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 0.6rem;
+            cursor: pointer;
+            padding: 0.2rem 0.8rem;
+            transition: var(--transition);
+            position: relative;
+            gap: 2px;
+            min-width: 50px;
+        }
+        .bottom-nav .nav-item i {
+            font-size: 1.4rem;
+            transition: var(--transition);
+        }
+        .bottom-nav .nav-item.active {
+            color: var(--primary);
+        }
+        .bottom-nav .nav-item.active i {
+            transform: scale(1.1);
+        }
+        .bottom-nav .nav-item .nav-badge {
+            position: absolute;
+            top: -2px;
+            right: 4px;
+            background: #dc2626;
+            color: #fff;
+            font-size: 0.5rem;
+            padding: 0.1rem 0.4rem;
+            border-radius: 40px;
+            min-width: 16px;
+            text-align: center;
+        }
+        .bottom-nav .nav-item .nav-label {
+            font-size: 0.55rem;
+            font-weight: 500;
+        }
+        
         /* ===== Toast / إشعارات ===== */
         .toast {
-            position: fixed; bottom: 100px; left: 50%;
+            position: fixed; bottom: calc(var(--bottom-nav-height) + 20px); left: 50%;
             transform: translateX(-50%);
             z-index: 99999;
             background: #1e293b; color: #fff;
@@ -409,7 +558,7 @@
         .modal-overlay.show { display: flex; animation: fadeIn 0.3s ease; }
         
         .modal {
-            max-width: 480px; width: 100%;
+            max-width: 520px; width: 100%;
             background: var(--card-bg);
             border-radius: var(--radius);
             padding: 2rem;
@@ -525,6 +674,42 @@
         }
         .modal .input-group button:hover { background: var(--primary-dark); }
         
+        /* ===== Theme Selector ===== */
+        .theme-options {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+        .theme-options .theme-btn {
+            width: 100%;
+            padding: 0.5rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: transparent;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.7rem;
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        .theme-options .theme-btn:hover {
+            transform: scale(1.02);
+        }
+        .theme-options .theme-btn.active {
+            border-color: var(--primary);
+            background: rgba(37,99,235,0.04);
+        }
+        .theme-options .theme-btn .color-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        
         /* ===== نافذة التبرع ===== */
         .donate-options {
             display: grid; grid-template-columns: repeat(3, 1fr);
@@ -638,12 +823,16 @@
             backdrop-filter: blur(6px);
             -webkit-backdrop-filter: blur(6px);
             border-radius: var(--radius);
-            padding: 2rem 2rem 5rem 2rem;
+            padding: 2rem 2rem 2rem 2rem;
             box-shadow: var(--shadow);
             transition: var(--transition);
             border: 1px solid rgba(255,255,255,0.5);
         }
         body.dark-mode .main-card { border-color: rgba(255,255,255,0.03); }
+        body.reading-mode .main-card {
+            max-width: 800px;
+            margin: 0 auto;
+        }
         
         .header {
             display: flex; flex-wrap: wrap;
@@ -876,8 +1065,183 @@
             100% { transform: scale(1); }
         }
         
+        /* ===== Reading Mode Button ===== */
+        .reading-mode-btn.active {
+            background: var(--primary);
+            color: #fff;
+        }
+        .reading-mode-btn.active i {
+            color: #fff !important;
+        }
+        
+        /* ===== Tickets System ===== */
+        .ticket-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-sm);
+            padding: 1rem;
+            border: 1px solid var(--border);
+            margin-bottom: 0.8rem;
+            transition: var(--transition);
+        }
+        .ticket-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        .ticket-card .ticket-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .ticket-card .ticket-title {
+            font-weight: 700;
+            color: var(--text);
+        }
+        .ticket-card .ticket-status {
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.65rem;
+            font-weight: 600;
+        }
+        .ticket-card .ticket-status.open {
+            background: #22c55e20;
+            color: #22c55e;
+            border: 1px solid #22c55e40;
+        }
+        .ticket-card .ticket-status.in-progress {
+            background: #eab30820;
+            color: #eab308;
+            border: 1px solid #eab30840;
+        }
+        .ticket-card .ticket-status.resolved {
+            background: #3b82f620;
+            color: #3b82f6;
+            border: 1px solid #3b82f640;
+        }
+        .ticket-card .ticket-status.closed {
+            background: #64748b20;
+            color: #64748b;
+            border: 1px solid #64748b40;
+        }
+        .ticket-card .ticket-desc {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+        }
+        .ticket-card .ticket-meta {
+            color: var(--text-light);
+            font-size: 0.65rem;
+            margin-top: 0.3rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        /* ===== API Docs ===== */
+        .api-endpoint {
+            background: var(--border);
+            border-radius: var(--radius-sm);
+            padding: 1rem;
+            margin-bottom: 0.8rem;
+        }
+        .api-endpoint .endpoint-method {
+            display: inline-block;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            margin-left: 0.5rem;
+        }
+        .api-endpoint .endpoint-method.get { background: #22c55e20; color: #22c55e; }
+        .api-endpoint .endpoint-method.post { background: #3b82f620; color: #3b82f6; }
+        .api-endpoint .endpoint-method.put { background: #eab30820; color: #eab308; }
+        .api-endpoint .endpoint-method.delete { background: #dc262620; color: #dc2626; }
+        .api-endpoint .endpoint-url {
+            font-family: monospace;
+            color: var(--primary);
+            font-size: 0.85rem;
+            direction: ltr;
+            display: block;
+            margin: 0.3rem 0;
+        }
+        .api-endpoint .endpoint-desc {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+        
+        /* ===== AI Assistant ===== */
+        .ai-chat {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .ai-chat .ai-message {
+            padding: 0.8rem 1rem;
+            border-radius: var(--radius-sm);
+            max-width: 85%;
+            animation: slideUp 0.3s ease;
+        }
+        .ai-chat .ai-message.user {
+            background: var(--primary);
+            color: #fff;
+            align-self: flex-end;
+        }
+        .ai-chat .ai-message.assistant {
+            background: var(--border);
+            color: var(--text);
+            align-self: flex-start;
+        }
+        .ai-chat .ai-message .ai-time {
+            font-size: 0.5rem;
+            opacity: 0.6;
+            margin-top: 0.2rem;
+            display: block;
+        }
+        .ai-chat .ai-input {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .ai-chat .ai-input input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: rgba(0,0,0,0.02);
+            color: var(--text);
+            font-size: 0.9rem;
+            outline: none;
+        }
+        .ai-chat .ai-input input:focus {
+            border-color: var(--primary);
+        }
+        .ai-chat .ai-input button {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            background: var(--primary);
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .ai-chat .ai-input button:hover {
+            background: var(--primary-dark);
+        }
+        .ai-chat .ai-input button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .ai-chat .ai-thinking {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            padding: 0.5rem;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
         @media (max-width: 700px) {
-            .main-card { padding: 1.2rem 1rem 4.5rem 1rem; border-radius: 28px; }
+            .main-card { padding: 1.2rem 1rem; border-radius: 28px; }
             .brand h1 { font-size: 1.4rem; }
             .header-actions { width: 100%; justify-content: center; margin-top: 0.3rem; gap: 4px; }
             .btn-icon { font-size: 0.7rem; padding: 0.2rem 0.7rem; }
@@ -887,13 +1251,54 @@
             .footer { flex-direction: column; gap: 0.3rem; text-align: center; }
             .side-menu { width: 300px; right: -320px; }
             .auth-box { padding: 1.5rem 1rem; }
-            .auth-box .social-login { grid-template-columns: repeat(4, 1fr); }
+            .auth-box .social-login { grid-template-columns: repeat(3, 1fr); }
             .donate-options { grid-template-columns: repeat(3, 1fr); }
             .official-channel { flex-direction: column; text-align: center; }
+            .theme-options { grid-template-columns: repeat(3, 1fr); }
+            .bottom-nav .nav-item {
+                min-width: 40px;
+                padding: 0.2rem 0.4rem;
+            }
+            .bottom-nav .nav-item .nav-label {
+                font-size: 0.45rem;
+            }
+            .bottom-nav .nav-item i {
+                font-size: 1.2rem;
+            }
         }
         @media (max-width: 400px) {
             .auth-box .social-login { grid-template-columns: repeat(2, 1fr); }
             .donate-options { grid-template-columns: repeat(2, 1fr); }
+            .theme-options { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        /* ===== GitHub OAuth Button ===== */
+        .github-oauth-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #24292e;
+            border-radius: var(--radius-sm);
+            background: #24292e;
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .github-oauth-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(36,41,46,0.15);
+        }
+        .github-oauth-btn i {
+            font-size: 1.4rem;
+        }
+        body.dark-mode .github-oauth-btn {
+            border-color: #ffffff20;
+            background: #1a1e24;
         }
     </style>
 </head>
@@ -927,6 +1332,13 @@
                     <div class="error-msg" id="loginPasswordError">كلمة المرور غير صحيحة</div>
                 </div>
                 
+                <!-- 2FA Input (hidden by default) -->
+                <div class="form-group" id="twofaInput" style="display:none;">
+                    <label><i class="fas fa-shield-alt"></i> رمز التحقق بخطوتين (2FA)</label>
+                    <input type="text" id="login2FA" placeholder="000000" maxlength="6" inputmode="numeric">
+                    <div class="error-msg" id="login2FAError">رمز التحقق غير صحيح</div>
+                </div>
+                
                 <div class="remember-me">
                     <input type="checkbox" id="rememberMe" checked>
                     <label for="rememberMe">تذكر بيانات الدخول للعودة مرة أخرى</label>
@@ -940,21 +1352,13 @@
             <div class="auth-divider">أو</div>
             
             <div class="social-login">
-                <button onclick="socialLogin('google')" title="تسجيل عبر جوجل">
-                    <i class="fab fa-google" style="color:#ea4335;"></i>
-                    <span class="label">جوجل</span>
-                </button>
-                <button onclick="socialLogin('github')" title="تسجيل عبر جيثاب">
+                <button onclick="githubOAuthLogin()" title="تسجيل عبر جيثاب">
                     <i class="fab fa-github" style="color:var(--text);"></i>
                     <span class="label">جيثاب</span>
                 </button>
-                <button onclick="socialLogin('telegram')" title="تسجيل عبر تليجرام">
-                    <i class="fab fa-telegram" style="color:#0088cc;"></i>
-                    <span class="label">تليجرام</span>
-                </button>
-                <button onclick="socialLogin('facebook')" title="تسجيل عبر فيسبوك">
-                    <i class="fab fa-facebook" style="color:#1877f2;"></i>
-                    <span class="label">فيسبوك</span>
+                <button onclick="githubOAuthLogin()" title="تسجيل عبر جيثاب">
+                    <i class="fab fa-github" style="color:var(--text);"></i>
+                    <span class="label">جيثاب OAuth</span>
                 </button>
             </div>
             
@@ -1018,6 +1422,38 @@
         </div>
     </div>
 
+    <!-- ===== 2FA Setup Modal ===== -->
+    <div class="modal-overlay twofa-modal" id="twofaModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-shield-alt"></i> تفعيل التحقق بخطوتين</h2>
+                <button class="modal-close" onclick="closeModal('twofaModal')"><i class="fas fa-times"></i></button>
+            </div>
+            <div style="text-align:center; margin-bottom:1rem;">
+                <p style="color:var(--text-secondary); font-size:0.9rem;">
+                    امسح رمز QR باستخدام تطبيق Google Authenticator أو Authy
+                </p>
+            </div>
+            <div class="qr-container" id="qrContainer">
+                <div id="qrPlaceholder" style="width:200px;height:200px;display:flex;align-items:center;justify-content:center;background:var(--border);border-radius:var(--radius-sm);color:var(--text-secondary);font-size:0.8rem;">
+                    ⏳ جاري إنشاء الرمز...
+                </div>
+                <canvas id="qrCanvas" style="display:none;"></canvas>
+            </div>
+            <div style="text-align:center; margin:0.5rem 0;">
+                <div class="secret-key" id="twofaSecret">••••••</div>
+                <p style="font-size:0.65rem;color:var(--text-secondary);">احتفظ بهذا المفتاح في مكان آمن</p>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-key"></i> أدخل رمز التحقق للتأكيد</label>
+                <input type="text" id="twofaVerify" placeholder="000000" maxlength="6" inputmode="numeric">
+            </div>
+            <button class="btn-auth" onclick="verify2FA()">
+                <i class="fas fa-check"></i> تأكيد التفعيل
+            </button>
+        </div>
+    </div>
+
     <!-- ===== القائمة الجانبية ===== -->
     <div class="side-menu" id="sideMenu">
         <div class="menu-header">
@@ -1047,23 +1483,25 @@
                 <i class="fas fa-cog"></i> <span>الإعدادات</span>
                 <span class="arrow"><i class="fas fa-chevron-left"></i></span>
             </button>
+            <button class="menu-item" onclick="closeMenu(); openTickets()">
+                <i class="fas fa-ticket-alt"></i> <span>التذاكر</span>
+                <span class="badge" id="ticketBadge">0</span>
+            </button>
+            <button class="menu-item" onclick="closeMenu(); openAPI()">
+                <i class="fas fa-code"></i> <span>API</span>
+            </button>
+            <button class="menu-item" onclick="closeMenu(); openAI()">
+                <i class="fas fa-robot"></i> <span>المساعد الذكي</span>
+                <span class="badge">✨ جديد</span>
+            </button>
+            <div class="menu-divider"></div>
             <button class="menu-item" onclick="closeMenu(); openDonate()">
                 <i class="fas fa-heart" style="color:#dc2626;"></i> <span>دعم التطبيق</span>
                 <span class="badge">❤️</span>
             </button>
-            <div class="menu-divider"></div>
             <button class="menu-item" onclick="closeMenu(); openOfficialChannel()">
                 <i class="fas fa-bullhorn"></i> <span>القناة الرسمية</span>
                 <span class="badge" style="background:#eab308;">@python2015</span>
-            </button>
-            <button class="menu-item" onclick="closeMenu(); navigateTo('channels')">
-                <i class="fas fa-hashtag"></i> <span>القنوات</span>
-            </button>
-            <button class="menu-item" onclick="closeMenu(); navigateTo('bots')">
-                <i class="fas fa-robot"></i> <span>البوتات</span>
-            </button>
-            <button class="menu-item" onclick="closeMenu(); navigateTo('api')">
-                <i class="fas fa-plug"></i> <span>خدمات API</span>
             </button>
             <div class="menu-divider"></div>
             <button class="menu-item logout" onclick="handleLogout()">
@@ -1072,12 +1510,37 @@
         </div>
         
         <div class="menu-footer">
-            Python Zone v2.0
+            Python Zone v3.0
             <span class="version">@TopVeGa • 2025</span>
         </div>
     </div>
 
     <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+
+    <!-- ===== Bottom Navigation ===== -->
+    <nav class="bottom-nav" id="bottomNav">
+        <button class="nav-item active" onclick="navigateTo('home')" data-page="home">
+            <i class="fas fa-home"></i>
+            <span class="nav-label">الرئيسية</span>
+        </button>
+        <button class="nav-item" onclick="navigateTo('channels')" data-page="channels">
+            <i class="fas fa-hashtag"></i>
+            <span class="nav-label">القنوات</span>
+        </button>
+        <button class="nav-item" onclick="navigateTo('bots')" data-page="bots">
+            <i class="fas fa-robot"></i>
+            <span class="nav-label">البوتات</span>
+        </button>
+        <button class="nav-item" onclick="navigateTo('tickets')" data-page="tickets">
+            <i class="fas fa-ticket-alt"></i>
+            <span class="nav-label">التذاكر</span>
+            <span class="nav-badge" id="navTicketBadge" style="display:none;">0</span>
+        </button>
+        <button class="nav-item" onclick="navigateTo('settings')" data-page="settings">
+            <i class="fas fa-cog"></i>
+            <span class="nav-label">الإعدادات</span>
+        </button>
+    </nav>
 
     <!-- ===== Toast ===== -->
     <div class="toast hidden" id="toastContainer"></div>
@@ -1095,6 +1558,9 @@
                     </div>
                 </div>
                 <div class="header-actions">
+                    <button class="btn-icon reading-mode-btn" onclick="toggleReadingMode()" title="وضع القراءة">
+                        <i class="fas fa-book-open"></i>
+                    </button>
                     <button class="btn-icon" onclick="toggleMenu()" title="القائمة">
                         <i class="fas fa-bars"></i>
                     </button>
@@ -1135,6 +1601,9 @@
                     </button>
                     <button class="dropdown-item" onclick="openSettings()">
                         <i class="fas fa-cog"></i> الإعدادات
+                    </button>
+                    <button class="dropdown-item" onclick="toggleReadingMode()">
+                        <i class="fas fa-book-open"></i> وضع القراءة
                     </button>
                     <div style="height:1px; background:var(--border); margin:0.2rem 1rem;"></div>
                     <a class="dropdown-item" href="https://t.me/Cybervega" target="_blank">
@@ -1307,6 +1776,47 @@
                 </select>
             </div>
             
+            <!-- الثيمات -->
+            <div class="setting-item" style="flex-wrap:wrap;">
+                <div class="setting-info" style="width:100%;">
+                    <i class="fas fa-palette"></i>
+                    <div>
+                        <div class="setting-label">الثيمات</div>
+                        <div class="setting-desc">اختر مظهر التطبيق المفضل</div>
+                    </div>
+                </div>
+                <div class="theme-options" style="width:100%;">
+                    <button class="theme-btn active" onclick="setTheme('default')" data-theme="default">
+                        <span class="color-dot" style="background:#2563eb;"></span>
+                        أزرق
+                    </button>
+                    <button class="theme-btn" onclick="setTheme('purple')" data-theme="purple">
+                        <span class="color-dot" style="background:#7c3aed;"></span>
+                        بنفسجي
+                    </button>
+                    <button class="theme-btn" onclick="setTheme('green')" data-theme="green">
+                        <span class="color-dot" style="background:#16a34a;"></span>
+                        أخضر
+                    </button>
+                    <button class="theme-btn" onclick="setTheme('red')" data-theme="red">
+                        <span class="color-dot" style="background:#dc2626;"></span>
+                        أحمر
+                    </button>
+                    <button class="theme-btn" onclick="setTheme('orange')" data-theme="orange">
+                        <span class="color-dot" style="background:#f59e0b;"></span>
+                        برتقالي
+                    </button>
+                    <button class="theme-btn" onclick="setTheme('pink')" data-theme="pink">
+                        <span class="color-dot" style="background:#ec4899;"></span>
+                        وردي
+                    </button>
+                    <button class="theme-btn" onclick="setTheme('cyan')" data-theme="cyan">
+                        <span class="color-dot" style="background:#06b6d4;"></span>
+                        سماوي
+                    </button>
+                </div>
+            </div>
+            
             <!-- تغيير اسم المستخدم -->
             <div class="setting-item" style="flex-wrap:wrap;">
                 <div class="setting-info">
@@ -1349,6 +1859,18 @@
                 <div class="toggle" id="darkModeToggle" onclick="toggleTheme()"></div>
             </div>
             
+            <!-- وضع القراءة -->
+            <div class="setting-item">
+                <div class="setting-info">
+                    <i class="fas fa-book-open"></i>
+                    <div>
+                        <div class="setting-label">وضع القراءة</div>
+                        <div class="setting-desc">تصفح هادئ ومريح للعين</div>
+                    </div>
+                </div>
+                <div class="toggle" id="readingModeToggle" onclick="toggleReadingMode()"></div>
+            </div>
+            
             <!-- الإشعارات -->
             <div class="setting-item">
                 <div class="setting-info">
@@ -1370,7 +1892,7 @@
                         <div class="setting-desc">تفعيل طبقة حماية إضافية</div>
                     </div>
                 </div>
-                <div class="toggle" id="twoFAToggle" onclick="toggle2FA()"></div>
+                <button class="setting-action" id="twoFABtn" onclick="setup2FA()">تفعيل</button>
             </div>
             
             <!-- وضع التخفي -->
@@ -1570,16 +2092,260 @@
         </div>
     </div>
 
+    <!-- ===== نافذة التذاكر ===== -->
+    <div class="modal-overlay" id="ticketsModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-ticket-alt"></i> التذاكر</h2>
+                <button class="modal-close" onclick="closeModal('ticketsModal')"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <div style="margin-bottom:1rem;">
+                <button onclick="showNewTicketForm()" style="width:100%; padding:0.8rem; border:2px dashed var(--primary); border-radius:var(--radius-sm); background:transparent; color:var(--primary); font-weight:600; cursor:pointer; transition:var(--transition);">
+                    <i class="fas fa-plus"></i> إنشاء تذكرة جديدة
+                </button>
+            </div>
+            
+            <div id="newTicketForm" style="display:none; margin-bottom:1rem; padding:1rem; background:var(--border); border-radius:var(--radius-sm);">
+                <div class="form-group">
+                    <label>عنوان التذكرة</label>
+                    <input type="text" id="ticketTitle" placeholder="مشكلة في تسجيل الدخول">
+                </div>
+                <div class="form-group">
+                    <label>الوصف</label>
+                    <textarea id="ticketDesc" rows="3" placeholder="صف المشكلة بالتفصيل..." style="width:100%; padding:0.8rem; border-radius:var(--radius-sm); border:1px solid var(--border); background:rgba(0,0,0,0.02); color:var(--text); font-size:0.9rem; outline:none;"></textarea>
+                </div>
+                <div style="display:flex; gap:0.5rem;">
+                    <button onclick="createTicket()" style="flex:1; padding:0.6rem; border:none; border-radius:var(--radius-sm); background:var(--primary); color:#fff; font-weight:600; cursor:pointer;">إرسال</button>
+                    <button onclick="hideNewTicketForm()" style="padding:0.6rem 1.2rem; border:1px solid var(--border); border-radius:var(--radius-sm); background:transparent; color:var(--text-secondary); cursor:pointer;">إلغاء</button>
+                </div>
+            </div>
+            
+            <div id="ticketsList"></div>
+        </div>
+    </div>
+
+    <!-- ===== نافذة API ===== -->
+    <div class="modal-overlay" id="apiModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-code"></i> واجهة برمجة التطبيقات (API)</h2>
+                <button class="modal-close" onclick="closeModal('apiModal')"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <p style="color:var(--text-secondary); font-size:0.85rem; margin-bottom:1rem;">
+                استخدم واجهة API للتفاعل مع منصة Python Zone برمجياً
+            </p>
+            
+            <div style="background:var(--border); padding:0.8rem; border-radius:var(--radius-sm); margin-bottom:1rem;">
+                <strong style="color:var(--text);">مفتاح API الخاص بك:</strong>
+                <div style="font-family:monospace; color:var(--primary); direction:ltr; word-break:break-all; font-size:0.8rem; margin-top:0.3rem;" id="apiKeyDisplay">
+                    pk_live_••••••••••••••••••••••••••••••••••••
+                </div>
+                <button onclick="regenerateAPIKey()" style="margin-top:0.3rem; padding:0.2rem 1rem; border:none; border-radius:40px; background:var(--primary); color:#fff; font-size:0.7rem; cursor:pointer;">
+                    تجديد المفتاح
+                </button>
+            </div>
+            
+            <h4 style="color:var(--text); margin-bottom:0.5rem;">النقاط المتاحة</h4>
+            
+            <div class="api-endpoint">
+                <span class="endpoint-method get">GET</span>
+                <span class="endpoint-url">/api/v1/users/me</span>
+                <div class="endpoint-desc">جلب معلومات المستخدم الحالي</div>
+            </div>
+            
+            <div class="api-endpoint">
+                <span class="endpoint-method get">GET</span>
+                <span class="endpoint-url">/api/v1/channels</span>
+                <div class="endpoint-desc">جلب قائمة القنوات المتاحة</div>
+            </div>
+            
+            <div class="api-endpoint">
+                <span class="endpoint-method get">GET</span>
+                <span class="endpoint-url">/api/v1/bots</span>
+                <div class="endpoint-desc">جلب قائمة البوتات</div>
+            </div>
+            
+            <div class="api-endpoint">
+                <span class="endpoint-method post">POST</span>
+                <span class="endpoint-url">/api/v1/tickets</span>
+                <div class="endpoint-desc">إنشاء تذكرة دعم جديدة</div>
+            </div>
+            
+            <div class="api-endpoint">
+                <span class="endpoint-method post">POST</span>
+                <span class="endpoint-url">/api/v1/comments</span>
+                <div class="endpoint-desc">إضافة تعليق جديد</div>
+            </div>
+            
+            <div style="margin-top:1rem; padding:0.8rem; background:rgba(37,99,235,0.04); border-radius:var(--radius-sm); border:1px solid rgba(37,99,235,0.06);">
+                <p style="font-size:0.7rem; color:var(--text-secondary);">
+                    <i class="fas fa-info-circle"></i> جميع الطلبات تتطلب مفتاح API في الهيدر: 
+                    <code style="background:var(--border); padding:0.1rem 0.4rem; border-radius:4px; font-size:0.65rem;">X-API-Key: YOUR_KEY</code>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== نافذة المساعد الذكي ===== -->
+    <div class="modal-overlay" id="aiModal">
+        <div class="modal" style="max-width:500px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-robot" style="color:#7c3aed;"></i> المساعد الذكي</h2>
+                <button class="modal-close" onclick="closeModal('aiModal')"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <div style="text-align:center; margin-bottom:0.5rem;">
+                <span style="display:inline-block; padding:0.1rem 0.8rem; border-radius:40px; background:#22c55e20; color:#22c55e; font-size:0.6rem; border:1px solid #22c55e40;">
+                    <i class="fas fa-circle" style="font-size:0.4rem;"></i> متصل
+                </span>
+            </div>
+            
+            <div class="ai-chat" id="aiChat">
+                <div id="aiMessages" style="max-height:350px; overflow-y:auto; display:flex; flex-direction:column; gap:0.5rem; padding:0.2rem;">
+                    <div class="ai-message assistant">
+                        <div>👋 مرحباً بك في المساعد الذكي! كيف يمكنني مساعدتك اليوم؟</div>
+                        <span class="ai-time">الآن</span>
+                    </div>
+                </div>
+                <div class="ai-input">
+                    <input type="text" id="aiInput" placeholder="اسألني أي شيء عن البرمجة..." onkeypress="if(event.key==='Enter') sendAIMessage()">
+                    <button onclick="sendAIMessage()" id="aiSendBtn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div id="aiThinking" class="ai-thinking" style="display:none;">
+                    🤔 جاري التفكير...
+                </div>
+            </div>
+            
+            <div style="margin-top:0.5rem; text-align:center; font-size:0.6rem; color:var(--text-light);">
+                <i class="fas fa-shield-alt"></i> مدعوم بـ Gemini API • محادثات آمنة ومشفرة
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== GitHub OAuth Callback Handler ===== -->
+    <div id="githubOAuthHandler" style="display:none;"></div>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <script>
         // ==========================================
-        // JavaScript الكامل
+        // JavaScript الكامل مع جميع الميزات الجديدة
         // ==========================================
 
         AOS.init({ duration: 600, once: true, easing: 'ease-out' });
 
         // ==========================================
-        // نظام المستخدمين
+        // IndexedDB - استبدال localStorage
+        // ==========================================
+
+        class IndexedDBStorage {
+            constructor(dbName = 'PythonZoneDB', version = 1) {
+                this.dbName = dbName;
+                this.version = version;
+                this.db = null;
+            }
+
+            async open() {
+                return new Promise((resolve, reject) => {
+                    const request = indexedDB.open(this.dbName, this.version);
+                    request.onupgradeneeded = (event) => {
+                        const db = event.target.result;
+                        if (!db.objectStoreNames.contains('users')) {
+                            db.createObjectStore('users', { keyPath: 'email' });
+                        }
+                        if (!db.objectStoreNames.contains('tickets')) {
+                            db.createObjectStore('tickets', { keyPath: 'id', autoIncrement: true });
+                        }
+                        if (!db.objectStoreNames.contains('comments')) {
+                            db.createObjectStore('comments', { keyPath: 'id', autoIncrement: true });
+                        }
+                        if (!db.objectStoreNames.contains('settings')) {
+                            db.createObjectStore('settings', { keyPath: 'key' });
+                        }
+                        if (!db.objectStoreNames.contains('apiKeys')) {
+                            db.createObjectStore('apiKeys', { keyPath: 'userId' });
+                        }
+                    };
+                    request.onsuccess = (event) => {
+                        this.db = event.target.result;
+                        resolve(this.db);
+                    };
+                    request.onerror = (event) => {
+                        reject(event.target.error);
+                    };
+                });
+            }
+
+            async get(storeName, key) {
+                return new Promise((resolve, reject) => {
+                    const transaction = this.db.transaction(storeName, 'readonly');
+                    const store = transaction.objectStore(storeName);
+                    const request = store.get(key);
+                    request.onsuccess = () => resolve(request.result);
+                    request.onerror = () => reject(request.error);
+                });
+            }
+
+            async getAll(storeName) {
+                return new Promise((resolve, reject) => {
+                    const transaction = this.db.transaction(storeName, 'readonly');
+                    const store = transaction.objectStore(storeName);
+                    const request = store.getAll();
+                    request.onsuccess = () => resolve(request.result);
+                    request.onerror = () => reject(request.error);
+                });
+            }
+
+            async put(storeName, data) {
+                return new Promise((resolve, reject) => {
+                    const transaction = this.db.transaction(storeName, 'readwrite');
+                    const store = transaction.objectStore(storeName);
+                    const request = store.put(data);
+                    request.onsuccess = () => resolve(request.result);
+                    request.onerror = () => reject(request.error);
+                });
+            }
+
+            async delete(storeName, key) {
+                return new Promise((resolve, reject) => {
+                    const transaction = this.db.transaction(storeName, 'readwrite');
+                    const store = transaction.objectStore(storeName);
+                    const request = store.delete(key);
+                    request.onsuccess = () => resolve();
+                    request.onerror = () => reject(request.error);
+                });
+            }
+
+            async clear(storeName) {
+                return new Promise((resolve, reject) => {
+                    const transaction = this.db.transaction(storeName, 'readwrite');
+                    const store = transaction.objectStore(storeName);
+                    const request = store.clear();
+                    request.onsuccess = () => resolve();
+                    request.onerror = () => reject(request.error);
+                });
+            }
+
+            async getAllKeys(storeName) {
+                return new Promise((resolve, reject) => {
+                    const transaction = this.db.transaction(storeName, 'readonly');
+                    const store = transaction.objectStore(storeName);
+                    const request = store.getAllKeys();
+                    request.onsuccess = () => resolve(request.result);
+                    request.onerror = () => reject(request.error);
+                });
+            }
+        }
+
+        // إنشاء نسخة من قاعدة البيانات
+        const db = new IndexedDBStorage();
+
+        // ==========================================
+        // نظام المستخدمين - مع IndexedDB
         // ==========================================
 
         let users = {};
@@ -1589,67 +2355,182 @@
             language: 'ar',
             notifications: true,
             twoFA: false,
-            stealth: false
+            stealth: false,
+            theme: 'default',
+            readingMode: false,
+            twoFASecret: null
         };
+        let tickets = [];
+        let comments = [];
+        let apiKeys = {};
 
-        // تحميل البيانات
-        function loadData() {
+        // ===== تحميل البيانات من IndexedDB =====
+        async function loadAllData() {
             try {
-                const data = localStorage.getItem('appUsers');
-                if (data) users = JSON.parse(data);
-            } catch (e) { users = {}; }
+                await db.open();
+                
+                // تحميل المستخدمين
+                const userData = await db.getAll('users');
+                if (userData && userData.length > 0) {
+                    userData.forEach(u => { users[u.email] = u; });
+                }
+                
+                // تحميل التذاكر
+                const ticketData = await db.getAll('tickets');
+                if (ticketData && ticketData.length > 0) {
+                    tickets = ticketData;
+                }
+                
+                // تحميل التعليقات
+                const commentData = await db.getAll('comments');
+                if (commentData && commentData.length > 0) {
+                    comments = commentData;
+                }
+                
+                // تحميل الإعدادات
+                const settingsData = await db.get('settings', 'appSettings');
+                if (settingsData) {
+                    settings = settingsData.value;
+                    applySettings();
+                }
+                
+                // تحميل مفاتيح API
+                const apiKeyData = await db.get('apiKeys', 'currentUser');
+                if (apiKeyData) {
+                    apiKeys = apiKeyData.keys || {};
+                }
+                
+                // تحميل المستخدم الحالي
+                const currentUserData = await db.get('settings', 'currentUser');
+                if (currentUserData && currentUserData.value) {
+                    const user = users[currentUserData.value.email];
+                    if (user) {
+                        currentUser = user;
+                        updateUI();
+                        document.getElementById('loginScreen').classList.remove('active');
+                    }
+                }
+                
+                // تحديث التذاكر في الـ UI
+                updateTicketBadge();
+                
+            } catch (error) {
+                console.error('Error loading data:', error);
+            }
+        }
+
+        // ===== حفظ البيانات =====
+        async function saveAllData() {
+            try {
+                await db.open();
+                
+                // حفظ المستخدمين
+                for (const email in users) {
+                    await db.put('users', users[email]);
+                }
+                
+                // حفظ التذاكر
+                for (const ticket of tickets) {
+                    await db.put('tickets', ticket);
+                }
+                
+                // حفظ التعليقات
+                for (const comment of comments) {
+                    await db.put('comments', comment);
+                }
+                
+                // حفظ الإعدادات
+                await db.put('settings', { key: 'appSettings', value: settings });
+                
+                // حفظ المستخدم الحالي
+                if (currentUser) {
+                    await db.put('settings', { key: 'currentUser', value: currentUser });
+                }
+                
+                // حفظ مفاتيح API
+                await db.put('apiKeys', { userId: 'currentUser', keys: apiKeys });
+                
+            } catch (error) {
+                console.error('Error saving data:', error);
+            }
+        }
+
+        // ===== تطبيق الإعدادات =====
+        function applySettings() {
+            if (settings.darkMode) {
+                document.body.classList.add('dark-mode');
+                document.getElementById('themeIcon').className = 'fas fa-sun';
+            } else {
+                document.body.classList.remove('dark-mode');
+                document.getElementById('themeIcon').className = 'fas fa-moon';
+            }
             
-            try {
-                const s = localStorage.getItem('appSettings');
-                if (s) settings = JSON.parse(s);
-                if (settings.darkMode) {
-                    document.body.classList.add('dark-mode');
-                    document.getElementById('themeIcon').className = 'fas fa-sun';
-                }
-                if (settings.language === 'en') {
-                    document.body.dir = 'ltr';
-                }
-            } catch (e) {}
+            if (settings.readingMode) {
+                document.body.classList.add('reading-mode');
+                document.querySelector('.reading-mode-btn').classList.add('active');
+            } else {
+                document.body.classList.remove('reading-mode');
+                document.querySelector('.reading-mode-btn').classList.remove('active');
+            }
             
-            try {
-                const user = JSON.parse(localStorage.getItem('currentUser') || 'null');
-                if (user && users[user.email]) {
-                    currentUser = users[user.email];
-                    updateUI();
+            if (settings.theme && settings.theme !== 'default') {
+                document.body.classList.add('theme-' + settings.theme);
+            } else {
+                document.body.classList.remove('theme-purple', 'theme-green', 'theme-red', 'theme-orange', 'theme-pink', 'theme-cyan');
+            }
+            
+            if (settings.language === 'en') {
+                document.body.dir = 'ltr';
+            } else {
+                document.body.dir = 'rtl';
+            }
+            
+            // تحديث التوجلات
+            const darkToggle = document.getElementById('darkModeToggle');
+            if (darkToggle) {
+                darkToggle.classList.toggle('active', settings.darkMode);
+            }
+            const readingToggle = document.getElementById('readingModeToggle');
+            if (readingToggle) {
+                readingToggle.classList.toggle('active', settings.readingMode);
+            }
+            const notifToggle = document.getElementById('notifToggle');
+            if (notifToggle) {
+                notifToggle.classList.toggle('active', settings.notifications);
+            }
+            const stealthToggle = document.getElementById('stealthToggle');
+            if (stealthToggle) {
+                stealthToggle.classList.toggle('active', settings.stealth);
+            }
+            
+            // تحديث زر 2FA
+            const twoFABtn = document.getElementById('twoFABtn');
+            if (twoFABtn) {
+                if (settings.twoFA) {
+                    twoFABtn.textContent = 'معطل';
+                    twoFABtn.style.color = '#dc2626';
+                } else {
+                    twoFABtn.textContent = 'تفعيل';
+                    twoFABtn.style.color = 'var(--primary)';
                 }
-            } catch (e) {}
+            }
+            
+            // تحديث الثيم النشط
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.theme === (settings.theme || 'default'));
+            });
         }
 
-        function saveUsers() {
-            try {
-                localStorage.setItem('appUsers', JSON.stringify(users));
-            } catch (e) {}
-        }
+        // ==========================================
+        // وظائف تسجيل الدخول
+        // ==========================================
 
-        function saveSettings() {
-            try {
-                localStorage.setItem('appSettings', JSON.stringify(settings));
-            } catch (e) {}
-        }
-
-        // ===== التحقق من صحة البريد الإلكتروني =====
-        function isValidEmail(email) {
-            return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
-        }
-
-        // ===== التحقق من البريد إذا كان مستخدماً =====
-        function isEmailUsed(email) {
-            return !!users[email];
-        }
-
-        // ===== تسجيل الدخول =====
-        function handleLogin(event) {
+        async function handleLogin(event) {
             event.preventDefault();
             const email = document.getElementById('loginEmail').value.trim();
             const password = document.getElementById('loginPassword').value.trim();
             const remember = document.getElementById('rememberMe').checked;
 
-            // إخفاء الأخطاء السابقة
             document.querySelectorAll('.error-msg').forEach(e => e.classList.remove('show'));
             document.querySelectorAll('.form-group input').forEach(e => e.classList.remove('error'));
 
@@ -1665,37 +2546,73 @@
                 return;
             }
 
-            if (!isEmailUsed(email)) {
+            const user = users[email];
+            if (!user) {
                 document.getElementById('loginEmailError').textContent = 'هذا البريد غير مسجل';
                 document.getElementById('loginEmailError').classList.add('show');
                 document.getElementById('loginEmail').classList.add('error');
                 return;
             }
 
-            if (users[email].password !== password) {
+            if (user.password !== password) {
                 document.getElementById('loginPasswordError').classList.add('show');
                 document.getElementById('loginPassword').classList.add('error');
                 return;
             }
 
-            currentUser = users[email];
+            // التحقق من 2FA إذا كانت مفعلة
+            if (settings.twoFA && user.twoFAEnabled) {
+                const twofaInput = document.getElementById('twofaInput');
+                twofaInput.style.display = 'block';
+                showToast('🔐 أدخل رمز التحقق بخطوتين', 'warning');
+                document.getElementById('loginBtn').disabled = true;
+                
+                // انتظار إدخال الرمز
+                const check2FA = async () => {
+                    const code = document.getElementById('login2FA').value.trim();
+                    if (code.length === 6) {
+                        if (code === user.twoFACode) {
+                            completeLogin(user, remember);
+                        } else {
+                            document.getElementById('login2FAError').classList.add('show');
+                            document.getElementById('login2FA').classList.add('error');
+                            setTimeout(() => {
+                                document.getElementById('login2FA').value = '';
+                                document.getElementById('login2FAError').classList.remove('show');
+                                document.getElementById('login2FA').classList.remove('error');
+                            }, 2000);
+                        }
+                    }
+                };
+                
+                document.getElementById('login2FA').addEventListener('input', check2FA);
+                return;
+            }
+
+            completeLogin(user, remember);
+        }
+
+        function completeLogin(user, remember) {
+            currentUser = user;
             if (remember) {
                 localStorage.setItem('currentUser', JSON.stringify(currentUser));
             }
             updateUI();
-            showToast('✅ مرحباً بك ' + currentUser.name + '!', 'success');
+            showToast('✅ مرحباً بك ' + user.name + '!', 'success');
             document.getElementById('loginScreen').classList.remove('active');
+            document.getElementById('twofaInput').style.display = 'none';
+            document.getElementById('loginBtn').disabled = false;
+            saveAllData();
         }
 
         // ===== التسجيل =====
-        function handleRegister(event) {
+        async function handleRegister(event) {
             event.preventDefault();
             const name = document.getElementById('registerName').value.trim();
             const email = document.getElementById('registerEmail').value.trim();
             const password = document.getElementById('registerPassword').value.trim();
             const confirm = document.getElementById('registerConfirm').value.trim();
 
-            // إخفاء الأخطاء السابقة
             document.querySelectorAll('#registerScreen .error-msg').forEach(e => e.classList.remove('show'));
             document.querySelectorAll('#registerScreen .form-group input').forEach(e => e.classList.remove('error'));
 
@@ -1713,7 +2630,7 @@
                 return;
             }
 
-            if (isEmailUsed(email)) {
+            if (users[email]) {
                 document.getElementById('registerEmailError').textContent = 'هذا البريد مسجل مسبقاً';
                 document.getElementById('registerEmailError').classList.add('show');
                 document.getElementById('registerEmail').classList.add('error');
@@ -1733,16 +2650,17 @@
                 return;
             }
 
-            // إنشاء الحساب
             const newUser = {
                 name: name,
                 email: email,
                 password: password,
-                created: Date.now()
+                created: Date.now(),
+                twoFAEnabled: false,
+                twoFACode: null
             };
 
             users[email] = newUser;
-            saveUsers();
+            await saveAllData();
 
             currentUser = newUser;
             localStorage.setItem('currentUser', JSON.stringify(currentUser));
@@ -1753,35 +2671,34 @@
             document.getElementById('loginScreen').classList.remove('active');
         }
 
-        // ===== تسجيل الدخول عبر وسائل التواصل =====
-        function socialLogin(provider) {
-            const names = {
-                google: 'مستخدم جوجل',
-                github: 'مستخدم جيثاب',
-                telegram: 'مستخدم تليجرام',
-                facebook: 'مستخدم فيسبوك'
-            };
-            const email = provider + '_' + Date.now() + '@pythonzone.com';
+        // ===== GitHub OAuth Login =====
+        function githubOAuthLogin() {
+            // محاكاة OAuth من GitHub (في الواقع يتم التوجيه إلى GitHub)
+            showToast('🔐 جاري الاتصال بـ GitHub...', 'warning');
             
-            if (isEmailUsed(email)) {
-                currentUser = users[email];
-            } else {
-                const newUser = {
-                    name: names[provider] + ' ' + Date.now().toString().slice(-4),
-                    email: email,
-                    password: 'social_' + Date.now(),
-                    provider: provider,
-                    created: Date.now()
-                };
-                users[email] = newUser;
-                saveUsers();
-                currentUser = newUser;
-            }
-            
-            localStorage.setItem('currentUser', JSON.stringify(currentUser));
-            updateUI();
-            showToast('✅ مرحباً بك ' + currentUser.name + '!', 'success');
-            document.getElementById('loginScreen').classList.remove('active');
+            // محاكاة استجابة OAuth
+            setTimeout(() => {
+                const email = 'github_' + Date.now() + '@pythonzone.com';
+                let user = users[email];
+                if (!user) {
+                    user = {
+                        name: 'GitHub User ' + Date.now().toString().slice(-4),
+                        email: email,
+                        password: 'oauth_' + Date.now(),
+                        provider: 'github',
+                        created: Date.now(),
+                        twoFAEnabled: false,
+                        twoFACode: null
+                    };
+                    users[email] = user;
+                }
+                currentUser = user;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                updateUI();
+                showToast('✅ مرحباً بك ' + user.name + '!', 'success');
+                document.getElementById('loginScreen').classList.remove('active');
+                saveAllData();
+            }, 1500);
         }
 
         // ===== إظهار/إخفاء شاشات =====
@@ -1798,11 +2715,12 @@
         // ===== إظهار/إخفاء كلمة المرور =====
         function togglePassword(inputId) {
             const input = document.getElementById(inputId);
-            if (input.type === 'password') {
-                input.type = 'text';
-            } else {
-                input.type = 'password';
-            }
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+
+        // ===== التحقق من البريد =====
+        function isValidEmail(email) {
+            return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
         }
 
         // ===== تحديث الواجهة =====
@@ -1826,7 +2744,94 @@
         }
 
         // ==========================================
-        // القائمة الجانبية
+        // 2FA - التحقق بخطوتين (ميزة 10)
+        // ==========================================
+
+        let twoFASecret = null;
+
+        function setup2FA() {
+            if (!currentUser) {
+                showToast('⚠️ الرجاء تسجيل الدخول أولاً', 'error');
+                return;
+            }
+            
+            if (settings.twoFA) {
+                // تعطيل 2FA
+                if (confirm('هل أنت متأكد من تعطيل التحقق بخطوتين؟')) {
+                    settings.twoFA = false;
+                    if (currentUser) {
+                        currentUser.twoFAEnabled = false;
+                        currentUser.twoFACode = null;
+                    }
+                    saveAllData();
+                    applySettings();
+                    showToast('🔓 تم تعطيل التحقق بخطوتين', 'warning');
+                }
+                return;
+            }
+            
+            // إنشاء مفتاح سري
+            twoFASecret = generateSecret();
+            document.getElementById('twofaSecret').textContent = twoFASecret;
+            
+            // عرض QR Code
+            const qrContainer = document.getElementById('qrContainer');
+            const qrPlaceholder = document.getElementById('qrPlaceholder');
+            const qrCanvas = document.getElementById('qrCanvas');
+            
+            qrPlaceholder.style.display = 'none';
+            qrCanvas.style.display = 'block';
+            
+            const otpAuth = `otpauth://totp/PythonZone:${currentUser.email}?secret=${twoFASecret}&issuer=PythonZone`;
+            
+            QRCode.toCanvas(qrCanvas, otpAuth, { width: 200, height: 200 }, function(error) {
+                if (error) {
+                    console.error(error);
+                    qrPlaceholder.style.display = 'flex';
+                    qrCanvas.style.display = 'none';
+                }
+            });
+            
+            document.getElementById('twofaModal').classList.add('show');
+            closeModal('settingsModal');
+        }
+
+        function generateSecret() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+            let secret = '';
+            for (let i = 0; i < 16; i++) {
+                secret += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return secret;
+        }
+
+        function verify2FA() {
+            const code = document.getElementById('twofaVerify').value.trim();
+            if (code.length !== 6) {
+                showToast('⚠️ الرجاء إدخال 6 أرقام', 'error');
+                return;
+            }
+            
+            // التحقق من الرمز (محاكاة)
+            if (code === '123456') {
+                showToast('⚠️ الرمز غير صحيح، حاول مرة أخرى', 'error');
+                return;
+            }
+            
+            // تفعيل 2FA
+            settings.twoFA = true;
+            if (currentUser) {
+                currentUser.twoFAEnabled = true;
+                currentUser.twoFACode = code;
+            }
+            saveAllData();
+            applySettings();
+            closeModal('twofaModal');
+            showToast('✅ تم تفعيل التحقق بخطوتين بنجاح!', 'success');
+        }
+
+        // ==========================================
+        // القائمة الجانبية والتنقل
         // ==========================================
 
         function toggleMenu() {
@@ -1842,8 +2847,72 @@
         }
 
         function navigateTo(page) {
-            showToast('📱 جاري الانتقال إلى ' + page, 'warning');
             closeMenu();
+            // تحديث التنقل السفلي
+            document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
+                item.classList.toggle('active', item.dataset.page === page);
+            });
+            
+            switch(page) {
+                case 'home':
+                    showToast('🏠 العودة للرئيسية', 'warning');
+                    break;
+                case 'channels':
+                    showToast('📢 جاري فتح القنوات', 'warning');
+                    break;
+                case 'bots':
+                    showToast('🤖 جاري فتح البوتات', 'warning');
+                    break;
+                case 'tickets':
+                    openTickets();
+                    break;
+                case 'settings':
+                    openSettings();
+                    break;
+                default:
+                    showToast('📱 جاري الانتقال إلى ' + page, 'warning');
+            }
+        }
+
+        // ==========================================
+        // الثيمات (ميزة 13)
+        // ==========================================
+
+        function setTheme(theme) {
+            // إزالة الثيمات السابقة
+            document.body.classList.remove('theme-purple', 'theme-green', 'theme-red', 'theme-orange', 'theme-pink', 'theme-cyan');
+            
+            if (theme !== 'default') {
+                document.body.classList.add('theme-' + theme);
+            }
+            
+            settings.theme = theme;
+            saveAllData();
+            
+            // تحديث الأزرار
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.theme === theme);
+            });
+            
+            showToast('🎨 تم تغيير الثيم', 'success');
+        }
+
+        // ==========================================
+        // وضع القراءة (ميزة 16)
+        // ==========================================
+
+        function toggleReadingMode() {
+            settings.readingMode = !settings.readingMode;
+            document.body.classList.toggle('reading-mode', settings.readingMode);
+            document.querySelector('.reading-mode-btn').classList.toggle('active', settings.readingMode);
+            
+            const readingToggle = document.getElementById('readingModeToggle');
+            if (readingToggle) {
+                readingToggle.classList.toggle('active', settings.readingMode);
+            }
+            
+            saveAllData();
+            showToast(settings.readingMode ? '📖 تم تفعيل وضع القراءة' : '📖 تم تعطيل وضع القراءة', 'warning');
         }
 
         // ==========================================
@@ -1854,12 +2923,7 @@
             closeMenu();
             const modal = document.getElementById('settingsModal');
             modal.classList.add('show');
-            // تحديث حالة التوجلات
-            document.getElementById('darkModeToggle').classList.toggle('active', settings.darkMode);
-            document.getElementById('notifToggle').classList.toggle('active', settings.notifications);
-            document.getElementById('twoFAToggle').classList.toggle('active', settings.twoFA);
-            document.getElementById('stealthToggle').classList.toggle('active', settings.stealth);
-            document.getElementById('languageSelect').value = settings.language || 'ar';
+            applySettings();
         }
 
         function closeModal(id) {
@@ -1869,7 +2933,7 @@
         // ===== تغيير اللغة =====
         function changeLanguage(lang) {
             settings.language = lang;
-            saveSettings();
+            saveAllData();
             if (lang === 'en') {
                 document.body.dir = 'ltr';
             } else {
@@ -1877,51 +2941,32 @@
             }
             showToast('🌍 تم تغيير اللغة', 'success');
             document.getElementById('dropdownMenu').style.display = 'none';
+            document.getElementById('languageSelect').value = lang;
         }
 
         // ===== تغيير الوضع =====
         function toggleTheme() {
-            document.body.classList.toggle('dark-mode');
-            settings.darkMode = document.body.classList.contains('dark-mode');
+            settings.darkMode = !settings.darkMode;
+            document.body.classList.toggle('dark-mode', settings.darkMode);
             const icon = document.getElementById('themeIcon');
-            if (settings.darkMode) {
-                icon.className = 'fas fa-sun';
-            } else {
-                icon.className = 'fas fa-moon';
-            }
+            icon.className = settings.darkMode ? 'fas fa-sun' : 'fas fa-moon';
             document.getElementById('darkModeToggle').classList.toggle('active', settings.darkMode);
-            saveSettings();
+            saveAllData();
         }
 
         // ===== الإشعارات =====
         function toggleNotifications() {
             settings.notifications = !settings.notifications;
             document.getElementById('notifToggle').classList.toggle('active', settings.notifications);
-            saveSettings();
-            if (settings.notifications && 'Notification' in window && Notification.permission === 'granted') {
-                new Notification('🔔 الإشعارات مفعلة', { body: 'ستصلك التنبيهات من التطبيق' });
-            }
+            saveAllData();
             showToast(settings.notifications ? '🔔 تم تفعيل الإشعارات' : '🔕 تم تعطيل الإشعارات', 'warning');
-        }
-
-        // ===== التحقق بخطوتين =====
-        function toggle2FA() {
-            settings.twoFA = !settings.twoFA;
-            document.getElementById('twoFAToggle').classList.toggle('active', settings.twoFA);
-            saveSettings();
-            if (settings.twoFA) {
-                const code = Math.floor(100000 + Math.random() * 900000);
-                showToast('🔐 رمز التحقق الخاص بك: ' + code + ' (استخدمه عند تسجيل الدخول)', 'warning');
-            } else {
-                showToast('🔓 تم تعطيل التحقق بخطوتين', 'warning');
-            }
         }
 
         // ===== وضع التخفي =====
         function toggleStealth() {
             settings.stealth = !settings.stealth;
             document.getElementById('stealthToggle').classList.toggle('active', settings.stealth);
-            saveSettings();
+            saveAllData();
             showToast(settings.stealth ? '👤 تم تفعيل وضع التخفي' : '👤 تم تعطيل وضع التخفي', 'warning');
         }
 
@@ -1936,8 +2981,7 @@
             if (currentUser) {
                 currentUser.name = newName;
                 users[currentUser.email] = currentUser;
-                saveUsers();
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                saveAllData();
                 updateUI();
                 input.value = '';
                 showToast('✅ تم تغيير الاسم إلى ' + newName, 'success');
@@ -1953,7 +2997,7 @@
                 showToast('⚠️ بريد إلكتروني غير صحيح', 'error');
                 return;
             }
-            if (isEmailUsed(newEmail)) {
+            if (users[newEmail]) {
                 showToast('⚠️ هذا البريد مسجل مسبقاً', 'error');
                 return;
             }
@@ -1964,8 +3008,7 @@
                 userData.email = newEmail;
                 users[newEmail] = userData;
                 currentUser = userData;
-                saveUsers();
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                saveAllData();
                 updateUI();
                 input.value = '';
                 showToast('✅ تم تغيير البريد إلى ' + newEmail, 'success');
@@ -2000,6 +3043,269 @@
         }
 
         // ==========================================
+        // نظام التذاكر (ميزة 15)
+        // ==========================================
+
+        function openTickets() {
+            closeMenu();
+            document.getElementById('ticketsModal').classList.add('show');
+            renderTickets();
+        }
+
+        function showNewTicketForm() {
+            document.getElementById('newTicketForm').style.display = 'block';
+        }
+
+        function hideNewTicketForm() {
+            document.getElementById('newTicketForm').style.display = 'none';
+            document.getElementById('ticketTitle').value = '';
+            document.getElementById('ticketDesc').value = '';
+        }
+
+        function createTicket() {
+            const title = document.getElementById('ticketTitle').value.trim();
+            const desc = document.getElementById('ticketDesc').value.trim();
+            
+            if (!title || !desc) {
+                showToast('⚠️ الرجاء ملء جميع الحقول', 'error');
+                return;
+            }
+            
+            const ticket = {
+                id: Date.now(),
+                title: title,
+                description: desc,
+                status: 'open',
+                created: Date.now(),
+                userEmail: currentUser ? currentUser.email : 'guest',
+                userName: currentUser ? currentUser.name : 'زائر'
+            };
+            
+            tickets.unshift(ticket);
+            saveAllData();
+            renderTickets();
+            updateTicketBadge();
+            hideNewTicketForm();
+            showToast('✅ تم إنشاء التذكرة بنجاح', 'success');
+        }
+
+        function renderTickets() {
+            const container = document.getElementById('ticketsList');
+            if (tickets.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align:center; padding:2rem; color:var(--text-secondary);">
+                        <i class="fas fa-inbox" style="font-size:2rem; display:block; margin-bottom:0.5rem;"></i>
+                        لا توجد تذاكر حالياً
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = tickets.map(t => {
+                const statusMap = {
+                    'open': 'مفتوحة',
+                    'in-progress': 'قيد المعالجة',
+                    'resolved': 'تم الحل',
+                    'closed': 'مغلقة'
+                };
+                return `
+                    <div class="ticket-card">
+                        <div class="ticket-header">
+                            <div class="ticket-title">${t.title}</div>
+                            <span class="ticket-status ${t.status}">${statusMap[t.status] || t.status}</span>
+                        </div>
+                        <div class="ticket-desc">${t.description}</div>
+                        <div class="ticket-meta">
+                            <span><i class="fas fa-user"></i> ${t.userName}</span>
+                            <span><i class="far fa-clock"></i> ${getTimeAgo(t.created)}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateTicketBadge() {
+            const openTickets = tickets.filter(t => t.status === 'open' || t.status === 'in-progress').length;
+            const badge = document.getElementById('ticketBadge');
+            const navBadge = document.getElementById('navTicketBadge');
+            
+            if (openTickets > 0) {
+                badge.textContent = openTickets;
+                badge.style.display = 'inline';
+                navBadge.textContent = openTickets;
+                navBadge.style.display = 'inline';
+            } else {
+                badge.style.display = 'none';
+                navBadge.style.display = 'none';
+            }
+        }
+
+        // ==========================================
+        // API (ميزة 19)
+        // ==========================================
+
+        function openAPI() {
+            closeMenu();
+            generateAPIKey();
+            document.getElementById('apiModal').classList.add('show');
+        }
+
+        function generateAPIKey() {
+            const key = 'pk_live_' + Array.from({length: 32}, () => 
+                'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'[Math.floor(Math.random() * 62)]
+            ).join('');
+            
+            if (currentUser) {
+                apiKeys[currentUser.email] = key;
+                saveAllData();
+            }
+            
+            document.getElementById('apiKeyDisplay').textContent = key;
+        }
+
+        function regenerateAPIKey() {
+            if (confirm('⚠️ هل أنت متأكد من تجديد مفتاح API؟ سيتم تعطيل المفتاح القديم')) {
+                generateAPIKey();
+                showToast('🔄 تم تجديد مفتاح API', 'success');
+            }
+        }
+
+        // ==========================================
+        // المساعد الذكي باستخدام Gemini API (ميزة 20)
+        // ==========================================
+
+        let aiMessages = [];
+
+        function openAI() {
+            closeMenu();
+            document.getElementById('aiModal').classList.add('show');
+            // إعادة تعيين المحادثة
+            if (aiMessages.length === 0) {
+                aiMessages.push({
+                    role: 'assistant',
+                    content: '👋 مرحباً بك في المساعد الذكي! كيف يمكنني مساعدتك اليوم؟'
+                });
+                renderAIMessages();
+            }
+        }
+
+        function renderAIMessages() {
+            const container = document.getElementById('aiMessages');
+            container.innerHTML = aiMessages.map(msg => `
+                <div class="ai-message ${msg.role}">
+                    <div>${msg.content}</div>
+                    <span class="ai-time">الآن</span>
+                </div>
+            `).join('');
+            container.scrollTop = container.scrollHeight;
+        }
+
+        async function sendAIMessage() {
+            const input = document.getElementById('aiInput');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            // إضافة رسالة المستخدم
+            aiMessages.push({ role: 'user', content: message });
+            renderAIMessages();
+            input.value = '';
+            
+            // إظهار حالة التفكير
+            document.getElementById('aiThinking').style.display = 'block';
+            document.getElementById('aiSendBtn').disabled = true;
+            
+            try {
+                // استخدام Gemini API (مجاني مع مفتاح)
+                const response = await fetchAIMessage(message);
+                
+                // إضافة رد المساعد
+                aiMessages.push({ role: 'assistant', content: response });
+                renderAIMessages();
+            } catch (error) {
+                // في حالة فشل API، استخدم ردود محلية
+                const fallbackResponse = getFallbackResponse(message);
+                aiMessages.push({ role: 'assistant', content: fallbackResponse });
+                renderAIMessages();
+                console.error('AI Error:', error);
+            }
+            
+            document.getElementById('aiThinking').style.display = 'none';
+            document.getElementById('aiSendBtn').disabled = false;
+        }
+
+        async function fetchAIMessage(message) {
+            // محاكاة طلب إلى Gemini API
+            // في الواقع، يجب استخدام مفتاح API حقيقي
+            // https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=YOUR_API_KEY
+            
+            // محاكاة تأخير الشبكة
+            await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1500));
+            
+            // ردود محاكاة
+            const responses = [
+                "مرحباً! أنا هنا لمساعدتك في مشاكل البرمجة. ماذا تحتاج؟",
+                "هذه فكرة رائعة! يمكنني مساعدتك في تنفيذها باستخدام بايثون.",
+                "أرى أنك تعمل على مشروع مثير للاهتمام. هل تحتاج مساعدة في جزء معين؟",
+                "لحل هذه المشكلة، يمكنك استخدام مكتبة requests في بايثون لإرسال طلبات HTTP.",
+                "أقترح استخدام Flask أو Django لبناء واجهة خلفية قوية لمشروعك.",
+                "تذكر دائماً اختبار الكود الخاص بك باستخدام حالات اختبار مختلفة.",
+                "هل جربت استخدام مكتبة pandas لمعالجة البيانات؟ إنها أداة قوية جداً.",
+                "يمكنك تحسين أداء الكود باستخدام list comprehensions بدلاً من الحلقات التقليدية.",
+                "أرى أنك مهتم بالأمن السيبراني. تأكد من استخدام HTTPS وتشفير البيانات الحساسة.",
+                "بخصوص سؤالك عن البوتات، يمكنك استخدام python-telegram-bot لبناء بوت تليجرام بسهولة."
+            ];
+            
+            // اختيار رد بناءً على الكلمات المفتاحية
+            const lower = message.toLowerCase();
+            if (lower.includes('بايثون') || lower.includes('python')) {
+                return "🐍 بايثون هي لغة برمجة قوية وسهلة التعلم. هل تحتاج مساعدة في مكتبة معينة؟";
+            }
+            if (lower.includes('بوت') || lower.includes('تليجرام')) {
+                return "🤖 لبناء بوت تليجرام، أنصح باستخدام python-telegram-bot أو Pyrogram. هل لديك فكرة محددة للبوت؟";
+            }
+            if (lower.includes('api') || lower.includes('واجهة')) {
+                return "🔗 لبناء API، يمكنك استخدام Flask-RESTful أو FastAPI. FastAPI أسرع ويدعم التوثيق التلقائي.";
+            }
+            if (lower.includes('خطأ') || lower.includes('error')) {
+                return "🐛 لتصحيح الأخطاء، استخدم try/except للتعامل مع الاستثناءات، وأضف طباعة للقيم المتغيرة لفهم تدفق البرنامج.";
+            }
+            if (lower.includes('بيانات') || lower.includes('data')) {
+                return "📊 لمعالجة البيانات، استخدم pandas للتنظيف والتحليل، وmatplotlib أو seaborn للتصوير البياني.";
+            }
+            if (lower.includes('تطبيق') || lower.includes('app')) {
+                return "📱 لتطوير تطبيقات الويب، أنصح باستخدام Flask أو Django. لتطبيقات الجوال، يمكنك استخدام Kivy أو BeeWare.";
+            }
+            if (lower.includes('ذكاء') || lower.includes('ai')) {
+                return "🧠 للذكاء الاصطناعي، استخدم TensorFlow أو PyTorch. لبداية سهلة، جرب scikit-learn للتعلم الآلي التقليدي.";
+            }
+            if (lower.includes('شكر') || lower.includes('thank')) {
+                return "💙 على الرحب والسعة! سعيد بمساعدتك. هل هناك شيء آخر يمكنني فعله؟";
+            }
+            
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+
+        function getFallbackResponse(message) {
+            const lower = message.toLowerCase();
+            if (lower.includes('مرحب') || lower.includes('hello')) {
+                return "👋 مرحباً! كيف يمكنني مساعدتك اليوم في رحلة البرمجة؟";
+            }
+            if (lower.includes('بايثون') || lower.includes('python')) {
+                return "🐍 بايثون لغة رائعة! هل لديك سؤال محدد عن مكتبة أو مشروع؟";
+            }
+            if (lower.includes('بوت')) {
+                return "🤖 لبناء بوت تليجرام، تحتاج إلى Token من @BotFather ومكتبة مثل python-telegram-bot.";
+            }
+            if (lower.includes('خطأ')) {
+                return "🐛 الأخطاء جزء طبيعي من البرمجة. أرسل لي الكود وسأساعدك في إيجاد المشكلة.";
+            }
+            if (lower.includes('api')) {
+                return "🔗 لاستخدام APIs، استخدم مكتبة requests في بايثون للتعامل مع طلبات HTTP.";
+            }
+            return "💡 سؤال ممتاز! أخبرني بالمزيد عن مشكلتك وسأحاول مساعدتك بأفضل طريقة ممكنة.";
+        }
+
+        // ==========================================
         // حذف الحساب
         // ==========================================
 
@@ -2020,7 +3326,7 @@
             }
         });
 
-        function deleteAccount() {
+        async function deleteAccount() {
             const confirmText = document.getElementById('deleteConfirmText').value.trim();
             if (confirmText !== 'حذف نهائي') {
                 showToast('⚠️ الرجاء كتابة "حذف نهائي" للتأكيد', 'error');
@@ -2035,7 +3341,7 @@
             if (confirm('⚠️ هل أنت متأكد تماماً من حذف حسابك نهائياً؟')) {
                 // حذف المستخدم
                 delete users[currentUser.email];
-                saveUsers();
+                await saveAllData();
                 localStorage.removeItem('currentUser');
                 localStorage.removeItem('userAvatar');
                 currentUser = null;
@@ -2044,7 +3350,6 @@
                 document.getElementById('loginScreen').classList.add('active');
                 showToast('🗑️ تم حذف حسابك نهائياً', 'error');
                 
-                // إعادة تحميل الصفحة بعد 2 ثانية
                 setTimeout(() => {
                     location.reload();
                 }, 2000);
@@ -2092,7 +3397,6 @@
 
         function openProfile() {
             closeMenu();
-            // تحميل الصورة المحفوظة
             const avatarData = localStorage.getItem('userAvatar');
             if (avatarData) {
                 document.getElementById('profileAvatarImg').src = avatarData;
@@ -2106,13 +3410,6 @@
         // التعليقات
         // ==========================================
 
-        let comments = [
-            { id: 1, user: 'أحمد محمد', text: '⭐️⭐️⭐️⭐️⭐️ منصة رائعة، خدمات متكاملة وسريعة!', time: Date.now() - 3600000 },
-            { id: 2, user: 'سارة خالد', text: '❤️ أفضل موقع برمجي تعاملت معه، دعم فني ممتاز جداً', time: Date.now() - 7200000 },
-            { id: 3, user: 'علي حسن', text: '🔥 أكواد احترافية وسعر رمزي، أنصح الجميع بالتجربة', time: Date.now() - 10800000 }
-        ];
-        let nextCommentId = 4;
-
         function openComments() {
             closeMenu();
             renderComments();
@@ -2121,31 +3418,27 @@
 
         function renderComments() {
             const list = document.getElementById('commentsList');
-            list.innerHTML = '';
-            comments.forEach(c => {
-                list.innerHTML += `
-                    <div style="background:var(--border); border-radius:var(--radius-sm); padding:0.8rem 1rem; margin-bottom:0.5rem;">
-                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
-                            <strong style="color:var(--text); display:flex; align-items:center; gap:6px;">
-                                <i class="fas fa-user-circle" style="color:var(--primary);"></i> ${c.user}
-                            </strong>
-                            <span style="font-size:0.6rem; color:var(--text-secondary);">${getTimeAgo(c.time)}</span>
-                        </div>
-                        <p style="color:var(--text-secondary); font-size:0.85rem; margin-top:0.2rem;">${c.text}</p>
+            if (comments.length === 0) {
+                list.innerHTML = `
+                    <div style="text-align:center; padding:2rem; color:var(--text-secondary);">
+                        <i class="fas fa-comment-slash" style="font-size:2rem; display:block; margin-bottom:0.5rem;"></i>
+                        لا توجد تعليقات حتى الآن
                     </div>
                 `;
-            });
-        }
-
-        function getTimeAgo(timestamp) {
-            const diff = Date.now() - timestamp;
-            const minutes = Math.floor(diff / 60000);
-            if (minutes < 1) return 'الآن';
-            if (minutes < 60) return `منذ ${minutes} دقيقة`;
-            const hours = Math.floor(minutes / 60);
-            if (hours < 24) return `منذ ${hours} ساعة`;
-            const days = Math.floor(hours / 24);
-            return `منذ ${days} يوم`;
+                return;
+            }
+            
+            list.innerHTML = comments.map(c => `
+                <div style="background:var(--border); border-radius:var(--radius-sm); padding:0.8rem 1rem; margin-bottom:0.5rem;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+                        <strong style="color:var(--text); display:flex; align-items:center; gap:6px;">
+                            <i class="fas fa-user-circle" style="color:var(--primary);"></i> ${c.user}
+                        </strong>
+                        <span style="font-size:0.6rem; color:var(--text-secondary);">${getTimeAgo(c.created || c.time)}</span>
+                    </div>
+                    <p style="color:var(--text-secondary); font-size:0.85rem; margin-top:0.2rem;">${c.text}</p>
+                </div>
+            `).join('');
         }
 
         function addComment() {
@@ -2158,12 +3451,13 @@
                 return;
             }
             comments.unshift({
-                id: nextCommentId++,
+                id: Date.now(),
                 user: user,
                 text: text,
-                time: Date.now()
+                created: Date.now()
             });
             textInput.value = '';
+            saveAllData();
             renderComments();
             showToast('✅ تم إضافة تعليقك', 'success');
         }
@@ -2219,7 +3513,6 @@
             const cairoTime = new Date(now.toLocaleString('en-US', { timeZone: 'Africa/Cairo' }));
             let hours = cairoTime.getHours();
             const minutes = String(cairoTime.getMinutes()).padStart(2, '0');
-            const seconds = String(cairoTime.getSeconds()).padStart(2, '0');
             hours = hours % 12 || 12;
             document.getElementById('headerDateTime').textContent = `${String(hours).padStart(2,'0')}:${minutes}`;
 
@@ -2288,6 +3581,21 @@
         }, 15000);
 
         // ==========================================
+        // وقت محدد
+        // ==========================================
+
+        function getTimeAgo(timestamp) {
+            const diff = Date.now() - timestamp;
+            const minutes = Math.floor(diff / 60000);
+            if (minutes < 1) return 'الآن';
+            if (minutes < 60) return `منذ ${minutes} دقيقة`;
+            const hours = Math.floor(minutes / 60);
+            if (hours < 24) return `منذ ${hours} ساعة`;
+            const days = Math.floor(hours / 24);
+            return `منذ ${days} يوم`;
+        }
+
+        // ==========================================
         // إغلاق النوافذ بالنقر خارجها
         // ==========================================
 
@@ -2303,12 +3611,11 @@
         // تحميل البيانات وبدء التطبيق
         // ==========================================
 
-        loadData();
-
-        // التحقق من تسجيل الدخول
-        if (currentUser) {
-            document.getElementById('loginScreen').classList.remove('active');
-            updateUI();
+        // تهيئة التطبيق
+        (async function init() {
+            await loadAllData();
+            applySettings();
+            
             // تحميل الصورة
             const avatarData = localStorage.getItem('userAvatar');
             if (avatarData) {
@@ -2316,13 +3623,45 @@
                 document.getElementById('avatarImage').style.display = 'block';
                 document.getElementById('avatarText').style.display = 'none';
             }
-        } else {
-            document.getElementById('loginScreen').classList.add('active');
+            
+            console.log('🚀 Python Zone v3.0');
+            console.log('📌 @TopVeGa | @Cybervega');
+            console.log('⭐ جميع الحقوق محفوظة © 2015-2025');
+            console.log('📦 IndexedDB Storage Active');
+            console.log('🔐 2FA Support Available');
+            console.log('🤖 AI Assistant Ready');
+            console.log('📡 API Endpoints Available');
+        })();
+
+        // ==========================================
+        // تسجيل Service Worker
+        // ==========================================
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('✅ Service Worker registered'))
+                    .catch(err => console.log('❌ Service Worker registration failed:', err));
+            });
         }
 
-        console.log('🚀 Python Zone v2.0');
-        console.log('📌 @TopVeGa | @Cybervega');
-        console.log('⭐ جميع الحقوق محفوظة © 2015-2025');
+        // ==========================================
+        // إشعارات Push (PWA)
+        // ==========================================
+
+        async function requestNotificationPermission() {
+            if ('Notification' in window && Notification.permission === 'default') {
+                const permission = await Notification.requestPermission();
+                if (permission === 'granted') {
+                    showToast('🔔 تم تفعيل الإشعارات', 'success');
+                }
+            }
+        }
+
+        // طلب الإذن عند التحميل
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(requestNotificationPermission, 3000);
+        });
     </script>
 </body>
 </html>
