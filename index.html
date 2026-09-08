@@ -477,8 +477,14 @@
         }
 
         /* ===== SEARCH ===== */
-        .search-bar {
+        .search-wrapper {
+            position: relative;
             display: flex;
+            align-items: center;
+        }
+
+        .search-bar {
+            display: none;
             align-items: center;
             background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(10px);
@@ -489,11 +495,17 @@
             transition: all 0.4s ease;
             flex: 1;
             max-width: 400px;
+            margin-left: 0.5rem;
         }
 
         body.dark-mode .search-bar {
             background: rgba(255, 255, 255, 0.03);
             border-color: rgba(255, 255, 255, 0.04);
+        }
+
+        .search-bar.active {
+            display: flex;
+            animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .search-bar:focus-within {
@@ -548,6 +560,26 @@
         body.dark-mode .search-bar button {
             background: linear-gradient(135deg, #60a5fa, #a78bfa);
             color: #0a0e1a;
+        }
+
+        .search-toggle {
+            background: transparent;
+            border: none;
+            color: #2563eb;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.3rem 0.6rem;
+            border-radius: 60px;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .search-toggle {
+            color: #60a5fa;
+        }
+
+        .search-toggle:hover {
+            transform: scale(1.2);
+            background: rgba(37, 99, 235, 0.04);
         }
 
         /* ===== NAV ===== */
@@ -1152,6 +1184,7 @@
             transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
 
         .pricing-card::before {
@@ -1848,6 +1881,62 @@
             color: #60a5fa;
         }
 
+        /* ===== PRICING DETAIL MODAL ===== */
+        .pricing-detail-grid {
+            display: grid;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .pricing-detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.4rem 0.8rem;
+            background: rgba(248, 250, 252, 0.4);
+            border-radius: 12px;
+            font-size: 0.85rem;
+            color: #1e293b;
+            transition: all 0.6s ease;
+        }
+
+        body.dark-mode .pricing-detail-item {
+            background: rgba(255, 255, 255, 0.02);
+            color: #e2e8f0;
+        }
+
+        .pricing-detail-item span:last-child {
+            font-weight: 600;
+            color: #2563eb;
+        }
+
+        body.dark-mode .pricing-detail-item span:last-child {
+            color: #60a5fa;
+        }
+
+        .btn-subscribe {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            border: none;
+            padding: 0.8rem 2.5rem;
+            border-radius: 60px;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .btn-subscribe:hover {
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.15);
+        }
+
+        body.dark-mode .btn-subscribe {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            color: #0a0e1a;
+        }
+
         /* ===== COMMENTS ===== */
         .comment-input-area {
             border-radius: 28px;
@@ -2229,6 +2318,7 @@
             color: #2563eb;
             font-weight: 600;
             transition: all 0.6s ease;
+            direction: ltr;
         }
 
         body.dark-mode .calendar-header .clock-display {
@@ -2365,6 +2455,18 @@
 
         body.dark-mode .terms-section ul li i {
             color: #60a5fa;
+        }
+
+        /* ===== LANGUAGE INDICATOR ===== */
+        .lang-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            margin-right: 6px;
+            vertical-align: middle;
+            box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
         }
 
         /* ===== RESPONSIVE ===== */
@@ -2591,12 +2693,17 @@
                         <span id="statusText">جميع الخدمات تعمل</span>
                     </div>
 
-                    <!-- Search Bar -->
-                    <div class="search-bar">
-                        <input type="text" id="searchInput" placeholder="🔍 ابحث عن كود، بوت، خدمة..." oninput="searchContent(this.value)">
-                        <button onclick="searchContent(document.getElementById('searchInput').value)">
-                            <i class="fas fa-search"></i> بحث
+                    <!-- Search Wrapper -->
+                    <div class="search-wrapper">
+                        <button class="search-toggle" onclick="toggleSearchBar()" title="بحث">
+                            <i class="fas fa-search"></i>
                         </button>
+                        <div class="search-bar" id="searchBar">
+                            <input type="text" id="searchInput" placeholder="🔍 ابحث عن كود، بوت، خدمة..." oninput="searchContent(this.value)">
+                            <button onclick="searchContent(document.getElementById('searchInput').value)">
+                                <i class="fas fa-search"></i> بحث
+                            </button>
+                        </div>
                     </div>
 
                     <!-- User Section -->
@@ -2631,10 +2738,10 @@
             <div style="position:relative;">
                 <div class="dropdown-content" id="dropdownMenu">
                     <button class="dropdown-item" onclick="changeLanguage('ar')">
-                        <i class="fas fa-flag"></i> 🇸🇦 العربية
+                        <i class="fas fa-flag"></i> 🇸🇦 العربية <span id="langIndicatorAr"></span>
                     </button>
                     <button class="dropdown-item" onclick="changeLanguage('en')">
-                        <i class="fas fa-flag"></i> 🇬🇧 English
+                        <i class="fas fa-flag"></i> 🇬🇧 English <span id="langIndicatorEn"></span>
                     </button>
                     <div class="dropdown-divider"></div>
                     <button class="dropdown-item" onclick="toggleFullscreen()">
@@ -2792,77 +2899,8 @@
                     <i class="fas fa-tags"></i>
                     <h3 data-key="pricingTitle">💰 خطط التسعير</h3>
                 </div>
-                <div class="pricing-grid">
-                    <div class="pricing-card glass">
-                        <div class="pricing-name" data-key="pricingBasic">أساسي</div>
-                        <div class="pricing-price">3$ <small>/شهر</small></div>
-                        <div class="pricing-desc" data-key="pricingBasicDesc">للمبتدئين</div>
-                        <ul class="pricing-features">
-                            <li><i class="fas fa-check"></i> 500 طلب/يوم</li>
-                            <li><i class="fas fa-check"></i> API أساسية</li>
-                            <li><i class="fas fa-check"></i> دعم أساسي</li>
-                        </ul>
-                        <button class="pricing-btn" data-key="pricingStart">ابدأ</button>
-                    </div>
-                    <div class="pricing-card glass">
-                        <div class="pricing-name" data-key="pricingStandard">قياسي</div>
-                        <div class="pricing-price">5$ <small>/شهر</small></div>
-                        <div class="pricing-desc" data-key="pricingStandardDesc">للمطورين</div>
-                        <ul class="pricing-features">
-                            <li><i class="fas fa-check"></i> 2,000 طلب/يوم</li>
-                            <li><i class="fas fa-check"></i> جميع الـ APIs</li>
-                            <li><i class="fas fa-check"></i> دعم سريع</li>
-                        </ul>
-                        <button class="pricing-btn" data-key="pricingStart">ابدأ</button>
-                    </div>
-                    <div class="pricing-card glass popular">
-                        <div class="pricing-name" data-key="pricingPro">احترافي</div>
-                        <div class="pricing-price">10$ <small>/شهر</small></div>
-                        <div class="pricing-desc" data-key="pricingProDesc">الأكثر طلباً</div>
-                        <ul class="pricing-features">
-                            <li><i class="fas fa-check"></i> 10,000 طلب/يوم</li>
-                            <li><i class="fas fa-check"></i> جميع الـ APIs</li>
-                            <li><i class="fas fa-check"></i> دعم VIP 24/7</li>
-                            <li><i class="fas fa-check"></i> تخصيص مسبق</li>
-                        </ul>
-                        <button class="pricing-btn" data-key="pricingStart">ابدأ</button>
-                    </div>
-                    <div class="pricing-card glass">
-                        <div class="pricing-name" data-key="pricingBusiness">أعمال</div>
-                        <div class="pricing-price">15$ <small>/شهر</small></div>
-                        <div class="pricing-desc" data-key="pricingBusinessDesc">للشركات الصغيرة</div>
-                        <ul class="pricing-features">
-                            <li><i class="fas fa-check"></i> 25,000 طلب/يوم</li>
-                            <li><i class="fas fa-check"></i> جميع الـ APIs</li>
-                            <li><i class="fas fa-check"></i> دعم مخصص</li>
-                            <li><i class="fas fa-check"></i> تحليلات متقدمة</li>
-                        </ul>
-                        <button class="pricing-btn" data-key="pricingStart">ابدأ</button>
-                    </div>
-                    <div class="pricing-card glass">
-                        <div class="pricing-name" data-key="pricingPremium">مميز</div>
-                        <div class="pricing-price">20$ <small>/شهر</small></div>
-                        <div class="pricing-desc" data-key="pricingPremiumDesc">للمشاريع الكبيرة</div>
-                        <ul class="pricing-features">
-                            <li><i class="fas fa-check"></i> 50,000 طلب/يوم</li>
-                            <li><i class="fas fa-check"></i> APIs مخصصة</li>
-                            <li><i class="fas fa-check"></i> دعم أولوية</li>
-                            <li><i class="fas fa-check"></i> تقارير مفصلة</li>
-                        </ul>
-                        <button class="pricing-btn" data-key="pricingStart">ابدأ</button>
-                    </div>
-                    <div class="pricing-card glass">
-                        <div class="pricing-name" data-key="pricingEnterprise">مؤسسي</div>
-                        <div class="pricing-price">25$ <small>/شهر</small></div>
-                        <div class="pricing-desc" data-key="pricingEnterpriseDesc">للشركات الكبرى</div>
-                        <ul class="pricing-features">
-                            <li><i class="fas fa-check"></i> غير محدود</li>
-                            <li><i class="fas fa-check"></i> APIs مخصصة بالكامل</li>
-                            <li><i class="fas fa-check"></i> دعم مخصص 24/7</li>
-                            <li><i class="fas fa-check"></i> SLA مضمون</li>
-                        </ul>
-                        <button class="pricing-btn" data-key="pricingStart">ابدأ</button>
-                    </div>
+                <div class="pricing-grid" id="pricingGrid">
+                    <!-- Pricing cards will be rendered by JS -->
                 </div>
                 <div style="margin-top:0.5rem;font-size:0.7rem;color:#94a3b8;text-align:center;">
                     <i class="fas fa-shield-alt"></i> دفع آمن عبر باينس و نجوم تليجرام
@@ -2886,35 +2924,8 @@
                         <i class="fas fa-info-circle"></i> جميع الـ APIs هي واجهاتنا المخصصة والمطورة داخلياً، وليست مجرد تغليف لخدمات خارجية.
                     </span>
                 </p>
-                <div class="api-grid">
-                    <div class="api-card glass">
-                        <span class="api-badge limited">محدود</span>
-                        <i class="fab fa-youtube"></i>
-                        <div class="api-name" data-key="apiName1">YouTube API</div>
-                        <div class="api-desc" data-key="apiDesc1">جلب البيانات، بحث، تشغيل</div>
-                        <div class="api-limits"><i class="fas fa-tachometer-alt"></i> 500 طلب/ساعة</div>
-                    </div>
-                    <div class="api-card glass">
-                        <span class="api-badge limited">محدود</span>
-                        <i class="fab fa-spotify"></i>
-                        <div class="api-name" data-key="apiName2">Spotify API</div>
-                        <div class="api-desc" data-key="apiDesc2">موسيقى، قوائم تشغيل، بحث</div>
-                        <div class="api-limits"><i class="fas fa-tachometer-alt"></i> 300 طلب/ساعة</div>
-                    </div>
-                    <div class="api-card glass">
-                        <span class="api-badge" style="background:#22c55e;">مفتوح</span>
-                        <i class="fab fa-telegram"></i>
-                        <div class="api-name" data-key="apiName3">Telegram API</div>
-                        <div class="api-desc" data-key="apiDesc3">بوتات، جلسات، تفاعلات</div>
-                        <div class="api-limits"><i class="fas fa-tachometer-alt"></i> 1000 طلب/ساعة</div>
-                    </div>
-                    <div class="api-card glass">
-                        <span class="api-badge limited">محدود</span>
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <div class="api-name" data-key="apiName4">Media API</div>
-                        <div class="api-desc" data-key="apiDesc4">رفع ومعالجة الميديا</div>
-                        <div class="api-limits"><i class="fas fa-tachometer-alt"></i> 200 طلب/ساعة</div>
-                    </div>
+                <div class="api-grid" id="apiGrid">
+                    <!-- API cards rendered by JS -->
                 </div>
                 <div class="api-note">
                     <i class="fas fa-info-circle"></i>
@@ -3197,6 +3208,52 @@
         </div>
     </div>
 
+    <!-- Pricing Detail Modal -->
+    <div class="modal-overlay" id="pricingDetailOverlay">
+        <div class="modal">
+            <button class="close-modal" onclick="closePricingDetail()"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-crown"></i> <span id="pricingDetailTitle">تفاصيل الخطة</span></h2>
+            <div class="pricing-detail-grid" id="pricingDetailGrid">
+                <!-- filled by JS -->
+            </div>
+            <button class="btn-subscribe" onclick="openSubscribe()">
+                <i class="fas fa-credit-card"></i> اشتراك
+            </button>
+        </div>
+    </div>
+
+    <!-- Subscribe Modal (Google Pay) -->
+    <div class="modal-overlay" id="subscribeOverlay">
+        <div class="modal">
+            <button class="close-modal" onclick="closeSubscribe()"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-credit-card"></i> 💳 بيانات الدفع - Google Pay</h2>
+            <div style="display:flex;flex-direction:column;gap:1rem;margin-top:1rem;">
+                <div>
+                    <label style="font-weight:600;color:#0f172a;display:block;margin-bottom:0.3rem;transition:color 0.6s ease;">البطاقة</label>
+                    <input type="text" placeholder="0000 0000 0000 0000" style="width:100%;padding:0.6rem;border-radius:16px;border:1px solid rgba(0,0,0,0.04);background:rgba(248,250,252,0.4);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:#1e293b;font-size:0.9rem;transition:all 0.6s ease;">
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                    <div>
+                        <label style="font-weight:600;color:#0f172a;display:block;margin-bottom:0.3rem;transition:color 0.6s ease;">تاريخ الانتهاء</label>
+                        <input type="text" placeholder="MM/YY" style="width:100%;padding:0.6rem;border-radius:16px;border:1px solid rgba(0,0,0,0.04);background:rgba(248,250,252,0.4);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:#1e293b;font-size:0.9rem;transition:all 0.6s ease;">
+                    </div>
+                    <div>
+                        <label style="font-weight:600;color:#0f172a;display:block;margin-bottom:0.3rem;transition:color 0.6s ease;">CVV</label>
+                        <input type="text" placeholder="123" style="width:100%;padding:0.6rem;border-radius:16px;border:1px solid rgba(0,0,0,0.04);background:rgba(248,250,252,0.4);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:#1e293b;font-size:0.9rem;transition:all 0.6s ease;">
+                    </div>
+                </div>
+                <div>
+                    <label style="font-weight:600;color:#0f172a;display:block;margin-bottom:0.3rem;transition:color 0.6s ease;">الاسم على البطاقة</label>
+                    <input type="text" placeholder="الاسم" style="width:100%;padding:0.6rem;border-radius:16px;border:1px solid rgba(0,0,0,0.04);background:rgba(248,250,252,0.4);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:#1e293b;font-size:0.9rem;transition:all 0.6s ease;">
+                </div>
+                <button onclick="processPayment()" style="background:linear-gradient(135deg,#2563eb,#7c3aed);border:none;padding:0.8rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;font-size:1rem;transition:all 0.3s ease;display:flex;align-items:center;justify-content:center;gap:8px;">
+                    <i class="fab fa-google-pay"></i> دفع عبر Google Pay
+                </button>
+                <p style="font-size:0.7rem;color:#64748b;text-align:center;">سيتم خصم المبلغ تلقائياً. يمكنك إلغاء الاشتراك في أي وقت.</p>
+            </div>
+        </div>
+    </div>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 600, once: true, easing: 'ease-out' });
@@ -3204,85 +3261,64 @@
         // ============================================================
         // ===== DATA =====
         // ============================================================
-        const contentData = [{
-            id: 1,
-            title: 'سكربت استخراج جلسات تليجرام',
-            desc: 'استخراج جلسات بايروجرام بسهولة وسرعة',
-            icon: 'fa-key',
-            category: 'telegram',
-            type: 'scripts',
-            downloads: 1247,
-            views: 5231,
-            rating: 4.8,
-            favorite: false,
-            downloadLink: 'https://t.me/python2015'
-        }, {
-            id: 2,
-            title: 'بوت موسيقى متكامل',
-            desc: 'بوت تليجرام لتشغيل وتحميل الأغاني من يوتيوب',
-            icon: 'fa-music',
-            category: 'music',
-            type: 'bots',
-            downloads: 892,
-            views: 3412,
-            rating: 4.9,
-            favorite: false,
-            downloadLink: 'https://t.me/Bi1ieBot'
-        }, {
-            id: 3,
-            title: 'أداة حماية سيرفرات',
-            desc: 'حماية متقدمة للسيرفرات من الاختراقات',
-            icon: 'fa-shield-alt',
-            category: 'security',
-            type: 'tools',
-            downloads: 534,
-            views: 2156,
-            rating: 4.6,
-            favorite: false,
-            downloadLink: 'https://t.me/ToolsTermex'
-        }, {
-            id: 4,
-            title: 'مكتبة بايثون للـ API',
-            desc: 'مكتبة متكاملة للتعامل مع واجهات API',
-            icon: 'fa-plug',
-            category: 'python',
-            type: 'codes',
-            downloads: 723,
-            views: 2894,
-            rating: 4.7,
-            favorite: false,
-            downloadLink: 'https://t.me/python2015'
-        }, {
-            id: 5,
-            title: 'سكربت نقل أعضاء تليجرام',
-            desc: 'نقل أعضاء بين المجموعات مخفي أو ظهار',
-            icon: 'fa-user-friends',
-            category: 'telegram',
-            type: 'scripts',
-            downloads: 456,
-            views: 1876,
-            rating: 4.5,
-            favorite: false,
-            downloadLink: 'https://t.me/vegaone'
-        }, {
-            id: 6,
-            title: 'ملف حماية lua & php',
-            desc: 'حماية متقدمة لمواقع الويب وسيرفرات اللعبة',
-            icon: 'fa-file-code',
-            category: 'security',
-            type: 'tools',
-            downloads: 678,
-            views: 2567,
-            rating: 4.8,
-            favorite: false,
-            downloadLink: 'https://t.me/ToolsTermex'
-        }];
+        const contentData = [
+            { id: 1, title: 'سكربت استخراج جلسات تليجرام', desc: 'استخراج جلسات بايروجرام بسهولة وسرعة', icon: 'fa-key',
+                category: 'telegram', type: 'scripts', downloads: 1247, views: 5231, rating: 4.8, favorite: false,
+                downloadLink: 'https://t.me/python2015' },
+            { id: 2, title: 'بوت موسيقى متكامل', desc: 'بوت تليجرام لتشغيل وتحميل الأغاني من يوتيوب', icon: 'fa-music',
+                category: 'music', type: 'bots', downloads: 892, views: 3412, rating: 4.9, favorite: false,
+                downloadLink: 'https://t.me/Bi1ieBot' },
+            { id: 3, title: 'أداة حماية سيرفرات', desc: 'حماية متقدمة للسيرفرات من الاختراقات', icon: 'fa-shield-alt',
+                category: 'security', type: 'tools', downloads: 534, views: 2156, rating: 4.6, favorite: false,
+                downloadLink: 'https://t.me/ToolsTermex' },
+            { id: 4, title: 'مكتبة بايثون للـ API', desc: 'مكتبة متكاملة للتعامل مع واجهات API', icon: 'fa-plug',
+                category: 'python', type: 'codes', downloads: 723, views: 2894, rating: 4.7, favorite: false,
+                downloadLink: 'https://t.me/python2015' },
+            { id: 5, title: 'سكربت نقل أعضاء تليجرام', desc: 'نقل أعضاء بين المجموعات مخفي أو ظهار', icon: 'fa-user-friends',
+                category: 'telegram', type: 'scripts', downloads: 456, views: 1876, rating: 4.5, favorite: false,
+                downloadLink: 'https://t.me/vegaone' },
+            { id: 6, title: 'ملف حماية lua & php', desc: 'حماية متقدمة لمواقع الويب وسيرفرات اللعبة', icon: 'fa-file-code',
+                category: 'security', type: 'tools', downloads: 678, views: 2567, rating: 4.8, favorite: false,
+                downloadLink: 'https://t.me/ToolsTermex' }
+        ];
+
+        const pricingData = [
+            { name: 'أساسي', price: '3', desc: 'للمبتدئين', features: ['500 طلب/يوم', 'API أساسية', 'دعم أساسي'],
+            popular: false },
+            { name: 'قياسي', price: '5', desc: 'للمطورين', features: ['2,000 طلب/يوم', 'جميع الـ APIs', 'دعم سريع'],
+            popular: false },
+            { name: 'احترافي', price: '10', desc: 'الأكثر طلباً', features: ['10,000 طلب/يوم', 'جميع الـ APIs',
+                    'دعم VIP 24/7', 'تخصيص مسبق'
+                ], popular: true },
+            { name: 'أعمال', price: '15', desc: 'للشركات الصغيرة', features: ['25,000 طلب/يوم', 'جميع الـ APIs',
+                    'دعم مخصص', 'تحليلات متقدمة'
+                ], popular: false },
+            { name: 'مميز', price: '20', desc: 'للمشاريع الكبيرة', features: ['50,000 طلب/يوم', 'APIs مخصصة',
+                    'دعم أولوية', 'تقارير مفصلة'
+                ], popular: false },
+            { name: 'مؤسسي', price: '25', desc: 'للشركات الكبرى', features: ['غير محدود', 'APIs مخصصة بالكامل',
+                    'دعم مخصص 24/7', 'SLA مضمون'
+                ], popular: false }
+        ];
+
+        const apiData = [
+            { name: 'YouTube API', desc: 'جلب البيانات، بحث، تشغيل', icon: 'fab fa-youtube', limit: '500 طلب/ساعة',
+                badge: 'محدود' },
+            { name: 'Spotify API', desc: 'موسيقى، قوائم تشغيل، بحث', icon: 'fab fa-spotify', limit: '300 طلب/ساعة',
+                badge: 'محدود' },
+            { name: 'Telegram API', desc: 'بوتات، جلسات، تفاعلات', icon: 'fab fa-telegram', limit: '1000 طلب/ساعة',
+                badge: 'مفتوح' },
+            { name: 'Media API', desc: 'رفع ومعالجة الميديا', icon: 'fas fa-cloud-upload-alt', limit: '200 طلب/ساعة',
+                badge: 'محدود' }
+        ];
 
         let favorites = [];
         let currentUser = 'زائر';
         let currentFilter = 'all';
         let currentCategory = 'all';
         let cricketPlaying = false;
+        let currentLang = 'ar';
+        let selectedPricing = null;
 
         // ============================================================
         // ===== DARK MODE BACKGROUND BUGS =====
@@ -3442,7 +3478,7 @@
         }
 
         // ============================================================
-        // ===== RENDER CONTENT =====
+        // ===== RENDER FUNCTIONS =====
         // ============================================================
         function renderContent() {
             const grid = document.getElementById('contentGrid');
@@ -3500,27 +3536,88 @@
             return html;
         }
 
-        // ============================================================
-        // ===== STATUS INDICATOR =====
-        // ============================================================
-        let statusDegraded = false;
-        setInterval(() => {
-            statusDegraded = Math.random() < 0.05;
-            const dot = document.getElementById('statusDot');
-            const text = document.getElementById('statusText');
-            if (statusDegraded) {
-                dot.className = 'status-dot degraded';
-                text.textContent = '⚠️ بعض الخدمات متأثرة';
-                setTimeout(() => {
-                    dot.className = 'status-dot online';
-                    text.textContent = 'جميع الخدمات تعمل';
-                    statusDegraded = false;
-                }, 15000);
-            }
-        }, 30000);
+        function renderPricing() {
+            const grid = document.getElementById('pricingGrid');
+            grid.innerHTML = pricingData.map((p, idx) => `
+                <div class="pricing-card glass ${p.popular ? 'popular' : ''}" onclick="openPricingDetail(${idx})">
+                    <div class="pricing-name">${p.name}</div>
+                    <div class="pricing-price">${p.price}$ <small>/شهر</small></div>
+                    <div class="pricing-desc">${p.desc}</div>
+                    <ul class="pricing-features">
+                        ${p.features.map(f => `<li><i class="fas fa-check"></i> ${f}</li>`).join('')}
+                    </ul>
+                    <button class="pricing-btn" onclick="event.stopPropagation();openPricingDetail(${idx})">${currentLang === 'ar' ? 'ابدأ' : 'Start'}</button>
+                </div>
+            `).join('');
+        }
+
+        function renderAPIs() {
+            const grid = document.getElementById('apiGrid');
+            grid.innerHTML = apiData.map(api => `
+                <div class="api-card glass">
+                    <span class="api-badge ${api.badge === 'محدود' ? 'limited' : ''}">${api.badge}</span>
+                    <i class="${api.icon}"></i>
+                    <div class="api-name">${api.name}</div>
+                    <div class="api-desc">${api.desc}</div>
+                    <div class="api-limits"><i class="fas fa-tachometer-alt"></i> ${api.limit}</div>
+                </div>
+            `).join('');
+        }
 
         // ============================================================
-        // ===== DOWNLOAD/CONTENT FUNCTIONS =====
+        // ===== PRICING DETAIL MODAL =====
+        // ============================================================
+        function openPricingDetail(index) {
+            selectedPricing = pricingData[index];
+            const overlay = document.getElementById('pricingDetailOverlay');
+            document.getElementById('pricingDetailTitle').textContent = selectedPricing.name;
+
+            const grid = document.getElementById('pricingDetailGrid');
+            grid.innerHTML = `
+                <div class="pricing-detail-item"><span>السعر</span><span>${selectedPricing.price}$ / شهر</span></div>
+                <div class="pricing-detail-item"><span>الوصف</span><span>${selectedPricing.desc}</span></div>
+                ${selectedPricing.features.map(f => `<div class="pricing-detail-item"><span>الميزة</span><span>${f}</span></div>`).join('')}
+                <div class="pricing-detail-item"><span>المعالج</span><span>AMD EPYC 64Core</span></div>
+                <div class="pricing-detail-item"><span>الذاكرة العشوائية</span><span>${index === 0 ? '4GB' : index === 1 ? '8GB' : index === 2 ? '16GB' : index === 3 ? '32GB' : index === 4 ? '64GB' : '128GB'} DDR4</span></div>
+                <div class="pricing-detail-item"><span>التخزين</span><span>${index === 0 ? '50GB' : index === 1 ? '100GB' : index === 2 ? '200GB' : index === 3 ? '400GB' : index === 4 ? '800GB' : '1.6TB'} NVMe</span></div>
+                <div class="pricing-detail-item"><span>النطاق الترددي</span><span>${index === 0 ? '4TB' : index === 1 ? '8TB' : index === 2 ? '16TB' : index === 3 ? '32TB' : index === 4 ? '64TB' : '128TB'}</span></div>
+                <div class="pricing-detail-item"><span>النسخ الاحتياطية</span><span>${index === 0 ? 'أسبوعية' : 'يومية'}</span></div>
+            `;
+            overlay.classList.add('show');
+        }
+
+        function closePricingDetail() {
+            document.getElementById('pricingDetailOverlay').classList.remove('show');
+            selectedPricing = null;
+        }
+
+        function openSubscribe() {
+            document.getElementById('pricingDetailOverlay').classList.remove('show');
+            document.getElementById('subscribeOverlay').classList.add('show');
+        }
+
+        function closeSubscribe() {
+            document.getElementById('subscribeOverlay').classList.remove('show');
+        }
+
+        function processPayment() {
+            showToast('✅ تم الدفع بنجاح عبر Google Pay!');
+            closeSubscribe();
+        }
+
+        // ============================================================
+        // ===== SEARCH TOGGLE =====
+        // ============================================================
+        function toggleSearchBar() {
+            const bar = document.getElementById('searchBar');
+            bar.classList.toggle('active');
+            if (bar.classList.contains('active')) {
+                document.getElementById('searchInput').focus();
+            }
+        }
+
+        // ============================================================
+        // ===== CONTENT FUNCTIONS =====
         // ============================================================
         function downloadContent(id) {
             const item = contentData.find(c => c.id === id);
@@ -3546,9 +3643,6 @@
             }
         }
 
-        // ============================================================
-        // ===== FAVORITES =====
-        // ============================================================
         function toggleFavorite(id) {
             const index = favorites.indexOf(id);
             if (index > -1) {
@@ -3674,7 +3768,7 @@
         // ============================================================
         function openUserSettings() {
             document.getElementById('settingsUsername').value = currentUser;
-            document.getElementById('settingsLanguage').value = document.body.dir === 'rtl' ? 'ar' : 'en';
+            document.getElementById('settingsLanguage').value = currentLang;
             document.getElementById('settingsOverlay').classList.add('show');
             document.getElementById('dropdownMenu').style.display = 'none';
             document.getElementById('userMenu').style.display = 'none';
@@ -3802,14 +3896,6 @@
                 support: 'جروب الدعم',
                 apiTitle: 'خدمات API للتطبيقات',
                 apiDesc: 'نقدم واجهات برمجة تطبيقات (API) جاهزة للتكامل مع تطبيقاتك، مصممة خصيصاً لتلبية احتياجات المطورين.',
-                apiName1: 'YouTube API',
-                apiDesc1: 'جلب البيانات، بحث، تشغيل',
-                apiName2: 'Spotify API',
-                apiDesc2: 'موسيقى، قوائم تشغيل، بحث',
-                apiName3: 'Telegram API',
-                apiDesc3: 'بوتات، جلسات، تفاعلات',
-                apiName4: 'Media API',
-                apiDesc4: 'رفع ومعالجة الميديا',
                 apiNote: 'ملاحظة: جميع واجهات API قابلة للتعديل والتخصيص حسب طلبك، مع دعم فني متواصل.',
                 visionTitle: 'رؤيتنا وخدمتنا',
                 visionText: 'نؤمن بأن البرمجيات هي لغة المستقبل، ونسعى لتقديم منصة متكاملة تجمع بين الإبداع والتقنية. نقدم حلولاً برمجية مبتكرة، واجهات API متطورة، وأدوات تسهل على المطورين بناء تطبيقاتهم بسهولة. خدمتنا: نوفر بيئة داعمة للمطورين، مع محتوى غني، وأكواد جاهزة، ودعم فني احترافي. رؤيتنا: أن نكون المنصة الأولى في العالم العربي للبرمجيات والتطوير، مع الحفاظ على الجودة والابتكار.',
@@ -3838,28 +3924,9 @@
                 aboutPricing: 'يوجد عمل اي كود او تعديل اي ملف كل هذا و #بأسعار رمزيه بدون تكلفة',
                 aboutContact: 'للتواصل:',
                 aboutNotice: '#تنويه_هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك',
-                donateTitle: 'تبرع بـ نجوم تليجرام',
-                donateDesc: 'تبرعك بـ 1 نجمة يساعدنا على الاستمرار وتطوير المنصة نحو الأفضل ❤️',
-                donate1: 'تبرع بـ 1 ⭐',
-                donate5: 'تبرع بـ 5 ⭐',
-                donate10: 'تبرع بـ 10 ⭐',
-                donateSecure: 'الدفع مباشرة لحساب @TopVeGa',
                 popularTitle: '📌 الأكثر طلباً',
                 channelsTitle: '📡 قنواتنا',
                 pricingTitle: 'خطط التسعير',
-                pricingBasic: 'أساسي',
-                pricingBasicDesc: 'للمبتدئين',
-                pricingStandard: 'قياسي',
-                pricingStandardDesc: 'للمطورين',
-                pricingPro: 'احترافي',
-                pricingProDesc: 'الأكثر طلباً',
-                pricingBusiness: 'أعمال',
-                pricingBusinessDesc: 'للشركات الصغيرة',
-                pricingPremium: 'مميز',
-                pricingPremiumDesc: 'للمشاريع الكبيرة',
-                pricingEnterprise: 'مؤسسي',
-                pricingEnterpriseDesc: 'للشركات الكبرى',
-                pricingStart: 'ابدأ',
                 privacyTitle: 'سياسة الخصوصية',
                 privacyIntro: 'نحن في python zone نلتزم بحماية خصوصية بياناتك. إليك كيفية تعاملنا معها:',
                 privacy1: 'لا نقوم بتخزين أي بيانات شخصية للمستخدمين على خوادمنا.',
@@ -3919,14 +3986,6 @@
                 support: 'Support Group',
                 apiTitle: 'API Services for Applications',
                 apiDesc: 'We provide ready-to-use APIs for integration with your applications, specifically designed to meet developers\' needs.',
-                apiName1: 'YouTube API',
-                apiDesc1: 'Fetch data, search, play',
-                apiName2: 'Spotify API',
-                apiDesc2: 'Music, playlists, search',
-                apiName3: 'Telegram API',
-                apiDesc3: 'Bots, sessions, interactions',
-                apiName4: 'Media API',
-                apiDesc4: 'Upload and process media',
                 apiNote: 'Note: All APIs are customizable upon request, with continuous technical support.',
                 visionTitle: 'Our Vision & Service',
                 visionText: 'We believe that software is the language of the future, and we strive to provide an integrated platform that combines creativity and technology. We offer innovative software solutions, advanced APIs, and tools that make it easy for developers to build their applications. Our service: We provide a supportive environment for developers, with rich content, ready-made codes, and professional technical support. Our vision: To be the leading platform in the Arab world for software and development, while maintaining quality and innovation.',
@@ -3955,28 +4014,9 @@
                 aboutPricing: 'We can create any code or modify any file All of this at #symbolic prices without cost',
                 aboutContact: 'Contact:',
                 aboutNotice: '#Important: Please be serious so we don\'t waste time',
-                donateTitle: 'Donate with Telegram Stars',
-                donateDesc: 'Your donation of 1 star helps us continue and develop the platform for the better ❤️',
-                donate1: 'Donate 1 ⭐',
-                donate5: 'Donate 5 ⭐',
-                donate10: 'Donate 10 ⭐',
-                donateSecure: 'Payment directly to @TopVeGa account',
                 popularTitle: '📌 Most Popular',
                 channelsTitle: '📡 Our Channels',
                 pricingTitle: 'Pricing Plans',
-                pricingBasic: 'Basic',
-                pricingBasicDesc: 'For beginners',
-                pricingStandard: 'Standard',
-                pricingStandardDesc: 'For developers',
-                pricingPro: 'Professional',
-                pricingProDesc: 'Most popular',
-                pricingBusiness: 'Business',
-                pricingBusinessDesc: 'For small businesses',
-                pricingPremium: 'Premium',
-                pricingPremiumDesc: 'For large projects',
-                pricingEnterprise: 'Enterprise',
-                pricingEnterpriseDesc: 'For large enterprises',
-                pricingStart: 'Get Started',
                 privacyTitle: 'Privacy Policy',
                 privacyIntro: 'At python zone, we are committed to protecting your data privacy. Here\'s how we handle it:',
                 privacy1: 'We do not store any personal user data on our servers.',
@@ -3988,6 +4028,7 @@
         };
 
         function changeLanguage(lang) {
+            currentLang = lang;
             const t = translations[lang];
             if (!t) return;
             document.body.dir = lang === 'en' ? 'ltr' : 'rtl';
@@ -3997,7 +4038,17 @@
             });
             document.getElementById('settingsLanguage').value = lang;
             document.getElementById('dropdownMenu').style.display = 'none';
+            renderPricing();
+            renderAPIs();
+            updateLanguageIndicators(lang);
             saveData();
+        }
+
+        function updateLanguageIndicators(selected) {
+            const arIndicator = document.getElementById('langIndicatorAr');
+            const enIndicator = document.getElementById('langIndicatorEn');
+            arIndicator.innerHTML = selected === 'ar' ? '<span class="lang-indicator"></span>' : '';
+            enIndicator.innerHTML = selected === 'en' ? '<span class="lang-indicator"></span>' : '';
         }
 
         // ============================================================
@@ -4219,7 +4270,7 @@
             const seconds = String(cairoTime.getSeconds()).padStart(2, '0');
             const ampm = hours >= 12 ? 'م' : 'ص';
             hours = hours % 12 || 12;
-            document.getElementById('headerDateTime').textContent = `${String(hours).padStart(2,'0')}:${minutes}`;
+            document.getElementById('headerDateTime').textContent = `${String(hours).padStart(2,'0')}:${minutes}:${seconds}`;
             document.getElementById('calClock').textContent = `${String(hours).padStart(2,'0')}:${minutes}:${seconds} ${ampm}`;
 
             const day = String(cairoTime.getDate()).padStart(2, '0');
@@ -4268,6 +4319,14 @@
                 </div>
             `;
             document.body.insertAdjacentHTML('beforeend', modalHtml);
+            // apply translations
+            const t = translations[currentLang];
+            if (t) {
+                document.querySelectorAll('[data-key]').forEach(el => {
+                    const key = el.dataset.key;
+                    if (t[key]) el.textContent = t[key];
+                });
+            }
         }
 
         // ============================================================
@@ -4305,7 +4364,7 @@
                     currentUser,
                     vc,
                     darkMode: document.body.classList.contains('dark-mode'),
-                    language: document.body.dir === 'rtl' ? 'ar' : 'en'
+                    language: currentLang
                 };
                 localStorage.setItem('siteData', JSON.stringify(data));
             } catch (e) {}
@@ -4330,7 +4389,7 @@
                         document.getElementById('cricketToggle').style.display = 'flex';
                         if (!cricketPlaying) toggleCricketSound();
                     }
-                    if (data.language && data.language !== 'ar') {
+                    if (data.language) {
                         changeLanguage(data.language);
                     }
                 }
@@ -4338,23 +4397,15 @@
         }
 
         // ============================================================
-        // ===== PRICING BUTTONS =====
-        // ============================================================
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('pricing-btn') || e.target.closest('.pricing-btn')) {
-                const btn = e.target.closest('.pricing-btn') || e.target;
-                const plan = btn.closest('.pricing-card').querySelector('.pricing-name').textContent;
-                showToast(`✅ تم اختيار خطة "${plan}"! سيتم التواصل معك قريباً.`);
-            }
-        });
-
-        // ============================================================
         // ===== INIT =====
         // ============================================================
         loadData();
         renderContent();
+        renderPricing();
+        renderAPIs();
         renderComments();
         createBugs();
+        updateLanguageIndicators(currentLang);
 
         if (document.body.classList.contains('dark-mode')) {
             document.getElementById('cricketToggle').style.display = 'flex';
@@ -4372,15 +4423,14 @@
         console.log('📌 @TopVeGa | @Cybervega');
         console.log('⭐ جميع الحقوق محفوظة © 2015-2026');
         console.log('📊 المميزات المضافة:');
-        console.log('✅ تأثيرات زجاجية (Glassmorphism)');
-        console.log('✅ خلفية ليلية متحركة مع حشرات ويراعات');
-        console.log('✅ صوت رنين صرصور ليلي جميل');
-        console.log('✅ خطط تسعير من 3$ إلى 25$');
-        console.log('✅ بوتات متعددة في قسم الخدمات');
-        console.log('✅ تصميم أكثر سلاسة وجاذبية');
-        console.log('✅ أيقونات متحركة ونابضة بالحياة');
-        console.log('✅ وضع ليلي محسن بخلفية متحركة');
-        console.log('✅ شفافية تامة في الخدمات');
+        console.log('✅ خطط تسعير مع تفاصيل ومعالج وذاكرة');
+        console.log('✅ زر اشتراك Google Pay');
+        console.log('✅ وضع ليلي محسن مع صوت صراصير');
+        console.log('✅ شريط بحث مخفي يظهر عند الضغط على الأيقونة');
+        console.log('✅ ساعة متحركة بالثواني والدقائق');
+        console.log('✅ مؤشر لغة أخضر في القائمة المنسدلة');
+        console.log('✅ حركات انتقال سلسة بين الأقسام');
+        console.log('✅ واجهة APIs مع تفاصيل السعة والمعالج');
     </script>
 </body>
 </html>
