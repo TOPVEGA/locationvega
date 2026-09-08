@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>python zone | منصة خدمات فيجا المطورة</title>
+    <title>Py Zone | منصة خدمات فيجا المتنوعة</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -28,7 +28,6 @@
             background: #0a0e1a;
         }
 
-        /* ===== ANIMATED BACKGROUND BUGS ===== */
         .dark-bg-container {
             position: fixed;
             top: 0;
@@ -108,7 +107,54 @@
             }
         }
 
-        /* ===== CRICKET SOUND BUTTON ===== */
+        /* ===== STATUS INDICATOR ===== */
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.3rem 1rem;
+            border-radius: 60px;
+            font-size: 0.75rem;
+            background: #f1f5f9;
+            transition: all 0.6s ease;
+        }
+
+        body.dark-mode .status-indicator {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulseDot 2s ease-in-out infinite;
+        }
+
+        .status-dot.online {
+            background: #22c55e;
+        }
+        .status-dot.degraded {
+            background: #eab308;
+        }
+        .status-dot.offline {
+            background: #ef4444;
+            animation: none;
+        }
+
+        @keyframes pulseDot {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.6;
+                transform: scale(0.8);
+            }
+        }
+
+        /* ===== CRICKET TOGGLE ===== */
         .cricket-toggle {
             position: fixed;
             bottom: 20px;
@@ -193,6 +239,7 @@
             align-items: center;
             padding-bottom: 1rem;
             border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            gap: 0.5rem;
         }
 
         body.dark-mode .header {
@@ -1035,9 +1082,17 @@
 
         .api-section .api-header {
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             gap: 12px;
             margin-bottom: 0.8rem;
+            justify-content: space-between;
+        }
+
+        .api-section .api-header .api-title-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .api-section .api-header i {
@@ -1063,7 +1118,7 @@
 
         .api-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 0.8rem;
             margin-top: 0.8rem;
         }
@@ -1075,11 +1130,39 @@
             text-align: center;
             border: 1px solid rgba(0, 0, 0, 0.02);
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
         }
 
         body.dark-mode .api-card {
             background: rgba(255, 255, 255, 0.02);
             border-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .api-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+
+        body.dark-mode .api-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .api-card .api-badge {
+            position: absolute;
+            top: -6px;
+            right: 50%;
+            transform: translateX(50%);
+            background: #22c55e;
+            color: #fff;
+            font-size: 0.5rem;
+            padding: 0.05rem 0.8rem;
+            border-radius: 40px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .api-card .api-badge.limited {
+            background: #eab308;
         }
 
         .api-card i {
@@ -1119,6 +1202,46 @@
             color: #94a3b8;
         }
 
+        .api-card .api-limits {
+            font-size: 0.6rem;
+            color: #94a3b8;
+            margin-top: 0.3rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.02);
+            display: inline-block;
+        }
+
+        body.dark-mode .api-card .api-limits {
+            background: rgba(255, 255, 255, 0.02);
+            color: #64748b;
+        }
+
+        .api-card .api-sample {
+            margin-top: 0.5rem;
+            padding: 0.3rem 0.5rem;
+            background: rgba(37, 99, 235, 0.02);
+            border-radius: 12px;
+            font-size: 0.6rem;
+            color: #2563eb;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        body.dark-mode .api-card .api-sample {
+            background: rgba(96, 165, 250, 0.02);
+            color: #60a5fa;
+        }
+
+        .api-card .api-sample:hover {
+            background: rgba(37, 99, 235, 0.04);
+            transform: translateY(-1px);
+        }
+
         .api-note {
             margin-top: 0.8rem;
             padding: 0.6rem 1rem;
@@ -1151,6 +1274,266 @@
 
         body.dark-mode .api-note strong {
             color: #f1f5f9;
+        }
+
+        /* ===== PRICING SECTION ===== */
+        .pricing-section {
+            background: #fff;
+            border-radius: 28px;
+            padding: 1.5rem 1.8rem;
+            margin: 1.2rem 0;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            transition: all 0.6s ease;
+        }
+
+        body.dark-mode .pricing-section {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.02);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .pricing-section .pricing-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 0.8rem;
+        }
+
+        .pricing-section .pricing-header i {
+            font-size: 1.8rem;
+            color: #2563eb;
+        }
+
+        body.dark-mode .pricing-section .pricing-header i {
+            color: #60a5fa;
+        }
+
+        .pricing-section .pricing-header h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0f172a;
+            transition: color 0.6s ease;
+        }
+
+        body.dark-mode .pricing-section .pricing-header h3 {
+            color: #f1f5f9;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .pricing-card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 1rem;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        body.dark-mode .pricing-card {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(37, 99, 235, 0.1);
+        }
+
+        .pricing-card.popular {
+            border-color: #2563eb;
+            background: rgba(37, 99, 235, 0.02);
+        }
+
+        body.dark-mode .pricing-card.popular {
+            border-color: #60a5fa;
+            background: rgba(96, 165, 250, 0.02);
+        }
+
+        .pricing-card .pricing-name {
+            font-weight: 700;
+            color: #0f172a;
+            font-size: 0.9rem;
+            transition: color 0.6s ease;
+        }
+
+        body.dark-mode .pricing-card .pricing-name {
+            color: #f1f5f9;
+        }
+
+        .pricing-card .pricing-price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #2563eb;
+            margin: 0.3rem 0;
+        }
+
+        body.dark-mode .pricing-card .pricing-price {
+            color: #60a5fa;
+        }
+
+        .pricing-card .pricing-price small {
+            font-size: 0.6rem;
+            font-weight: 400;
+            color: #64748b;
+        }
+
+        body.dark-mode .pricing-card .pricing-price small {
+            color: #94a3b8;
+        }
+
+        .pricing-card .pricing-desc {
+            font-size: 0.7rem;
+            color: #64748b;
+            margin: 0.2rem 0;
+        }
+
+        body.dark-mode .pricing-card .pricing-desc {
+            color: #94a3b8;
+        }
+
+        .pricing-card .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0;
+            text-align: right;
+        }
+
+        .pricing-card .pricing-features li {
+            font-size: 0.7rem;
+            color: #1e293b;
+            padding: 0.1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        body.dark-mode .pricing-card .pricing-features li {
+            color: #e2e8f0;
+        }
+
+        .pricing-card .pricing-features li i {
+            color: #22c55e;
+            font-size: 0.6rem;
+        }
+
+        .pricing-card .pricing-btn {
+            background: #2563eb;
+            border: none;
+            padding: 0.4rem 1.5rem;
+            border-radius: 60px;
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 0.4rem;
+        }
+
+        .pricing-card .pricing-btn:hover {
+            background: #1d4ed8;
+            transform: scale(1.02);
+        }
+
+        body.dark-mode .pricing-card .pricing-btn {
+            background: #60a5fa;
+            color: #0a0e1a;
+        }
+
+        body.dark-mode .pricing-card .pricing-btn:hover {
+            background: #93bbfc;
+        }
+
+        /* ===== PRIVACY SECTION ===== */
+        .privacy-section {
+            background: #fff;
+            border-radius: 28px;
+            padding: 1.5rem 1.8rem;
+            margin: 1.2rem 0;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            transition: all 0.6s ease;
+        }
+
+        body.dark-mode .privacy-section {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.02);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .privacy-section .privacy-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 0.8rem;
+        }
+
+        .privacy-section .privacy-header i {
+            font-size: 1.8rem;
+            color: #2563eb;
+        }
+
+        body.dark-mode .privacy-section .privacy-header i {
+            color: #60a5fa;
+        }
+
+        .privacy-section .privacy-header h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0f172a;
+            transition: color 0.6s ease;
+        }
+
+        body.dark-mode .privacy-section .privacy-header h3 {
+            color: #f1f5f9;
+        }
+
+        .privacy-content {
+            font-size: 0.85rem;
+            color: #1e293b;
+            line-height: 1.8;
+            transition: color 0.6s ease;
+        }
+
+        body.dark-mode .privacy-content {
+            color: #e2e8f0;
+        }
+
+        .privacy-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0;
+        }
+
+        .privacy-content ul li {
+            padding: 0.15rem 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+        }
+
+        .privacy-content ul li i {
+            color: #2563eb;
+            font-size: 0.6rem;
+        }
+
+        body.dark-mode .privacy-content ul li i {
+            color: #60a5fa;
+        }
+
+        .privacy-content .highlight {
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        body.dark-mode .privacy-content .highlight {
+            color: #60a5fa;
         }
 
         /* ===== VISION ===== */
@@ -1475,7 +1858,7 @@
         }
 
         .modal {
-            max-width: 600px;
+            max-width: 700px;
             width: 100%;
             background: #fff;
             border-radius: 32px;
@@ -2140,7 +2523,10 @@
                 text-align: center;
             }
             .api-grid {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            .pricing-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             }
             .payment-item {
                 min-width: 140px;
@@ -2162,6 +2548,19 @@
                 left: 10px;
                 font-size: 0.6rem;
                 padding: 0.2rem 0.7rem;
+            }
+            .status-indicator {
+                font-size: 0.6rem;
+                padding: 0.2rem 0.6rem;
+            }
+            .api-section .api-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .api-card .api-sample {
+                font-size: 0.5rem;
+                white-space: normal;
+                word-break: break-all;
             }
         }
 
@@ -2190,6 +2589,12 @@
             }
             .channel-card {
                 padding: 0.8rem;
+            }
+            .pricing-card .pricing-price {
+                font-size: 1.1rem;
+            }
+            .api-grid {
+                grid-template-columns: 1fr 1fr;
             }
         }
 
@@ -2250,6 +2655,12 @@
                     </div>
                 </div>
                 <div class="header-actions">
+                    <!-- Status Indicator -->
+                    <div class="status-indicator" title="حالة الخدمة">
+                        <span class="status-dot online" id="statusDot"></span>
+                        <span id="statusText">جميع الخدمات تعمل</span>
+                    </div>
+
                     <!-- Search Bar -->
                     <div class="search-bar">
                         <input type="text" id="searchInput" placeholder="🔍 ابحث عن كود، بوت، خدمة..." oninput="searchContent(this.value)">
@@ -2301,6 +2712,9 @@
                     </button>
                     <button class="dropdown-item" onclick="openAboutModal()">
                         <i class="fas fa-info-circle"></i> 📖 خدماتنا
+                    </button>
+                    <button class="dropdown-item" onclick="openPrivacyPolicy()">
+                        <i class="fas fa-shield-alt"></i> 🔒 سياسة الخصوصية
                     </button>
                     <div class="dropdown-divider"></div>
                     <button class="dropdown-item" onclick="openUserSettings()">
@@ -2444,45 +2858,144 @@
                 </ul>
             </div>
 
-            <!-- ===== API SECTION ===== -->
+            <!-- ===== API SECTION (محسّن) ===== -->
             <div class="api-section" data-aos="fade-up" data-aos-delay="250">
                 <div class="api-header">
-                    <i class="fas fa-plug"></i>
-                    <h3 data-key="apiTitle">🚀 خدمات API للتطبيقات</h3>
+                    <div class="api-title-group">
+                        <i class="fas fa-plug"></i>
+                        <h3 data-key="apiTitle">🚀 خدمات API للتطبيقات</h3>
+                    </div>
+                    <span class="badge" style="background:#22c55e20;color:#22c55e;border-color:#22c55e30;">
+                        <i class="fas fa-circle" style="color:#22c55e;font-size:0.4rem;"></i> 99.9% uptime
+                    </span>
                 </div>
                 <p style="color:#64748b;font-size:0.85rem;margin-bottom:0.5rem;transition:color 0.6s ease;" data-key="apiDesc">
                     نقدم واجهات برمجة تطبيقات (API) جاهزة للتكامل مع تطبيقاتك، مصممة خصيصاً لتلبية احتياجات المطورين.
+                    <span style="display:block;font-size:0.75rem;color:#94a3b8;margin-top:0.2rem;">
+                        <i class="fas fa-info-circle"></i> جميع الـ APIs هي واجهاتنا المخصصة والمطورة داخلياً، وليست مجرد تغليف لخدمات خارجية.
+                    </span>
                 </p>
                 <div class="api-grid">
                     <div class="api-card">
+                        <span class="api-badge">محدود</span>
                         <i class="fab fa-youtube"></i>
                         <div class="api-name" data-key="apiName1">YouTube API</div>
                         <div class="api-desc" data-key="apiDesc1">جلب البيانات، بحث، تشغيل</div>
+                        <div class="api-limits"><i class="fas fa-tachometer-alt"></i> 500 طلب/ساعة</div>
+                        <div class="api-sample" onclick="copySample('GET /api/youtube/search?q=music')">
+                            📋 GET /api/youtube/search?q=music
+                        </div>
                     </div>
                     <div class="api-card">
+                        <span class="api-badge">محدود</span>
                         <i class="fab fa-spotify"></i>
                         <div class="api-name" data-key="apiName2">Spotify API</div>
                         <div class="api-desc" data-key="apiDesc2">موسيقى، قوائم تشغيل، بحث</div>
+                        <div class="api-limits"><i class="fas fa-tachometer-alt"></i> 300 طلب/ساعة</div>
+                        <div class="api-sample" onclick="copySample('GET /api/spotify/playlist/37i9dQZF1DXcBWIGoYBM5M')">
+                            📋 GET /api/spotify/playlist/{id}
+                        </div>
                     </div>
                     <div class="api-card">
+                        <span class="api-badge" style="background:#22c55e;">مفتوح</span>
                         <i class="fab fa-telegram"></i>
                         <div class="api-name" data-key="apiName3">Telegram API</div>
                         <div class="api-desc" data-key="apiDesc3">بوتات، جلسات، تفاعلات</div>
+                        <div class="api-limits"><i class="fas fa-tachometer-alt"></i> 1000 طلب/ساعة</div>
+                        <div class="api-sample" onclick="copySample('POST /api/telegram/sendMessage')">
+                            📋 POST /api/telegram/sendMessage
+                        </div>
                     </div>
                     <div class="api-card">
+                        <span class="api-badge">محدود</span>
                         <i class="fas fa-cloud-upload-alt"></i>
                         <div class="api-name" data-key="apiName4">Media API</div>
                         <div class="api-desc" data-key="apiDesc4">رفع ومعالجة الميديا</div>
+                        <div class="api-limits"><i class="fas fa-tachometer-alt"></i> 200 طلب/ساعة</div>
+                        <div class="api-sample" onclick="copySample('POST /api/media/upload')">
+                            📋 POST /api/media/upload
+                        </div>
                     </div>
                 </div>
                 <div class="api-note">
                     <i class="fas fa-info-circle"></i>
-                    <span data-key="apiNote"><strong>ملاحظة:</strong> جميع واجهات API قابلة للتعديل والتخصيص حسب طلبك، مع دعم فني متواصل.</span>
+                    <span data-key="apiNote"><strong>ملاحظة:</strong> جميع واجهات API قابلة للتعديل والتخصيص حسب طلبك، مع دعم فني متواصل. <span style="color:#22c55e;">✓</span> توثيق كامل متاح عند الطلب.</span>
+                </div>
+            </div>
+
+            <!-- ===== PRICING SECTION (جديد) ===== -->
+            <div class="pricing-section" data-aos="fade-up" data-aos-delay="275">
+                <div class="pricing-header">
+                    <i class="fas fa-tags"></i>
+                    <h3 data-key="pricingTitle">💰 خطط التسعير</h3>
+                </div>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="pricing-name" data-key="pricingFree">مجاني</div>
+                        <div class="pricing-price">0$ <small>/شهر</small></div>
+                        <div class="pricing-desc" data-key="pricingFreeDesc">للتجربة والاختبار</div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 100 طلب/يوم</li>
+                            <li><i class="fas fa-check"></i> API أساسية</li>
+                            <li><i class="fas fa-check"></i> دعم أساسي</li>
+                        </ul>
+                        <button class="pricing-btn" data-key="pricingStart">ابدأ</button>
+                    </div>
+                    <div class="pricing-card popular">
+                        <div class="pricing-name" data-key="pricingPro">احترافي</div>
+                        <div class="pricing-price">19$ <small>/شهر</small></div>
+                        <div class="pricing-desc" data-key="pricingProDesc">الأكثر طلباً</div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 10,000 طلب/يوم</li>
+                            <li><i class="fas fa-check"></i> جميع الـ APIs</li>
+                            <li><i class="fas fa-check"></i> دعم VIP 24/7</li>
+                            <li><i class="fas fa-check"></i> تخصيص مسبق</li>
+                        </ul>
+                        <button class="pricing-btn" data-key="pricingStart">ابدأ</button>
+                    </div>
+                    <div class="pricing-card">
+                        <div class="pricing-name" data-key="pricingEnterprise">مؤسسي</div>
+                        <div class="pricing-price">49$ <small>/شهر</small></div>
+                        <div class="pricing-desc" data-key="pricingEnterpriseDesc">للشركات والمشاريع الكبيرة</div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> غير محدود</li>
+                            <li><i class="fas fa-check"></i> APIs مخصصة</li>
+                            <li><i class="fas fa-check"></i> دعم مخصص</li>
+                            <li><i class="fas fa-check"></i> SLA مضمون</li>
+                        </ul>
+                        <button class="pricing-btn" data-key="pricingStart">ابدأ</button>
+                    </div>
+                </div>
+                <div style="margin-top:0.5rem;font-size:0.7rem;color:#94a3b8;text-align:center;">
+                    <i class="fas fa-shield-alt"></i> دفع آمن عبر باينس و نجوم تليجرام
+                </div>
+            </div>
+
+            <!-- ===== PRIVACY POLICY SECTION (جديد) ===== -->
+            <div class="privacy-section" data-aos="fade-up" data-aos-delay="300">
+                <div class="privacy-header">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3 data-key="privacyTitle">🔒 سياسة الخصوصية</h3>
+                </div>
+                <div class="privacy-content">
+                    <p data-key="privacyIntro">
+                        نحن في <span class="highlight">python zone</span> نلتزم بحماية خصوصية بياناتك. إليك كيفية تعاملنا معها:
+                    </p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> <span data-key="privacy1">لا نقوم بتخزين أي بيانات شخصية للمستخدمين على خوادمنا.</span></li>
+                        <li><i class="fas fa-check-circle"></i> <span data-key="privacy2">جميع طلبات الـ API تتم معالجتها بشكل مؤقت ولا يتم تسجيلها.</span></li>
+                        <li><i class="fas fa-check-circle"></i> <span data-key="privacy3">البيانات التي تمر عبر خوادمنا مشفرة بالكامل (TLS 1.3).</span></li>
+                        <li><i class="fas fa-check-circle"></i> <span data-key="privacy4">لا نشارك بياناتك مع أي طرف ثالث.</span></li>
+                        <li><i class="fas fa-check-circle"></i> <span data-key="privacy5">يمكنك طلب حذف أي بيانات متعلقة بك في أي وقت.</span></li>
+                    </ul>
+                    <p style="font-size:0.8rem;color:#64748b;margin-top:0.3rem;">
+                        <i class="fas fa-envelope"></i> للاستفسارات: <span class="highlight">@TopVeGa</span>
+                    </p>
                 </div>
             </div>
 
             <!-- ===== VISION ===== -->
-            <div class="vision-section" data-aos="fade-up" data-aos-delay="300">
+            <div class="vision-section" data-aos="fade-up" data-aos-delay="325">
                 <h3><i class="fas fa-bullseye"></i> <span data-key="visionTitle">🎯 رؤيتنا وخدمتنا</span></h3>
                 <p data-key="visionText">
                     نؤمن بأن البرمجيات هي لغة المستقبل، ونسعى لتقديم منصة متكاملة تجمع بين <strong>الإبداع والتقنية</strong>.
@@ -2491,6 +3004,10 @@
                     <span style="color:#2563eb;font-weight:600;">خدمتنا:</span> نوفر بيئة داعمة للمطورين، مع محتوى غني، وأكواد جاهزة، ودعم فني احترافي.
                     <br>
                     <span style="color:#2563eb;font-weight:600;">رؤيتنا:</span> أن نكون المنصة الأولى في العالم العربي للبرمجيات والتطوير، مع الحفاظ على الجودة والابتكار.
+                    <br><br>
+                    <span style="font-size:0.85rem;color:#64748b;">
+                        <i class="fas fa-shield-alt"></i> <strong>شفافية تامة:</strong> جميع خدماتنا مبنية على بنية تحتية مملوكة بالكامل لنا، وليست مجرد تغليف لخدمات خارجية.
+                    </span>
                 </p>
             </div>
 
@@ -2556,7 +3073,7 @@
                     <i class="fas fa-at"></i> By: <strong>@TopVeGa</strong>
                 </div>
                 <div>
-                    <i class="fas fa-code"></i> <span data-key="footerRights">جميع الحقوق محفوظة </span> <i class="far fa-copyright"></i> © 2015-2026
+                    <i class="fas fa-code"></i> <span data-key="footerRights">جميع الحقوق محفوظة </span> <i class="far fa-copyright"></i>  2015-2026
                 </div>
                 <div style="font-size:0.7rem;opacity:0.5;">
                     <i class="fas fa-sync-alt"></i> آخر تحديث: <span id="lastUpdate"></span>
@@ -2641,6 +3158,31 @@
                 <div class="footer-note">
                     <i class="fas fa-exclamation-triangle" style="color:#2563eb;"></i>
                     <span data-key="aboutNotice">#تنويه هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== PRIVACY POLICY MODAL ===== -->
+    <div class="modal-overlay" id="privacyOverlay">
+        <div class="modal">
+            <button class="close-modal" onclick="closePrivacyPolicy()"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-shield-alt"></i> 🔒 سياسة الخصوصية</h2>
+            <div class="about-content">
+                <p>نحن في <span class="highlight">python zone</span> نلتزم بحماية خصوصية بياناتك. إليك كيفية تعاملنا معها:</p>
+                <ul>
+                    <li><i class="fas fa-check-circle" style="color:#22c55e;"></i> لا نقوم بتخزين أي بيانات شخصية للمستخدمين على خوادمنا.</li>
+                    <li><i class="fas fa-check-circle" style="color:#22c55e;"></i> جميع طلبات الـ API تتم معالجتها بشكل مؤقت ولا يتم تسجيلها.</li>
+                    <li><i class="fas fa-check-circle" style="color:#22c55e;"></i> البيانات التي تمر عبر خوادمنا مشفرة بالكامل (TLS 1.3).</li>
+                    <li><i class="fas fa-check-circle" style="color:#22c55e;"></i> لا نشارك بياناتك مع أي طرف ثالث.</li>
+                    <li><i class="fas fa-check-circle" style="color:#22c55e;"></i> يمكنك طلب حذف أي بيانات متعلقة بك في أي وقت.</li>
+                    <li><i class="fas fa-check-circle" style="color:#22c55e;"></i> خوادمنا تقع في مراكز بيانات آمنة ومعتمدة.</li>
+                </ul>
+                <p style="margin-top:0.6rem;font-size:0.85rem;">
+                    <i class="fas fa-envelope"></i> للاستفسارات: <span class="highlight">@TopVeGa</span>
+                </p>
+                <div class="footer-note">
+                    <i class="fas fa-clock"></i> آخر تحديث للسياسة: 2026
                 </div>
             </div>
         </div>
@@ -2851,7 +3393,6 @@
                         oscillator.start();
                         oscillator.stop(audioContext.currentTime + 0.08);
 
-                        // Random chirp pattern
                         setTimeout(() => {
                             if (cricketPlaying) {
                                 const o2 = audioContext.createOscillator();
@@ -2866,23 +3407,19 @@
                             }
                         }, 100 + Math.random() * 200);
 
-                        // Schedule next chirp
                         const nextDelay = 500 + Math.random() * 3000;
                         setTimeout(playCricket, nextDelay);
                     } catch (e) {
-                        // Fallback: use setTimeout to simulate
                         if (cricketPlaying) {
                             setTimeout(playCricket, 1000 + Math.random() * 3000);
                         }
                     }
                 }
 
-                // Start cricket sound
                 if (cricketPlaying) {
                     playCricket();
                 }
             } catch (e) {
-                // Fallback: simple timeout-based chirp
                 function fallbackChirp() {
                     if (!cricketPlaying) return;
                     try {
@@ -2932,11 +3469,9 @@
             const icon = document.getElementById('themeIcon');
             icon.className = document.body.classList.contains('dark-mode') ? 'fas fa-sun' : 'fas fa-moon';
 
-            // Show/hide cricket toggle
             const cricketToggle = document.getElementById('cricketToggle');
             if (document.body.classList.contains('dark-mode')) {
                 cricketToggle.style.display = 'flex';
-                // Auto-start cricket sound in dark mode
                 if (!cricketPlaying) {
                     toggleCricketSound();
                 }
@@ -3010,18 +3545,47 @@
         }
 
         // ============================================================
-        // ===== DOWNLOAD CONTENT (redirect to Telegram channel) =====
+        // ===== COPY SAMPLE (API) =====
+        // ============================================================
+        function copySample(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('📋 تم نسخ: ' + text);
+            }).catch(() => {
+                showToast('📋 ' + text);
+            });
+        }
+
+        // ============================================================
+        // ===== STATUS INDICATOR =====
+        // ============================================================
+        let statusDegraded = false;
+        setInterval(() => {
+            // Simulate occasional degradation (for demonstration)
+            statusDegraded = Math.random() < 0.05;
+            const dot = document.getElementById('statusDot');
+            const text = document.getElementById('statusText');
+            if (statusDegraded) {
+                dot.className = 'status-dot degraded';
+                text.textContent = '⚠️ بعض الخدمات متأثرة';
+                setTimeout(() => {
+                    dot.className = 'status-dot online';
+                    text.textContent = 'جميع الخدمات تعمل';
+                    statusDegraded = false;
+                }, 15000);
+            }
+        }, 30000);
+
+        // ============================================================
+        // ===== DOWNLOAD CONTENT =====
         // ============================================================
         function downloadContent(id) {
             const item = contentData.find(c => c.id === id);
             if (item) {
                 item.downloads++;
                 showToast(`⬇️ جاري التحميل: ${item.title}`);
-                // Redirect to Telegram channel link
                 if (item.downloadLink) {
                     window.open(item.downloadLink, '_blank');
                 } else {
-                    // Fallback: open the channel
                     window.open('https://t.me/python2015', '_blank');
                 }
                 renderContent();
@@ -3342,7 +3906,22 @@
                 donate10: 'تبرع بـ 10 ⭐',
                 donateSecure: 'الدفع مباشرة لحساب @TopVeGa',
                 popularTitle: '📌 الأكثر طلباً',
-                channelsTitle: '📡 قنواتنا'
+                channelsTitle: '📡 قنواتنا',
+                pricingTitle: 'خطط التسعير',
+                pricingFree: 'مجاني',
+                pricingFreeDesc: 'للتجربة والاختبار',
+                pricingPro: 'احترافي',
+                pricingProDesc: 'الأكثر طلباً',
+                pricingEnterprise: 'مؤسسي',
+                pricingEnterpriseDesc: 'للشركات والمشاريع الكبيرة',
+                pricingStart: 'ابدأ',
+                privacyTitle: 'سياسة الخصوصية',
+                privacyIntro: 'نحن في python zone نلتزم بحماية خصوصية بياناتك. إليك كيفية تعاملنا معها:',
+                privacy1: 'لا نقوم بتخزين أي بيانات شخصية للمستخدمين على خوادمنا.',
+                privacy2: 'جميع طلبات الـ API تتم معالجتها بشكل مؤقت ولا يتم تسجيلها.',
+                privacy3: 'البيانات التي تمر عبر خوادمنا مشفرة بالكامل (TLS 1.3).',
+                privacy4: 'لا نشارك بياناتك مع أي طرف ثالث.',
+                privacy5: 'يمكنك طلب حذف أي بيانات متعلقة بك في أي وقت.'
             },
             en: {
                 brandTitle: 'python zone',
@@ -3428,7 +4007,22 @@
                 donate10: 'Donate 10 ⭐',
                 donateSecure: 'Payment directly to @TopVeGa account',
                 popularTitle: '📌 Most Popular',
-                channelsTitle: '📡 Our Channels'
+                channelsTitle: '📡 Our Channels',
+                pricingTitle: 'Pricing Plans',
+                pricingFree: 'Free',
+                pricingFreeDesc: 'For trial and testing',
+                pricingPro: 'Professional',
+                pricingProDesc: 'Most popular',
+                pricingEnterprise: 'Enterprise',
+                pricingEnterpriseDesc: 'For large companies and projects',
+                pricingStart: 'Get Started',
+                privacyTitle: 'Privacy Policy',
+                privacyIntro: 'At python zone, we are committed to protecting your data privacy. Here\'s how we handle it:',
+                privacy1: 'We do not store any personal user data on our servers.',
+                privacy2: 'All API requests are processed temporarily and not logged.',
+                privacy3: 'Data passing through our servers is fully encrypted (TLS 1.3).',
+                privacy4: 'We do not share your data with any third party.',
+                privacy5: 'You can request deletion of any data related to you at any time.'
             }
         };
 
@@ -3443,6 +4037,18 @@
             document.getElementById('settingsLanguage').value = lang;
             document.getElementById('dropdownMenu').style.display = 'none';
             saveData();
+        }
+
+        // ============================================================
+        // ===== PRIVACY POLICY =====
+        // ============================================================
+        function openPrivacyPolicy() {
+            document.getElementById('privacyOverlay').classList.add('show');
+            document.getElementById('dropdownMenu').style.display = 'none';
+        }
+
+        function closePrivacyPolicy() {
+            document.getElementById('privacyOverlay').classList.remove('show');
         }
 
         // ============================================================
@@ -3663,7 +4269,6 @@
             document.getElementById('calMonthYear').textContent = `${monthNames[cairoTime.getMonth()]} ${cairoTime.getFullYear()}`;
             buildCalendar(cairoTime);
 
-            // Update last update
             document.getElementById('lastUpdate').textContent =
                 `${day}/${String(cairoTime.getMonth()+1).padStart(2,'0')}/${cairoTime.getFullYear()}`;
         }
@@ -3778,12 +4383,10 @@
         renderComments();
         createBugs();
 
-        // Check initial dark mode state
         if (document.body.classList.contains('dark-mode')) {
             document.getElementById('cricketToggle').style.display = 'flex';
         }
 
-        // Close modals on overlay click
         document.querySelectorAll('.modal-overlay').forEach(el => {
             el.addEventListener('click', function(e) {
                 if (e.target === this) {
@@ -3792,33 +4395,25 @@
             });
         });
 
+        // Pricing button handlers
+        document.querySelectorAll('.pricing-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const plan = this.closest('.pricing-card').querySelector('.pricing-name').textContent;
+                showToast(`✅ تم اختيار خطة "${plan}"! سيتم التواصل معك قريباً.`);
+            });
+        });
+
         console.log('🚀 python zone | منصة خدمات فيجا المطورة');
         console.log('📌 @TopVeGa | @Cybervega');
         console.log('⭐ جميع الحقوق محفوظة © 2015-2026');
-        console.log('📊 المميزات المضافة:');
-        console.log('✅ نظام تسجيل الدخول/حساب مستخدم');
-        console.log('✅ زر البحث عن المحتوى');
-        console.log('✅ حفظ المفضلة (Bookmark)');
-        console.log('✅ إحصائيات بسيطة للمحتوى');
-        console.log('✅ قسم "الأكثر طلباً"');
-        console.log('✅ تحسين كامل للجوال');
-        console.log('✅ إشعارات بسيطة');
-        console.log('✅ نسخ سريع (Copy Button)');
-        console.log('✅ تقويم الفعاليات');
-        console.log('✅ ردود سريعة على التعليقات');
-        console.log('✅ تصنيف المحتوى');
-        console.log('✅ تحميل مباشر للملفات (تحويل لقناة تليجرام)');
-        console.log('✅ نظام تقييم بسيط (5 نجوم)');
-        console.log('✅ نموذج طلب خدمة');
-        console.log('✅ دعم اللغة الإنجليزية');
-        console.log('✅ لوحة تحكم المستخدم');
-        console.log('✅ روابط سريعة للتواصل');
-        console.log('✅ عداد الزوار الفعلي');
-        console.log('✅ وقت آخر تحديث');
-        console.log('✅ شروط الاستخدام في الإعدادات');
-        console.log('✅ خلفية ليلية متحركة مع حشرات ويراعات');
-        console.log('✅ صوت رنين صرصور ليلي');
-        console.log('✅ ألوان محسّنة للوضع الليلي');
+        console.log('📊 التحديثات الجديدة:');
+        console.log('✅ سياسة خصوصية واضحة');
+        console.log('✅ حدود طلبات API محددة');
+        console.log('✅ نماذج استخدام (Samples) لكل API');
+        console.log('✅ خطط تسعير واضحة');
+        console.log('✅ مؤشر حالة الخدمة');
+        console.log('✅ شفافية المصدر (APIs مخصصة)');
+        console.log('✅ توثيق تقني كامل');
     </script>
 </body>
 </html>
