@@ -19,12 +19,127 @@
             min-height: 100vh;
             background: #f0f4f8;
             padding: 1.5rem;
-            transition: background 0.4s ease;
+            transition: background 0.6s ease;
             position: relative;
         }
 
+        /* ===== DARK MODE BACKGROUND WITH ANIMATED BUGS ===== */
         body.dark-mode {
-            background: #0b1120;
+            background: #0a0e1a;
+        }
+
+        /* ===== ANIMATED BACKGROUND BUGS ===== */
+        .dark-bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            display: none;
+            overflow: hidden;
+        }
+
+        body.dark-mode .dark-bg-container {
+            display: block;
+        }
+
+        .bug {
+            position: absolute;
+            font-size: 8px;
+            color: rgba(255, 255, 255, 0.15);
+            animation: flyBug linear infinite;
+            opacity: 0;
+            will-change: transform;
+        }
+
+        .bug i {
+            display: block;
+            animation: bugGlow 1.5s ease-in-out infinite alternate;
+        }
+
+        .bug-firefly {
+            color: rgba(255, 255, 200, 0.2);
+            font-size: 6px;
+            animation: flyBug 20s linear infinite, fireflyGlow 2s ease-in-out infinite alternate;
+        }
+
+        .bug-firefly i {
+            text-shadow: 0 0 10px rgba(255, 255, 200, 0.3);
+        }
+
+        @keyframes flyBug {
+            0% {
+                transform: translate(0, 0) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            5% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) rotate(720deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        @keyframes bugGlow {
+            0% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1.3);
+            }
+        }
+
+        @keyframes fireflyGlow {
+            0% {
+                opacity: 0.2;
+                text-shadow: 0 0 5px rgba(255, 255, 200, 0.1);
+            }
+            100% {
+                opacity: 0.8;
+                text-shadow: 0 0 20px rgba(255, 255, 200, 0.4), 0 0 40px rgba(255, 255, 200, 0.1);
+            }
+        }
+
+        /* ===== CRICKET SOUND BUTTON ===== */
+        .cricket-toggle {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.4rem 1rem;
+            border-radius: 60px;
+            color: #94a3b8;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: none;
+            align-items: center;
+            gap: 8px;
+        }
+
+        body.dark-mode .cricket-toggle {
+            display: flex;
+        }
+
+        .cricket-toggle:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.05);
+        }
+
+        .cricket-toggle.active {
+            color: #60a5fa;
+            border-color: rgba(96, 165, 250, 0.3);
         }
 
         .bg-pattern {
@@ -37,6 +152,11 @@
                 radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
+        }
+
+        body.dark-mode .bg-pattern {
+            background: radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
         }
 
         .container {
@@ -54,14 +174,15 @@
             padding: 2rem;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.5);
-            transition: all 0.4s ease;
+            transition: all 0.6s ease;
         }
 
         body.dark-mode .main-card {
-            background: rgba(15, 23, 42, 0.92);
-            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
             border-color: rgba(255, 255, 255, 0.04);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.03);
         }
 
         /* ===== HEADER ===== */
@@ -99,6 +220,7 @@
             font-weight: 800;
             color: #0f172a;
             letter-spacing: -0.5px;
+            transition: color 0.6s ease;
         }
 
         body.dark-mode .brand h1 {
@@ -111,6 +233,7 @@
             color: #64748b;
             font-weight: 400;
             margin-top: 1px;
+            transition: color 0.6s ease;
         }
 
         body.dark-mode .brand small {
@@ -132,7 +255,7 @@
             color: #1e293b;
             font-size: 0.8rem;
             cursor: pointer;
-            transition: 0.2s ease;
+            transition: 0.3s ease;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -174,6 +297,8 @@
             padding: 0.2rem 0.8rem 0.2rem 0.3rem;
             border-radius: 60px;
             border: 1px solid rgba(0, 0, 0, 0.02);
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
         body.dark-mode .user-section {
@@ -194,11 +319,16 @@
             font-weight: 700;
         }
 
+        body.dark-mode .user-avatar {
+            background: #60a5fa;
+            color: #0a0e1a;
+        }
+
         .user-name {
             font-size: 0.8rem;
             font-weight: 600;
             color: #0f172a;
-            cursor: pointer;
+            transition: color 0.6s ease;
         }
 
         body.dark-mode .user-name {
@@ -224,11 +354,13 @@
             border: 1px solid rgba(0, 0, 0, 0.02);
             min-width: 200px;
             z-index: 1000;
+            transition: all 0.3s ease;
         }
 
         body.dark-mode .dropdown-content {
-            background: #1e293b;
+            background: #1a2332;
             border-color: rgba(255, 255, 255, 0.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
 
         .dropdown-item {
@@ -256,7 +388,7 @@
         }
 
         body.dark-mode .dropdown-item:hover {
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.03);
         }
 
         .dropdown-divider {
@@ -290,6 +422,11 @@
         .search-bar:focus-within {
             border-color: #2563eb;
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.04);
+        }
+
+        body.dark-mode .search-bar:focus-within {
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.04);
         }
 
         .search-bar input {
@@ -328,6 +465,15 @@
         .search-bar button:hover {
             background: #1d4ed8;
             transform: scale(1.02);
+        }
+
+        body.dark-mode .search-bar button {
+            background: #60a5fa;
+            color: #0a0e1a;
+        }
+
+        body.dark-mode .search-bar button:hover {
+            background: #93bbfc;
         }
 
         /* ===== NAV ===== */
@@ -376,6 +522,10 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
         }
 
+        body.dark-mode .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
         .nav-btn:hover i {
             transform: scale(1.4) rotate(-15deg);
             color: #7c3aed;
@@ -386,8 +536,17 @@
             color: #fff;
         }
 
+        body.dark-mode .nav-btn.active {
+            background: #60a5fa;
+            color: #0a0e1a;
+        }
+
         .nav-btn.active i {
             color: #fff;
+        }
+
+        body.dark-mode .nav-btn.active i {
+            color: #0a0e1a;
         }
 
         /* ===== CATEGORIES ===== */
@@ -400,6 +559,7 @@
             background: #fff;
             border-radius: 28px;
             border: 1px solid rgba(0, 0, 0, 0.02);
+            transition: all 0.6s ease;
         }
 
         body.dark-mode .categories-section {
@@ -429,6 +589,21 @@
             transform: translateY(-2px);
         }
 
+        body.dark-mode .category-tag:hover {
+            background: #60a5fa;
+            color: #0a0e1a;
+        }
+
+        .category-tag.active {
+            background: #2563eb;
+            color: #fff;
+        }
+
+        body.dark-mode .category-tag.active {
+            background: #60a5fa;
+            color: #0a0e1a;
+        }
+
         .category-tag i {
             margin-left: 4px;
         }
@@ -446,7 +621,7 @@
             border-radius: 24px;
             padding: 1.2rem;
             border: 1px solid rgba(0, 0, 0, 0.02);
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
             position: relative;
         }
@@ -454,11 +629,16 @@
         body.dark-mode .content-card {
             background: rgba(255, 255, 255, 0.02);
             border-color: rgba(255, 255, 255, 0.02);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .content-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+        }
+
+        body.dark-mode .content-card:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
         }
 
         .content-card .card-badge {
@@ -474,7 +654,7 @@
 
         body.dark-mode .content-card .card-badge {
             background: #60a5fa;
-            color: #0b1120;
+            color: #0a0e1a;
         }
 
         .content-card .card-icon {
@@ -491,6 +671,7 @@
             font-weight: 700;
             color: #0f172a;
             font-size: 1rem;
+            transition: color 0.6s ease;
         }
 
         body.dark-mode .content-card .card-title {
@@ -513,6 +694,10 @@
             margin-top: 0.6rem;
             font-size: 0.7rem;
             color: #94a3b8;
+        }
+
+        body.dark-mode .content-card .card-stats {
+            color: #64748b;
         }
 
         .content-card .card-actions {
@@ -546,6 +731,12 @@
             background: #2563eb;
             color: #fff;
             border-color: #2563eb;
+        }
+
+        body.dark-mode .content-card .card-actions button:hover {
+            background: #60a5fa;
+            color: #0a0e1a;
+            border-color: #60a5fa;
         }
 
         .content-card .card-actions .favorite-btn.active {
@@ -588,13 +779,14 @@
             border-radius: 24px;
             padding: 1.2rem;
             border: 1px solid rgba(0, 0, 0, 0.02);
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         }
 
         body.dark-mode .channel-card {
             background: rgba(255, 255, 255, 0.02);
             border-color: rgba(255, 255, 255, 0.02);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .channel-card:hover {
@@ -607,6 +799,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            transition: color 0.6s ease;
         }
 
         body.dark-mode .channel-card .card-title {
@@ -701,13 +894,14 @@
             padding: 1.2rem 0.8rem;
             text-align: center;
             border: 1px solid rgba(0, 0, 0, 0.02);
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         }
 
         body.dark-mode .bot-card {
             background: rgba(255, 255, 255, 0.02);
             border-color: rgba(255, 255, 255, 0.02);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .bot-card:hover {
@@ -733,6 +927,7 @@
             font-weight: 700;
             color: #0f172a;
             margin-top: 0.3rem;
+            transition: color 0.6s ease;
         }
 
         body.dark-mode .bot-card .bot-name {
@@ -790,11 +985,13 @@
             margin: 1.2rem 0;
             border: 1px solid rgba(0, 0, 0, 0.02);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            transition: all 0.6s ease;
         }
 
         body.dark-mode .services-list {
             background: rgba(255, 255, 255, 0.02);
             border-color: rgba(255, 255, 255, 0.02);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .services-list ul {
@@ -812,6 +1009,7 @@
             align-items: center;
             gap: 8px;
             padding: 0.15rem 0;
+            transition: color 0.6s ease;
         }
 
         body.dark-mode .services-list ul li {
@@ -826,12 +1024,13 @@
             margin: 1.2rem 0;
             border: 1px solid rgba(0, 0, 0, 0.02);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-            transition: all 0.3s ease;
+            transition: all 0.6s ease;
         }
 
         body.dark-mode .api-section {
             background: rgba(255, 255, 255, 0.02);
             border-color: rgba(255, 255, 255, 0.02);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .api-section .api-header {
@@ -855,6 +1054,7 @@
             font-size: 1.2rem;
             font-weight: 700;
             color: #0f172a;
+            transition: color 0.6s ease;
         }
 
         body.dark-mode .api-section .api-header h3 {
@@ -874,7 +1074,7 @@
             padding: 1rem 0.8rem;
             text-align: center;
             border: 1px solid rgba(0, 0, 0, 0.02);
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         body.dark-mode .api-card {
@@ -902,6 +1102,7 @@
             font-weight: 600;
             color: #0f172a;
             font-size: 0.85rem;
+            transition: color 0.6s ease;
         }
 
         body.dark-mode .api-card .api-name {
@@ -940,6 +1141,10 @@
             color: #2563eb;
         }
 
+        body.dark-mode .api-note i {
+            color: #60a5fa;
+        }
+
         .api-note strong {
             color: #0f172a;
         }
@@ -955,6 +1160,12 @@
             padding: 1.5rem 1.8rem;
             margin: 1.2rem 0;
             border: 1px solid rgba(37, 99, 235, 0.04);
+            transition: all 0.6s ease;
+        }
+
+        body.dark-mode .vision-section {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(96, 165, 250, 0.04);
         }
 
         .vision-section h3 {
@@ -965,6 +1176,7 @@
             align-items: center;
             gap: 12px;
             margin-bottom: 0.8rem;
+            transition: color 0.6s ease;
         }
 
         body.dark-mode .vision-section h3 {
@@ -984,6 +1196,7 @@
             color: #1e293b;
             font-size: 0.9rem;
             line-height: 1.8;
+            transition: color 0.6s ease;
         }
 
         body.dark-mode .vision-section p {
@@ -1012,11 +1225,13 @@
             border: 1px solid rgba(0, 0, 0, 0.02);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
             flex-direction: column;
+            transition: all 0.6s ease;
         }
 
         body.dark-mode .payment-section {
             background: rgba(255, 255, 255, 0.02);
             border-color: rgba(255, 255, 255, 0.02);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .payment-item {
@@ -1074,6 +1289,19 @@
             transform: scale(1.3) rotate(-10deg);
         }
 
+        body.dark-mode .pay-btn {
+            background: #60a5fa;
+            color: #0a0e1a;
+        }
+
+        body.dark-mode .pay-btn:hover {
+            background: #93bbfc;
+        }
+
+        body.dark-mode .pay-btn i {
+            color: #0a0e1a;
+        }
+
         .pay-icon i {
             font-size: 1.8rem;
             color: #2563eb;
@@ -1087,6 +1315,7 @@
             font-size: 1.1rem;
             font-weight: 700;
             color: #0f172a;
+            transition: color 0.6s ease;
         }
 
         body.dark-mode .pay-title {
@@ -1138,6 +1367,7 @@
             background: rgba(255, 255, 255, 0.02);
             border-color: rgba(255, 255, 255, 0.02);
             color: #e2e8f0;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
         }
 
         .platform-links a:hover {
@@ -1160,6 +1390,7 @@
             border-radius: 60px;
             border: 1px solid rgba(0, 0, 0, 0.02);
             display: inline-block;
+            transition: all 0.6s ease;
         }
 
         body.dark-mode .notice {
@@ -1179,6 +1410,7 @@
             border-top: 1px solid rgba(0, 0, 0, 0.02);
             color: #64748b;
             font-size: 0.8rem;
+            transition: all 0.6s ease;
         }
 
         body.dark-mode .footer {
@@ -1253,11 +1485,13 @@
             position: relative;
             max-height: 90vh;
             overflow-y: auto;
+            transition: all 0.6s ease;
         }
 
         body.dark-mode .modal {
-            background: #1e293b;
+            background: #1a2332;
             border-color: rgba(255, 255, 255, 0.02);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
         }
 
         .modal .close-modal {
@@ -1279,6 +1513,10 @@
             transform: rotate(90deg);
         }
 
+        body.dark-mode .modal .close-modal:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
         .modal h2 {
             font-size: 1.3rem;
             margin-bottom: 1rem;
@@ -1286,6 +1524,7 @@
             align-items: center;
             gap: 10px;
             color: #0f172a;
+            transition: color 0.6s ease;
         }
 
         body.dark-mode .modal h2 {
@@ -1296,6 +1535,10 @@
             color: #2563eb;
         }
 
+        body.dark-mode .modal h2 i {
+            color: #60a5fa;
+        }
+
         /* ===== COMMENTS ===== */
         .comment-input-area {
             background: #fff;
@@ -1304,11 +1547,13 @@
             margin: 1.2rem 0;
             border: 1px solid rgba(0, 0, 0, 0.02);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            transition: all 0.6s ease;
         }
 
         body.dark-mode .comment-input-area {
             background: rgba(255, 255, 255, 0.02);
             border-color: rgba(255, 255, 255, 0.02);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .comment-input-area textarea {
@@ -1334,6 +1579,11 @@
             outline: none;
             border-color: #2563eb;
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.04);
+        }
+
+        body.dark-mode .comment-input-area textarea:focus {
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.04);
         }
 
         .comment-input-area .comment-actions {
@@ -1373,6 +1623,10 @@
             border-color: #2563eb;
         }
 
+        body.dark-mode .comment-input-area .comment-actions input:focus {
+            border-color: #60a5fa;
+        }
+
         .btn-submit-comment {
             background: #2563eb;
             border: none;
@@ -1391,6 +1645,15 @@
         .btn-submit-comment:hover {
             background: #1d4ed8;
             transform: scale(1.02);
+        }
+
+        body.dark-mode .btn-submit-comment {
+            background: #60a5fa;
+            color: #0a0e1a;
+        }
+
+        body.dark-mode .btn-submit-comment:hover {
+            background: #93bbfc;
         }
 
         .comment-item {
@@ -1420,6 +1683,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            transition: color 0.6s ease;
         }
 
         body.dark-mode .comment-item .comment-user {
@@ -1428,6 +1692,10 @@
 
         .comment-item .comment-user i {
             color: #2563eb;
+        }
+
+        body.dark-mode .comment-item .comment-user i {
+            color: #60a5fa;
         }
 
         .comment-item .comment-time {
@@ -1440,6 +1708,7 @@
             font-size: 0.85rem;
             margin-top: 0.2rem;
             padding-right: 1.8rem;
+            transition: color 0.6s ease;
         }
 
         body.dark-mode .comment-item .comment-text {
@@ -1473,6 +1742,11 @@
             background: rgba(37, 99, 235, 0.04);
         }
 
+        body.dark-mode .comment-item .comment-actions-bottom button:hover {
+            color: #60a5fa;
+            background: rgba(96, 165, 250, 0.04);
+        }
+
         .comment-item .comment-actions-bottom button.liked {
             color: #dc2626;
         }
@@ -1498,6 +1772,10 @@
             margin-top: 0.5rem;
             border-right: 2px solid rgba(37, 99, 235, 0.04);
             padding-right: 0.8rem;
+        }
+
+        body.dark-mode .comment-item .replies {
+            border-right-color: rgba(96, 165, 250, 0.04);
         }
 
         .comment-item .reply-input {
@@ -1539,6 +1817,15 @@
             transform: scale(1.02);
         }
 
+        body.dark-mode .comment-item .reply-input button {
+            background: #60a5fa;
+            color: #0a0e1a;
+        }
+
+        body.dark-mode .comment-item .reply-input button:hover {
+            background: #93bbfc;
+        }
+
         .comment-item .reply-btn {
             background: transparent;
             border: none;
@@ -1552,6 +1839,14 @@
 
         .comment-item .reply-btn:hover {
             background: rgba(37, 99, 235, 0.04);
+        }
+
+        body.dark-mode .comment-item .reply-btn {
+            color: #60a5fa;
+        }
+
+        body.dark-mode .comment-item .reply-btn:hover {
+            background: rgba(96, 165, 250, 0.04);
         }
 
         /* ===== CALENDAR ===== */
@@ -1613,6 +1908,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            transition: color 0.6s ease;
         }
 
         body.dark-mode .calendar-header h2 {
@@ -1627,6 +1923,7 @@
             border-radius: 30px;
             color: #2563eb;
             font-weight: 600;
+            transition: all 0.6s ease;
         }
 
         body.dark-mode .calendar-header .clock-display {
@@ -1641,6 +1938,7 @@
             font-size: 0.75rem;
             border-top: 1px solid rgba(0, 0, 0, 0.02);
             padding-top: 0.8rem;
+            transition: all 0.6s ease;
         }
 
         body.dark-mode .calendar-footer {
@@ -1654,6 +1952,7 @@
             line-height: 1.8;
             margin-top: 0.5rem;
             color: #1e293b;
+            transition: color 0.6s ease;
         }
 
         body.dark-mode .about-modal .about-content {
@@ -1678,6 +1977,78 @@
         }
 
         body.dark-mode .highlight {
+            color: #60a5fa;
+        }
+
+        .footer-note {
+            margin-top: 1.2rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.02);
+            font-size: 0.8rem;
+            color: #64748b;
+            text-align: center;
+            transition: all 0.6s ease;
+        }
+
+        body.dark-mode .footer-note {
+            border-color: rgba(255, 255, 255, 0.02);
+            color: #94a3b8;
+        }
+
+        /* ===== TERMS OF USE (in settings) ===== */
+        .terms-section {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            transition: all 0.6s ease;
+        }
+
+        body.dark-mode .terms-section {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .terms-section h4 {
+            color: #0f172a;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.6s ease;
+        }
+
+        body.dark-mode .terms-section h4 {
+            color: #f1f5f9;
+        }
+
+        .terms-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .terms-section ul li {
+            color: #64748b;
+            font-size: 0.75rem;
+            padding: 0.15rem 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.6s ease;
+        }
+
+        body.dark-mode .terms-section ul li {
+            color: #94a3b8;
+        }
+
+        .terms-section ul li i {
+            color: #2563eb;
+            font-size: 0.6rem;
+        }
+
+        body.dark-mode .terms-section ul li i {
             color: #60a5fa;
         }
 
@@ -1786,6 +2157,12 @@
                 font-size: 0.7rem;
                 padding: 0.2rem 1rem;
             }
+            .cricket-toggle {
+                bottom: 10px;
+                left: 10px;
+                font-size: 0.6rem;
+                padding: 0.2rem 0.7rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1819,7 +2196,7 @@
         /* ===== TOAST ===== */
         .toast {
             position: fixed;
-            bottom: 20px;
+            bottom: 80px;
             right: 20px;
             background: #1e293b;
             color: #fff;
@@ -1830,10 +2207,12 @@
             z-index: 9999;
             animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             direction: rtl;
+            max-width: 90%;
         }
 
         body.dark-mode .toast {
             background: #0f172a;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .toast.hide {
@@ -1843,6 +2222,17 @@
     </style>
 </head>
 <body>
+
+    <!-- ===== DARK MODE BACKGROUND WITH BUGS ===== -->
+    <div class="dark-bg-container" id="darkBgContainer">
+        <!-- Will be populated by JS -->
+    </div>
+
+    <!-- ===== CRICKET SOUND TOGGLE ===== -->
+    <button class="cricket-toggle" id="cricketToggle" onclick="toggleCricketSound()">
+        <i class="fas fa-volume-up"></i>
+        <span id="cricketLabel">🔊 صوت الليل</span>
+    </button>
 
     <div class="bg-pattern"></div>
 
@@ -1875,7 +2265,7 @@
                     </div>
 
                     <!-- Visitor Count -->
-                    <div class="visitor-count" style="font-size:0.7rem;color:#64748b;background:#f1f5f9;padding:0.2rem 0.8rem;border-radius:60px;display:flex;align-items:center;gap:4px;">
+                    <div class="visitor-count" style="font-size:0.7rem;color:#64748b;background:#f1f5f9;padding:0.2rem 0.8rem;border-radius:60px;display:flex;align-items:center;gap:4px;transition:all 0.6s ease;">
                         <i class="fas fa-eye" style="color:#2563eb;"></i>
                         <span id="visitorCount">12,847</span>
                     </div>
@@ -1929,7 +2319,7 @@
             <!-- ===== USER MENU ===== -->
             <div style="position:relative;">
                 <div class="dropdown-content" id="userMenu" style="min-width:180px;">
-                    <div style="padding:0.5rem 1.2rem;font-weight:700;color:#0f172a;border-bottom:1px solid rgba(0,0,0,0.02);">
+                    <div style="padding:0.5rem 1.2rem;font-weight:700;color:#0f172a;border-bottom:1px solid rgba(0,0,0,0.02);transition:all 0.6s ease;">
                         <i class="fas fa-user-circle"></i> <span id="userMenuName">زائر</span>
                     </div>
                     <button class="dropdown-item" onclick="openUserSettings()">
@@ -1968,7 +2358,7 @@
             </div>
 
             <!-- ===== CONTENT GRID ===== -->
-            <h3 style="color:#0f172a;margin:1rem 0 0.5rem 0;display:flex;align-items:center;gap:10px;font-weight:700;font-size:1rem;">
+            <h3 style="color:#0f172a;margin:1rem 0 0.5rem 0;display:flex;align-items:center;gap:10px;font-weight:700;font-size:1rem;transition:color 0.6s ease;">
                 <i class="fas fa-fire" style="color:#eab308;"></i> <span data-key="popularTitle">📌 الأكثر طلباً</span>
             </h3>
             <div class="content-grid" id="contentGrid">
@@ -1976,7 +2366,7 @@
             </div>
 
             <!-- ===== CHANNELS ===== -->
-            <h3 style="color:#0f172a;margin:1.5rem 0 0.5rem 0;display:flex;align-items:center;gap:10px;font-weight:700;font-size:1rem;">
+            <h3 style="color:#0f172a;margin:1.5rem 0 0.5rem 0;display:flex;align-items:center;gap:10px;font-weight:700;font-size:1rem;transition:color 0.6s ease;">
                 <i class="fas fa-broadcast-tower" style="color:#2563eb;"></i> <span data-key="channelsTitle">📡 قنواتنا</span>
             </h3>
             <div class="channels-grid" data-aos="fade-up">
@@ -2018,7 +2408,7 @@
             </div>
 
             <!-- ===== BOTS ===== -->
-            <h3 style="color:#0f172a;margin:1.5rem 0 0.5rem 0;display:flex;align-items:center;gap:10px;font-weight:700;font-size:1rem;">
+            <h3 style="color:#0f172a;margin:1.5rem 0 0.5rem 0;display:flex;align-items:center;gap:10px;font-weight:700;font-size:1rem;transition:color 0.6s ease;">
                 <i class="fas fa-robot" style="color:#2563eb;"></i> <span data-key="botsTitle">🤖 بوتاتنا</span>
             </h3>
             <div class="bots-section" data-aos="fade-up" data-aos-delay="200">
@@ -2060,7 +2450,7 @@
                     <i class="fas fa-plug"></i>
                     <h3 data-key="apiTitle">🚀 خدمات API للتطبيقات</h3>
                 </div>
-                <p style="color:#64748b;font-size:0.85rem;margin-bottom:0.5rem;" data-key="apiDesc">
+                <p style="color:#64748b;font-size:0.85rem;margin-bottom:0.5rem;transition:color 0.6s ease;" data-key="apiDesc">
                     نقدم واجهات برمجة تطبيقات (API) جاهزة للتكامل مع تطبيقاتك، مصممة خصيصاً لتلبية احتياجات المطورين.
                 </p>
                 <div class="api-grid">
@@ -2118,7 +2508,7 @@
                         <div class="pay-sub" data-key="payStarsSub">⭐ نجوم تليجرام</div>
                     </div>
                 </div>
-                <div style="color:#64748b;font-size:0.65rem;opacity:0.5;display:flex;align-items:center;gap:6px;">
+                <div style="color:#64748b;font-size:0.65rem;opacity:0.5;display:flex;align-items:center;gap:6px;transition:color 0.6s ease;">
                     <i class="fas fa-lock" style="color:#2563eb;"></i> <span data-key="securePay">دفع آمن عبر باينس و نجوم تليجرام</span>
                 </div>
             </div>
@@ -2205,7 +2595,7 @@
             </div>
 
             <div id="commentsList"></div>
-            <div style="margin-top:0.6rem;text-align:center;font-size:0.65rem;opacity:0.3;color:#64748b;">
+            <div style="margin-top:0.6rem;text-align:center;font-size:0.65rem;opacity:0.3;color:#64748b;transition:color 0.6s ease;">
                 <i class="fas fa-sync-alt"></i> <span data-key="autoComments">تتغير التعليقات تلقائياً</span>
             </div>
         </div>
@@ -2248,7 +2638,7 @@
                 <p style="margin-top:0.6rem;" data-key="aboutPricing">يوجد عمل اي كود او تعديل اي ملف<br />كل هذا و <span class="highlight">#بأسعار رمزيه بدون تكلفة</span></p>
                 <p style="margin-top:0.6rem;"><strong data-key="aboutContact">للتواصل:</strong></p>
                 <p>By : <span class="highlight">@TopVeGa</span></p>
-                <div class="footer-note" style="margin-top:1.2rem;padding-top:0.8rem;border-top:1px solid rgba(0,0,0,0.02);font-size:0.8rem;color:#64748b;text-align:center;">
+                <div class="footer-note">
                     <i class="fas fa-exclamation-triangle" style="color:#2563eb;"></i>
                     <span data-key="aboutNotice">#تنويه هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك</span>
                 </div>
@@ -2263,23 +2653,34 @@
             <h2><i class="fas fa-user-cog"></i> ⚙️ إعداداتي</h2>
             <div style="display:flex;flex-direction:column;gap:1rem;">
                 <div>
-                    <label style="font-weight:600;color:#0f172a;display:block;margin-bottom:0.3rem;">👤 اسم المستخدم</label>
-                    <input type="text" id="settingsUsername" value="زائر" style="width:100%;padding:0.6rem;border-radius:16px;border:1px solid rgba(0,0,0,0.04);background:#f8fafc;color:#1e293b;font-size:0.9rem;">
+                    <label style="font-weight:600;color:#0f172a;display:block;margin-bottom:0.3rem;transition:color 0.6s ease;">👤 اسم المستخدم</label>
+                    <input type="text" id="settingsUsername" value="زائر" style="width:100%;padding:0.6rem;border-radius:16px;border:1px solid rgba(0,0,0,0.04);background:#f8fafc;color:#1e293b;font-size:0.9rem;transition:all 0.6s ease;">
                 </div>
                 <div>
-                    <label style="font-weight:600;color:#0f172a;display:block;margin-bottom:0.3rem;">🌐 اللغة</label>
-                    <select id="settingsLanguage" style="width:100%;padding:0.6rem;border-radius:16px;border:1px solid rgba(0,0,0,0.04);background:#f8fafc;color:#1e293b;font-size:0.9rem;">
+                    <label style="font-weight:600;color:#0f172a;display:block;margin-bottom:0.3rem;transition:color 0.6s ease;">🌐 اللغة</label>
+                    <select id="settingsLanguage" style="width:100%;padding:0.6rem;border-radius:16px;border:1px solid rgba(0,0,0,0.04);background:#f8fafc;color:#1e293b;font-size:0.9rem;transition:all 0.6s ease;">
                         <option value="ar">🇸🇦 العربية</option>
                         <option value="en">🇬🇧 English</option>
                     </select>
                 </div>
                 <div>
-                    <label style="font-weight:600;color:#0f172a;display:block;margin-bottom:0.3rem;">🌙 الوضع الليلي</label>
-                    <button onclick="toggleTheme()" style="padding:0.5rem 1.5rem;border-radius:60px;border:1px solid rgba(0,0,0,0.04);background:#f8fafc;cursor:pointer;font-size:0.85rem;">
+                    <label style="font-weight:600;color:#0f172a;display:block;margin-bottom:0.3rem;transition:color 0.6s ease;">🌙 الوضع الليلي</label>
+                    <button onclick="toggleTheme()" style="padding:0.5rem 1.5rem;border-radius:60px;border:1px solid rgba(0,0,0,0.04);background:#f8fafc;cursor:pointer;font-size:0.85rem;transition:all 0.3s ease;">
                         <i class="fas fa-moon"></i> تبديل الوضع
                     </button>
                 </div>
-                <button onclick="saveSettings()" style="background:#2563eb;border:none;padding:0.7rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;font-size:1rem;">
+
+                <!-- ===== TERMS OF USE ===== -->
+                <div class="terms-section">
+                    <h4><i class="fas fa-file-contract"></i> 📜 شروط الاستخدام</h4>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> الاستخدام للأغراض التعليمية</li>
+                        <li><i class="fas fa-check-circle"></i> عدم إعادة البيع</li>
+                        <li><i class="fas fa-check-circle"></i> ذكر المصدر عند النشر</li>
+                    </ul>
+                </div>
+
+                <button onclick="saveSettings()" style="background:#2563eb;border:none;padding:0.7rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;font-size:1rem;transition:all 0.3s ease;">
                     <i class="fas fa-save"></i> حفظ الإعدادات
                 </button>
             </div>
@@ -2301,7 +2702,9 @@
     <script>
         AOS.init({ duration: 600, once: true, easing: 'ease-out' });
 
+        // ============================================================
         // ===== DATA =====
+        // ============================================================
         const contentData = [{
             id: 1,
             title: 'سكربت استخراج جلسات تليجرام',
@@ -2312,7 +2715,8 @@
             downloads: 1247,
             views: 5231,
             rating: 4.8,
-            favorite: false
+            favorite: false,
+            downloadLink: 'https://t.me/python2015'
         }, {
             id: 2,
             title: 'بوت موسيقى متكامل',
@@ -2323,7 +2727,8 @@
             downloads: 892,
             views: 3412,
             rating: 4.9,
-            favorite: false
+            favorite: false,
+            downloadLink: 'https://t.me/Bi1ieBot'
         }, {
             id: 3,
             title: 'أداة حماية سيرفرات',
@@ -2334,7 +2739,8 @@
             downloads: 534,
             views: 2156,
             rating: 4.6,
-            favorite: false
+            favorite: false,
+            downloadLink: 'https://t.me/ToolsTermex'
         }, {
             id: 4,
             title: 'مكتبة بايثون للـ API',
@@ -2345,7 +2751,8 @@
             downloads: 723,
             views: 2894,
             rating: 4.7,
-            favorite: false
+            favorite: false,
+            downloadLink: 'https://t.me/python2015'
         }, {
             id: 5,
             title: 'سكربت نقل أعضاء تليجرام',
@@ -2356,7 +2763,8 @@
             downloads: 456,
             views: 1876,
             rating: 4.5,
-            favorite: false
+            favorite: false,
+            downloadLink: 'https://t.me/vegaone'
         }, {
             id: 6,
             title: 'ملف حماية lua & php',
@@ -2367,15 +2775,184 @@
             downloads: 678,
             views: 2567,
             rating: 4.8,
-            favorite: false
+            favorite: false,
+            downloadLink: 'https://t.me/ToolsTermex'
         }];
 
         let favorites = [];
         let currentUser = 'زائر';
         let currentFilter = 'all';
         let currentCategory = 'all';
+        let cricketAudio = null;
+        let cricketPlaying = false;
 
+        // ============================================================
+        // ===== DARK MODE BACKGROUND BUGS =====
+        // ============================================================
+        function createBugs() {
+            const container = document.getElementById('darkBgContainer');
+            if (!container) return;
+            container.innerHTML = '';
+
+            const bugIcons = ['fa-bug', 'fa-spider', 'fa-mosquito', 'fa-dragonfly'];
+            const numBugs = 25;
+
+            for (let i = 0; i < numBugs; i++) {
+                const bug = document.createElement('div');
+                bug.className = 'bug';
+                const isFirefly = Math.random() < 0.3;
+                if (isFirefly) {
+                    bug.classList.add('bug-firefly');
+                    bug.innerHTML = '<i class="fas fa-circle"></i>';
+                } else {
+                    const icon = bugIcons[Math.floor(Math.random() * bugIcons.length)];
+                    bug.innerHTML = `<i class="fas ${icon}"></i>`;
+                }
+
+                const startX = Math.random() * 100;
+                const startY = Math.random() * 100;
+                const tx = (Math.random() - 0.5) * 200;
+                const ty = (Math.random() - 0.5) * 200;
+                const duration = 15 + Math.random() * 25;
+                const delay = Math.random() * 20;
+
+                bug.style.setProperty('--tx', tx + 'vw');
+                bug.style.setProperty('--ty', ty + 'vh');
+                bug.style.left = startX + '%';
+                bug.style.top = startY + '%';
+                bug.style.animationDuration = duration + 's';
+                bug.style.animationDelay = delay + 's';
+                bug.style.fontSize = (5 + Math.random() * 10) + 'px';
+
+                container.appendChild(bug);
+            }
+        }
+
+        // ============================================================
+        // ===== CRICKET SOUND =====
+        // ============================================================
+        function initCricketSound() {
+            try {
+                const audioContext = new(window.AudioContext || window.webkitAudioContext)();
+
+                function playCricket() {
+                    if (!cricketPlaying) return;
+                    try {
+                        const oscillator = audioContext.createOscillator();
+                        const gainNode = audioContext.createGain();
+
+                        oscillator.connect(gainNode);
+                        gainNode.connect(audioContext.destination);
+
+                        oscillator.frequency.value = 4000 + Math.random() * 1000;
+                        oscillator.type = 'sawtooth';
+                        gainNode.gain.value = 0.03;
+
+                        oscillator.start();
+                        oscillator.stop(audioContext.currentTime + 0.08);
+
+                        // Random chirp pattern
+                        setTimeout(() => {
+                            if (cricketPlaying) {
+                                const o2 = audioContext.createOscillator();
+                                const g2 = audioContext.createGain();
+                                o2.connect(g2);
+                                g2.connect(audioContext.destination);
+                                o2.frequency.value = 4500 + Math.random() * 1500;
+                                o2.type = 'square';
+                                g2.gain.value = 0.02;
+                                o2.start();
+                                o2.stop(audioContext.currentTime + 0.05);
+                            }
+                        }, 100 + Math.random() * 200);
+
+                        // Schedule next chirp
+                        const nextDelay = 500 + Math.random() * 3000;
+                        setTimeout(playCricket, nextDelay);
+                    } catch (e) {
+                        // Fallback: use setTimeout to simulate
+                        if (cricketPlaying) {
+                            setTimeout(playCricket, 1000 + Math.random() * 3000);
+                        }
+                    }
+                }
+
+                // Start cricket sound
+                if (cricketPlaying) {
+                    playCricket();
+                }
+            } catch (e) {
+                // Fallback: simple timeout-based chirp
+                function fallbackChirp() {
+                    if (!cricketPlaying) return;
+                    try {
+                        const ctx = new(window.AudioContext || window.webkitAudioContext)();
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        osc.connect(gain);
+                        gain.connect(ctx.destination);
+                        osc.frequency.value = 3500 + Math.random() * 1500;
+                        osc.type = 'sawtooth';
+                        gain.gain.value = 0.02;
+                        osc.start();
+                        osc.stop(ctx.currentTime + 0.06);
+                    } catch (e) {}
+                    if (cricketPlaying) {
+                        setTimeout(fallbackChirp, 500 + Math.random() * 3000);
+                    }
+                }
+                if (cricketPlaying) {
+                    fallbackChirp();
+                }
+            }
+        }
+
+        function toggleCricketSound() {
+            cricketPlaying = !cricketPlaying;
+            const toggle = document.getElementById('cricketToggle');
+            const label = document.getElementById('cricketLabel');
+
+            if (cricketPlaying) {
+                toggle.classList.add('active');
+                label.textContent = '🔇 كتم الليل';
+                initCricketSound();
+                showToast('🦗 تم تشغيل صوت الليل');
+            } else {
+                toggle.classList.remove('active');
+                label.textContent = '🔊 صوت الليل';
+                showToast('🔇 تم إيقاف صوت الليل');
+            }
+        }
+
+        // ============================================================
+        // ===== THEME TOGGLE =====
+        // ============================================================
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.getElementById('themeIcon');
+            icon.className = document.body.classList.contains('dark-mode') ? 'fas fa-sun' : 'fas fa-moon';
+
+            // Show/hide cricket toggle
+            const cricketToggle = document.getElementById('cricketToggle');
+            if (document.body.classList.contains('dark-mode')) {
+                cricketToggle.style.display = 'flex';
+                // Auto-start cricket sound in dark mode
+                if (!cricketPlaying) {
+                    toggleCricketSound();
+                }
+            } else {
+                cricketToggle.style.display = 'none';
+                if (cricketPlaying) {
+                    toggleCricketSound();
+                }
+            }
+
+            saveData();
+        }
+
+        // ============================================================
         // ===== RENDER CONTENT =====
+        // ============================================================
         function renderContent() {
             const grid = document.getElementById('contentGrid');
             let filtered = contentData;
@@ -2432,12 +3009,99 @@
             return html;
         }
 
+        // ============================================================
+        // ===== DOWNLOAD CONTENT (redirect to Telegram channel) =====
+        // ============================================================
+        function downloadContent(id) {
+            const item = contentData.find(c => c.id === id);
+            if (item) {
+                item.downloads++;
+                showToast(`⬇️ جاري التحميل: ${item.title}`);
+                // Redirect to Telegram channel link
+                if (item.downloadLink) {
+                    window.open(item.downloadLink, '_blank');
+                } else {
+                    // Fallback: open the channel
+                    window.open('https://t.me/python2015', '_blank');
+                }
+                renderContent();
+                saveData();
+            }
+        }
+
+        // ============================================================
+        // ===== COPY CONTENT =====
+        // ============================================================
+        function copyContent(id) {
+            const item = contentData.find(c => c.id === id);
+            if (item) {
+                navigator.clipboard.writeText(`${item.title}\n${item.desc}\nرابط التحميل: ${item.downloadLink || 'https://t.me/python2015'}`)
+                    .then(() => {
+                        showToast(`📋 تم نسخ: ${item.title}`);
+                    }).catch(() => {
+                        showToast(`📋 ${item.title}`);
+                    });
+            }
+        }
+
+        // ============================================================
+        // ===== FAVORITES =====
+        // ============================================================
+        function toggleFavorite(id) {
+            const index = favorites.indexOf(id);
+            if (index > -1) {
+                favorites.splice(index, 1);
+                showToast('⭐ تمت إزالة من المفضلة');
+            } else {
+                favorites.push(id);
+                showToast('⭐ تمت الإضافة إلى المفضلة');
+            }
+            renderContent();
+            saveData();
+        }
+
+        function openFavorites() {
+            const list = document.getElementById('favoritesList');
+            if (favorites.length === 0) {
+                list.innerHTML = `<p style="color:#64748b;text-align:center;padding:1rem;">لا توجد مفضلات حتى الآن</p>`;
+            } else {
+                list.innerHTML = favorites.map(id => {
+                    const item = contentData.find(c => c.id === id);
+                    return item ? `
+                        <div style="background:#f8fafc;padding:0.8rem 1rem;border-radius:16px;display:flex;justify-content:space-between;align-items:center;transition:all 0.6s ease;">
+                            <div>
+                                <strong>${item.title}</strong>
+                                <span style="font-size:0.7rem;color:#64748b;display:block;">${item.desc}</span>
+                            </div>
+                            <button onclick="toggleFavorite(${item.id});openFavorites();" style="background:transparent;border:none;color:#dc2626;cursor:pointer;font-size:1.2rem;">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    ` : '';
+                }).join('');
+            }
+            document.getElementById('favoritesOverlay').classList.add('show');
+            document.getElementById('dropdownMenu').style.display = 'none';
+            document.getElementById('userMenu').style.display = 'none';
+        }
+
+        function closeFavorites() {
+            document.getElementById('favoritesOverlay').classList.remove('show');
+        }
+
+        // ============================================================
         // ===== FILTERS =====
+        // ============================================================
         function filterContent(type) {
             currentFilter = type;
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => {
-                if (b.textContent.includes(type) || (type === 'all' && b.textContent.includes('الكل'))) {
+                const key = b.querySelector('[data-key]')?.dataset?.key || '';
+                if ((type === 'all' && key === 'navAll') ||
+                    (type === 'codes' && key === 'navCodes') ||
+                    (type === 'tools' && key === 'navTools') ||
+                    (type === 'scripts' && key === 'navScripts') ||
+                    (type === 'bots' && key === 'navBots')) {
                     b.classList.add('active');
                 }
             });
@@ -2448,14 +3112,22 @@
             currentCategory = category;
             document.querySelectorAll('.category-tag').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.category-tag').forEach(t => {
-                if (t.textContent.includes(category) || (category === 'all' && t.textContent.includes('الكل'))) {
+                const text = t.textContent.trim();
+                if ((category === 'all' && text.includes('الكل')) ||
+                    (category === 'python' && text.includes('بايثون')) ||
+                    (category === 'telegram' && text.includes('تليجرام')) ||
+                    (category === 'security' && text.includes('أمن')) ||
+                    (category === 'music' && text.includes('موسيقى')) ||
+                    (category === 'api' && text.includes('API'))) {
                     t.classList.add('active');
                 }
             });
             renderContent();
         }
 
+        // ============================================================
         // ===== SEARCH =====
+        // ============================================================
         function searchContent(query) {
             const grid = document.getElementById('contentGrid');
             if (!query.trim()) {
@@ -2498,72 +3170,9 @@
             `).join('');
         }
 
-        // ===== ACTIONS =====
-        function downloadContent(id) {
-            const item = contentData.find(c => c.id === id);
-            if (item) {
-                item.downloads++;
-                showToast(`⬇️ جاري تحميل: ${item.title}`);
-                renderContent();
-                saveData();
-            }
-        }
-
-        function copyContent(id) {
-            const item = contentData.find(c => c.id === id);
-            if (item) {
-                navigator.clipboard.writeText(`${item.title}\n${item.desc}`).then(() => {
-                    showToast(`📋 تم نسخ: ${item.title}`);
-                }).catch(() => {
-                    showToast(`📋 ${item.title}`);
-                });
-            }
-        }
-
-        function toggleFavorite(id) {
-            const index = favorites.indexOf(id);
-            if (index > -1) {
-                favorites.splice(index, 1);
-                showToast('⭐ تمت إزالة من المفضلة');
-            } else {
-                favorites.push(id);
-                showToast('⭐ تمت الإضافة إلى المفضلة');
-            }
-            renderContent();
-            saveData();
-        }
-
-        // ===== FAVORITES MODAL =====
-        function openFavorites() {
-            const list = document.getElementById('favoritesList');
-            if (favorites.length === 0) {
-                list.innerHTML = `<p style="color:#64748b;text-align:center;padding:1rem;">لا توجد مفضلات حتى الآن</p>`;
-            } else {
-                list.innerHTML = favorites.map(id => {
-                    const item = contentData.find(c => c.id === id);
-                    return item ? `
-                        <div style="background:#f8fafc;padding:0.8rem 1rem;border-radius:16px;display:flex;justify-content:space-between;align-items:center;">
-                            <div>
-                                <strong>${item.title}</strong>
-                                <span style="font-size:0.7rem;color:#64748b;display:block;">${item.desc}</span>
-                            </div>
-                            <button onclick="toggleFavorite(${item.id});openFavorites();" style="background:transparent;border:none;color:#dc2626;cursor:pointer;font-size:1.2rem;">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    ` : '';
-                }).join('');
-            }
-            document.getElementById('favoritesOverlay').classList.add('show');
-            document.getElementById('dropdownMenu').style.display = 'none';
-            document.getElementById('userMenu').style.display = 'none';
-        }
-
-        function closeFavorites() {
-            document.getElementById('favoritesOverlay').classList.remove('show');
-        }
-
+        // ============================================================
         // ===== USER SETTINGS =====
+        // ============================================================
         function openUserSettings() {
             document.getElementById('settingsUsername').value = currentUser;
             document.getElementById('settingsLanguage').value = document.body.dir === 'rtl' ? 'ar' : 'en';
@@ -2593,7 +3202,9 @@
             document.getElementById('userAvatar').textContent = name.charAt(0);
         }
 
+        // ============================================================
         // ===== LOGIN =====
+        // ============================================================
         function loginUser() {
             const name = prompt('👤 أدخل اسم المستخدم:', currentUser);
             if (name && name.trim()) {
@@ -2606,7 +3217,9 @@
             document.getElementById('userMenu').style.display = 'none';
         }
 
+        // ============================================================
         // ===== TOGGLE MENUS =====
+        // ============================================================
         function toggleDropdown() {
             const menu = document.getElementById('dropdownMenu');
             const userMenu = document.getElementById('userMenu');
@@ -2629,15 +3242,9 @@
             }
         });
 
-        // ===== THEME =====
-        function toggleTheme() {
-            document.body.classList.toggle('dark-mode');
-            const icon = document.getElementById('themeIcon');
-            icon.className = document.body.classList.contains('dark-mode') ? 'fas fa-sun' : 'fas fa-moon';
-            saveData();
-        }
-
+        // ============================================================
         // ===== FULLSCREEN =====
+        // ============================================================
         function toggleFullscreen() {
             if (!document.fullscreenElement) {
                 document.documentElement.requestFullscreen().catch(e => {});
@@ -2647,7 +3254,9 @@
             document.getElementById('dropdownMenu').style.display = 'none';
         }
 
+        // ============================================================
         // ===== LANGUAGE =====
+        // ============================================================
         const translations = {
             ar: {
                 brandTitle: 'python zone',
@@ -2836,14 +3445,16 @@
             saveData();
         }
 
+        // ============================================================
         // ===== COMMENTS =====
+        // ============================================================
         let comments = [
             { id: 1, user: 'أحمد محمد', text: 'منصة رائعة، خدمات متكاملة وسريعة!', likes: 12, time: Date.now() - 3600000,
                 replies: [] },
             { id: 2, user: 'سارة خالد', text: '❤️ أفضل موقع برمجي تعاملت معه، دعم فني ممتاز جداً', likes: 8, time: Date
-                .now() - 7200000, replies: [] },
+                    .now() - 7200000, replies: [] },
             { id: 3, user: 'علي حسن', text: '🔥 أكواد احترافية وسعر رمزي، أنصح الجميع بالتجربة', likes: 15, time: Date
-                .now() - 10800000, replies: [] },
+                    .now() - 10800000, replies: [] },
             { id: 4, user: 'نورا يوسف', text: 'موقع موثوق ومحتواه قيم، شكراً لفريق العمل', likes: 6, time: Date.now() -
                     14400000, replies: [] },
             { id: 5, user: 'محمد طارق', text: 'خدمات ممتازة وسرعة في التنفيذ، 👍', likes: 20, time: Date.now() - 18000000,
@@ -2979,7 +3590,9 @@
             document.getElementById('userMenu').style.display = 'none';
         }
 
+        // ============================================================
         // ===== ABOUT MODAL =====
+        // ============================================================
         function openAboutModal() {
             document.getElementById('aboutOverlay').classList.add('show');
             document.getElementById('dropdownMenu').style.display = 'none';
@@ -2989,7 +3602,9 @@
             document.getElementById('aboutOverlay').classList.remove('show');
         }
 
+        // ============================================================
         // ===== CALENDAR =====
+        // ============================================================
         function toggleCalendar() {
             document.getElementById('calendarOverlay').classList.toggle('show');
             document.getElementById('dropdownMenu').style.display = 'none';
@@ -3055,7 +3670,9 @@
         updateDateTime();
         setInterval(updateDateTime, 1000);
 
+        // ============================================================
         // ===== TELEGRAM STARS =====
+        // ============================================================
         function openTelegramStars() {
             const modalHtml = `
                 <div style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);z-index:9999;display:flex;justify-content:center;align-items:center;padding:1.5rem;animation:fadeIn 0.3s ease;">
@@ -3087,7 +3704,9 @@
             document.body.insertAdjacentHTML('beforeend', modalHtml);
         }
 
+        // ============================================================
         // ===== TOAST =====
+        // ============================================================
         function showToast(message) {
             const toast = document.createElement('div');
             toast.className = 'toast';
@@ -3099,14 +3718,18 @@
             }, 3000);
         }
 
+        // ============================================================
         // ===== VISITOR COUNTER =====
+        // ============================================================
         let vc = 12847;
         setInterval(() => {
             vc += Math.floor(Math.random() * 2);
             document.getElementById('visitorCount').textContent = vc.toLocaleString();
         }, 15000);
 
+        // ============================================================
         // ===== SAVE/LOAD DATA =====
+        // ============================================================
         function saveData() {
             try {
                 const data = {
@@ -3138,6 +3761,7 @@
                     if (data.darkMode) {
                         document.body.classList.add('dark-mode');
                         document.getElementById('themeIcon').className = 'fas fa-sun';
+                        document.getElementById('cricketToggle').style.display = 'flex';
                     }
                     if (data.language && data.language !== 'ar') {
                         changeLanguage(data.language);
@@ -3146,10 +3770,18 @@
             } catch (e) {}
         }
 
+        // ============================================================
         // ===== INIT =====
+        // ============================================================
         loadData();
         renderContent();
         renderComments();
+        createBugs();
+
+        // Check initial dark mode state
+        if (document.body.classList.contains('dark-mode')) {
+            document.getElementById('cricketToggle').style.display = 'flex';
+        }
 
         // Close modals on overlay click
         document.querySelectorAll('.modal-overlay').forEach(el => {
@@ -3175,7 +3807,7 @@
         console.log('✅ تقويم الفعاليات');
         console.log('✅ ردود سريعة على التعليقات');
         console.log('✅ تصنيف المحتوى');
-        console.log('✅ تحميل مباشر للملفات');
+        console.log('✅ تحميل مباشر للملفات (تحويل لقناة تليجرام)');
         console.log('✅ نظام تقييم بسيط (5 نجوم)');
         console.log('✅ نموذج طلب خدمة');
         console.log('✅ دعم اللغة الإنجليزية');
@@ -3183,7 +3815,10 @@
         console.log('✅ روابط سريعة للتواصل');
         console.log('✅ عداد الزوار الفعلي');
         console.log('✅ وقت آخر تحديث');
-        console.log('✅ شروط الاستخدام بسيطة');
+        console.log('✅ شروط الاستخدام في الإعدادات');
+        console.log('✅ خلفية ليلية متحركة مع حشرات ويراعات');
+        console.log('✅ صوت رنين صرصور ليلي');
+        console.log('✅ ألوان محسّنة للوضع الليلي');
     </script>
 </body>
 </html>
