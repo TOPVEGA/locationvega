@@ -6,8 +6,9 @@
     <title>Py Zone | منصة خدمات فيجا المتنوعة</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
+        /* ===== RESET & BASE ===== */
         * {
             margin: 0;
             padding: 0;
@@ -19,8 +20,26 @@
             min-height: 100vh;
             background: #f0f4f8;
             padding: 1.5rem;
-            transition: background 0.6s ease;
+            transition: background 0.8s ease;
             position: relative;
+            overflow-x: hidden;
+        }
+
+        /* ===== GLASS EFFECTS ===== */
+        .glass {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+        }
+
+        body.dark-mode .glass {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         /* ===== DARK MODE BACKGROUND WITH ANIMATED BUGS ===== */
@@ -47,7 +66,7 @@
         .bug {
             position: absolute;
             font-size: 8px;
-            color: rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.12);
             animation: flyBug linear infinite;
             opacity: 0;
             will-change: transform;
@@ -55,17 +74,17 @@
 
         .bug i {
             display: block;
-            animation: bugGlow 1.5s ease-in-out infinite alternate;
+            animation: bugGlow 2s ease-in-out infinite alternate;
         }
 
         .bug-firefly {
-            color: rgba(255, 255, 200, 0.2);
+            color: rgba(255, 255, 200, 0.25);
             font-size: 6px;
-            animation: flyBug 20s linear infinite, fireflyGlow 2s ease-in-out infinite alternate;
+            animation: flyBug 22s linear infinite, fireflyGlow 2.5s ease-in-out infinite alternate;
         }
 
         .bug-firefly i {
-            text-shadow: 0 0 10px rgba(255, 255, 200, 0.3);
+            text-shadow: 0 0 15px rgba(255, 255, 200, 0.3), 0 0 30px rgba(255, 255, 200, 0.1);
         }
 
         @keyframes flyBug {
@@ -92,7 +111,7 @@
             }
             100% {
                 opacity: 1;
-                transform: scale(1.3);
+                transform: scale(1.4);
             }
         }
 
@@ -102,76 +121,31 @@
                 text-shadow: 0 0 5px rgba(255, 255, 200, 0.1);
             }
             100% {
-                opacity: 0.8;
-                text-shadow: 0 0 20px rgba(255, 255, 200, 0.4), 0 0 40px rgba(255, 255, 200, 0.1);
+                opacity: 0.9;
+                text-shadow: 0 0 25px rgba(255, 255, 200, 0.5), 0 0 50px rgba(255, 255, 200, 0.15);
             }
         }
 
-        /* ===== STATUS INDICATOR ===== */
-        .status-indicator {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 0.3rem 1rem;
-            border-radius: 60px;
-            font-size: 0.75rem;
-            background: #f1f5f9;
-            transition: all 0.6s ease;
-        }
-
-        body.dark-mode .status-indicator {
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .status-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            display: inline-block;
-            animation: pulseDot 2s ease-in-out infinite;
-        }
-
-        .status-dot.online {
-            background: #22c55e;
-        }
-        .status-dot.degraded {
-            background: #eab308;
-        }
-        .status-dot.offline {
-            background: #ef4444;
-            animation: none;
-        }
-
-        @keyframes pulseDot {
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.6;
-                transform: scale(0.8);
-            }
-        }
-
-        /* ===== CRICKET TOGGLE ===== */
+        /* ===== CRICKET SOUND TOGGLE ===== */
         .cricket-toggle {
             position: fixed;
-            bottom: 20px;
-            left: 20px;
+            bottom: 24px;
+            left: 24px;
             z-index: 100;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0.4rem 1rem;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0.5rem 1.2rem;
             border-radius: 60px;
             color: #94a3b8;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             display: none;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         body.dark-mode .cricket-toggle {
@@ -179,13 +153,22 @@
         }
 
         .cricket-toggle:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.2);
             transform: scale(1.05);
         }
 
         .cricket-toggle.active {
             color: #60a5fa;
             border-color: rgba(96, 165, 250, 0.3);
+            box-shadow: 0 4px 30px rgba(96, 165, 250, 0.1);
+        }
+
+        .cricket-toggle i {
+            transition: all 0.4s ease;
+        }
+
+        .cricket-toggle.active i {
+            animation: pulseIcon 1.5s ease-in-out infinite;
         }
 
         .bg-pattern {
@@ -201,8 +184,8 @@
         }
 
         body.dark-mode .bg-pattern {
-            background: radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+            background: radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.04) 0%, transparent 50%);
         }
 
         .container {
@@ -213,22 +196,9 @@
         }
 
         .main-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
             border-radius: 40px;
             padding: 2rem;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            transition: all 0.6s ease;
-        }
-
-        body.dark-mode .main-card {
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(12px);
-            border-color: rgba(255, 255, 255, 0.04);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         /* ===== HEADER ===== */
@@ -253,25 +223,33 @@
         }
 
         .brand i {
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             color: #2563eb;
-            animation: pulseIcon 2s ease-in-out infinite;
+            animation: pulseIcon 2.5s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(37, 99, 235, 0.1));
         }
 
         body.dark-mode .brand i {
             color: #60a5fa;
+            filter: drop-shadow(0 0 30px rgba(96, 165, 250, 0.15));
         }
 
         .brand h1 {
             font-size: 1.8rem;
-            font-weight: 800;
-            color: #0f172a;
+            font-weight: 900;
+            background: linear-gradient(135deg, #1e293b, #2563eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             letter-spacing: -0.5px;
-            transition: color 0.6s ease;
+            transition: all 0.6s ease;
         }
 
         body.dark-mode .brand h1 {
-            color: #f1f5f9;
+            background: linear-gradient(135deg, #f1f5f9, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .brand small {
@@ -294,31 +272,77 @@
             flex-wrap: wrap;
         }
 
+        /* ===== STATUS INDICATOR ===== */
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.3rem 1rem;
+            border-radius: 60px;
+            font-size: 0.7rem;
+            transition: all 0.6s ease;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulseDot 2s ease-in-out infinite;
+        }
+
+        .status-dot.online {
+            background: #22c55e;
+        }
+
+        .status-dot.degraded {
+            background: #eab308;
+        }
+
+        .status-dot.offline {
+            background: #ef4444;
+            animation: none;
+        }
+
+        @keyframes pulseDot {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(0.8);
+            }
+        }
+
+        /* ===== BUTTONS ===== */
         .btn-icon {
-            background: rgba(0, 0, 0, 0.02);
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(0, 0, 0, 0.04);
             padding: 0.4rem 0.9rem;
             border-radius: 60px;
             color: #1e293b;
             font-size: 0.8rem;
             cursor: pointer;
-            transition: 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             display: flex;
             align-items: center;
             gap: 6px;
-            background: #fff;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
         }
 
         body.dark-mode .btn-icon {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.04);
             border-color: rgba(255, 255, 255, 0.04);
             color: #e2e8f0;
         }
 
         .btn-icon i {
             color: #2563eb;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         body.dark-mode .btn-icon i {
@@ -326,8 +350,9 @@
         }
 
         .btn-icon:hover {
-            background: rgba(37, 99, 235, 0.04);
-            transform: translateY(-1px);
+            background: rgba(37, 99, 235, 0.06);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.06);
         }
 
         .btn-icon:hover i {
@@ -340,12 +365,14 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            background: #f1f5f9;
+            background: rgba(241, 245, 249, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             padding: 0.2rem 0.8rem 0.2rem 0.3rem;
             border-radius: 60px;
             border: 1px solid rgba(0, 0, 0, 0.02);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         body.dark-mode .user-section {
@@ -353,21 +380,27 @@
             border-color: rgba(255, 255, 255, 0.02);
         }
 
+        .user-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+
         .user-avatar {
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            background: #2563eb;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
             color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 0.8rem;
             font-weight: 700;
+            transition: all 0.4s ease;
         }
 
         body.dark-mode .user-avatar {
-            background: #60a5fa;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
             color: #0a0e1a;
         }
 
@@ -394,19 +427,23 @@
             position: absolute;
             left: 0;
             top: 100%;
-            background: #fff;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: 20px;
             padding: 0.4rem 0;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(0, 0, 0, 0.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             min-width: 200px;
             z-index: 1000;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         body.dark-mode .dropdown-content {
-            background: #1a2332;
-            border-color: rgba(255, 255, 255, 0.02);
+            background: rgba(26, 35, 50, 0.9);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-color: rgba(255, 255, 255, 0.04);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
 
@@ -422,7 +459,7 @@
             cursor: pointer;
             font-size: 0.8rem;
             border-radius: 12px;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             text-decoration: none;
         }
 
@@ -431,49 +468,43 @@
         }
 
         .dropdown-item:hover {
-            background: rgba(0, 0, 0, 0.02);
+            background: rgba(0, 0, 0, 0.03);
+            transform: translateX(-4px);
         }
 
         body.dark-mode .dropdown-item:hover {
             background: rgba(255, 255, 255, 0.03);
         }
 
-        .dropdown-divider {
-            height: 1px;
-            background: rgba(0, 0, 0, 0.02);
-            margin: 0.2rem 1rem;
-        }
-
-        body.dark-mode .dropdown-divider {
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        /* ===== SEARCH BAR ===== */
+        /* ===== SEARCH ===== */
         .search-bar {
             display: flex;
             align-items: center;
-            background: #fff;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-radius: 60px;
             padding: 0.3rem 0.3rem 0.3rem 0.8rem;
             border: 1px solid rgba(0, 0, 0, 0.04);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             flex: 1;
             max-width: 400px;
         }
 
         body.dark-mode .search-bar {
-            background: rgba(255, 255, 255, 0.02);
-            border-color: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.04);
         }
 
         .search-bar:focus-within {
             border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.04);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.04);
+            transform: translateY(-2px);
         }
 
         body.dark-mode .search-bar:focus-within {
             border-color: #60a5fa;
-            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.04);
+            box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.04);
         }
 
         .search-bar input {
@@ -496,31 +527,27 @@
         }
 
         .search-bar button {
-            background: #2563eb;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
             border: none;
             padding: 0.4rem 1.2rem;
             border-radius: 60px;
             color: #fff;
             font-size: 0.8rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
         .search-bar button:hover {
-            background: #1d4ed8;
-            transform: scale(1.02);
+            transform: scale(1.04) translateY(-2px);
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.15);
         }
 
         body.dark-mode .search-bar button {
-            background: #60a5fa;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
             color: #0a0e1a;
-        }
-
-        body.dark-mode .search-bar button:hover {
-            background: #93bbfc;
         }
 
         /* ===== NAV ===== */
@@ -533,14 +560,16 @@
         }
 
         .nav-btn {
-            background: #fff;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(0, 0, 0, 0.03);
             padding: 0.4rem 1.4rem;
             border-radius: 60px;
             color: #1e293b;
             font-weight: 500;
             font-size: 0.85rem;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             cursor: pointer;
             display: inline-flex;
             align-items: center;
@@ -549,14 +578,14 @@
         }
 
         body.dark-mode .nav-btn {
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.03);
             border-color: rgba(255, 255, 255, 0.03);
             color: #e2e8f0;
         }
 
         .nav-btn i {
             color: #2563eb;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         body.dark-mode .nav-btn i {
@@ -564,13 +593,13 @@
         }
 
         .nav-btn:hover {
-            background: #f1f5f9;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            background: rgba(241, 245, 249, 0.7);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
         }
 
         body.dark-mode .nav-btn:hover {
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .nav-btn:hover i {
@@ -579,12 +608,13 @@
         }
 
         .nav-btn.active {
-            background: #2563eb;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
             color: #fff;
+            border-color: transparent;
         }
 
         body.dark-mode .nav-btn.active {
-            background: #60a5fa;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
             color: #0a0e1a;
         }
 
@@ -603,26 +633,21 @@
             gap: 0.5rem;
             margin: 1rem 0;
             padding: 0.8rem 1.2rem;
-            background: #fff;
             border-radius: 28px;
-            border: 1px solid rgba(0, 0, 0, 0.02);
             transition: all 0.6s ease;
-        }
-
-        body.dark-mode .categories-section {
-            background: rgba(255, 255, 255, 0.02);
-            border-color: rgba(255, 255, 255, 0.02);
         }
 
         .category-tag {
             padding: 0.2rem 1rem;
             border-radius: 60px;
             font-size: 0.75rem;
-            background: #f1f5f9;
+            background: rgba(241, 245, 249, 0.5);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
             color: #1e293b;
             cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid rgba(0, 0, 0, 0.02);
         }
 
         body.dark-mode .category-tag {
@@ -631,23 +656,24 @@
         }
 
         .category-tag:hover {
-            background: #2563eb;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
             color: #fff;
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.1);
         }
 
         body.dark-mode .category-tag:hover {
-            background: #60a5fa;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
             color: #0a0e1a;
         }
 
         .category-tag.active {
-            background: #2563eb;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
             color: #fff;
         }
 
         body.dark-mode .category-tag.active {
-            background: #60a5fa;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
             color: #0a0e1a;
         }
 
@@ -664,35 +690,30 @@
         }
 
         .content-card {
-            background: #fff;
             border-radius: 24px;
             padding: 1.2rem;
             border: 1px solid rgba(0, 0, 0, 0.02);
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
             position: relative;
         }
 
-        body.dark-mode .content-card {
-            background: rgba(255, 255, 255, 0.02);
-            border-color: rgba(255, 255, 255, 0.02);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
-
         .content-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.04);
+            border-color: rgba(37, 99, 235, 0.05);
         }
 
         body.dark-mode .content-card:hover {
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(96, 165, 250, 0.05);
         }
 
         .content-card .card-badge {
             position: absolute;
             top: 0.5rem;
             left: 0.5rem;
-            background: #2563eb;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
             color: #fff;
             font-size: 0.6rem;
             padding: 0.1rem 0.7rem;
@@ -700,7 +721,7 @@
         }
 
         body.dark-mode .content-card .card-badge {
-            background: #60a5fa;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
             color: #0a0e1a;
         }
 
@@ -708,10 +729,16 @@
             font-size: 2rem;
             color: #2563eb;
             margin-bottom: 0.5rem;
+            transition: all 0.4s ease;
         }
 
         body.dark-mode .content-card .card-icon {
             color: #60a5fa;
+        }
+
+        .content-card:hover .card-icon {
+            transform: scale(1.1) rotate(-5deg);
+            color: #7c3aed;
         }
 
         .content-card .card-title {
@@ -758,11 +785,13 @@
             padding: 0.2rem 1rem;
             border-radius: 40px;
             border: 1px solid rgba(0, 0, 0, 0.02);
-            background: #f8fafc;
+            background: rgba(248, 250, 252, 0.5);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             color: #1e293b;
             font-size: 0.7rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             display: flex;
             align-items: center;
             gap: 4px;
@@ -775,15 +804,16 @@
         }
 
         .content-card .card-actions button:hover {
-            background: #2563eb;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
             color: #fff;
-            border-color: #2563eb;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.1);
         }
 
         body.dark-mode .content-card .card-actions button:hover {
-            background: #60a5fa;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
             color: #0a0e1a;
-            border-color: #60a5fa;
         }
 
         .content-card .card-actions .favorite-btn.active {
@@ -822,22 +852,20 @@
         }
 
         .channel-card {
-            background: #fff;
             border-radius: 24px;
             padding: 1.2rem;
             border: 1px solid rgba(0, 0, 0, 0.02);
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         }
 
-        body.dark-mode .channel-card {
-            background: rgba(255, 255, 255, 0.02);
-            border-color: rgba(255, 255, 255, 0.02);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        .channel-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
         }
 
-        .channel-card:hover {
-            transform: translateY(-3px);
+        body.dark-mode .channel-card:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
         }
 
         .channel-card .card-title {
@@ -855,7 +883,7 @@
 
         .channel-card .card-title i {
             color: #2563eb;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
 
         body.dark-mode .channel-card .card-title i {
@@ -910,11 +938,13 @@
 
         .channel-card .card-meta a:hover {
             background: rgba(37, 99, 235, 0.04);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
         }
 
         .badge {
-            background: #f1f5f9;
+            background: rgba(241, 245, 249, 0.5);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             padding: 0.1rem 0.7rem;
             border-radius: 40px;
             font-size: 0.6rem;
@@ -936,29 +966,27 @@
         }
 
         .bot-card {
-            background: #fff;
             border-radius: 24px;
             padding: 1.2rem 0.8rem;
             text-align: center;
             border: 1px solid rgba(0, 0, 0, 0.02);
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         }
 
-        body.dark-mode .bot-card {
-            background: rgba(255, 255, 255, 0.02);
-            border-color: rgba(255, 255, 255, 0.02);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        .bot-card:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
         }
 
-        .bot-card:hover {
-            transform: translateY(-3px);
+        body.dark-mode .bot-card:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
         }
 
         .bot-card i {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: #2563eb;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         body.dark-mode .bot-card i {
@@ -1010,7 +1038,7 @@
             text-decoration: none;
             font-size: 0.75rem;
             border: 1px solid rgba(37, 99, 235, 0.04);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         body.dark-mode .bot-link {
@@ -1021,24 +1049,18 @@
 
         .bot-link:hover {
             background: rgba(37, 99, 235, 0.04);
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.06);
         }
 
         /* ===== SERVICES ===== */
         .services-list {
-            background: #fff;
             border-radius: 28px;
             padding: 1.2rem 1.5rem;
             margin: 1.2rem 0;
             border: 1px solid rgba(0, 0, 0, 0.02);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
             transition: all 0.6s ease;
-        }
-
-        body.dark-mode .services-list {
-            background: rgba(255, 255, 255, 0.02);
-            border-color: rgba(255, 255, 255, 0.02);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .services-list ul {
@@ -1063,234 +1085,28 @@
             color: #e2e8f0;
         }
 
-        /* ===== API SECTION ===== */
-        .api-section {
-            background: #fff;
-            border-radius: 28px;
-            padding: 1.5rem 1.8rem;
-            margin: 1.2rem 0;
-            border: 1px solid rgba(0, 0, 0, 0.02);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-            transition: all 0.6s ease;
-        }
-
-        body.dark-mode .api-section {
-            background: rgba(255, 255, 255, 0.02);
-            border-color: rgba(255, 255, 255, 0.02);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .api-section .api-header {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 0.8rem;
-            justify-content: space-between;
-        }
-
-        .api-section .api-header .api-title-group {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .api-section .api-header i {
-            font-size: 1.8rem;
+        .services-list ul li i {
             color: #2563eb;
-            animation: pulseIcon 2s ease-in-out infinite;
-        }
-
-        body.dark-mode .api-section .api-header i {
-            color: #60a5fa;
-        }
-
-        .api-section .api-header h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #0f172a;
-            transition: color 0.6s ease;
-        }
-
-        body.dark-mode .api-section .api-header h3 {
-            color: #f1f5f9;
-        }
-
-        .api-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 0.8rem;
-            margin-top: 0.8rem;
-        }
-
-        .api-card {
-            background: #f8fafc;
-            border-radius: 20px;
-            padding: 1rem 0.8rem;
-            text-align: center;
-            border: 1px solid rgba(0, 0, 0, 0.02);
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            position: relative;
-        }
-
-        body.dark-mode .api-card {
-            background: rgba(255, 255, 255, 0.02);
-            border-color: rgba(255, 255, 255, 0.02);
-        }
-
-        .api-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-        }
-
-        body.dark-mode .api-card:hover {
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .api-card .api-badge {
-            position: absolute;
-            top: -6px;
-            right: 50%;
-            transform: translateX(50%);
-            background: #22c55e;
-            color: #fff;
-            font-size: 0.5rem;
-            padding: 0.05rem 0.8rem;
-            border-radius: 40px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        .api-card .api-badge.limited {
-            background: #eab308;
-        }
-
-        .api-card i {
-            font-size: 1.6rem;
-            color: #2563eb;
-            margin-bottom: 0.3rem;
-            display: block;
             transition: all 0.3s ease;
         }
 
-        body.dark-mode .api-card i {
+        body.dark-mode .services-list ul li i {
             color: #60a5fa;
         }
 
-        .api-card:hover i {
-            transform: scale(1.3) rotate(10deg);
+        .services-list ul li:hover i {
+            transform: scale(1.3) rotate(-10deg);
+            color: #7c3aed;
         }
 
-        .api-card .api-name {
-            font-weight: 600;
-            color: #0f172a;
-            font-size: 0.85rem;
-            transition: color 0.6s ease;
-        }
-
-        body.dark-mode .api-card .api-name {
-            color: #f1f5f9;
-        }
-
-        .api-card .api-desc {
-            font-size: 0.7rem;
-            color: #64748b;
-            margin-top: 0.2rem;
-        }
-
-        body.dark-mode .api-card .api-desc {
-            color: #94a3b8;
-        }
-
-        .api-card .api-limits {
-            font-size: 0.6rem;
-            color: #94a3b8;
-            margin-top: 0.3rem;
-            padding: 0.1rem 0.5rem;
-            border-radius: 20px;
-            background: rgba(0, 0, 0, 0.02);
-            display: inline-block;
-        }
-
-        body.dark-mode .api-card .api-limits {
-            background: rgba(255, 255, 255, 0.02);
-            color: #64748b;
-        }
-
-        .api-card .api-sample {
-            margin-top: 0.5rem;
-            padding: 0.3rem 0.5rem;
-            background: rgba(37, 99, 235, 0.02);
-            border-radius: 12px;
-            font-size: 0.6rem;
-            color: #2563eb;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Courier New', monospace;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        body.dark-mode .api-card .api-sample {
-            background: rgba(96, 165, 250, 0.02);
-            color: #60a5fa;
-        }
-
-        .api-card .api-sample:hover {
-            background: rgba(37, 99, 235, 0.04);
-            transform: translateY(-1px);
-        }
-
-        .api-note {
-            margin-top: 0.8rem;
-            padding: 0.6rem 1rem;
-            background: rgba(37, 99, 235, 0.02);
-            border-radius: 16px;
-            font-size: 0.8rem;
-            color: #64748b;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        body.dark-mode .api-note {
-            background: rgba(255, 255, 255, 0.02);
-            color: #94a3b8;
-        }
-
-        .api-note i {
-            color: #2563eb;
-        }
-
-        body.dark-mode .api-note i {
-            color: #60a5fa;
-        }
-
-        .api-note strong {
-            color: #0f172a;
-        }
-
-        body.dark-mode .api-note strong {
-            color: #f1f5f9;
-        }
-
-        /* ===== PRICING SECTION ===== */
+        /* ===== PRICING ===== */
         .pricing-section {
-            background: #fff;
             border-radius: 28px;
             padding: 1.5rem 1.8rem;
             margin: 1.2rem 0;
             border: 1px solid rgba(0, 0, 0, 0.02);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
             transition: all 0.6s ease;
-        }
-
-        body.dark-mode .pricing-section {
-            background: rgba(255, 255, 255, 0.02);
-            border-color: rgba(255, 255, 255, 0.02);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .pricing-section .pricing-header {
@@ -1303,6 +1119,7 @@
         .pricing-section .pricing-header i {
             font-size: 1.8rem;
             color: #2563eb;
+            animation: pulseIcon 2.5s ease-in-out infinite;
         }
 
         body.dark-mode .pricing-section .pricing-header i {
@@ -1322,27 +1139,40 @@
 
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
             margin-top: 0.5rem;
         }
 
         .pricing-card {
-            background: #f8fafc;
             border-radius: 20px;
-            padding: 1rem;
+            padding: 1.2rem 1rem;
             text-align: center;
             border: 2px solid transparent;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
         }
 
-        body.dark-mode .pricing-card {
-            background: rgba(255, 255, 255, 0.02);
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.02) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .pricing-card:hover::before {
+            opacity: 1;
         }
 
         .pricing-card:hover {
-            transform: translateY(-3px);
-            border-color: rgba(37, 99, 235, 0.1);
+            transform: translateY(-6px);
+            border-color: rgba(37, 99, 235, 0.05);
         }
 
         .pricing-card.popular {
@@ -1367,8 +1197,8 @@
         }
 
         .pricing-card .pricing-price {
-            font-size: 1.4rem;
-            font-weight: 800;
+            font-size: 1.6rem;
+            font-weight: 900;
             color: #2563eb;
             margin: 0.3rem 0;
         }
@@ -1423,7 +1253,7 @@
         }
 
         .pricing-card .pricing-btn {
-            background: #2563eb;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
             border: none;
             padding: 0.4rem 1.5rem;
             border-radius: 60px;
@@ -1431,27 +1261,22 @@
             font-size: 0.75rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             margin-top: 0.4rem;
         }
 
         .pricing-card .pricing-btn:hover {
-            background: #1d4ed8;
-            transform: scale(1.02);
+            transform: scale(1.04) translateY(-2px);
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.15);
         }
 
         body.dark-mode .pricing-card .pricing-btn {
-            background: #60a5fa;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
             color: #0a0e1a;
         }
 
-        body.dark-mode .pricing-card .pricing-btn:hover {
-            background: #93bbfc;
-        }
-
-        /* ===== PRIVACY SECTION ===== */
-        .privacy-section {
-            background: #fff;
+        /* ===== API SECTION ===== */
+        .api-section {
             border-radius: 28px;
             padding: 1.5rem 1.8rem;
             margin: 1.2rem 0;
@@ -1460,80 +1285,178 @@
             transition: all 0.6s ease;
         }
 
-        body.dark-mode .privacy-section {
-            background: rgba(255, 255, 255, 0.02);
-            border-color: rgba(255, 255, 255, 0.02);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .privacy-section .privacy-header {
+        .api-section .api-header {
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             gap: 12px;
             margin-bottom: 0.8rem;
+            justify-content: space-between;
         }
 
-        .privacy-section .privacy-header i {
+        .api-section .api-header .api-title-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .api-section .api-header i {
             font-size: 1.8rem;
             color: #2563eb;
+            animation: pulseIcon 2.5s ease-in-out infinite;
         }
 
-        body.dark-mode .privacy-section .privacy-header i {
+        body.dark-mode .api-section .api-header i {
             color: #60a5fa;
         }
 
-        .privacy-section .privacy-header h3 {
+        .api-section .api-header h3 {
             font-size: 1.2rem;
             font-weight: 700;
             color: #0f172a;
             transition: color 0.6s ease;
         }
 
-        body.dark-mode .privacy-section .privacy-header h3 {
+        body.dark-mode .api-section .api-header h3 {
             color: #f1f5f9;
         }
 
-        .privacy-content {
+        .api-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .api-card {
+            background: rgba(248, 250, 252, 0.4);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border-radius: 20px;
+            padding: 1rem 0.8rem;
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+
+        body.dark-mode .api-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .api-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+        }
+
+        body.dark-mode .api-card:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .api-card .api-badge {
+            position: absolute;
+            top: -6px;
+            right: 50%;
+            transform: translateX(50%);
+            background: #22c55e;
+            color: #fff;
+            font-size: 0.5rem;
+            padding: 0.05rem 0.8rem;
+            border-radius: 40px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .api-card .api-badge.limited {
+            background: #eab308;
+        }
+
+        .api-card i {
+            font-size: 1.6rem;
+            color: #2563eb;
+            margin-bottom: 0.3rem;
+            display: block;
+            transition: all 0.4s ease;
+        }
+
+        body.dark-mode .api-card i {
+            color: #60a5fa;
+        }
+
+        .api-card:hover i {
+            transform: scale(1.3) rotate(-10deg);
+            color: #7c3aed;
+        }
+
+        .api-card .api-name {
+            font-weight: 600;
+            color: #0f172a;
             font-size: 0.85rem;
-            color: #1e293b;
-            line-height: 1.8;
             transition: color 0.6s ease;
         }
 
-        body.dark-mode .privacy-content {
-            color: #e2e8f0;
+        body.dark-mode .api-card .api-name {
+            color: #f1f5f9;
         }
 
-        .privacy-content ul {
-            list-style: none;
-            padding: 0;
-            margin: 0.5rem 0;
+        .api-card .api-desc {
+            font-size: 0.7rem;
+            color: #64748b;
+            margin-top: 0.2rem;
         }
 
-        .privacy-content ul li {
-            padding: 0.15rem 0;
+        body.dark-mode .api-card .api-desc {
+            color: #94a3b8;
+        }
+
+        .api-card .api-limits {
+            font-size: 0.6rem;
+            color: #94a3b8;
+            margin-top: 0.3rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.02);
+            display: inline-block;
+        }
+
+        body.dark-mode .api-card .api-limits {
+            background: rgba(255, 255, 255, 0.02);
+            color: #64748b;
+        }
+
+        .api-note {
+            margin-top: 0.8rem;
+            padding: 0.6rem 1rem;
+            background: rgba(37, 99, 235, 0.02);
+            border-radius: 16px;
+            font-size: 0.8rem;
+            color: #64748b;
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.8rem;
+            flex-wrap: wrap;
         }
 
-        .privacy-content ul li i {
+        body.dark-mode .api-note {
+            background: rgba(255, 255, 255, 0.02);
+            color: #94a3b8;
+        }
+
+        .api-note i {
             color: #2563eb;
-            font-size: 0.6rem;
         }
 
-        body.dark-mode .privacy-content ul li i {
+        body.dark-mode .api-note i {
             color: #60a5fa;
         }
 
-        .privacy-content .highlight {
-            color: #2563eb;
-            font-weight: 600;
+        .api-note strong {
+            color: #0f172a;
         }
 
-        body.dark-mode .privacy-content .highlight {
-            color: #60a5fa;
+        body.dark-mode .api-note strong {
+            color: #f1f5f9;
         }
 
         /* ===== VISION ===== */
@@ -1603,7 +1526,6 @@
             gap: 1.2rem;
             margin: 1.2rem 0 1rem 0;
             padding: 1rem 1.5rem;
-            background: #fff;
             border-radius: 40px;
             border: 1px solid rgba(0, 0, 0, 0.02);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
@@ -1611,23 +1533,19 @@
             transition: all 0.6s ease;
         }
 
-        body.dark-mode .payment-section {
-            background: rgba(255, 255, 255, 0.02);
-            border-color: rgba(255, 255, 255, 0.02);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
-
         .payment-item {
             display: flex;
             align-items: center;
             gap: 14px;
-            background: #f8fafc;
+            background: rgba(248, 250, 252, 0.4);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
             padding: 0.4rem 2rem;
             border-radius: 60px;
             border: 1px solid rgba(0, 0, 0, 0.02);
             color: #1e293b;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             flex-direction: column;
             min-width: 180px;
         }
@@ -1638,8 +1556,13 @@
             border-color: rgba(255, 255, 255, 0.02);
         }
 
+        .payment-item:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+
         .pay-btn {
-            background: #2563eb;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
             border: none;
             padding: 0.7rem 2.5rem;
             border-radius: 60px;
@@ -1649,23 +1572,22 @@
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             cursor: pointer;
             text-decoration: none;
             margin: 0.2rem 0;
-            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.08);
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.08);
         }
 
         .pay-btn i {
             font-size: 1.2rem;
             color: #fff;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .pay-btn:hover {
-            background: #1d4ed8;
-            transform: scale(1.02);
-            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.12);
+            transform: scale(1.03) translateY(-3px);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.15);
         }
 
         .pay-btn:hover i {
@@ -1673,12 +1595,8 @@
         }
 
         body.dark-mode .pay-btn {
-            background: #60a5fa;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
             color: #0a0e1a;
-        }
-
-        body.dark-mode .pay-btn:hover {
-            background: #93bbfc;
         }
 
         body.dark-mode .pay-btn i {
@@ -1739,9 +1657,11 @@
             font-size: 0.8rem;
             padding: 0.3rem 1.2rem;
             border-radius: 60px;
-            background: #fff;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(0, 0, 0, 0.02);
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
             cursor: pointer;
         }
@@ -1754,32 +1674,13 @@
         }
 
         .platform-links a:hover {
-            background: #f1f5f9;
-            transform: translateY(-2px);
+            background: rgba(241, 245, 249, 0.7);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
         }
 
         body.dark-mode .platform-links a:hover {
             background: rgba(255, 255, 255, 0.04);
-        }
-
-        /* ===== NOTICE ===== */
-        .notice {
-            text-align: center;
-            margin: 0.8rem 0 0.2rem 0;
-            font-size: 0.7rem;
-            color: #64748b;
-            background: #f8fafc;
-            padding: 0.3rem 1.2rem;
-            border-radius: 60px;
-            border: 1px solid rgba(0, 0, 0, 0.02);
-            display: inline-block;
-            transition: all 0.6s ease;
-        }
-
-        body.dark-mode .notice {
-            background: rgba(255, 255, 255, 0.02);
-            border-color: rgba(255, 255, 255, 0.02);
-            color: #94a3b8;
         }
 
         /* ===== FOOTER ===== */
@@ -1801,6 +1702,27 @@
             color: #94a3b8;
         }
 
+        .notice {
+            text-align: center;
+            margin: 0.8rem 0 0.2rem 0;
+            font-size: 0.7rem;
+            color: #64748b;
+            background: rgba(248, 250, 252, 0.4);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            padding: 0.3rem 1.2rem;
+            border-radius: 60px;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            display: inline-block;
+            transition: all 0.6s ease;
+        }
+
+        body.dark-mode .notice {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.02);
+            color: #94a3b8;
+        }
+
         /* ===== MODALS ===== */
         .modal-overlay {
             display: none;
@@ -1810,8 +1732,8 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             z-index: 2000;
             justify-content: center;
             align-items: center;
@@ -1820,13 +1742,13 @@
 
         .modal-overlay.show {
             display: flex;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.4s ease;
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: scale(0.96);
+                transform: scale(0.95);
             }
             to {
                 opacity: 1;
@@ -1836,7 +1758,7 @@
 
         @keyframes slideUp {
             from {
-                transform: translateY(20px);
+                transform: translateY(30px);
                 opacity: 0;
             }
             to {
@@ -1850,7 +1772,7 @@
                 transform: scale(1);
             }
             50% {
-                transform: scale(1.15);
+                transform: scale(1.1);
             }
             100% {
                 transform: scale(1);
@@ -1860,11 +1782,13 @@
         .modal {
             max-width: 700px;
             width: 100%;
-            background: #fff;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             border-radius: 32px;
             padding: 2rem;
             box-shadow: 0 40px 80px rgba(0, 0, 0, 0.04);
-            border: 1px solid rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             position: relative;
             max-height: 90vh;
             overflow-y: auto;
@@ -1872,8 +1796,10 @@
         }
 
         body.dark-mode .modal {
-            background: #1a2332;
-            border-color: rgba(255, 255, 255, 0.02);
+            background: rgba(26, 35, 50, 0.9);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border-color: rgba(255, 255, 255, 0.04);
             box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
         }
 
@@ -1888,7 +1814,7 @@
             padding: 0.2rem 0.6rem;
             border-radius: 40px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
 
         .modal .close-modal:hover {
@@ -1924,7 +1850,6 @@
 
         /* ===== COMMENTS ===== */
         .comment-input-area {
-            background: #fff;
             border-radius: 28px;
             padding: 1.2rem 1.5rem;
             margin: 1.2rem 0;
@@ -1933,18 +1858,14 @@
             transition: all 0.6s ease;
         }
 
-        body.dark-mode .comment-input-area {
-            background: rgba(255, 255, 255, 0.02);
-            border-color: rgba(255, 255, 255, 0.02);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
-
         .comment-input-area textarea {
             width: 100%;
             padding: 0.8rem;
             border-radius: 16px;
             border: 1px solid rgba(0, 0, 0, 0.04);
-            background: #f8fafc;
+            background: rgba(248, 250, 252, 0.4);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             color: #1e293b;
             font-size: 0.9rem;
             resize: vertical;
@@ -1961,12 +1882,12 @@
         .comment-input-area textarea:focus {
             outline: none;
             border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.04);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.04);
         }
 
         body.dark-mode .comment-input-area textarea:focus {
             border-color: #60a5fa;
-            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.04);
+            box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.04);
         }
 
         .comment-input-area .comment-actions {
@@ -1988,7 +1909,9 @@
             padding: 0.4rem 0.8rem;
             border-radius: 40px;
             border: 1px solid rgba(0, 0, 0, 0.04);
-            background: #f8fafc;
+            background: rgba(248, 250, 252, 0.4);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             color: #1e293b;
             font-size: 0.8rem;
             min-width: 120px;
@@ -2011,7 +1934,7 @@
         }
 
         .btn-submit-comment {
-            background: #2563eb;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
             border: none;
             padding: 0.5rem 2rem;
             border-radius: 60px;
@@ -2019,28 +1942,26 @@
             font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             display: inline-flex;
             align-items: center;
             gap: 8px;
         }
 
         .btn-submit-comment:hover {
-            background: #1d4ed8;
-            transform: scale(1.02);
+            transform: scale(1.03) translateY(-2px);
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.15);
         }
 
         body.dark-mode .btn-submit-comment {
-            background: #60a5fa;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
             color: #0a0e1a;
         }
 
-        body.dark-mode .btn-submit-comment:hover {
-            background: #93bbfc;
-        }
-
         .comment-item {
-            background: #f8fafc;
+            background: rgba(248, 250, 252, 0.4);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             border-radius: 16px;
             padding: 0.8rem 1rem;
             margin-bottom: 0.8rem;
@@ -2173,7 +2094,9 @@
             padding: 0.3rem 0.8rem;
             border-radius: 40px;
             border: 1px solid rgba(0, 0, 0, 0.04);
-            background: #f8fafc;
+            background: rgba(248, 250, 252, 0.4);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             font-size: 0.75rem;
             transition: all 0.3s ease;
         }
@@ -2185,7 +2108,7 @@
         }
 
         .comment-item .reply-input button {
-            background: #2563eb;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
             border: none;
             padding: 0.2rem 1rem;
             border-radius: 40px;
@@ -2196,17 +2119,12 @@
         }
 
         .comment-item .reply-input button:hover {
-            background: #1d4ed8;
-            transform: scale(1.02);
+            transform: scale(1.04);
         }
 
         body.dark-mode .comment-item .reply-input button {
-            background: #60a5fa;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
             color: #0a0e1a;
-        }
-
-        body.dark-mode .comment-item .reply-input button:hover {
-            background: #93bbfc;
         }
 
         .comment-item .reply-btn {
@@ -2255,7 +2173,9 @@
         .calendar-modal .calendar-grid .day {
             padding: 0.3rem 0;
             border-radius: 12px;
-            background: #f8fafc;
+            background: rgba(248, 250, 252, 0.4);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             color: #1e293b;
             transition: all 0.3s ease;
         }
@@ -2301,7 +2221,9 @@
         .calendar-header .clock-display {
             font-family: 'Inter', monospace;
             font-size: 1rem;
-            background: #f1f5f9;
+            background: rgba(241, 245, 249, 0.4);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
             padding: 0.1rem 0.8rem;
             border-radius: 30px;
             color: #2563eb;
@@ -2354,6 +2276,14 @@
             gap: 8px;
         }
 
+        .about-modal .about-content ul li i {
+            color: #2563eb;
+        }
+
+        body.dark-mode .about-modal .about-content ul li i {
+            color: #60a5fa;
+        }
+
         .highlight {
             color: #2563eb;
             font-weight: 600;
@@ -2378,11 +2308,13 @@
             color: #94a3b8;
         }
 
-        /* ===== TERMS OF USE (in settings) ===== */
+        /* ===== TERMS ===== */
         .terms-section {
             margin-top: 1rem;
             padding: 1rem;
-            background: #f8fafc;
+            background: rgba(248, 250, 252, 0.4);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
             border-radius: 16px;
             border: 1px solid rgba(0, 0, 0, 0.02);
             transition: all 0.6s ease;
@@ -2557,11 +2489,6 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
-            .api-card .api-sample {
-                font-size: 0.5rem;
-                white-space: normal;
-                word-break: break-all;
-            }
         }
 
         @media (max-width: 480px) {
@@ -2603,7 +2530,9 @@
             position: fixed;
             bottom: 80px;
             right: 20px;
-            background: #1e293b;
+            background: rgba(30, 41, 59, 0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             color: #fff;
             padding: 0.8rem 1.5rem;
             border-radius: 16px;
@@ -2613,10 +2542,13 @@
             animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             direction: rtl;
             max-width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         body.dark-mode .toast {
-            background: #0f172a;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
@@ -2629,9 +2561,7 @@
 <body>
 
     <!-- ===== DARK MODE BACKGROUND WITH BUGS ===== -->
-    <div class="dark-bg-container" id="darkBgContainer">
-        <!-- Will be populated by JS -->
-    </div>
+    <div class="dark-bg-container" id="darkBgContainer"></div>
 
     <!-- ===== CRICKET SOUND TOGGLE ===== -->
     <button class="cricket-toggle" id="cricketToggle" onclick="toggleCricketSound()">
@@ -2643,7 +2573,7 @@
 
     <div class="container">
 
-        <div class="main-card" data-aos="fade-up">
+        <div class="main-card glass" data-aos="fade-up">
 
             <!-- ===== HEADER ===== -->
             <div class="header">
@@ -2656,7 +2586,7 @@
                 </div>
                 <div class="header-actions">
                     <!-- Status Indicator -->
-                    <div class="status-indicator" title="حالة الخدمة">
+                    <div class="status-indicator glass" title="حالة الخدمة">
                         <span class="status-dot online" id="statusDot"></span>
                         <span id="statusText">جميع الخدمات تعمل</span>
                     </div>
@@ -2676,7 +2606,7 @@
                     </div>
 
                     <!-- Visitor Count -->
-                    <div class="visitor-count" style="font-size:0.7rem;color:#64748b;background:#f1f5f9;padding:0.2rem 0.8rem;border-radius:60px;display:flex;align-items:center;gap:4px;transition:all 0.6s ease;">
+                    <div class="visitor-count glass" style="font-size:0.7rem;color:#64748b;padding:0.2rem 0.8rem;border-radius:60px;display:flex;align-items:center;gap:4px;transition:all 0.6s ease;">
                         <i class="fas fa-eye" style="color:#2563eb;"></i>
                         <span id="visitorCount">12,847</span>
                     </div>
@@ -2762,7 +2692,7 @@
             </div>
 
             <!-- ===== CATEGORIES ===== -->
-            <div class="categories-section">
+            <div class="categories-section glass">
                 <span class="category-tag active" onclick="filterCategory('all')"><i class="fas fa-th"></i> الكل</span>
                 <span class="category-tag" onclick="filterCategory('python')"><i class="fab fa-python"></i> بايثون</span>
                 <span class="category-tag" onclick="filterCategory('telegram')"><i class="fab fa-telegram"></i> تليجرام</span>
@@ -2775,16 +2705,14 @@
             <h3 style="color:#0f172a;margin:1rem 0 0.5rem 0;display:flex;align-items:center;gap:10px;font-weight:700;font-size:1rem;transition:color 0.6s ease;">
                 <i class="fas fa-fire" style="color:#eab308;"></i> <span data-key="popularTitle">📌 الأكثر طلباً</span>
             </h3>
-            <div class="content-grid" id="contentGrid">
-                <!-- Content cards will be rendered by JS -->
-            </div>
+            <div class="content-grid" id="contentGrid"></div>
 
             <!-- ===== CHANNELS ===== -->
             <h3 style="color:#0f172a;margin:1.5rem 0 0.5rem 0;display:flex;align-items:center;gap:10px;font-weight:700;font-size:1rem;transition:color 0.6s ease;">
                 <i class="fas fa-broadcast-tower" style="color:#2563eb;"></i> <span data-key="channelsTitle">📡 قنواتنا</span>
             </h3>
             <div class="channels-grid" data-aos="fade-up">
-                <div class="channel-card">
+                <div class="channel-card glass">
                     <div class="card-title"><i class="fab fa-python"></i> <span data-key="channel1Title">قناة بايثون</span></div>
                     <div class="card-desc" data-key="channel1Desc">محتوى برمجي، أكواد، ومشاريع بايثون متطورة.</div>
                     <div class="card-meta">
@@ -2793,7 +2721,7 @@
                     </div>
                 </div>
 
-                <div class="channel-card">
+                <div class="channel-card glass">
                     <div class="card-title"><i class="fas fa-music"></i> <span data-key="channel2Title">سورس ميوزك فيجا</span></div>
                     <div class="card-desc" data-key="channel2Desc">مستوحى من بوتات الموسيقى • مفتوحة المصدر</div>
                     <div class="card-meta">
@@ -2802,7 +2730,7 @@
                     </div>
                 </div>
 
-                <div class="channel-card">
+                <div class="channel-card glass">
                     <div class="card-title"><i class="fas fa-shield-alt"></i> <span data-key="channel3Title">قناة ترمكس</span></div>
                     <div class="card-desc" data-key="channel3Desc">أدوات و اختراق و أمن سيبراني .</div>
                     <div class="card-meta">
@@ -2811,7 +2739,7 @@
                     </div>
                 </div>
 
-                <div class="channel-card">
+                <div class="channel-card glass">
                     <div class="card-title"><i class="fas fa-headset"></i> <span data-key="supportTitle">جروب الدعم</span></div>
                     <div class="card-desc" data-key="supportDesc">الدعم الفني والمساعدة في جميع الاستفسارات.</div>
                     <div class="card-meta">
@@ -2826,14 +2754,14 @@
                 <i class="fas fa-robot" style="color:#2563eb;"></i> <span data-key="botsTitle">🤖 بوتاتنا</span>
             </h3>
             <div class="bots-section" data-aos="fade-up" data-aos-delay="200">
-                <div class="bot-card">
+                <div class="bot-card glass">
                     <i class="fas fa-music"></i>
                     <div class="bot-name">بيري للأغاني</div>
                     <div class="bot-username">@Bi1ieBot</div>
                     <div class="bot-desc" data-key="bot1Desc">بوت استماع وتحميل الأغاني</div>
                     <a href="https://t.me/Bi1ieBot" target="_blank" class="bot-link"><i class="fab fa-telegram"></i> <span data-key="openBot">افتح البوت</span></a>
                 </div>
-                <div class="bot-card">
+                <div class="bot-card glass">
                     <i class="fas fa-key"></i>
                     <div class="bot-name">بوت استخراج جلسات</div>
                     <div class="bot-username">@StrngGenBot</div>
@@ -2843,7 +2771,7 @@
             </div>
 
             <!-- ===== SERVICES ===== -->
-            <div class="services-list" data-aos="fade-up" data-aos-delay="100">
+            <div class="services-list glass" data-aos="fade-up" data-aos-delay="100">
                 <ul>
                     <li><i class="fas fa-terminal"></i> <span data-key="s1">أكواد بجميع اللغات</span></li>
                     <li><i class="fas fa-file-audio"></i> <span data-key="s2">مصانع ميوزك</span></li>
@@ -2858,8 +2786,91 @@
                 </ul>
             </div>
 
-            <!-- ===== API SECTION (محسّن) ===== -->
-            <div class="api-section" data-aos="fade-up" data-aos-delay="250">
+            <!-- ===== PRICING SECTION ===== -->
+            <div class="pricing-section glass" data-aos="fade-up" data-aos-delay="250">
+                <div class="pricing-header">
+                    <i class="fas fa-tags"></i>
+                    <h3 data-key="pricingTitle">💰 خطط التسعير</h3>
+                </div>
+                <div class="pricing-grid">
+                    <div class="pricing-card glass">
+                        <div class="pricing-name" data-key="pricingBasic">أساسي</div>
+                        <div class="pricing-price">3$ <small>/شهر</small></div>
+                        <div class="pricing-desc" data-key="pricingBasicDesc">للمبتدئين</div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 500 طلب/يوم</li>
+                            <li><i class="fas fa-check"></i> API أساسية</li>
+                            <li><i class="fas fa-check"></i> دعم أساسي</li>
+                        </ul>
+                        <button class="pricing-btn" data-key="pricingStart">ابدأ</button>
+                    </div>
+                    <div class="pricing-card glass">
+                        <div class="pricing-name" data-key="pricingStandard">قياسي</div>
+                        <div class="pricing-price">5$ <small>/شهر</small></div>
+                        <div class="pricing-desc" data-key="pricingStandardDesc">للمطورين</div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 2,000 طلب/يوم</li>
+                            <li><i class="fas fa-check"></i> جميع الـ APIs</li>
+                            <li><i class="fas fa-check"></i> دعم سريع</li>
+                        </ul>
+                        <button class="pricing-btn" data-key="pricingStart">ابدأ</button>
+                    </div>
+                    <div class="pricing-card glass popular">
+                        <div class="pricing-name" data-key="pricingPro">احترافي</div>
+                        <div class="pricing-price">10$ <small>/شهر</small></div>
+                        <div class="pricing-desc" data-key="pricingProDesc">الأكثر طلباً</div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 10,000 طلب/يوم</li>
+                            <li><i class="fas fa-check"></i> جميع الـ APIs</li>
+                            <li><i class="fas fa-check"></i> دعم VIP 24/7</li>
+                            <li><i class="fas fa-check"></i> تخصيص مسبق</li>
+                        </ul>
+                        <button class="pricing-btn" data-key="pricingStart">ابدأ</button>
+                    </div>
+                    <div class="pricing-card glass">
+                        <div class="pricing-name" data-key="pricingBusiness">أعمال</div>
+                        <div class="pricing-price">15$ <small>/شهر</small></div>
+                        <div class="pricing-desc" data-key="pricingBusinessDesc">للشركات الصغيرة</div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 25,000 طلب/يوم</li>
+                            <li><i class="fas fa-check"></i> جميع الـ APIs</li>
+                            <li><i class="fas fa-check"></i> دعم مخصص</li>
+                            <li><i class="fas fa-check"></i> تحليلات متقدمة</li>
+                        </ul>
+                        <button class="pricing-btn" data-key="pricingStart">ابدأ</button>
+                    </div>
+                    <div class="pricing-card glass">
+                        <div class="pricing-name" data-key="pricingPremium">مميز</div>
+                        <div class="pricing-price">20$ <small>/شهر</small></div>
+                        <div class="pricing-desc" data-key="pricingPremiumDesc">للمشاريع الكبيرة</div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 50,000 طلب/يوم</li>
+                            <li><i class="fas fa-check"></i> APIs مخصصة</li>
+                            <li><i class="fas fa-check"></i> دعم أولوية</li>
+                            <li><i class="fas fa-check"></i> تقارير مفصلة</li>
+                        </ul>
+                        <button class="pricing-btn" data-key="pricingStart">ابدأ</button>
+                    </div>
+                    <div class="pricing-card glass">
+                        <div class="pricing-name" data-key="pricingEnterprise">مؤسسي</div>
+                        <div class="pricing-price">25$ <small>/شهر</small></div>
+                        <div class="pricing-desc" data-key="pricingEnterpriseDesc">للشركات الكبرى</div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> غير محدود</li>
+                            <li><i class="fas fa-check"></i> APIs مخصصة بالكامل</li>
+                            <li><i class="fas fa-check"></i> دعم مخصص 24/7</li>
+                            <li><i class="fas fa-check"></i> SLA مضمون</li>
+                        </ul>
+                        <button class="pricing-btn" data-key="pricingStart">ابدأ</button>
+                    </div>
+                </div>
+                <div style="margin-top:0.5rem;font-size:0.7rem;color:#94a3b8;text-align:center;">
+                    <i class="fas fa-shield-alt"></i> دفع آمن عبر باينس و نجوم تليجرام
+                </div>
+            </div>
+
+            <!-- ===== API SECTION ===== -->
+            <div class="api-section glass" data-aos="fade-up" data-aos-delay="275">
                 <div class="api-header">
                     <div class="api-title-group">
                         <i class="fas fa-plug"></i>
@@ -2876,45 +2887,33 @@
                     </span>
                 </p>
                 <div class="api-grid">
-                    <div class="api-card">
-                        <span class="api-badge">محدود</span>
+                    <div class="api-card glass">
+                        <span class="api-badge limited">محدود</span>
                         <i class="fab fa-youtube"></i>
                         <div class="api-name" data-key="apiName1">YouTube API</div>
                         <div class="api-desc" data-key="apiDesc1">جلب البيانات، بحث، تشغيل</div>
                         <div class="api-limits"><i class="fas fa-tachometer-alt"></i> 500 طلب/ساعة</div>
-                        <div class="api-sample" onclick="copySample('GET /api/youtube/search?q=music')">
-                            📋 GET /api/youtube/search?q=music
-                        </div>
                     </div>
-                    <div class="api-card">
-                        <span class="api-badge">محدود</span>
+                    <div class="api-card glass">
+                        <span class="api-badge limited">محدود</span>
                         <i class="fab fa-spotify"></i>
                         <div class="api-name" data-key="apiName2">Spotify API</div>
                         <div class="api-desc" data-key="apiDesc2">موسيقى، قوائم تشغيل، بحث</div>
                         <div class="api-limits"><i class="fas fa-tachometer-alt"></i> 300 طلب/ساعة</div>
-                        <div class="api-sample" onclick="copySample('GET /api/spotify/playlist/37i9dQZF1DXcBWIGoYBM5M')">
-                            📋 GET /api/spotify/playlist/{id}
-                        </div>
                     </div>
-                    <div class="api-card">
+                    <div class="api-card glass">
                         <span class="api-badge" style="background:#22c55e;">مفتوح</span>
                         <i class="fab fa-telegram"></i>
                         <div class="api-name" data-key="apiName3">Telegram API</div>
                         <div class="api-desc" data-key="apiDesc3">بوتات، جلسات، تفاعلات</div>
                         <div class="api-limits"><i class="fas fa-tachometer-alt"></i> 1000 طلب/ساعة</div>
-                        <div class="api-sample" onclick="copySample('POST /api/telegram/sendMessage')">
-                            📋 POST /api/telegram/sendMessage
-                        </div>
                     </div>
-                    <div class="api-card">
-                        <span class="api-badge">محدود</span>
+                    <div class="api-card glass">
+                        <span class="api-badge limited">محدود</span>
                         <i class="fas fa-cloud-upload-alt"></i>
                         <div class="api-name" data-key="apiName4">Media API</div>
                         <div class="api-desc" data-key="apiDesc4">رفع ومعالجة الميديا</div>
                         <div class="api-limits"><i class="fas fa-tachometer-alt"></i> 200 طلب/ساعة</div>
-                        <div class="api-sample" onclick="copySample('POST /api/media/upload')">
-                            📋 POST /api/media/upload
-                        </div>
                     </div>
                 </div>
                 <div class="api-note">
@@ -2923,56 +2922,8 @@
                 </div>
             </div>
 
-            <!-- ===== PRICING SECTION (جديد) ===== -->
-            <div class="pricing-section" data-aos="fade-up" data-aos-delay="275">
-                <div class="pricing-header">
-                    <i class="fas fa-tags"></i>
-                    <h3 data-key="pricingTitle">💰 خطط التسعير</h3>
-                </div>
-                <div class="pricing-grid">
-                    <div class="pricing-card">
-                        <div class="pricing-name" data-key="pricingFree">مجاني</div>
-                        <div class="pricing-price">0$ <small>/شهر</small></div>
-                        <div class="pricing-desc" data-key="pricingFreeDesc">للتجربة والاختبار</div>
-                        <ul class="pricing-features">
-                            <li><i class="fas fa-check"></i> 100 طلب/يوم</li>
-                            <li><i class="fas fa-check"></i> API أساسية</li>
-                            <li><i class="fas fa-check"></i> دعم أساسي</li>
-                        </ul>
-                        <button class="pricing-btn" data-key="pricingStart">ابدأ</button>
-                    </div>
-                    <div class="pricing-card popular">
-                        <div class="pricing-name" data-key="pricingPro">احترافي</div>
-                        <div class="pricing-price">19$ <small>/شهر</small></div>
-                        <div class="pricing-desc" data-key="pricingProDesc">الأكثر طلباً</div>
-                        <ul class="pricing-features">
-                            <li><i class="fas fa-check"></i> 10,000 طلب/يوم</li>
-                            <li><i class="fas fa-check"></i> جميع الـ APIs</li>
-                            <li><i class="fas fa-check"></i> دعم VIP 24/7</li>
-                            <li><i class="fas fa-check"></i> تخصيص مسبق</li>
-                        </ul>
-                        <button class="pricing-btn" data-key="pricingStart">ابدأ</button>
-                    </div>
-                    <div class="pricing-card">
-                        <div class="pricing-name" data-key="pricingEnterprise">مؤسسي</div>
-                        <div class="pricing-price">49$ <small>/شهر</small></div>
-                        <div class="pricing-desc" data-key="pricingEnterpriseDesc">للشركات والمشاريع الكبيرة</div>
-                        <ul class="pricing-features">
-                            <li><i class="fas fa-check"></i> غير محدود</li>
-                            <li><i class="fas fa-check"></i> APIs مخصصة</li>
-                            <li><i class="fas fa-check"></i> دعم مخصص</li>
-                            <li><i class="fas fa-check"></i> SLA مضمون</li>
-                        </ul>
-                        <button class="pricing-btn" data-key="pricingStart">ابدأ</button>
-                    </div>
-                </div>
-                <div style="margin-top:0.5rem;font-size:0.7rem;color:#94a3b8;text-align:center;">
-                    <i class="fas fa-shield-alt"></i> دفع آمن عبر باينس و نجوم تليجرام
-                </div>
-            </div>
-
-            <!-- ===== PRIVACY POLICY SECTION (جديد) ===== -->
-            <div class="privacy-section" data-aos="fade-up" data-aos-delay="300">
+            <!-- ===== PRIVACY POLICY SECTION ===== -->
+            <div class="privacy-section glass" data-aos="fade-up" data-aos-delay="300">
                 <div class="privacy-header">
                     <i class="fas fa-shield-alt"></i>
                     <h3 data-key="privacyTitle">🔒 سياسة الخصوصية</h3>
@@ -2995,7 +2946,7 @@
             </div>
 
             <!-- ===== VISION ===== -->
-            <div class="vision-section" data-aos="fade-up" data-aos-delay="325">
+            <div class="vision-section glass" data-aos="fade-up" data-aos-delay="325">
                 <h3><i class="fas fa-bullseye"></i> <span data-key="visionTitle">🎯 رؤيتنا وخدمتنا</span></h3>
                 <p data-key="visionText">
                     نؤمن بأن البرمجيات هي لغة المستقبل، ونسعى لتقديم منصة متكاملة تجمع بين <strong>الإبداع والتقنية</strong>.
@@ -3012,7 +2963,7 @@
             </div>
 
             <!-- ===== PAYMENT ===== -->
-            <div class="payment-section" data-aos="fade-up" data-aos-delay="350">
+            <div class="payment-section glass" data-aos="fade-up" data-aos-delay="350">
                 <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;width:100%;">
                     <div class="payment-item" onclick="window.open('https://account.binance.com/register?ref=894656421&?registerChannel=user_center', '_blank')">
                         <div class="pay-icon"><i class="fab fa-bitcoin"></i></div>
@@ -3034,7 +2985,7 @@
                 <a href="https://account.binance.com/register?ref=894656421&?registerChannel=user_center" target="_blank" class="pay-btn">
                     <i class="fab fa-bitcoin"></i> <span data-key="payBtn">الدفع عبر Binance</span>
                 </a>
-                <button onclick="openTelegramStars()" class="pay-btn" style="background:#eab308;">
+                <button onclick="openTelegramStars()" class="pay-btn" style="background:linear-gradient(135deg, #eab308, #f59e0b);">
                     <i class="fas fa-star"></i> <span data-key="payStars">الدفع بـ ⭐ نجوم</span>
                 </button>
             </div>
@@ -3093,13 +3044,13 @@
         </div>
     </div>
 
-    <!-- ===== COMMENTS MODAL ===== -->
+    <!-- ===== MODALS ===== -->
+    <!-- Comments Modal -->
     <div class="modal-overlay" id="commentsOverlay">
         <div class="modal">
             <button class="close-modal" onclick="closeComments()"><i class="fas fa-times"></i></button>
             <h2><i class="fas fa-comment-dots"></i> <span data-key="commentsTitle">💬 آراء المستخدمين</span></h2>
-
-            <div class="comment-input-area">
+            <div class="comment-input-area glass">
                 <textarea id="newCommentText" placeholder="اكتب تعليقك هنا..."></textarea>
                 <div class="comment-actions">
                     <div class="user-input">
@@ -3110,7 +3061,6 @@
                     </button>
                 </div>
             </div>
-
             <div id="commentsList"></div>
             <div style="margin-top:0.6rem;text-align:center;font-size:0.65rem;opacity:0.3;color:#64748b;transition:color 0.6s ease;">
                 <i class="fas fa-sync-alt"></i> <span data-key="autoComments">تتغير التعليقات تلقائياً</span>
@@ -3118,7 +3068,7 @@
         </div>
     </div>
 
-    <!-- ===== CALENDAR MODAL ===== -->
+    <!-- Calendar Modal -->
     <div class="modal-overlay" id="calendarOverlay">
         <div class="modal calendar-modal">
             <button class="close-modal" onclick="toggleCalendar()"><i class="fas fa-times"></i></button>
@@ -3133,7 +3083,7 @@
         </div>
     </div>
 
-    <!-- ===== ABOUT MODAL ===== -->
+    <!-- About Modal -->
     <div class="modal-overlay" id="aboutOverlay">
         <div class="modal about-modal">
             <button class="close-modal" onclick="closeAboutModal()"><i class="fas fa-times"></i></button>
@@ -3151,19 +3101,29 @@
                     <li><i class="fas fa-gavel"></i> <span data-key="about8">يوجد ملفات مزاد للسوبرات</span></li>
                     <li><i class="fas fa-file-code"></i> <span data-key="about9">يوجد ملف lua & php حمايه</span></li>
                     <li><i class="fas fa-bug"></i> <span data-key="about10">يوجد حل جميع الأخطاء</span></li>
+                    <li><i class="fas fa-sign-in-alt"></i> <span data-key="about11">يوجد بوت تسجيل دخول طلبات</span></li>
+                    <li><i class="fas fa-link"></i> <span data-key="about12">يوجد بوت فحص روابط و مواقع</span></li>
+                    <li><i class="fas fa-server"></i> <span data-key="about13">يوجد بوت رفع علي الاستضافة</span></li>
+                    <li><i class="fas fa-ban"></i> <span data-key="about14">يوجد بوت فك و حظر حسابات تواصل الاجتماعي</span></li>
+                    <li><i class="fas fa-envelope"></i> <span data-key="about15">يوجد بوت انشاء بريد الكتروني مزيف</span></li>
+                    <li><i class="fas fa-link"></i> <span data-key="about16">يوجد بوت اشتراكات اجباري</span></li>
+                    <li><i class="fas fa-shield-alt"></i> <span data-key="about17">يوجد بوت حماية قنوات</span></li>
+                    <li><i class="fas fa-user-shield"></i> <span data-key="about18">يوجد بوت حماية من رشق الاعضاء</span></li>
+                    <li><i class="fas fa-palette"></i> <span data-key="about19">يوجد بوت تخصيص ازرار منشورات للقنوات</span></li>
+                    <li><i class="fas fa-download"></i> <span data-key="about20">يوجد بوت تحميل من المنصات</span></li>
                 </ul>
                 <p style="margin-top:0.6rem;" data-key="aboutPricing">يوجد عمل اي كود او تعديل اي ملف<br />كل هذا و <span class="highlight">#بأسعار رمزيه بدون تكلفة</span></p>
                 <p style="margin-top:0.6rem;"><strong data-key="aboutContact">للتواصل:</strong></p>
                 <p>By : <span class="highlight">@TopVeGa</span></p>
                 <div class="footer-note">
                     <i class="fas fa-exclamation-triangle" style="color:#2563eb;"></i>
-                    <span data-key="aboutNotice">#تنويه هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك</span>
+                    <span data-key="aboutNotice">#تنويه_هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ===== PRIVACY POLICY MODAL ===== -->
+    <!-- Privacy Policy Modal -->
     <div class="modal-overlay" id="privacyOverlay">
         <div class="modal">
             <button class="close-modal" onclick="closePrivacyPolicy()"><i class="fas fa-times"></i></button>
@@ -3188,7 +3148,7 @@
         </div>
     </div>
 
-    <!-- ===== USER SETTINGS MODAL ===== -->
+    <!-- Settings Modal -->
     <div class="modal-overlay" id="settingsOverlay">
         <div class="modal">
             <button class="close-modal" onclick="closeSettings()"><i class="fas fa-times"></i></button>
@@ -3196,23 +3156,21 @@
             <div style="display:flex;flex-direction:column;gap:1rem;">
                 <div>
                     <label style="font-weight:600;color:#0f172a;display:block;margin-bottom:0.3rem;transition:color 0.6s ease;">👤 اسم المستخدم</label>
-                    <input type="text" id="settingsUsername" value="زائر" style="width:100%;padding:0.6rem;border-radius:16px;border:1px solid rgba(0,0,0,0.04);background:#f8fafc;color:#1e293b;font-size:0.9rem;transition:all 0.6s ease;">
+                    <input type="text" id="settingsUsername" value="زائر" style="width:100%;padding:0.6rem;border-radius:16px;border:1px solid rgba(0,0,0,0.04);background:rgba(248,250,252,0.4);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:#1e293b;font-size:0.9rem;transition:all 0.6s ease;">
                 </div>
                 <div>
                     <label style="font-weight:600;color:#0f172a;display:block;margin-bottom:0.3rem;transition:color 0.6s ease;">🌐 اللغة</label>
-                    <select id="settingsLanguage" style="width:100%;padding:0.6rem;border-radius:16px;border:1px solid rgba(0,0,0,0.04);background:#f8fafc;color:#1e293b;font-size:0.9rem;transition:all 0.6s ease;">
+                    <select id="settingsLanguage" style="width:100%;padding:0.6rem;border-radius:16px;border:1px solid rgba(0,0,0,0.04);background:rgba(248,250,252,0.4);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:#1e293b;font-size:0.9rem;transition:all 0.6s ease;">
                         <option value="ar">🇸🇦 العربية</option>
                         <option value="en">🇬🇧 English</option>
                     </select>
                 </div>
                 <div>
                     <label style="font-weight:600;color:#0f172a;display:block;margin-bottom:0.3rem;transition:color 0.6s ease;">🌙 الوضع الليلي</label>
-                    <button onclick="toggleTheme()" style="padding:0.5rem 1.5rem;border-radius:60px;border:1px solid rgba(0,0,0,0.04);background:#f8fafc;cursor:pointer;font-size:0.85rem;transition:all 0.3s ease;">
+                    <button onclick="toggleTheme()" style="padding:0.5rem 1.5rem;border-radius:60px;border:1px solid rgba(0,0,0,0.04);background:rgba(248,250,252,0.4);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);cursor:pointer;font-size:0.85rem;transition:all 0.3s ease;">
                         <i class="fas fa-moon"></i> تبديل الوضع
                     </button>
                 </div>
-
-                <!-- ===== TERMS OF USE ===== -->
                 <div class="terms-section">
                     <h4><i class="fas fa-file-contract"></i> 📜 شروط الاستخدام</h4>
                     <ul>
@@ -3221,15 +3179,14 @@
                         <li><i class="fas fa-check-circle"></i> ذكر المصدر عند النشر</li>
                     </ul>
                 </div>
-
-                <button onclick="saveSettings()" style="background:#2563eb;border:none;padding:0.7rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;font-size:1rem;transition:all 0.3s ease;">
+                <button onclick="saveSettings()" style="background:linear-gradient(135deg,#2563eb,#7c3aed);border:none;padding:0.7rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;font-size:1rem;transition:all 0.3s ease;">
                     <i class="fas fa-save"></i> حفظ الإعدادات
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- ===== FAVORITES MODAL ===== -->
+    <!-- Favorites Modal -->
     <div class="modal-overlay" id="favoritesOverlay">
         <div class="modal">
             <button class="close-modal" onclick="closeFavorites()"><i class="fas fa-times"></i></button>
@@ -3325,7 +3282,6 @@
         let currentUser = 'زائر';
         let currentFilter = 'all';
         let currentCategory = 'all';
-        let cricketAudio = null;
         let cricketPlaying = false;
 
         // ============================================================
@@ -3337,12 +3293,12 @@
             container.innerHTML = '';
 
             const bugIcons = ['fa-bug', 'fa-spider', 'fa-mosquito', 'fa-dragonfly'];
-            const numBugs = 25;
+            const numBugs = 30;
 
             for (let i = 0; i < numBugs; i++) {
                 const bug = document.createElement('div');
                 bug.className = 'bug';
-                const isFirefly = Math.random() < 0.3;
+                const isFirefly = Math.random() < 0.35;
                 if (isFirefly) {
                     bug.classList.add('bug-firefly');
                     bug.innerHTML = '<i class="fas fa-circle"></i>';
@@ -3353,9 +3309,9 @@
 
                 const startX = Math.random() * 100;
                 const startY = Math.random() * 100;
-                const tx = (Math.random() - 0.5) * 200;
-                const ty = (Math.random() - 0.5) * 200;
-                const duration = 15 + Math.random() * 25;
+                const tx = (Math.random() - 0.5) * 250;
+                const ty = (Math.random() - 0.5) * 250;
+                const duration = 18 + Math.random() * 30;
                 const delay = Math.random() * 20;
 
                 bug.style.setProperty('--tx', tx + 'vw');
@@ -3364,7 +3320,7 @@
                 bug.style.top = startY + '%';
                 bug.style.animationDuration = duration + 's';
                 bug.style.animationDelay = delay + 's';
-                bug.style.fontSize = (5 + Math.random() * 10) + 'px';
+                bug.style.fontSize = (4 + Math.random() * 12) + 'px';
 
                 container.appendChild(bug);
             }
@@ -3388,7 +3344,7 @@
 
                         oscillator.frequency.value = 4000 + Math.random() * 1000;
                         oscillator.type = 'sawtooth';
-                        gainNode.gain.value = 0.03;
+                        gainNode.gain.value = 0.035;
 
                         oscillator.start();
                         oscillator.stop(audioContext.currentTime + 0.08);
@@ -3401,7 +3357,7 @@
                                 g2.connect(audioContext.destination);
                                 o2.frequency.value = 4500 + Math.random() * 1500;
                                 o2.type = 'square';
-                                g2.gain.value = 0.02;
+                                g2.gain.value = 0.025;
                                 o2.start();
                                 o2.stop(audioContext.currentTime + 0.05);
                             }
@@ -3430,7 +3386,7 @@
                         gain.connect(ctx.destination);
                         osc.frequency.value = 3500 + Math.random() * 1500;
                         osc.type = 'sawtooth';
-                        gain.gain.value = 0.02;
+                        gain.gain.value = 0.025;
                         osc.start();
                         osc.stop(ctx.currentTime + 0.06);
                     } catch (e) {}
@@ -3510,7 +3466,7 @@
             }
 
             grid.innerHTML = filtered.map(item => `
-                <div class="content-card" data-id="${item.id}">
+                <div class="content-card glass" data-id="${item.id}">
                     <span class="card-badge">${item.category}</span>
                     <div class="card-icon"><i class="fas ${item.icon}"></i></div>
                     <div class="card-title">${item.title}</div>
@@ -3545,22 +3501,10 @@
         }
 
         // ============================================================
-        // ===== COPY SAMPLE (API) =====
-        // ============================================================
-        function copySample(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                showToast('📋 تم نسخ: ' + text);
-            }).catch(() => {
-                showToast('📋 ' + text);
-            });
-        }
-
-        // ============================================================
         // ===== STATUS INDICATOR =====
         // ============================================================
         let statusDegraded = false;
         setInterval(() => {
-            // Simulate occasional degradation (for demonstration)
             statusDegraded = Math.random() < 0.05;
             const dot = document.getElementById('statusDot');
             const text = document.getElementById('statusText');
@@ -3576,7 +3520,7 @@
         }, 30000);
 
         // ============================================================
-        // ===== DOWNLOAD CONTENT =====
+        // ===== DOWNLOAD/CONTENT FUNCTIONS =====
         // ============================================================
         function downloadContent(id) {
             const item = contentData.find(c => c.id === id);
@@ -3593,18 +3537,12 @@
             }
         }
 
-        // ============================================================
-        // ===== COPY CONTENT =====
-        // ============================================================
         function copyContent(id) {
             const item = contentData.find(c => c.id === id);
             if (item) {
                 navigator.clipboard.writeText(`${item.title}\n${item.desc}\nرابط التحميل: ${item.downloadLink || 'https://t.me/python2015'}`)
-                    .then(() => {
-                        showToast(`📋 تم نسخ: ${item.title}`);
-                    }).catch(() => {
-                        showToast(`📋 ${item.title}`);
-                    });
+                    .then(() => showToast(`📋 تم نسخ: ${item.title}`))
+                    .catch(() => showToast(`📋 ${item.title}`));
             }
         }
 
@@ -3632,7 +3570,7 @@
                 list.innerHTML = favorites.map(id => {
                     const item = contentData.find(c => c.id === id);
                     return item ? `
-                        <div style="background:#f8fafc;padding:0.8rem 1rem;border-radius:16px;display:flex;justify-content:space-between;align-items:center;transition:all 0.6s ease;">
+                        <div style="background:rgba(248,250,252,0.4);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);padding:0.8rem 1rem;border-radius:16px;display:flex;justify-content:space-between;align-items:center;transition:all 0.6s ease;border:1px solid rgba(0,0,0,0.02);">
                             <div>
                                 <strong>${item.title}</strong>
                                 <span style="font-size:0.7rem;color:#64748b;display:block;">${item.desc}</span>
@@ -3654,7 +3592,7 @@
         }
 
         // ============================================================
-        // ===== FILTERS =====
+        // ===== FILTERS & SEARCH =====
         // ============================================================
         function filterContent(type) {
             currentFilter = type;
@@ -3689,9 +3627,6 @@
             renderContent();
         }
 
-        // ============================================================
-        // ===== SEARCH =====
-        // ============================================================
         function searchContent(query) {
             const grid = document.getElementById('contentGrid');
             if (!query.trim()) {
@@ -3713,7 +3648,7 @@
                 return;
             }
             grid.innerHTML = filtered.map(item => `
-                <div class="content-card" data-id="${item.id}">
+                <div class="content-card glass" data-id="${item.id}">
                     <span class="card-badge">${item.category}</span>
                     <div class="card-icon"><i class="fas ${item.icon}"></i></div>
                     <div class="card-title">${item.title}</div>
@@ -3766,9 +3701,6 @@
             document.getElementById('userAvatar').textContent = name.charAt(0);
         }
 
-        // ============================================================
-        // ===== LOGIN =====
-        // ============================================================
         function loginUser() {
             const name = prompt('👤 أدخل اسم المستخدم:', currentUser);
             if (name && name.trim()) {
@@ -3806,9 +3738,6 @@
             }
         });
 
-        // ============================================================
-        // ===== FULLSCREEN =====
-        // ============================================================
         function toggleFullscreen() {
             if (!document.fullscreenElement) {
                 document.documentElement.requestFullscreen().catch(e => {});
@@ -3896,9 +3825,19 @@
                 about8: 'يوجد ملفات مزاد للسوبرات',
                 about9: 'يوجد ملف lua & php حمايه',
                 about10: 'يوجد حل جميع الأخطاء',
+                about11: 'يوجد بوت تسجيل دخول طلبات',
+                about12: 'يوجد بوت فحص روابط و مواقع',
+                about13: 'يوجد بوت رفع علي الاستضافة',
+                about14: 'يوجد بوت فك و حظر حسابات تواصل الاجتماعي',
+                about15: 'يوجد بوت انشاء بريد الكتروني مزيف',
+                about16: 'يوجد بوت اشتراكات اجباري',
+                about17: 'يوجد بوت حماية قنوات',
+                about18: 'يوجد بوت حماية من رشق الاعضاء',
+                about19: 'يوجد بوت تخصيص ازرار منشورات للقنوات',
+                about20: 'يوجد بوت تحميل من المنصات',
                 aboutPricing: 'يوجد عمل اي كود او تعديل اي ملف كل هذا و #بأسعار رمزيه بدون تكلفة',
                 aboutContact: 'للتواصل:',
-                aboutNotice: '#تنويه هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك',
+                aboutNotice: '#تنويه_هام: الرجاء جديه في تعامل حتي لا تضيع وقتي و وقتك',
                 donateTitle: 'تبرع بـ نجوم تليجرام',
                 donateDesc: 'تبرعك بـ 1 نجمة يساعدنا على الاستمرار وتطوير المنصة نحو الأفضل ❤️',
                 donate1: 'تبرع بـ 1 ⭐',
@@ -3908,12 +3847,18 @@
                 popularTitle: '📌 الأكثر طلباً',
                 channelsTitle: '📡 قنواتنا',
                 pricingTitle: 'خطط التسعير',
-                pricingFree: 'مجاني',
-                pricingFreeDesc: 'للتجربة والاختبار',
+                pricingBasic: 'أساسي',
+                pricingBasicDesc: 'للمبتدئين',
+                pricingStandard: 'قياسي',
+                pricingStandardDesc: 'للمطورين',
                 pricingPro: 'احترافي',
                 pricingProDesc: 'الأكثر طلباً',
+                pricingBusiness: 'أعمال',
+                pricingBusinessDesc: 'للشركات الصغيرة',
+                pricingPremium: 'مميز',
+                pricingPremiumDesc: 'للمشاريع الكبيرة',
                 pricingEnterprise: 'مؤسسي',
-                pricingEnterpriseDesc: 'للشركات والمشاريع الكبيرة',
+                pricingEnterpriseDesc: 'للشركات الكبرى',
                 pricingStart: 'ابدأ',
                 privacyTitle: 'سياسة الخصوصية',
                 privacyIntro: 'نحن في python zone نلتزم بحماية خصوصية بياناتك. إليك كيفية تعاملنا معها:',
@@ -3997,6 +3942,16 @@
                 about8: 'We provide supergroup auction files',
                 about9: 'We provide lua & php protection files',
                 about10: 'We solve all errors',
+                about11: 'We have a login request bot',
+                about12: 'We have a link and site checker bot',
+                about13: 'We have a hosting upload bot',
+                about14: 'We have a social media account unlock and block bot',
+                about15: 'We have a fake email creator bot',
+                about16: 'We have a mandatory subscription bot',
+                about17: 'We have a channel protection bot',
+                about18: 'We have a member spam protection bot',
+                about19: 'We have a channel post button customizer bot',
+                about20: 'We have a platform download bot',
                 aboutPricing: 'We can create any code or modify any file All of this at #symbolic prices without cost',
                 aboutContact: 'Contact:',
                 aboutNotice: '#Important: Please be serious so we don\'t waste time',
@@ -4009,12 +3964,18 @@
                 popularTitle: '📌 Most Popular',
                 channelsTitle: '📡 Our Channels',
                 pricingTitle: 'Pricing Plans',
-                pricingFree: 'Free',
-                pricingFreeDesc: 'For trial and testing',
+                pricingBasic: 'Basic',
+                pricingBasicDesc: 'For beginners',
+                pricingStandard: 'Standard',
+                pricingStandardDesc: 'For developers',
                 pricingPro: 'Professional',
                 pricingProDesc: 'Most popular',
+                pricingBusiness: 'Business',
+                pricingBusinessDesc: 'For small businesses',
+                pricingPremium: 'Premium',
+                pricingPremiumDesc: 'For large projects',
                 pricingEnterprise: 'Enterprise',
-                pricingEnterpriseDesc: 'For large companies and projects',
+                pricingEnterpriseDesc: 'For large enterprises',
                 pricingStart: 'Get Started',
                 privacyTitle: 'Privacy Policy',
                 privacyIntro: 'At python zone, we are committed to protecting your data privacy. Here\'s how we handle it:',
@@ -4280,8 +4241,8 @@
         // ============================================================
         function openTelegramStars() {
             const modalHtml = `
-                <div style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);z-index:9999;display:flex;justify-content:center;align-items:center;padding:1.5rem;animation:fadeIn 0.3s ease;">
-                    <div style="background:#fff;border-radius:32px;padding:2rem;max-width:400px;width:100%;text-align:center;position:relative;animation:slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);">
+                <div style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:9999;display:flex;justify-content:center;align-items:center;padding:1.5rem;animation:fadeIn 0.4s ease;">
+                    <div style="background:rgba(255,255,255,0.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-radius:32px;padding:2rem;max-width:400px;width:100%;text-align:center;position:relative;animation:slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);border:1px solid rgba(255,255,255,0.3);">
                         <button onclick="this.parentElement.parentElement.remove()" style="position:absolute;top:0.8rem;left:0.8rem;background:transparent;border:none;font-size:1.2rem;cursor:pointer;color:#64748b;transition:all 0.3s ease;">✕</button>
                         <div style="font-size:3rem;margin-bottom:0.5rem;">⭐</div>
                         <h3 style="color:#0f172a;margin-bottom:0.5rem;" data-key="donateTitle">تبرع بـ نجوم تليجرام</h3>
@@ -4290,13 +4251,13 @@
                             وتطوير المنصة نحو الأفضل ❤️
                         </p>
                         <div style="display:flex;flex-direction:column;gap:0.5rem;">
-                            <button onclick="window.open('https://t.me/topvega?start=donate','_blank')" style="background:#eab308;border:none;padding:0.8rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+                            <button onclick="window.open('https://t.me/topvega?start=donate','_blank')" style="background:linear-gradient(135deg,#eab308,#f59e0b);border:none;padding:0.8rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
                                 <i class="fas fa-star"></i> <span data-key="donate1">تبرع بـ 1 ⭐</span>
                             </button>
-                            <button onclick="window.open('https://t.me/topvega?start=donate_5','_blank')" style="background:#f59e0b;border:none;padding:0.8rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+                            <button onclick="window.open('https://t.me/topvega?start=donate_5','_blank')" style="background:linear-gradient(135deg,#f59e0b,#d97706);border:none;padding:0.8rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
                                 <i class="fas fa-star"></i> <span data-key="donate5">تبرع بـ 5 ⭐</span>
                             </button>
-                            <button onclick="window.open('https://t.me/topvega?start=donate_10','_blank')" style="background:#d97706;border:none;padding:0.8rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+                            <button onclick="window.open('https://t.me/topvega?start=donate_10','_blank')" style="background:linear-gradient(135deg,#d97706,#b45309);border:none;padding:0.8rem;border-radius:60px;color:#fff;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
                                 <i class="fas fa-star"></i> <span data-key="donate10">تبرع بـ 10 ⭐</span>
                             </button>
                         </div>
@@ -4367,6 +4328,7 @@
                         document.body.classList.add('dark-mode');
                         document.getElementById('themeIcon').className = 'fas fa-sun';
                         document.getElementById('cricketToggle').style.display = 'flex';
+                        if (!cricketPlaying) toggleCricketSound();
                     }
                     if (data.language && data.language !== 'ar') {
                         changeLanguage(data.language);
@@ -4374,6 +4336,17 @@
                 }
             } catch (e) {}
         }
+
+        // ============================================================
+        // ===== PRICING BUTTONS =====
+        // ============================================================
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('pricing-btn') || e.target.closest('.pricing-btn')) {
+                const btn = e.target.closest('.pricing-btn') || e.target;
+                const plan = btn.closest('.pricing-card').querySelector('.pricing-name').textContent;
+                showToast(`✅ تم اختيار خطة "${plan}"! سيتم التواصل معك قريباً.`);
+            }
+        });
 
         // ============================================================
         // ===== INIT =====
@@ -4395,25 +4368,19 @@
             });
         });
 
-        // Pricing button handlers
-        document.querySelectorAll('.pricing-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const plan = this.closest('.pricing-card').querySelector('.pricing-name').textContent;
-                showToast(`✅ تم اختيار خطة "${plan}"! سيتم التواصل معك قريباً.`);
-            });
-        });
-
         console.log('🚀 python zone | منصة خدمات فيجا المطورة');
         console.log('📌 @TopVeGa | @Cybervega');
         console.log('⭐ جميع الحقوق محفوظة © 2015-2026');
-        console.log('📊 التحديثات الجديدة:');
-        console.log('✅ سياسة خصوصية واضحة');
-        console.log('✅ حدود طلبات API محددة');
-        console.log('✅ نماذج استخدام (Samples) لكل API');
-        console.log('✅ خطط تسعير واضحة');
-        console.log('✅ مؤشر حالة الخدمة');
-        console.log('✅ شفافية المصدر (APIs مخصصة)');
-        console.log('✅ توثيق تقني كامل');
+        console.log('📊 المميزات المضافة:');
+        console.log('✅ تأثيرات زجاجية (Glassmorphism)');
+        console.log('✅ خلفية ليلية متحركة مع حشرات ويراعات');
+        console.log('✅ صوت رنين صرصور ليلي جميل');
+        console.log('✅ خطط تسعير من 3$ إلى 25$');
+        console.log('✅ بوتات متعددة في قسم الخدمات');
+        console.log('✅ تصميم أكثر سلاسة وجاذبية');
+        console.log('✅ أيقونات متحركة ونابضة بالحياة');
+        console.log('✅ وضع ليلي محسن بخلفية متحركة');
+        console.log('✅ شفافية تامة في الخدمات');
     </script>
 </body>
 </html>
