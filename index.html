@@ -20,7 +20,7 @@
             min-height: 100vh;
             background: #f0f4f8;
             padding: 1.5rem;
-            transition: background 0.8s ease;
+            transition: background 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
             overflow-x: hidden;
         }
@@ -35,14 +35,14 @@
         }
 
         body.dark-mode .glass {
-            background: rgba(15, 23, 42, 0.7);
+            background: rgba(10, 14, 26, 0.8);
             backdrop-filter: blur(24px) saturate(200%);
             -webkit-backdrop-filter: blur(24px) saturate(200%);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.04);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
-        /* ===== DARK MODE BACKGROUND WITH ANIMATED BUGS ===== */
+        /* ===== DARK MODE BACKGROUND ===== */
         body.dark-mode {
             background: #0a0e1a;
         }
@@ -61,69 +61,6 @@
 
         body.dark-mode .dark-bg-container {
             display: block;
-        }
-
-        .bug {
-            position: absolute;
-            font-size: 8px;
-            color: rgba(255, 255, 255, 0.12);
-            animation: flyBug linear infinite;
-            opacity: 0;
-            will-change: transform;
-        }
-
-        .bug i {
-            display: block;
-            animation: bugGlow 2s ease-in-out infinite alternate;
-        }
-
-        .bug-firefly {
-            color: rgba(255, 255, 200, 0.25);
-            font-size: 6px;
-            animation: flyBug 22s linear infinite, fireflyGlow 2.5s ease-in-out infinite alternate;
-        }
-
-        .bug-firefly i {
-            text-shadow: 0 0 15px rgba(255, 255, 200, 0.3), 0 0 30px rgba(255, 255, 200, 0.1);
-        }
-
-        @keyframes flyBug {
-            0% {
-                transform: translate(0, 0) rotate(0deg) scale(0.8);
-                opacity: 0;
-            }
-            5% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translate(var(--tx), var(--ty)) rotate(720deg) scale(1.2);
-                opacity: 0;
-            }
-        }
-
-        @keyframes bugGlow {
-            0% {
-                opacity: 0.3;
-                transform: scale(0.8);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1.4);
-            }
-        }
-
-        @keyframes fireflyGlow {
-            0% {
-                opacity: 0.2;
-                text-shadow: 0 0 5px rgba(255, 255, 200, 0.1);
-            }
-            100% {
-                opacity: 0.9;
-                text-shadow: 0 0 25px rgba(255, 255, 200, 0.5), 0 0 50px rgba(255, 255, 200, 0.15);
-            }
         }
 
         /* ===== CRICKET SOUND TOGGLE ===== */
@@ -163,31 +100,7 @@
             box-shadow: 0 4px 30px rgba(96, 165, 250, 0.1);
         }
 
-        .cricket-toggle i {
-            transition: all 0.4s ease;
-        }
-
-        .cricket-toggle.active i {
-            animation: pulseIcon 1.5s ease-in-out infinite;
-        }
-
-        .bg-pattern {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        body.dark-mode .bg-pattern {
-            background: radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.04) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.04) 0%, transparent 50%);
-        }
-
+        /* ===== MAIN ===== */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -272,7 +185,7 @@
             flex-wrap: wrap;
         }
 
-        /* ===== STATUS INDICATOR ===== */
+        /* ===== STATUS ===== */
         .status-indicator {
             display: flex;
             align-items: center;
@@ -293,15 +206,6 @@
 
         .status-dot.online {
             background: #22c55e;
-        }
-
-        .status-dot.degraded {
-            background: #eab308;
-        }
-
-        .status-dot.offline {
-            background: #ef4444;
-            animation: none;
         }
 
         @keyframes pulseDot {
@@ -360,7 +264,7 @@
             color: #7c3aed;
         }
 
-        /* ===== USER SECTION ===== */
+        /* ===== USER ===== */
         .user-section {
             display: flex;
             align-items: center;
@@ -413,12 +317,6 @@
 
         body.dark-mode .user-name {
             color: #f1f5f9;
-        }
-
-        .user-name i {
-            font-size: 0.6rem;
-            color: #64748b;
-            margin-right: 4px;
         }
 
         /* ===== DROPDOWN ===== */
@@ -506,17 +404,6 @@
         .search-bar.active {
             display: flex;
             animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .search-bar:focus-within {
-            border-color: #2563eb;
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.04);
-            transform: translateY(-2px);
-        }
-
-        body.dark-mode .search-bar:focus-within {
-            border-color: #60a5fa;
-            box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.04);
         }
 
         .search-bar input {
@@ -1131,7 +1018,7 @@
             color: #7c3aed;
         }
 
-        /* ===== PRICING ===== */
+        /* ===== PRICING SECTION ===== */
         .pricing-section {
             border-radius: 28px;
             padding: 1.5rem 1.8rem;
@@ -1937,6 +1824,98 @@
             color: #0a0e1a;
         }
 
+        /* ===== STARS PAYMENT MODAL ===== */
+        .stars-payment-details {
+            background: rgba(248, 250, 252, 0.6);
+            border-radius: 20px;
+            padding: 1.2rem 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            transition: all 0.6s ease;
+        }
+
+        body.dark-mode .stars-payment-details {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .stars-payment-details .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.3rem 0;
+            font-size: 0.9rem;
+            color: #1e293b;
+            transition: color 0.6s ease;
+        }
+
+        body.dark-mode .stars-payment-details .detail-row {
+            color: #e2e8f0;
+        }
+
+        .stars-payment-details .detail-row .value {
+            font-weight: 600;
+            color: #2563eb;
+        }
+
+        body.dark-mode .stars-payment-details .detail-row .value {
+            color: #60a5fa;
+        }
+
+        .stars-payment-details .detail-row .discount {
+            color: #22c55e;
+        }
+
+        .stars-payment-details .divider {
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+            margin: 0.5rem 0;
+        }
+
+        body.dark-mode .stars-payment-details .divider {
+            border-color: rgba(255, 255, 255, 0.04);
+        }
+
+        .stars-payment-details .total-row {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        body.dark-mode .stars-payment-details .total-row {
+            color: #f1f5f9;
+        }
+
+        .stars-payment-details .total-row .value {
+            font-size: 1.3rem;
+        }
+
+        .btn-stars-pay {
+            background: linear-gradient(135deg, #eab308, #f59e0b);
+            border: none;
+            padding: 0.8rem 2.5rem;
+            border-radius: 60px;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            width: 100%;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-stars-pay:hover {
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 8px 30px rgba(234, 179, 8, 0.3);
+        }
+
+        .btn-stars-pay i {
+            font-size: 1.2rem;
+        }
+
         /* ===== COMMENTS ===== */
         .comment-input-area {
             border-radius: 28px;
@@ -2144,22 +2123,6 @@
             color: #dc2626;
         }
 
-        .comment-item .comment-actions-bottom button.liked i {
-            animation: heartBeat 0.3s ease;
-        }
-
-        @keyframes heartBeat {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.5);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-
         .comment-item .replies {
             margin-right: 2rem;
             margin-top: 0.5rem;
@@ -2341,7 +2304,7 @@
             border-color: rgba(255, 255, 255, 0.02);
         }
 
-        /* ===== ABOUT MODAL ===== */
+        /* ===== ABOUT ===== */
         .about-modal .about-content {
             font-size: 0.9rem;
             line-height: 1.8;
@@ -2662,7 +2625,7 @@
 </head>
 <body>
 
-    <!-- ===== DARK MODE BACKGROUND WITH BUGS ===== -->
+    <!-- ===== DARK MODE BACKGROUND ===== -->
     <div class="dark-bg-container" id="darkBgContainer"></div>
 
     <!-- ===== CRICKET SOUND TOGGLE ===== -->
@@ -2670,8 +2633,6 @@
         <i class="fas fa-volume-up"></i>
         <span id="cricketLabel">🔊 صوت الليل</span>
     </button>
-
-    <div class="bg-pattern"></div>
 
     <div class="container">
 
@@ -2687,13 +2648,11 @@
                     </div>
                 </div>
                 <div class="header-actions">
-                    <!-- Status Indicator -->
                     <div class="status-indicator glass" title="حالة الخدمة">
                         <span class="status-dot online" id="statusDot"></span>
                         <span id="statusText">جميع الخدمات تعمل</span>
                     </div>
 
-                    <!-- Search Wrapper -->
                     <div class="search-wrapper">
                         <button class="search-toggle" onclick="toggleSearchBar()" title="بحث">
                             <i class="fas fa-search"></i>
@@ -2706,13 +2665,11 @@
                         </div>
                     </div>
 
-                    <!-- User Section -->
                     <div class="user-section" onclick="toggleUserMenu()">
                         <div class="user-avatar" id="userAvatar">ز</div>
                         <span class="user-name" id="userName">زائر <i class="fas fa-chevron-down"></i></span>
                     </div>
 
-                    <!-- Visitor Count -->
                     <div class="visitor-count glass" style="font-size:0.7rem;color:#64748b;padding:0.2rem 0.8rem;border-radius:60px;display:flex;align-items:center;gap:4px;transition:all 0.6s ease;">
                         <i class="fas fa-eye" style="color:#2563eb;"></i>
                         <span id="visitorCount">12,847</span>
@@ -2899,9 +2856,7 @@
                     <i class="fas fa-tags"></i>
                     <h3 data-key="pricingTitle">💰 خطط التسعير</h3>
                 </div>
-                <div class="pricing-grid" id="pricingGrid">
-                    <!-- Pricing cards will be rendered by JS -->
-                </div>
+                <div class="pricing-grid" id="pricingGrid"></div>
                 <div style="margin-top:0.5rem;font-size:0.7rem;color:#94a3b8;text-align:center;">
                     <i class="fas fa-shield-alt"></i> دفع آمن عبر باينس و نجوم تليجرام
                 </div>
@@ -2924,16 +2879,14 @@
                         <i class="fas fa-info-circle"></i> جميع الـ APIs هي واجهاتنا المخصصة والمطورة داخلياً، وليست مجرد تغليف لخدمات خارجية.
                     </span>
                 </p>
-                <div class="api-grid" id="apiGrid">
-                    <!-- API cards rendered by JS -->
-                </div>
+                <div class="api-grid" id="apiGrid"></div>
                 <div class="api-note">
                     <i class="fas fa-info-circle"></i>
                     <span data-key="apiNote"><strong>ملاحظة:</strong> جميع واجهات API قابلة للتعديل والتخصيص حسب طلبك، مع دعم فني متواصل. <span style="color:#22c55e;">✓</span> توثيق كامل متاح عند الطلب.</span>
                 </div>
             </div>
 
-            <!-- ===== PRIVACY POLICY SECTION ===== -->
+            <!-- ===== PRIVACY POLICY ===== -->
             <div class="privacy-section glass" data-aos="fade-up" data-aos-delay="300">
                 <div class="privacy-header">
                     <i class="fas fa-shield-alt"></i>
@@ -3056,6 +3009,7 @@
     </div>
 
     <!-- ===== MODALS ===== -->
+
     <!-- Comments Modal -->
     <div class="modal-overlay" id="commentsOverlay">
         <div class="modal">
@@ -3213,11 +3167,83 @@
         <div class="modal">
             <button class="close-modal" onclick="closePricingDetail()"><i class="fas fa-times"></i></button>
             <h2><i class="fas fa-crown"></i> <span id="pricingDetailTitle">تفاصيل الخطة</span></h2>
-            <div class="pricing-detail-grid" id="pricingDetailGrid">
-                <!-- filled by JS -->
+            <div class="pricing-detail-grid" id="pricingDetailGrid"></div>
+            <button class="btn-subscribe" onclick="openStarsPayment()">
+                <i class="fas fa-star"></i> اشتراك بـ ⭐ نجوم
+            </button>
+        </div>
+    </div>
+
+    <!-- Stars Payment Modal -->
+    <div class="modal-overlay" id="starsPaymentOverlay">
+        <div class="modal">
+            <button class="close-modal" onclick="closeStarsPayment()"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-star" style="color:#eab308;"></i> ⭐ الدفع بالنجوم</h2>
+            
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem;justify-content:center;">
+                <span class="category-tag" style="cursor:default;background:rgba(37,99,235,0.02);">1</span>
+                <span class="category-tag" style="cursor:default;background:rgba(37,99,235,0.02);">15</span>
+                <span class="category-tag" style="cursor:default;background:rgba(37,99,235,0.02);">50</span>
+                <span class="category-tag" style="cursor:default;background:rgba(37,99,235,0.02);">150</span>
+                <span class="category-tag" style="cursor:default;background:rgba(37,99,235,0.02);">500</span>
             </div>
-            <button class="btn-subscribe" onclick="openSubscribe()">
-                <i class="fas fa-credit-card"></i> اشتراك
+            <p style="color:#64748b;font-size:0.8rem;text-align:center;margin-bottom:0.5rem;">
+                Only published posts count — create scheduled posts without any limit.
+            </p>
+
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem;justify-content:center;">
+                <span class="category-tag" style="cursor:default;background:rgba(37,99,235,0.02);">30</span>
+                <span class="category-tag" style="cursor:default;background:rgba(37,99,235,0.02);">90</span>
+                <span class="category-tag" style="cursor:default;background:rgba(37,99,235,0.02);">180</span>
+                <span class="category-tag active" style="cursor:default;">365 days</span>
+            </div>
+
+            <div class="stars-payment-details">
+                <div class="detail-row">
+                    <span>Extend to 375 days</span>
+                    <span class="value">730 → 750 ★</span>
+                </div>
+                <div style="font-size:0.7rem;color:#64748b;padding:0.2rem 0 0.5rem 0;">
+                    Stars are sold in packs via @PremiumBot — the closest is 750 ★. Check the box to fit the pack exactly.
+                </div>
+                
+                <div class="detail-row">
+                    <span>Base</span>
+                    <span class="value" id="starsBasePrice">913 ★</span>
+                </div>
+                <div class="detail-row">
+                    <span>Discount (20%)</span>
+                    <span class="value discount" id="starsDiscount">-183 ★</span>
+                </div>
+                <div class="divider"></div>
+                <div class="detail-row total-row">
+                    <span>To pay</span>
+                    <span class="value" id="starsTotalPrice">730 ★</span>
+                </div>
+                <div class="detail-row" style="font-size:0.85rem;color:#64748b;">
+                    <span>≈</span>
+                    <span>$14.60</span>
+                </div>
+            </div>
+
+            <div style="background:rgba(248,250,252,0.4);border-radius:16px;padding:1rem;margin:1rem 0;">
+                <h4 style="color:#0f172a;font-size:0.9rem;margin-bottom:0.3rem;transition:color 0.6s ease;">What's included</h4>
+                <div style="display:flex;flex-wrap:wrap;gap:0.8rem;font-size:0.85rem;color:#1e293b;transition:color 0.6s ease;">
+                    <span><i class="fas fa-check-circle" style="color:#22c55e;"></i> Channels: <strong>1</strong></span>
+                    <span><i class="fas fa-check-circle" style="color:#22c55e;"></i> Term: <strong>365 days</strong></span>
+                </div>
+                <div style="margin-top:0.3rem;font-size:0.8rem;color:#64748b;">
+                    <strong>PER CHANNEL</strong>
+                    <div style="display:flex;flex-wrap:wrap;gap:0.8rem;margin-top:0.2rem;">
+                        <span>Posts: <strong>365</strong></span>
+                        <span>Watermarks · photo: <strong>360</strong></span>
+                        <span>Watermarks · video: <strong>72</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-stars-pay" onclick="processStarsPayment()">
+                <i class="fas fa-star"></i> Continue to payment · <span id="starsPayBtnAmount">730 ★</span>
             </button>
         </div>
     </div>
@@ -3284,21 +3310,21 @@
 
         const pricingData = [
             { name: 'أساسي', price: '3', desc: 'للمبتدئين', features: ['500 طلب/يوم', 'API أساسية', 'دعم أساسي'],
-            popular: false },
+                popular: false, stars: 730 },
             { name: 'قياسي', price: '5', desc: 'للمطورين', features: ['2,000 طلب/يوم', 'جميع الـ APIs', 'دعم سريع'],
-            popular: false },
+                popular: false, stars: 1460 },
             { name: 'احترافي', price: '10', desc: 'الأكثر طلباً', features: ['10,000 طلب/يوم', 'جميع الـ APIs',
                     'دعم VIP 24/7', 'تخصيص مسبق'
-                ], popular: true },
+                ], popular: true, stars: 2920 },
             { name: 'أعمال', price: '15', desc: 'للشركات الصغيرة', features: ['25,000 طلب/يوم', 'جميع الـ APIs',
                     'دعم مخصص', 'تحليلات متقدمة'
-                ], popular: false },
+                ], popular: false, stars: 4380 },
             { name: 'مميز', price: '20', desc: 'للمشاريع الكبيرة', features: ['50,000 طلب/يوم', 'APIs مخصصة',
                     'دعم أولوية', 'تقارير مفصلة'
-                ], popular: false },
+                ], popular: false, stars: 5840 },
             { name: 'مؤسسي', price: '25', desc: 'للشركات الكبرى', features: ['غير محدود', 'APIs مخصصة بالكامل',
                     'دعم مخصص 24/7', 'SLA مضمون'
-                ], popular: false }
+                ], popular: false, stars: 7300 }
         ];
 
         const apiData = [
@@ -3319,22 +3345,21 @@
         let cricketPlaying = false;
         let currentLang = 'ar';
         let selectedPricing = null;
+        let selectedStarsAmount = 730;
 
         // ============================================================
-        // ===== DARK MODE BACKGROUND BUGS =====
+        // ===== DARK MODE BACKGROUND =====
         // ============================================================
         function createBugs() {
             const container = document.getElementById('darkBgContainer');
             if (!container) return;
             container.innerHTML = '';
-
             const bugIcons = ['fa-bug', 'fa-spider', 'fa-mosquito', 'fa-dragonfly'];
-            const numBugs = 30;
-
+            const numBugs = 25;
             for (let i = 0; i < numBugs; i++) {
                 const bug = document.createElement('div');
                 bug.className = 'bug';
-                const isFirefly = Math.random() < 0.35;
+                const isFirefly = Math.random() < 0.3;
                 if (isFirefly) {
                     bug.classList.add('bug-firefly');
                     bug.innerHTML = '<i class="fas fa-circle"></i>';
@@ -3342,22 +3367,19 @@
                     const icon = bugIcons[Math.floor(Math.random() * bugIcons.length)];
                     bug.innerHTML = `<i class="fas ${icon}"></i>`;
                 }
-
                 const startX = Math.random() * 100;
                 const startY = Math.random() * 100;
-                const tx = (Math.random() - 0.5) * 250;
-                const ty = (Math.random() - 0.5) * 250;
-                const duration = 18 + Math.random() * 30;
+                const tx = (Math.random() - 0.5) * 200;
+                const ty = (Math.random() - 0.5) * 200;
+                const duration = 20 + Math.random() * 30;
                 const delay = Math.random() * 20;
-
                 bug.style.setProperty('--tx', tx + 'vw');
                 bug.style.setProperty('--ty', ty + 'vh');
                 bug.style.left = startX + '%';
                 bug.style.top = startY + '%';
                 bug.style.animationDuration = duration + 's';
                 bug.style.animationDelay = delay + 's';
-                bug.style.fontSize = (4 + Math.random() * 12) + 'px';
-
+                bug.style.fontSize = (4 + Math.random() * 10) + 'px';
                 container.appendChild(bug);
             }
         }
@@ -3374,17 +3396,13 @@
                     try {
                         const oscillator = audioContext.createOscillator();
                         const gainNode = audioContext.createGain();
-
                         oscillator.connect(gainNode);
                         gainNode.connect(audioContext.destination);
-
                         oscillator.frequency.value = 4000 + Math.random() * 1000;
                         oscillator.type = 'sawtooth';
                         gainNode.gain.value = 0.035;
-
                         oscillator.start();
                         oscillator.stop(audioContext.currentTime + 0.08);
-
                         setTimeout(() => {
                             if (cricketPlaying) {
                                 const o2 = audioContext.createOscillator();
@@ -3398,19 +3416,13 @@
                                 o2.stop(audioContext.currentTime + 0.05);
                             }
                         }, 100 + Math.random() * 200);
-
                         const nextDelay = 500 + Math.random() * 3000;
                         setTimeout(playCricket, nextDelay);
                     } catch (e) {
-                        if (cricketPlaying) {
-                            setTimeout(playCricket, 1000 + Math.random() * 3000);
-                        }
+                        if (cricketPlaying) setTimeout(playCricket, 1000 + Math.random() * 3000);
                     }
                 }
-
-                if (cricketPlaying) {
-                    playCricket();
-                }
+                if (cricketPlaying) playCricket();
             } catch (e) {
                 function fallbackChirp() {
                     if (!cricketPlaying) return;
@@ -3426,13 +3438,9 @@
                         osc.start();
                         osc.stop(ctx.currentTime + 0.06);
                     } catch (e) {}
-                    if (cricketPlaying) {
-                        setTimeout(fallbackChirp, 500 + Math.random() * 3000);
-                    }
+                    if (cricketPlaying) setTimeout(fallbackChirp, 500 + Math.random() * 3000);
                 }
-                if (cricketPlaying) {
-                    fallbackChirp();
-                }
+                if (cricketPlaying) fallbackChirp();
             }
         }
 
@@ -3440,7 +3448,6 @@
             cricketPlaying = !cricketPlaying;
             const toggle = document.getElementById('cricketToggle');
             const label = document.getElementById('cricketLabel');
-
             if (cricketPlaying) {
                 toggle.classList.add('active');
                 label.textContent = '🔇 كتم الليل';
@@ -3460,20 +3467,14 @@
             document.body.classList.toggle('dark-mode');
             const icon = document.getElementById('themeIcon');
             icon.className = document.body.classList.contains('dark-mode') ? 'fas fa-sun' : 'fas fa-moon';
-
             const cricketToggle = document.getElementById('cricketToggle');
             if (document.body.classList.contains('dark-mode')) {
                 cricketToggle.style.display = 'flex';
-                if (!cricketPlaying) {
-                    toggleCricketSound();
-                }
+                if (!cricketPlaying) toggleCricketSound();
             } else {
                 cricketToggle.style.display = 'none';
-                if (cricketPlaying) {
-                    toggleCricketSound();
-                }
+                if (cricketPlaying) toggleCricketSound();
             }
-
             saveData();
         }
 
@@ -3483,14 +3484,8 @@
         function renderContent() {
             const grid = document.getElementById('contentGrid');
             let filtered = contentData;
-
-            if (currentFilter !== 'all') {
-                filtered = filtered.filter(item => item.type === currentFilter);
-            }
-            if (currentCategory !== 'all') {
-                filtered = filtered.filter(item => item.category === currentCategory);
-            }
-
+            if (currentFilter !== 'all') filtered = filtered.filter(item => item.type === currentFilter);
+            if (currentCategory !== 'all') filtered = filtered.filter(item => item.category === currentCategory);
             if (filtered.length === 0) {
                 grid.innerHTML = `
                     <div style="grid-column:1/-1;text-align:center;padding:2rem;color:#64748b;">
@@ -3500,16 +3495,13 @@
                 `;
                 return;
             }
-
             grid.innerHTML = filtered.map(item => `
                 <div class="content-card glass" data-id="${item.id}">
                     <span class="card-badge">${item.category}</span>
                     <div class="card-icon"><i class="fas ${item.icon}"></i></div>
                     <div class="card-title">${item.title}</div>
                     <div class="card-desc">${item.desc}</div>
-                    <div class="rating">
-                        ${generateStars(item.rating)}
-                    </div>
+                    <div class="rating">${generateStars(item.rating)}</div>
                     <div class="card-stats">
                         <span><i class="fas fa-download"></i> ${item.downloads}</span>
                         <span><i class="fas fa-eye"></i> ${item.views}</span>
@@ -3565,13 +3557,12 @@
         }
 
         // ============================================================
-        // ===== PRICING DETAIL MODAL =====
+        // ===== PRICING DETAIL =====
         // ============================================================
         function openPricingDetail(index) {
             selectedPricing = pricingData[index];
             const overlay = document.getElementById('pricingDetailOverlay');
             document.getElementById('pricingDetailTitle').textContent = selectedPricing.name;
-
             const grid = document.getElementById('pricingDetailGrid');
             grid.innerHTML = `
                 <div class="pricing-detail-item"><span>السعر</span><span>${selectedPricing.price}$ / شهر</span></div>
@@ -3582,6 +3573,7 @@
                 <div class="pricing-detail-item"><span>التخزين</span><span>${index === 0 ? '50GB' : index === 1 ? '100GB' : index === 2 ? '200GB' : index === 3 ? '400GB' : index === 4 ? '800GB' : '1.6TB'} NVMe</span></div>
                 <div class="pricing-detail-item"><span>النطاق الترددي</span><span>${index === 0 ? '4TB' : index === 1 ? '8TB' : index === 2 ? '16TB' : index === 3 ? '32TB' : index === 4 ? '64TB' : '128TB'}</span></div>
                 <div class="pricing-detail-item"><span>النسخ الاحتياطية</span><span>${index === 0 ? 'أسبوعية' : 'يومية'}</span></div>
+                <div class="pricing-detail-item"><span>النجوم المطلوبة</span><span>${selectedPricing.stars} ★</span></div>
             `;
             overlay.classList.add('show');
         }
@@ -3591,44 +3583,95 @@
             selectedPricing = null;
         }
 
-        function openSubscribe() {
+        // ============================================================
+        // ===== STARS PAYMENT =====
+        // ============================================================
+        function openStarsPayment() {
+            if (!selectedPricing) {
+                showToast('⚠️ الرجاء اختيار خطة أولاً');
+                return;
+            }
+            const stars = selectedPricing.stars || 730;
+            const base = Math.round(stars * 1.25);
+            const discount = Math.round(base * 0.2);
+            const total = base - discount;
+
+            document.getElementById('starsBasePrice').textContent = base + ' ★';
+            document.getElementById('starsDiscount').textContent = '-' + discount + ' ★';
+            document.getElementById('starsTotalPrice').textContent = total + ' ★';
+            document.getElementById('starsPayBtnAmount').textContent = total + ' ★';
+            selectedStarsAmount = total;
+
             document.getElementById('pricingDetailOverlay').classList.remove('show');
-            document.getElementById('subscribeOverlay').classList.add('show');
+            document.getElementById('starsPaymentOverlay').classList.add('show');
         }
 
-        function closeSubscribe() {
-            document.getElementById('subscribeOverlay').classList.remove('show');
+        function closeStarsPayment() {
+            document.getElementById('starsPaymentOverlay').classList.remove('show');
         }
 
-        function processPayment() {
-            showToast('✅ تم الدفع بنجاح عبر Google Pay!');
-            closeSubscribe();
+        function processStarsPayment() {
+            showToast(`✅ تم الدفع بنجاح بـ ${selectedStarsAmount} ★`);
+            closeStarsPayment();
+            // Update user's stars balance or subscription status here
         }
 
         // ============================================================
-        // ===== SEARCH TOGGLE =====
+        // ===== SEARCH =====
         // ============================================================
         function toggleSearchBar() {
             const bar = document.getElementById('searchBar');
             bar.classList.toggle('active');
-            if (bar.classList.contains('active')) {
-                document.getElementById('searchInput').focus();
+            if (bar.classList.contains('active')) document.getElementById('searchInput').focus();
+        }
+
+        function searchContent(query) {
+            const grid = document.getElementById('contentGrid');
+            if (!query.trim()) { renderContent(); return; }
+            const filtered = contentData.filter(item =>
+                item.title.includes(query) || item.desc.includes(query) || item.category.includes(query)
+            );
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div style="grid-column:1/-1;text-align:center;padding:2rem;color:#64748b;">
+                        <i class="fas fa-search" style="font-size:2rem;display:block;margin-bottom:0.5rem;"></i>
+                        لا توجد نتائج لـ "${query}"
+                    </div>
+                `;
+                return;
             }
+            grid.innerHTML = filtered.map(item => `
+                <div class="content-card glass" data-id="${item.id}">
+                    <span class="card-badge">${item.category}</span>
+                    <div class="card-icon"><i class="fas ${item.icon}"></i></div>
+                    <div class="card-title">${item.title}</div>
+                    <div class="card-desc">${item.desc}</div>
+                    <div class="rating">${generateStars(item.rating)}</div>
+                    <div class="card-stats">
+                        <span><i class="fas fa-download"></i> ${item.downloads}</span>
+                        <span><i class="fas fa-eye"></i> ${item.views}</span>
+                    </div>
+                    <div class="card-actions">
+                        <button onclick="downloadContent(${item.id})"><i class="fas fa-download"></i> تحميل</button>
+                        <button onclick="copyContent(${item.id})"><i class="fas fa-copy"></i> نسخ</button>
+                        <button class="favorite-btn ${favorites.includes(item.id) ? 'active' : ''}" onclick="toggleFavorite(${item.id})">
+                            <i class="fas fa-star"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
         }
 
         // ============================================================
-        // ===== CONTENT FUNCTIONS =====
+        // ===== CONTENT ACTIONS =====
         // ============================================================
         function downloadContent(id) {
             const item = contentData.find(c => c.id === id);
             if (item) {
                 item.downloads++;
                 showToast(`⬇️ جاري التحميل: ${item.title}`);
-                if (item.downloadLink) {
-                    window.open(item.downloadLink, '_blank');
-                } else {
-                    window.open('https://t.me/python2015', '_blank');
-                }
+                if (item.downloadLink) window.open(item.downloadLink, '_blank');
+                else window.open('https://t.me/python2015', '_blank');
                 renderContent();
                 saveData();
             }
@@ -3645,13 +3688,9 @@
 
         function toggleFavorite(id) {
             const index = favorites.indexOf(id);
-            if (index > -1) {
-                favorites.splice(index, 1);
-                showToast('⭐ تمت إزالة من المفضلة');
-            } else {
-                favorites.push(id);
-                showToast('⭐ تمت الإضافة إلى المفضلة');
-            }
+            if (index > -1) { favorites.splice(index, 1);
+                showToast('⭐ تمت إزالة من المفضلة'); } else { favorites.push(id);
+                showToast('⭐ تمت الإضافة إلى المفضلة'); }
             renderContent();
             saveData();
         }
@@ -3686,7 +3725,7 @@
         }
 
         // ============================================================
-        // ===== FILTERS & SEARCH =====
+        // ===== FILTERS =====
         // ============================================================
         function filterContent(type) {
             currentFilter = type;
@@ -3697,9 +3736,7 @@
                     (type === 'codes' && key === 'navCodes') ||
                     (type === 'tools' && key === 'navTools') ||
                     (type === 'scripts' && key === 'navScripts') ||
-                    (type === 'bots' && key === 'navBots')) {
-                    b.classList.add('active');
-                }
+                    (type === 'bots' && key === 'navBots')) b.classList.add('active');
             });
             renderContent();
         }
@@ -3714,53 +3751,9 @@
                     (category === 'telegram' && text.includes('تليجرام')) ||
                     (category === 'security' && text.includes('أمن')) ||
                     (category === 'music' && text.includes('موسيقى')) ||
-                    (category === 'api' && text.includes('API'))) {
-                    t.classList.add('active');
-                }
+                    (category === 'api' && text.includes('API'))) t.classList.add('active');
             });
             renderContent();
-        }
-
-        function searchContent(query) {
-            const grid = document.getElementById('contentGrid');
-            if (!query.trim()) {
-                renderContent();
-                return;
-            }
-            const filtered = contentData.filter(item =>
-                item.title.includes(query) ||
-                item.desc.includes(query) ||
-                item.category.includes(query)
-            );
-            if (filtered.length === 0) {
-                grid.innerHTML = `
-                    <div style="grid-column:1/-1;text-align:center;padding:2rem;color:#64748b;">
-                        <i class="fas fa-search" style="font-size:2rem;display:block;margin-bottom:0.5rem;"></i>
-                        لا توجد نتائج لـ "${query}"
-                    </div>
-                `;
-                return;
-            }
-            grid.innerHTML = filtered.map(item => `
-                <div class="content-card glass" data-id="${item.id}">
-                    <span class="card-badge">${item.category}</span>
-                    <div class="card-icon"><i class="fas ${item.icon}"></i></div>
-                    <div class="card-title">${item.title}</div>
-                    <div class="card-desc">${item.desc}</div>
-                    <div class="rating">${generateStars(item.rating)}</div>
-                    <div class="card-stats">
-                        <span><i class="fas fa-download"></i> ${item.downloads}</span>
-                        <span><i class="fas fa-eye"></i> ${item.views}</span>
-                    </div>
-                    <div class="card-actions">
-                        <button onclick="downloadContent(${item.id})"><i class="fas fa-download"></i> تحميل</button>
-                        <button onclick="copyContent(${item.id})"><i class="fas fa-copy"></i> نسخ</button>
-                        <button class="favorite-btn ${favorites.includes(item.id) ? 'active' : ''}" onclick="toggleFavorite(${item.id})">
-                            <i class="fas fa-star"></i>
-                        </button>
-                    </div>
-                </div>
-            `).join('');
         }
 
         // ============================================================
@@ -3833,11 +3826,8 @@
         });
 
         function toggleFullscreen() {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(e => {});
-            } else {
-                document.exitFullscreen().catch(e => {});
-            }
+            if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(e => {});
+            else document.exitFullscreen().catch(e => {});
             document.getElementById('dropdownMenu').style.display = 'none';
         }
 
@@ -4104,7 +4094,6 @@
                         <div class="comment-text">${r.text}</div>
                     </div>
                 `).join('');
-
                 list.innerHTML += `
                     <div class="comment-item">
                         <div class="comment-header">
@@ -4136,9 +4125,7 @@
             const input = document.getElementById(`replyInput_${commentId}`);
             if (input) {
                 input.style.display = input.style.display === 'none' ? 'flex' : 'none';
-                if (input.style.display === 'flex') {
-                    document.getElementById(`replyText_${commentId}`).focus();
-                }
+                if (input.style.display === 'flex') document.getElementById(`replyText_${commentId}`).focus();
             }
         }
 
@@ -4147,11 +4134,7 @@
             if (!input || !input.value.trim()) return;
             const comment = comments.find(c => c.id === commentId);
             if (comment) {
-                comment.replies.push({
-                    user: currentUser || 'مستخدم',
-                    text: input.value.trim(),
-                    time: Date.now()
-                });
+                comment.replies.push({ user: currentUser || 'مستخدم', text: input.value.trim(), time: Date.now() });
                 input.value = '';
                 document.getElementById(`replyInput_${commentId}`).style.display = 'none';
                 renderComments();
@@ -4173,10 +4156,7 @@
         function addComment() {
             const textInput = document.getElementById('newCommentText');
             const userInput = document.getElementById('newCommentUser');
-            if (!textInput.value.trim()) {
-                showToast('⚠️ الرجاء كتابة تعليق!');
-                return;
-            }
+            if (!textInput.value.trim()) { showToast('⚠️ الرجاء كتابة تعليق!'); return; }
             comments.unshift({
                 id: nextCommentId++,
                 user: userInput.value.trim() || currentUser || 'مستخدم',
@@ -4209,7 +4189,7 @@
         }
 
         // ============================================================
-        // ===== ABOUT MODAL =====
+        // ===== ABOUT =====
         // ============================================================
         function openAboutModal() {
             document.getElementById('aboutOverlay').classList.add('show');
@@ -4234,31 +4214,25 @@
             const year = date.getFullYear();
             const month = date.getMonth();
             const today = date.getDate();
-
             const firstDay = new Date(year, month, 1).getDay();
             const daysInMonth = new Date(year, month + 1, 0).getDate();
             const daysInPrevMonth = new Date(year, month, 0).getDate();
-
             const weekdays = ['ح', 'ن', 'ث', 'ر', 'خ', 'ج', 'س'];
             let html = '';
             weekdays.forEach(d => { html += `<div class="weekday">${d}</div>`; });
-
             const startOffset = (firstDay + 1) % 7;
             for (let i = startOffset - 1; i >= 0; i--) {
                 html += `<div class="day other-month">${daysInPrevMonth - i}</div>`;
             }
-
             for (let i = 1; i <= daysInMonth; i++) {
                 const isToday = i === today ? 'today' : '';
                 html += `<div class="day ${isToday}">${i}</div>`;
             }
-
             const totalDays = startOffset + daysInMonth;
             const remaining = (7 - (totalDays % 7)) % 7;
             for (let i = 1; i <= remaining; i++) {
                 html += `<div class="day other-month">${i}</div>`;
             }
-
             grid.innerHTML = html;
         }
 
@@ -4272,7 +4246,6 @@
             hours = hours % 12 || 12;
             document.getElementById('headerDateTime').textContent = `${String(hours).padStart(2,'0')}:${minutes}:${seconds}`;
             document.getElementById('calClock').textContent = `${String(hours).padStart(2,'0')}:${minutes}:${seconds} ${ampm}`;
-
             const day = String(cairoTime.getDate()).padStart(2, '0');
             const monthNames = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر',
                 'ديسمبر'
@@ -4280,7 +4253,6 @@
             document.getElementById('calFullDate').textContent = `${day} ${monthNames[cairoTime.getMonth()]} ${cairoTime.getFullYear()}`;
             document.getElementById('calMonthYear').textContent = `${monthNames[cairoTime.getMonth()]} ${cairoTime.getFullYear()}`;
             buildCalendar(cairoTime);
-
             document.getElementById('lastUpdate').textContent =
                 `${day}/${String(cairoTime.getMonth()+1).padStart(2,'0')}/${cairoTime.getFullYear()}`;
         }
@@ -4319,7 +4291,6 @@
                 </div>
             `;
             document.body.insertAdjacentHTML('beforeend', modalHtml);
-            // apply translations
             const t = translations[currentLang];
             if (t) {
                 document.querySelectorAll('[data-key]').forEach(el => {
@@ -4327,6 +4298,23 @@
                     if (t[key]) el.textContent = t[key];
                 });
             }
+        }
+
+        // ============================================================
+        // ===== SUBSCRIBE (GOOGLE PAY) =====
+        // ============================================================
+        function openSubscribe() {
+            document.getElementById('pricingDetailOverlay').classList.remove('show');
+            document.getElementById('subscribeOverlay').classList.add('show');
+        }
+
+        function closeSubscribe() {
+            document.getElementById('subscribeOverlay').classList.remove('show');
+        }
+
+        function processPayment() {
+            showToast('✅ تم الدفع بنجاح عبر Google Pay!');
+            closeSubscribe();
         }
 
         // ============================================================
@@ -4353,7 +4341,7 @@
         }, 15000);
 
         // ============================================================
-        // ===== SAVE/LOAD DATA =====
+        // ===== SAVE/LOAD =====
         // ============================================================
         function saveData() {
             try {
@@ -4378,10 +4366,8 @@
                     if (data.favorites) favorites = data.favorites;
                     if (data.comments) comments = data.comments;
                     if (data.nextCommentId) nextCommentId = data.nextCommentId;
-                    if (data.currentUser) {
-                        currentUser = data.currentUser;
-                        updateUserUI(currentUser);
-                    }
+                    if (data.currentUser) { currentUser = data.currentUser;
+                        updateUserUI(currentUser); }
                     if (data.vc) vc = data.vc;
                     if (data.darkMode) {
                         document.body.classList.add('dark-mode');
@@ -4389,9 +4375,7 @@
                         document.getElementById('cricketToggle').style.display = 'flex';
                         if (!cricketPlaying) toggleCricketSound();
                     }
-                    if (data.language) {
-                        changeLanguage(data.language);
-                    }
+                    if (data.language) changeLanguage(data.language);
                 }
             } catch (e) {}
         }
@@ -4413,9 +4397,7 @@
 
         document.querySelectorAll('.modal-overlay').forEach(el => {
             el.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    this.classList.remove('show');
-                }
+                if (e.target === this) this.classList.remove('show');
             });
         });
 
@@ -4423,14 +4405,10 @@
         console.log('📌 @TopVeGa | @Cybervega');
         console.log('⭐ جميع الحقوق محفوظة © 2015-2026');
         console.log('📊 المميزات المضافة:');
-        console.log('✅ خطط تسعير مع تفاصيل ومعالج وذاكرة');
-        console.log('✅ زر اشتراك Google Pay');
-        console.log('✅ وضع ليلي محسن مع صوت صراصير');
-        console.log('✅ شريط بحث مخفي يظهر عند الضغط على الأيقونة');
-        console.log('✅ ساعة متحركة بالثواني والدقائق');
-        console.log('✅ مؤشر لغة أخضر في القائمة المنسدلة');
-        console.log('✅ حركات انتقال سلسة بين الأقسام');
-        console.log('✅ واجهة APIs مع تفاصيل السعة والمعالج');
+        console.log('✅ واجهة دفع بالنجوم بتصميم احترافي');
+        console.log('✅ وضع ليلي محسن مع ألوان دقيقة');
+        console.log('✅ حركات انتقال سلسة لجميع العناصر');
+        console.log('✅ تجربة مستخدم مرنة عالية الجودة (4K UI)');
     </script>
 </body>
 </html>
