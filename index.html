@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Py Zone | منصة خدمات فيجا المتنوعة</title>
+    <title>VEGA SOUND | منصة فيجا الرقمية</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -23,6 +23,245 @@
             transition: background 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
             overflow-x: hidden;
+        }
+
+        /* ===== LOGIN SCREEN ===== */
+        .login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+            padding: 1.5rem;
+        }
+
+        body.dark-mode .login-screen {
+            background: #0a0e1a;
+        }
+
+        .login-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+            border-radius: 40px;
+            padding: 3rem 2.5rem;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+        body.dark-mode .login-card {
+            background: rgba(10, 14, 26, 0.8);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-card .lock-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 1.2rem;
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.2);
+        }
+
+        .login-card h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 0.3rem;
+            transition: color 0.6s ease;
+        }
+
+        body.dark-mode .login-card h2 {
+            color: #f1f5f9;
+        }
+
+        .login-card .sub {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+            transition: color 0.6s ease;
+        }
+
+        body.dark-mode .login-card .sub {
+            color: #94a3b8;
+        }
+
+        .login-card .input-group {
+            text-align: right;
+            margin-bottom: 1.2rem;
+        }
+
+        .login-card .input-group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #64748b;
+            margin-bottom: 0.3rem;
+            transition: color 0.6s ease;
+        }
+
+        body.dark-mode .login-card .input-group label {
+            color: #94a3b8;
+        }
+
+        .login-card .input-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            background: rgba(248, 250, 252, 0.6);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            font-size: 0.9rem;
+            color: #1e293b;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .login-card .input-group input {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.06);
+            color: #e2e8f0;
+        }
+
+        .login-card .input-group input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.04);
+        }
+
+        body.dark-mode .login-card .input-group input:focus {
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.04);
+        }
+
+        .login-card .login-btn {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 60px;
+            border: none;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: #fff;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            margin-top: 0.5rem;
+        }
+
+        .login-card .login-btn:hover {
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.15);
+        }
+
+        body.dark-mode .login-card .login-btn {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            color: #0a0e1a;
+        }
+
+        .login-card .footer-link {
+            margin-top: 1.5rem;
+            font-size: 0.8rem;
+            color: #64748b;
+            transition: color 0.6s ease;
+        }
+
+        body.dark-mode .login-card .footer-link {
+            color: #94a3b8;
+        }
+
+        .login-card .footer-link a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        body.dark-mode .login-card .footer-link a {
+            color: #60a5fa;
+        }
+
+        .login-card .footer-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== IMAGE SLIDER ===== */
+        .slider-section {
+            width: 100%;
+            height: 400px;
+            border-radius: 32px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+            background: #0a0e1a;
+        }
+
+        body.dark-mode .slider-section {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .slider-track {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            transition: transform 1.2s cubic-bezier(0.45, 0, 0.15, 1);
+        }
+
+        .slider-track img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .slider-dots .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .slider-dots .dot.active {
+            background: #fff;
+            transform: scale(1.3);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
         }
 
         /* ===== GLASS EFFECTS ===== */
@@ -209,15 +448,8 @@
         }
 
         @keyframes pulseDot {
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.5;
-                transform: scale(0.8);
-            }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
         }
 
         /* ===== BUTTONS ===== */
@@ -1666,37 +1898,19 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         @keyframes slideUp {
-            from {
-                transform: translateY(30px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         @keyframes pulseIcon {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-            100% {
-                transform: scale(1);
-            }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
         .modal {
@@ -2434,160 +2648,53 @@
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            .main-card {
-                padding: 1rem;
-                border-radius: 28px;
-            }
-            .brand h1 {
-                font-size: 1.2rem;
-            }
-            .brand small {
-                display: none;
-            }
-            .header-actions {
-                width: 100%;
-                justify-content: center;
-                margin-top: 0.3rem;
-                gap: 4px;
-            }
-            .search-bar {
-                max-width: 100%;
-                width: 100%;
-                margin-top: 0.5rem;
-            }
-            .search-bar input {
-                min-width: 60px;
-                font-size: 0.75rem;
-            }
-            .search-bar button {
-                padding: 0.3rem 0.8rem;
-                font-size: 0.7rem;
-            }
-            .btn-icon {
-                font-size: 0.7rem;
-                padding: 0.2rem 0.6rem;
-            }
-            .btn-icon .date-label {
-                display: none;
-            }
-            .user-section {
-                padding: 0.1rem 0.5rem 0.1rem 0.2rem;
-            }
-            .user-name {
-                font-size: 0.7rem;
-            }
-            .user-avatar {
-                width: 26px;
-                height: 26px;
-                font-size: 0.6rem;
-            }
-            .channels-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            }
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
-            .categories-section {
-                justify-content: center;
-                padding: 0.5rem;
-            }
-            .category-tag {
-                font-size: 0.65rem;
-                padding: 0.1rem 0.7rem;
-            }
-            .services-list ul {
-                flex-direction: column;
-                align-items: center;
-                gap: 0.1rem;
-            }
-            .comment-input-area .comment-actions {
-                flex-direction: column;
-            }
-            .comment-input-area .comment-actions .user-input {
-                width: 100%;
-            }
-            .comment-input-area .comment-actions input {
-                flex: 1;
-                min-width: 80px;
-            }
-            .btn-submit-comment {
-                width: 100%;
-                justify-content: center;
-            }
-            .footer {
-                flex-direction: column;
-                gap: 0.3rem;
-                text-align: center;
-            }
-            .api-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            }
-            .pricing-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            }
-            .payment-item {
-                min-width: 140px;
-                padding: 0.3rem 1.2rem;
-            }
-            .pay-btn {
-                padding: 0.5rem 1.5rem;
-                font-size: 0.85rem;
-            }
-            .modal {
-                padding: 1.2rem;
-            }
-            .nav-btn {
-                font-size: 0.7rem;
-                padding: 0.2rem 1rem;
-            }
-            .cricket-toggle {
-                bottom: 10px;
-                left: 10px;
-                font-size: 0.6rem;
-                padding: 0.2rem 0.7rem;
-            }
-            .status-indicator {
-                font-size: 0.6rem;
-                padding: 0.2rem 0.6rem;
-            }
-            .api-section .api-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
+            .main-card { padding: 1rem; border-radius: 28px; }
+            .brand h1 { font-size: 1.2rem; }
+            .brand small { display: none; }
+            .header-actions { width: 100%; justify-content: center; margin-top: 0.3rem; gap: 4px; }
+            .search-bar { max-width: 100%; width: 100%; margin-top: 0.5rem; }
+            .search-bar input { min-width: 60px; font-size: 0.75rem; }
+            .search-bar button { padding: 0.3rem 0.8rem; font-size: 0.7rem; }
+            .btn-icon { font-size: 0.7rem; padding: 0.2rem 0.6rem; }
+            .btn-icon .date-label { display: none; }
+            .user-section { padding: 0.1rem 0.5rem 0.1rem 0.2rem; }
+            .user-name { font-size: 0.7rem; }
+            .user-avatar { width: 26px; height: 26px; font-size: 0.6rem; }
+            .channels-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+            .content-grid { grid-template-columns: 1fr; }
+            .categories-section { justify-content: center; padding: 0.5rem; }
+            .category-tag { font-size: 0.65rem; padding: 0.1rem 0.7rem; }
+            .services-list ul { flex-direction: column; align-items: center; gap: 0.1rem; }
+            .comment-input-area .comment-actions { flex-direction: column; }
+            .comment-input-area .comment-actions .user-input { width: 100%; }
+            .comment-input-area .comment-actions input { flex: 1; min-width: 80px; }
+            .btn-submit-comment { width: 100%; justify-content: center; }
+            .footer { flex-direction: column; gap: 0.3rem; text-align: center; }
+            .api-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+            .pricing-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+            .payment-item { min-width: 140px; padding: 0.3rem 1.2rem; }
+            .pay-btn { padding: 0.5rem 1.5rem; font-size: 0.85rem; }
+            .modal { padding: 1.2rem; }
+            .nav-btn { font-size: 0.7rem; padding: 0.2rem 1rem; }
+            .cricket-toggle { bottom: 10px; left: 10px; font-size: 0.6rem; padding: 0.2rem 0.7rem; }
+            .status-indicator { font-size: 0.6rem; padding: 0.2rem 0.6rem; }
+            .api-section .api-header { flex-direction: column; align-items: flex-start; }
+            .slider-section { height: 250px; border-radius: 20px; }
+            .login-card { padding: 2rem 1.5rem; }
         }
 
         @media (max-width: 480px) {
-            .brand h1 {
-                font-size: 1rem;
-            }
-            .header-actions {
-                gap: 2px;
-            }
-            .btn-icon {
-                font-size: 0.6rem;
-                padding: 0.15rem 0.4rem;
-            }
-            .btn-icon i {
-                font-size: 0.7rem;
-            }
-            .content-card {
-                padding: 0.8rem;
-            }
-            .bot-card {
-                padding: 0.8rem 0.4rem;
-            }
-            .bot-card i {
-                font-size: 1.5rem;
-            }
-            .channel-card {
-                padding: 0.8rem;
-            }
-            .pricing-card .pricing-price {
-                font-size: 1.1rem;
-            }
-            .api-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+            .brand h1 { font-size: 1rem; }
+            .header-actions { gap: 2px; }
+            .btn-icon { font-size: 0.6rem; padding: 0.15rem 0.4rem; }
+            .btn-icon i { font-size: 0.7rem; }
+            .content-card { padding: 0.8rem; }
+            .bot-card { padding: 0.8rem 0.4rem; }
+            .bot-card i { font-size: 1.5rem; }
+            .channel-card { padding: 0.8rem; }
+            .pricing-card .pricing-price { font-size: 1.1rem; }
+            .api-grid { grid-template-columns: 1fr 1fr; }
+            .slider-section { height: 180px; }
         }
 
         /* ===== TOAST ===== */
@@ -2625,6 +2732,27 @@
 </head>
 <body>
 
+    <!-- ===== LOGIN SCREEN ===== -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-card">
+            <div class="lock-icon"><i class="fas fa-lock"></i></div>
+            <h2>Welcome</h2>
+            <p class="sub">Login to continue your journey</p>
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" id="loginEmail" placeholder="you@example.com" />
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="loginPassword" placeholder="••••••••" />
+            </div>
+            <button class="login-btn" onclick="handleLogin()">Login</button>
+            <div class="footer-link">
+                Don't have an account? <a href="#">Sign Up</a>
+            </div>
+        </div>
+    </div>
+
     <!-- ===== DARK MODE BACKGROUND ===== -->
     <div class="dark-bg-container" id="darkBgContainer"></div>
 
@@ -2643,8 +2771,8 @@
                 <div class="brand">
                     <i class="fab fa-python"></i>
                     <div>
-                        <h1 id="brandTitle">python zone</h1>
-                        <small id="brandSub">منصة البرمجيات والتطوير</small>
+                        <h1 id="brandTitle">VEGA SOUND</h1>
+                        <small id="brandSub">منصة فيجا الرقمية</small>
                     </div>
                 </div>
                 <div class="header-actions">
@@ -2666,7 +2794,7 @@
                     </div>
 
                     <div class="user-section" onclick="toggleUserMenu()">
-                        <div class="user-avatar" id="userAvatar">ز</div>
+                        <div class="user-avatar" id="userAvatar">V</div>
                         <span class="user-name" id="userName">زائر <i class="fas fa-chevron-down"></i></span>
                     </div>
 
@@ -2718,7 +2846,7 @@
                         <i class="fas fa-star"></i> ⭐ مفضلاتي
                     </button>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="https://t.me/Cybervega" target="_blank">
+                    <a class="dropdown-item" href="https://t.me/vegaone" target="_blank">
                         <i class="fas fa-headset"></i> جروب الدعم
                     </a>
                 </div>
@@ -2743,6 +2871,24 @@
                     <button class="dropdown-item" onclick="loginUser()" id="loginBtn">
                         <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
                     </button>
+                </div>
+            </div>
+
+            <!-- ===== IMAGE SLIDER ===== -->
+            <div class="slider-section" data-aos="fade-up">
+                <div class="slider-track" id="sliderTrack">
+                    <img src="https://i.ibb.co/6P4QZ9Z/vega-logo.jpg" alt="Vega Logo" loading="lazy" />
+                    <img src="https://i.ibb.co/3Wq6Q9Z/hymero-logo.jpg" alt="Hymero Logo" loading="lazy" />
+                    <img src="https://i.ibb.co/9kL5Q9Z/numbe3-logo.jpg" alt="Numbe3 Logo" loading="lazy" />
+                    <img src="https://i.ibb.co/5Kq6Q9Z/topvega-avatar.jpg" alt="TopVeGa" loading="lazy" />
+                    <img src="https://i.ibb.co/2Wq6Q9Z/pink-avatar.jpg" alt="Pink Avatar" loading="lazy" />
+                </div>
+                <div class="slider-dots" id="sliderDots">
+                    <span class="dot active" onclick="goToSlide(0)"></span>
+                    <span class="dot" onclick="goToSlide(1)"></span>
+                    <span class="dot" onclick="goToSlide(2)"></span>
+                    <span class="dot" onclick="goToSlide(3)"></span>
+                    <span class="dot" onclick="goToSlide(4)"></span>
                 </div>
             </div>
 
@@ -2807,8 +2953,18 @@
                     <div class="card-title"><i class="fas fa-headset"></i> <span data-key="supportTitle">جروب الدعم</span></div>
                     <div class="card-desc" data-key="supportDesc">الدعم الفني والمساعدة في جميع الاستفسارات.</div>
                     <div class="card-meta">
-                        <a href="https://t.me/Cybervega" target="_blank"><i class="fab fa-telegram-plane"></i> <span data-key="joinSupport">انضم للدعم</span></a>
+                        <a href="https://t.me/vegaone" target="_blank"><i class="fab fa-telegram-plane"></i> <span data-key="joinSupport">انضم للدعم</span></a>
                         <span class="badge"><i class="fas fa-heart" style="color:#dc2626;"></i> <span data-key="activeSupport">متاح 24</span></span>
+                    </div>
+                </div>
+
+                <!-- New Channel -->
+                <div class="channel-card glass">
+                    <div class="card-title"><i class="fas fa-hashtag"></i> <span data-key="channel4Title">قناة الأرقام</span></div>
+                    <div class="card-desc" data-key="channel4Desc">أرقام وحسابات مميزة للبيع والشراء.</div>
+                    <div class="card-meta">
+                        <a href="https://t.me/eS_I_M" target="_blank"><i class="fab fa-telegram-plane"></i> <span data-key="join">انضم</span></a>
+                        <span class="badge"><i class="fas fa-star" style="color:#eab308;"></i> <span data-key="active">نشطة</span></span>
                     </div>
                 </div>
             </div>
@@ -2831,6 +2987,14 @@
                     <div class="bot-username">@StrngGenBot</div>
                     <div class="bot-desc" data-key="bot2Desc">استخراج جلسات بايروجرام</div>
                     <a href="https://t.me/StrngGenBot" target="_blank" class="bot-link"><i class="fab fa-telegram"></i> <span data-key="openBot">افتح البوت</span></a>
+                </div>
+                <!-- New Bot -->
+                <div class="bot-card glass">
+                    <i class="fas fa-phone-alt"></i>
+                    <div class="bot-name">بوت الأرقام</div>
+                    <div class="bot-username">@Numbe3Bot</div>
+                    <div class="bot-desc" data-key="bot3Desc">بوت شراء وبيع الأرقام الوهمية</div>
+                    <a href="https://t.me/Numbe3Bot" target="_blank" class="bot-link"><i class="fab fa-telegram"></i> <span data-key="openBot">افتح البوت</span></a>
                 </div>
             </div>
 
@@ -2894,7 +3058,7 @@
                 </div>
                 <div class="privacy-content">
                     <p data-key="privacyIntro">
-                        نحن في <span class="highlight">python zone</span> نلتزم بحماية خصوصية بياناتك. إليك كيفية تعاملنا معها:
+                        نحن في <span class="highlight">VEGA SOUND</span> نلتزم بحماية خصوصية بياناتك. إليك كيفية تعاملنا معها:
                     </p>
                     <ul>
                         <li><i class="fas fa-check-circle"></i> <span data-key="privacy1">لا نقوم بتخزين أي بيانات شخصية للمستخدمين على خوادمنا.</span></li>
@@ -2964,7 +3128,7 @@
                     <i class="fab fa-telegram"></i>
                     <span class="link-label" data-key="founder">المؤسس</span>
                 </a>
-                <a href="https://t.me/Cybervega" target="_blank">
+                <a href="https://t.me/vegaone" target="_blank">
                     <i class="fas fa-headset"></i>
                     <span class="link-label" data-key="support">جروب الدعم</span>
                 </a>
@@ -3094,7 +3258,7 @@
             <button class="close-modal" onclick="closePrivacyPolicy()"><i class="fas fa-times"></i></button>
             <h2><i class="fas fa-shield-alt"></i> 🔒 سياسة الخصوصية</h2>
             <div class="about-content">
-                <p>نحن في <span class="highlight">python zone</span> نلتزم بحماية خصوصية بياناتك. إليك كيفية تعاملنا معها:</p>
+                <p>نحن في <span class="highlight">VEGA SOUND</span> نلتزم بحماية خصوصية بياناتك. إليك كيفية تعاملنا معها:</p>
                 <ul>
                     <li><i class="fas fa-check-circle" style="color:#22c55e;"></i> لا نقوم بتخزين أي بيانات شخصية للمستخدمين على خوادمنا.</li>
                     <li><i class="fas fa-check-circle" style="color:#22c55e;"></i> جميع طلبات الـ API تتم معالجتها بشكل مؤقت ولا يتم تسجيلها.</li>
@@ -3283,6 +3447,30 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 600, once: true, easing: 'ease-out' });
+
+        // ============================================================
+        // ===== IMAGE SLIDER =====
+        // ============================================================
+        let currentSlide = 0;
+        const totalSlides = 5;
+        const sliderTrack = document.getElementById('sliderTrack');
+        const dots = document.querySelectorAll('.slider-dots .dot');
+
+        function goToSlide(index) {
+            currentSlide = index;
+            sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            goToSlide(currentSlide);
+        }
+
+        // Auto slide every 4 seconds (smooth and slow)
+        setInterval(nextSlide, 4000);
 
         // ============================================================
         // ===== DATA =====
@@ -3479,6 +3667,24 @@
         }
 
         // ============================================================
+        // ===== LOGIN =====
+        // ============================================================
+        function handleLogin() {
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value.trim();
+            if (!email || !password) {
+                showToast('⚠️ الرجاء إدخال البريد الإلكتروني وكلمة المرور');
+                return;
+            }
+            // Simulate login
+            document.getElementById('loginScreen').classList.add('hidden');
+            currentUser = email.split('@')[0] || 'مستخدم';
+            updateUserUI(currentUser);
+            showToast(`👋 مرحباً ${currentUser}`);
+            saveData();
+        }
+
+        // ============================================================
         // ===== RENDER FUNCTIONS =====
         // ============================================================
         function renderContent() {
@@ -3613,7 +3819,6 @@
         function processStarsPayment() {
             showToast(`✅ تم الدفع بنجاح بـ ${selectedStarsAmount} ★`);
             closeStarsPayment();
-            // Update user's stars balance or subscription status here
         }
 
         // ============================================================
@@ -3836,8 +4041,8 @@
         // ============================================================
         const translations = {
             ar: {
-                brandTitle: 'python zone',
-                brandSub: 'منصة البرمجيات والتطوير',
+                brandTitle: 'VEGA SOUND',
+                brandSub: 'منصة فيجا الرقمية',
                 navAll: 'الكل',
                 navCodes: 'الأكواد',
                 navTools: 'الأدوات',
@@ -3869,6 +4074,7 @@
                 botsTitle: 'بوتاتنا',
                 bot1Desc: 'بوت استماع وتحميل الأغاني',
                 bot2Desc: 'استخراج جلسات بايروجرام',
+                bot3Desc: 'بوت شراء وبيع الأرقام الوهمية',
                 openBot: 'افتح البوت',
                 securePay: 'دفع آمن عبر باينس و نجوم تليجرام',
                 payBtn: 'الدفع عبر Binance',
@@ -3918,16 +4124,24 @@
                 channelsTitle: '📡 قنواتنا',
                 pricingTitle: 'خطط التسعير',
                 privacyTitle: 'سياسة الخصوصية',
-                privacyIntro: 'نحن في python zone نلتزم بحماية خصوصية بياناتك. إليك كيفية تعاملنا معها:',
+                privacyIntro: 'نحن في VEGA SOUND نلتزم بحماية خصوصية بياناتك. إليك كيفية تعاملنا معها:',
                 privacy1: 'لا نقوم بتخزين أي بيانات شخصية للمستخدمين على خوادمنا.',
                 privacy2: 'جميع طلبات الـ API تتم معالجتها بشكل مؤقت ولا يتم تسجيلها.',
                 privacy3: 'البيانات التي تمر عبر خوادمنا مشفرة بالكامل (TLS 1.3).',
                 privacy4: 'لا نشارك بياناتك مع أي طرف ثالث.',
-                privacy5: 'يمكنك طلب حذف أي بيانات متعلقة بك في أي وقت.'
+                privacy5: 'يمكنك طلب حذف أي بيانات متعلقة بك في أي وقت.',
+                channel4Title: 'قناة الأرقام',
+                channel4Desc: 'أرقام وحسابات مميزة للبيع والشراء.',
+                donateTitle: 'تبرع بـ نجوم تليجرام',
+                donateDesc: 'تبرعك بـ 1 نجمة يساعدنا على الاستمرار<br>وتطوير المنصة نحو الأفضل ❤️',
+                donate1: 'تبرع بـ 1 ⭐',
+                donate5: 'تبرع بـ 5 ⭐',
+                donate10: 'تبرع بـ 10 ⭐',
+                donateSecure: 'الدفع مباشرة لحساب @TopVeGa'
             },
             en: {
-                brandTitle: 'python zone',
-                brandSub: 'Software & Development Platform',
+                brandTitle: 'VEGA SOUND',
+                brandSub: 'Vega Digital Platform',
                 navAll: 'All',
                 navCodes: 'Codes',
                 navTools: 'Tools',
@@ -3959,6 +4173,7 @@
                 botsTitle: 'Our Bots',
                 bot1Desc: 'Music listening and downloading bot',
                 bot2Desc: 'Pyrogram session extraction',
+                bot3Desc: 'Virtual number buying and selling bot',
                 openBot: 'Open Bot',
                 securePay: 'Secure payment via Binance & Telegram Stars',
                 payBtn: 'Pay with Binance',
@@ -4008,12 +4223,20 @@
                 channelsTitle: '📡 Our Channels',
                 pricingTitle: 'Pricing Plans',
                 privacyTitle: 'Privacy Policy',
-                privacyIntro: 'At python zone, we are committed to protecting your data privacy. Here\'s how we handle it:',
+                privacyIntro: 'At VEGA SOUND, we are committed to protecting your data privacy. Here\'s how we handle it:',
                 privacy1: 'We do not store any personal user data on our servers.',
                 privacy2: 'All API requests are processed temporarily and not logged.',
                 privacy3: 'Data passing through our servers is fully encrypted (TLS 1.3).',
                 privacy4: 'We do not share your data with any third party.',
-                privacy5: 'You can request deletion of any data related to you at any time.'
+                privacy5: 'You can request deletion of any data related to you at any time.',
+                channel4Title: 'Numbers Channel',
+                channel4Desc: 'Premium numbers and accounts for sale and purchase.',
+                donateTitle: 'Donate with Telegram Stars',
+                donateDesc: 'Your 1-star donation helps us continue<br>and improve the platform for the better ❤️',
+                donate1: 'Donate 1 ⭐',
+                donate5: 'Donate 5 ⭐',
+                donate10: 'Donate 10 ⭐',
+                donateSecure: 'Payment directly to @TopVeGa'
             }
         };
 
@@ -4401,14 +4624,9 @@
             });
         });
 
-        console.log('🚀 python zone | منصة خدمات فيجا المطورة');
-        console.log('📌 @TopVeGa | @Cybervega');
+        console.log('🚀 VEGA SOUND | منصة فيجا الرقمية');
+        console.log('📌 @TopVeGa | @vegaone');
         console.log('⭐ جميع الحقوق محفوظة © 2015-2026');
-        console.log('📊 المميزات المضافة:');
-        console.log('✅ واجهة دفع بالنجوم بتصميم احترافي');
-        console.log('✅ وضع ليلي محسن مع ألوان دقيقة');
-        console.log('✅ حركات انتقال سلسة لجميع العناصر');
-        console.log('✅ تجربة مستخدم مرنة عالية الجودة (4K UI)');
     </script>
 </body>
 </html>
