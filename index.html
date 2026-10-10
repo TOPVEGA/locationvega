@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VEGA SOUND | منصة فيجا الرقمية</title>
+    <title>Vega Zone | منصة فيجا الرقمية</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -37,7 +37,7 @@
             justify-content: center;
             align-items: center;
             z-index: 10000;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
+            transition: opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0.8s ease;
             padding: 1.5rem;
         }
 
@@ -63,7 +63,19 @@
             width: 100%;
             text-align: center;
             position: relative;
-            transition: all 0.5s ease;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: loginCardIn 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes loginCardIn {
+            0% {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         body.dark-mode .login-card {
@@ -86,14 +98,22 @@
             font-size: 1.8rem;
             margin: 0 auto 1.2rem;
             box-shadow: 0 8px 24px rgba(37, 99, 235, 0.2);
+            animation: lockPulse 3s ease-in-out infinite;
+            transition: all 0.4s ease;
+        }
+
+        @keyframes lockPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 8px 24px rgba(37, 99, 235, 0.2); }
+            50% { transform: scale(1.05); box-shadow: 0 12px 32px rgba(37, 99, 235, 0.3); }
         }
 
         .login-card h2 {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 800;
             color: #0f172a;
             margin-bottom: 0.3rem;
             transition: color 0.6s ease;
+            letter-spacing: -0.5px;
         }
 
         body.dark-mode .login-card h2 {
@@ -114,6 +134,7 @@
         .login-card .input-group {
             text-align: right;
             margin-bottom: 1.2rem;
+            position: relative;
         }
 
         .login-card .input-group label {
@@ -140,7 +161,7 @@
             font-size: 0.9rem;
             color: #1e293b;
             outline: none;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         body.dark-mode .login-card .input-group input {
@@ -151,12 +172,44 @@
 
         .login-card .input-group input:focus {
             border-color: #2563eb;
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.04);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.06);
+            transform: translateY(-2px);
         }
 
         body.dark-mode .login-card .input-group input:focus {
             border-color: #60a5fa;
-            box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.04);
+            box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.06);
+        }
+
+        .login-card .input-group input.error {
+            border-color: #dc2626;
+            box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.06);
+            animation: shake 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            50% { transform: translateX(8px); }
+            75% { transform: translateX(-4px); }
+        }
+
+        .login-card .input-group .error-message {
+            display: none;
+            font-size: 0.7rem;
+            color: #dc2626;
+            margin-top: 0.3rem;
+            text-align: right;
+            animation: fadeInError 0.3s ease;
+        }
+
+        @keyframes fadeInError {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-card .input-group .error-message.show {
+            display: block;
         }
 
         .login-card .login-btn {
@@ -171,11 +224,41 @@
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             margin-top: 0.5rem;
+            position: relative;
+            overflow: hidden;
         }
 
         .login-card .login-btn:hover {
             transform: scale(1.02) translateY(-2px);
             box-shadow: 0 8px 30px rgba(37, 99, 235, 0.15);
+        }
+
+        .login-card .login-btn:active {
+            transform: scale(0.98);
+        }
+
+        .login-card .login-btn.loading {
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        .login-card .login-btn.loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         body.dark-mode .login-card .login-btn {
@@ -198,6 +281,7 @@
             color: #2563eb;
             text-decoration: none;
             font-weight: 600;
+            transition: all 0.3s ease;
         }
 
         body.dark-mode .login-card .footer-link a {
@@ -2695,6 +2779,8 @@
             .pricing-card .pricing-price { font-size: 1.1rem; }
             .api-grid { grid-template-columns: 1fr 1fr; }
             .slider-section { height: 180px; }
+            .login-card h2 { font-size: 1.4rem; }
+            .login-card { padding: 1.8rem 1.2rem; }
         }
 
         /* ===== TOAST ===== */
@@ -2738,17 +2824,25 @@
             <div class="lock-icon"><i class="fas fa-lock"></i></div>
             <h2>Welcome</h2>
             <p class="sub">Login to continue your journey</p>
+            
             <div class="input-group">
                 <label>Email Address</label>
-                <input type="email" id="loginEmail" placeholder="you@example.com" />
+                <input type="email" id="loginEmail" placeholder="you@example.com" autocomplete="email" />
+                <div class="error-message" id="emailError">Please enter a valid email address</div>
             </div>
+            
             <div class="input-group">
                 <label>Password</label>
-                <input type="password" id="loginPassword" placeholder="••••••••" />
+                <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password" />
+                <div class="error-message" id="passwordError">Password must be at least 6 characters</div>
             </div>
-            <button class="login-btn" onclick="handleLogin()">Login</button>
+            
+            <button class="login-btn" id="loginBtn" onclick="handleLogin()">
+                <span class="btn-text">Login</span>
+            </button>
+            
             <div class="footer-link">
-                Don't have an account? <a href="#">Sign Up</a>
+                Don't have an account? <a href="#" onclick="event.preventDefault(); showToast('📝 Sign up coming soon!')">Sign Up</a>
             </div>
         </div>
     </div>
@@ -2771,7 +2865,7 @@
                 <div class="brand">
                     <i class="fab fa-python"></i>
                     <div>
-                        <h1 id="brandTitle">VEGA SOUND</h1>
+                        <h1 id="brandTitle">Vega Zone</h1>
                         <small id="brandSub">منصة فيجا الرقمية</small>
                     </div>
                 </div>
@@ -2846,7 +2940,7 @@
                         <i class="fas fa-star"></i> ⭐ مفضلاتي
                     </button>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="https://t.me/vegaone" target="_blank">
+                    <a class="dropdown-item" href="https://t.me/Cybervega" target="_blank">
                         <i class="fas fa-headset"></i> جروب الدعم
                     </a>
                 </div>
@@ -2868,7 +2962,7 @@
                         <i class="fas fa-comment-dots"></i> تعليقاتي
                     </button>
                     <div class="dropdown-divider"></div>
-                    <button class="dropdown-item" onclick="loginUser()" id="loginBtn">
+                    <button class="dropdown-item" onclick="loginUser()" id="loginBtnMenu">
                         <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
                     </button>
                 </div>
@@ -2953,7 +3047,7 @@
                     <div class="card-title"><i class="fas fa-headset"></i> <span data-key="supportTitle">جروب الدعم</span></div>
                     <div class="card-desc" data-key="supportDesc">الدعم الفني والمساعدة في جميع الاستفسارات.</div>
                     <div class="card-meta">
-                        <a href="https://t.me/vegaone" target="_blank"><i class="fab fa-telegram-plane"></i> <span data-key="joinSupport">انضم للدعم</span></a>
+                        <a href="https://t.me/Cybervega" target="_blank"><i class="fab fa-telegram-plane"></i> <span data-key="joinSupport">انضم للدعم</span></a>
                         <span class="badge"><i class="fas fa-heart" style="color:#dc2626;"></i> <span data-key="activeSupport">متاح 24</span></span>
                     </div>
                 </div>
@@ -3058,7 +3152,7 @@
                 </div>
                 <div class="privacy-content">
                     <p data-key="privacyIntro">
-                        نحن في <span class="highlight">VEGA SOUND</span> نلتزم بحماية خصوصية بياناتك. إليك كيفية تعاملنا معها:
+                        نحن في <span class="highlight">Vega Zone</span> نلتزم بحماية خصوصية بياناتك. إليك كيفية تعاملنا معها:
                     </p>
                     <ul>
                         <li><i class="fas fa-check-circle"></i> <span data-key="privacy1">لا نقوم بتخزين أي بيانات شخصية للمستخدمين على خوادمنا.</span></li>
@@ -3128,7 +3222,7 @@
                     <i class="fab fa-telegram"></i>
                     <span class="link-label" data-key="founder">المؤسس</span>
                 </a>
-                <a href="https://t.me/vegaone" target="_blank">
+                <a href="https://t.me/Cybervega" target="_blank">
                     <i class="fas fa-headset"></i>
                     <span class="link-label" data-key="support">جروب الدعم</span>
                 </a>
@@ -3258,7 +3352,7 @@
             <button class="close-modal" onclick="closePrivacyPolicy()"><i class="fas fa-times"></i></button>
             <h2><i class="fas fa-shield-alt"></i> 🔒 سياسة الخصوصية</h2>
             <div class="about-content">
-                <p>نحن في <span class="highlight">VEGA SOUND</span> نلتزم بحماية خصوصية بياناتك. إليك كيفية تعاملنا معها:</p>
+                <p>نحن في <span class="highlight">Vega Zone</span> نلتزم بحماية خصوصية بياناتك. إليك كيفية تعاملنا معها:</p>
                 <ul>
                     <li><i class="fas fa-check-circle" style="color:#22c55e;"></i> لا نقوم بتخزين أي بيانات شخصية للمستخدمين على خوادمنا.</li>
                     <li><i class="fas fa-check-circle" style="color:#22c55e;"></i> جميع طلبات الـ API تتم معالجتها بشكل مؤقت ولا يتم تسجيلها.</li>
@@ -3447,6 +3541,117 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 600, once: true, easing: 'ease-out' });
+
+        // ============================================================
+        // ===== LOGIN VALIDATION =====
+        // ============================================================
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function validatePassword(password) {
+            return password.length >= 6;
+        }
+
+        function showError(inputId, errorId, message) {
+            const input = document.getElementById(inputId);
+            const error = document.getElementById(errorId);
+            input.classList.add('error');
+            error.textContent = message;
+            error.classList.add('show');
+        }
+
+        function clearError(inputId, errorId) {
+            const input = document.getElementById(inputId);
+            const error = document.getElementById(errorId);
+            input.classList.remove('error');
+            error.classList.remove('show');
+        }
+
+        function handleLogin() {
+            const emailInput = document.getElementById('loginEmail');
+            const passwordInput = document.getElementById('loginPassword');
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+            const loginBtn = document.getElementById('loginBtn');
+
+            // Clear previous errors
+            clearError('loginEmail', 'emailError');
+            clearError('loginPassword', 'passwordError');
+
+            let isValid = true;
+
+            // Validate Email
+            if (!email) {
+                showError('loginEmail', 'emailError', 'Email is required');
+                isValid = false;
+            } else if (!validateEmail(email)) {
+                showError('loginEmail', 'emailError', 'Please enter a valid email address');
+                isValid = false;
+            }
+
+            // Validate Password
+            if (!password) {
+                showError('loginPassword', 'passwordError', 'Password is required');
+                isValid = false;
+            } else if (!validatePassword(password)) {
+                showError('loginPassword', 'passwordError', 'Password must be at least 6 characters');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                // Shake the card
+                const card = document.querySelector('.login-card');
+                card.style.animation = 'none';
+                card.offsetHeight; // Trigger reflow
+                card.style.animation = 'loginCardIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards';
+                return;
+            }
+
+            // Simulate loading
+            loginBtn.classList.add('loading');
+            loginBtn.querySelector('.btn-text').textContent = '';
+
+            setTimeout(() => {
+                loginBtn.classList.remove('loading');
+                loginBtn.querySelector('.btn-text').textContent = 'Login';
+                
+                // Hide login screen with smooth transition
+                const loginScreen = document.getElementById('loginScreen');
+                loginScreen.classList.add('hidden');
+                
+                // Update user info
+                currentUser = email.split('@')[0] || 'مستخدم';
+                updateUserUI(currentUser);
+                showToast(`👋 مرحباً ${currentUser}`);
+                saveData();
+            }, 1500);
+        }
+
+        // Allow Enter key to trigger login
+        document.getElementById('loginEmail').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('loginPassword').focus();
+            }
+        });
+
+        document.getElementById('loginPassword').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                handleLogin();
+            }
+        });
+
+        // Real-time validation on input
+        document.getElementById('loginEmail').addEventListener('input', function() {
+            clearError('loginEmail', 'emailError');
+        });
+
+        document.getElementById('loginPassword').addEventListener('input', function() {
+            clearError('loginPassword', 'passwordError');
+        });
 
         // ============================================================
         // ===== IMAGE SLIDER =====
@@ -3663,24 +3868,6 @@
                 cricketToggle.style.display = 'none';
                 if (cricketPlaying) toggleCricketSound();
             }
-            saveData();
-        }
-
-        // ============================================================
-        // ===== LOGIN =====
-        // ============================================================
-        function handleLogin() {
-            const email = document.getElementById('loginEmail').value.trim();
-            const password = document.getElementById('loginPassword').value.trim();
-            if (!email || !password) {
-                showToast('⚠️ الرجاء إدخال البريد الإلكتروني وكلمة المرور');
-                return;
-            }
-            // Simulate login
-            document.getElementById('loginScreen').classList.add('hidden');
-            currentUser = email.split('@')[0] || 'مستخدم';
-            updateUserUI(currentUser);
-            showToast(`👋 مرحباً ${currentUser}`);
             saveData();
         }
 
@@ -3998,7 +4185,7 @@
             if (name && name.trim()) {
                 currentUser = name.trim();
                 updateUserUI(currentUser);
-                document.getElementById('loginBtn').innerHTML = `<i class="fas fa-user"></i> ${currentUser}`;
+                document.getElementById('loginBtnMenu').innerHTML = `<i class="fas fa-user"></i> ${currentUser}`;
                 showToast(`👋 مرحباً ${currentUser}`);
                 saveData();
             }
@@ -4041,7 +4228,7 @@
         // ============================================================
         const translations = {
             ar: {
-                brandTitle: 'VEGA SOUND',
+                brandTitle: 'Vega Zone',
                 brandSub: 'منصة فيجا الرقمية',
                 navAll: 'الكل',
                 navCodes: 'الأكواد',
@@ -4124,7 +4311,7 @@
                 channelsTitle: '📡 قنواتنا',
                 pricingTitle: 'خطط التسعير',
                 privacyTitle: 'سياسة الخصوصية',
-                privacyIntro: 'نحن في VEGA SOUND نلتزم بحماية خصوصية بياناتك. إليك كيفية تعاملنا معها:',
+                privacyIntro: 'نحن في Vega Zone نلتزم بحماية خصوصية بياناتك. إليك كيفية تعاملنا معها:',
                 privacy1: 'لا نقوم بتخزين أي بيانات شخصية للمستخدمين على خوادمنا.',
                 privacy2: 'جميع طلبات الـ API تتم معالجتها بشكل مؤقت ولا يتم تسجيلها.',
                 privacy3: 'البيانات التي تمر عبر خوادمنا مشفرة بالكامل (TLS 1.3).',
@@ -4140,7 +4327,7 @@
                 donateSecure: 'الدفع مباشرة لحساب @TopVeGa'
             },
             en: {
-                brandTitle: 'VEGA SOUND',
+                brandTitle: 'Vega Zone',
                 brandSub: 'Vega Digital Platform',
                 navAll: 'All',
                 navCodes: 'Codes',
@@ -4223,7 +4410,7 @@
                 channelsTitle: '📡 Our Channels',
                 pricingTitle: 'Pricing Plans',
                 privacyTitle: 'Privacy Policy',
-                privacyIntro: 'At VEGA SOUND, we are committed to protecting your data privacy. Here\'s how we handle it:',
+                privacyIntro: 'At Vega Zone, we are committed to protecting your data privacy. Here\'s how we handle it:',
                 privacy1: 'We do not store any personal user data on our servers.',
                 privacy2: 'All API requests are processed temporarily and not logged.',
                 privacy3: 'Data passing through our servers is fully encrypted (TLS 1.3).',
@@ -4624,8 +4811,8 @@
             });
         });
 
-        console.log('🚀 VEGA SOUND | منصة فيجا الرقمية');
-        console.log('📌 @TopVeGa | @vegaone');
+        console.log('🚀 Vega Zone | منصة فيجا الرقمية');
+        console.log('📌 @TopVeGa | @Cybervega');
         console.log('⭐ جميع الحقوق محفوظة © 2015-2026');
     </script>
 </body>
